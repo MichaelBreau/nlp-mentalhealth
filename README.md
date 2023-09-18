@@ -1,8 +1,14 @@
 # Project Name
 
 Developer Names:
+Benjamin Chinnery
+Michael Breau
+Jessica Dawson
+Yaruo Tian
+Matthew Curtis
 
 Date of project start:
+2023/09/18
 
 This project is ...
 
