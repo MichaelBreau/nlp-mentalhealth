@@ -10,7 +10,7 @@ Matthew Curtis
 Date of project start:
 2023/09/18
 
-This project is ...
+This project is a capstone project focused on natural language processing used for detecting early signs of mental health issues.
 
 The folders and files for this project are as follows:
 
