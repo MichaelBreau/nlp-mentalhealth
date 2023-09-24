@@ -85,23 +85,38 @@ you will be able to overcome this risk?
 
 \section{Technology}
 
-\begin{itemize}
-\item Specific programming language
-\item Specific linter tool (if appropriate)
-\item Specific unit testing framework
-\item Investigation of code coverage measuring tools
-\item Specific plans for Continuous Integration (CI), or an explanation that CI
-  is not being done
-\item Specific performance measuring tools (like Valgrind), if
-  appropriate
-\item Libraries you will likely be using?
-\item Tools you will likely be using?
-\end{itemize}
+\begin{table}[hp]
+	\caption{Technology that will be used} \label{TblTechnology}
+	\begin{tabularx}{\textwidth}{llX}
+	\toprule
+	\textbf{Technology} & \textbf{Use}\\
+	\midrule
+	GitHub & will be used as version control for both the docs and code repositories\\
+	Python & will be used as the coding language for the majority of the project\\
+	Pytest & will be used to validate code\\
+	Pylint & will be used to ensure code quality\\
+	GitHub Actions & will be used for continuous integration with Pytest and Pylint\\
+	Stanza & Python library used for natural language processing\\
+	\bottomrule
+	\end{tabularx}
+\end{table}
+
+GitHub Actions will be used to run Pytest modules as well as check the code with Pylint when code is commited to the repository.
+This will ensure the quality of code pushed to the repository.
 
 \section{Coding Standard}
 
+The Python code in this project will follow the PEP 8 coding standards.
+This will be ensured by Pylint through extensions on the developers IDEs
+as well as through the GitHub actions check when new code is pushed to the repository.
+
 \section{Project Scheduling}
 
-\wss{How will the project be scheduled?}
+The project will largely follow the schedule outlined by the capstone course outline.
+The schedule will be organized through the use of the kanban board on the team's GitHub
+repository to ensure the team is on track. Team meetings will be scheduled through GitHub issues
+which contain information regarding the details of meeting as well as being used to
+keep track of attendance.
+
 
 \end{document}
