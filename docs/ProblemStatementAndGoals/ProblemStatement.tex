@@ -3,11 +3,12 @@
 \usepackage{tabularx}
 \usepackage{booktabs}
 
-\title{Problem Statement and Goals\\\progname}
+\title{Problem Statement and Goals\\}
 
-\author{\authname}
+\author{Team 13 \\Software Architecture for Natural Language
+\\ Processing/AI applied to Mental Health \\
+\\Michael Breau, \\Matthew Curtis, \\Benjamin Chinnery, \\Jessica Dawson, \\Yaruo Tian}
 
-\date{}
 
 \input{../Comments}
 \input{../Common}
@@ -22,35 +23,61 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+\today &  Benjamin Chinnery, Yaruo Tian & Initial Release\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \section{Problem Statement}
 
-\wss{You should check your problem statement with the
-\href{https://github.com/smiths/capTemplate/blob/main/docs/Checklists/ProbState-Checklist.pdf}
-{problem statement checklist}.}
-\wss{You can change the section headings, as long as you include the required information.}
-
 \subsection{Problem}
+As society grows to become more conscious of the ever-growing issues surrounding mental health, the demand for support services only seems to be increasing, especially in a post pandemic world, where more and more people are no longer satisfied with just having a higher visibility on their own mental health issues, they wish to actively work on themselves using support services. Unfortunately, many Canadians find themselves in remote communities where they are unable to receive the support they require. In responce a joint effort from Dr. Mosser's past teams, along with support from UQAM and several psychologists from around the world have developed methods and approaches to assist psychiatrists with diagnosing mental health issues.
+
+In this capstone project, the team will be designing and validating a Natural Language Processing architecture based off the works and methods described prior. This NLP would be capable of recognizing and diagnosing behaviour which displays signs of pathological gambling. Our team's goal is to successfully replicate and hopefully improve upon the results of the original studies, to eventually create an NLP architecture that would be capable of assisting mental health professionals in their field.
 
 \subsection{Inputs and Outputs}
+At a high level, the inputs for the system's initialization would be the data provided from the Early Risk Prediction on the Internet (eRisk) initiative, this data would be used alongside the prior studies done by the team to train the Natural Language Processor. Once the system has been trained, it would require text communications of people speaking to mental health services, to analyze these texts and produce an output.
 
-\wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
-Use abstraction so that you can avoid details.}
+This output would be using its natural language processing abilities to assist psychiatrists by pointing out behaviour of people who display warning signs of Mental Health issues such as gambling addiction.
 
 \subsection{Stakeholders}
+A major external stakeholder for this project would be the CLEF eRisk Organizers. They are responsible for providing project guidelines, datasets and performs evaluation of the project. Meeting their specifications and requirements is essential for the project's success. Secondly, the dataset involves potential "pathological gamblers" which are the researched communities. These individuals are also considered the external stakeholders.
+
+Few important internal stakeholders to note are ourselves, the student developers of the project, Dr.Sebastien Mosser, researchers of UQAM (University of Quebec in Montreal), and few psychologists from around the world. These individuals have a direct interest in the project's operation and success.
 
 \subsection{Environment}
+\subsubsection{Hardware}
+\begin{itemize}
+    \item The product will be supported on desktops and laptops with connections to the servers that CLEF eRisk 2023 provides to us. 
+\end{itemize}
 
-\wss{Hardware and software}
+\subsubsection{Software}
+\begin{itemize}
+    \item The product will be supported on Windows and macOS. 
+\end{itemize}
 
 \section{Goals}
+\subsection{Ease of Use}
+In terms of operations, the product should be intuitive and require no further instructions from the external stakeholders such as CLEF eRisk Organizers.
+
+\subsection{Natural Language Processing}
+The product should use Natural Language Processing techniques to accurately determine which users have commited pathological gambling.
+
+\subsection{Training on eRisk dataset}
+The product should be able to process and analyze the test dataset and server data of pathological gamblers and non-pathological gamblers provided by eRisk.
+
+\subsection{Safety of Data}
+The product should never leak personal data of any user being analyzed.
 
 \section{Stretch Goals}
+
+\subsection{Detection accuracy}
+The detected pathological gamblers of the product matches with the actual pathological gamblers 100\% of the time.
+
+\subsection{Detect other disorders}
+In addition of pathological gambling, the product could also perform other tasks provided by CLEF eRisk (TBA).
+
+\subsection{Support for public usage}
+The product could have an user interface that allows general public could enter their own inputs and able to generate an accurate result.
 
 \end{document}
