@@ -16,4 +16,3 @@ The requirements listed represent the core functionality of the Natural Language
 
 - **Precise Detection of Early Signs**: The system should replicated similar precision to be competitive with past eRisk competition participants in various detection tasks (less than 100% difference).
 - **Security of Data**: Due to the nature of the data used with training as well as for detection purposes, the system should be free from security risks that could compromise the data.
-
