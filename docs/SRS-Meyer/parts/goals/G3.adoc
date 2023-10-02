@@ -9,5 +9,5 @@ The implementation of a natural language processing model that can detect early 
 
 The system will be used to process data taken from an individuals messages (In the case of past competitions, the messages are normally taken from "reddit" users in communities that are related to the topic (Ex: r/ProblemGambling for detecting early signs of pathological gambling)). The system intends to benefit individuals who are affected by mental health issues by detecting early signs of these issues before they lead to a point that is irrecoverable for the individual.
 
-.Goal Model for {project-title}
+.Goal Model Diagram for {project-title}
 image::models/goals.svg[scale=50%,align="center"]
