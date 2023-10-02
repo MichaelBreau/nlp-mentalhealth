@@ -1,0 +1,53 @@
+digraph G {
+  rankdir=TB; // Arrange nodes from top to bottom
+
+  // Hard Goals
+  node [shape=rectangle, style=bold];
+  "Effortless Order Placement" [label="Effortless Order Placement\n(Hard Goal)"];
+  "Real-time Delivery Tracking" [label="Real-time Delivery Tracking\n(Hard Goal)"];
+  "Order Management Efficiency" [label="Order Management Efficiency\n(Hard Goal)"];
+  "Accurate Delivery Coordination" [label="Accurate Delivery Coordination\n(Hard Goal)"];
+
+  // Soft Goals
+  node [shape=doubleoctagon, style=bold];
+  "User Satisfaction" [label="User Satisfaction\n(Soft Goal)"];
+  "System Usability" [label="System Usability\n(Soft Goal)"];
+  "Data Security" [label="Data Security\n(Soft Goal)"];
+  
+  // Resources
+  node [shape=egg, style=bold];
+  "User Interface" [label="User Interface\n(Resource)"];
+  "Real-time Data" [label="Real-time Data\n(Resource)"];
+  "Inventory Management" [label="Inventory Management\n(Resource)"];
+  "Location Tracking" [label="Location Tracking\n(Resource)"];
+
+  // Plans
+  node [shape=hexagon, style=bold];
+  "Order Processing Workflow" [label="Order Processing Workflow\n(Plan)"];
+  "Delivery Tracking Algorithm" [label="Delivery Tracking Algorithm\n(Plan)"];
+
+  // Relationships with contributions
+  "Effortless Order Placement" -> "User Satisfaction" [label="+1"];
+  "Effortless Order Placement" -> "User Interface" [label="+1"];
+  
+  "Real-time Delivery Tracking" -> "Real-time Data" [label="+1"];
+  "Real-time Delivery Tracking" -> "Location Tracking" [label="+1"];
+  "Real-time Delivery Tracking" -> "User Satisfaction" [label="+2"];
+
+  "Order Management Efficiency" -> "User Satisfaction" [label="+1"];
+  "Order Management Efficiency" -> "User Interface" [label="+1"];
+  "Order Management Efficiency" -> "Inventory Management" [label="+1"];
+
+  "Accurate Delivery Coordination" -> "Real-time Data" [label="+1"];
+  "Accurate Delivery Coordination" -> "Location Tracking" [label="+1"];
+  "Accurate Delivery Coordination" -> "Data Security" [label="+1"];
+
+  "User Satisfaction" -> "Order Processing Workflow" [dir=back,label="+1"];
+  "User Interface" -> "Order Processing Workflow" [dir=back,label="+1"];
+  "Inventory Management" -> "Order Processing Workflow" [dir=back,label="+1"];
+
+
+  "Real-time Data" -> "Delivery Tracking Algorithm" [dir=back,label="+1"];
+  "Location Tracking" -> "Delivery Tracking Algorithm" [dir=back,label="+1"];
+  "User Satisfaction" -> "Delivery Tracking Algorithm" [dir=back,label="+2"];
+}
