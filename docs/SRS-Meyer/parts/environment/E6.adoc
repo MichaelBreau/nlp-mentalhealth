@@ -5,4 +5,13 @@ ifdef::env-draft[]
 TIP: _Properties of the environment that the system's operation must preserve, i.e., properties of the environment that operations of the system may assume to hold when they start, and must maintain_  <<BM22>>
 endif::[]
 
-{emptysec}
+- **User Data Privacy**: The system must maintain the privacy and anonymity of the individuals involved in either the training set or in any writings it evaluates.
+
+- **Inputted Data Privacy**: The system must maintain privacy for any evaluations done for a user, by only sharing that information to the appropriate mental health assessor of the user.
+
+- **Authority of Mental Health Professionals**: The system must maintain the current status quo for Mental Health Professionals being the only ones qualified to give a definitive diagnosis. This system is meant to aid the process, it is not meant to be the sole authority.
+
+- **Ethical Guideline Accountability**: The system must act in accordance with the proper ethical standards and practises provided to us from the correspondent mental health associates.
+
+- **Data Retention Guidelines**: The system must act in accordance with the nesscessary data retention guidelines of the appropriate environment, only saving and storing what is allowed.
+
