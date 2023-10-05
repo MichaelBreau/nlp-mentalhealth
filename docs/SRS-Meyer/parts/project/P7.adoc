@@ -5,4 +5,15 @@ ifdef::env-draft[]
 TIP: _Initially, description of what the requirements process will be; later, report on its steps. It starts out as a plan for conducting the requirements elicitation process, but is meant to be updated as part of that process so that it includes the key lessons of elicitation._  <<BM22>>
 endif::[]
 
-{emptysec}
+
+-**eRisk Competition Organizers**: Arrange internal team meetings and discussions to stay informed and up to date regarding any specifications and important deadlines for the eRisk Competition, in order to keep our project on track and to the right specifications. The competition organizers will release details such as what mental health issues will be focused on, timing and processing constraints, and general milestone deadlines. This information will be found on the website as well as communicated through their corresponding e-mail services.
+
+-**University of Montreal NLP Team**: The team of researchers and experts working at the University of Montreal offer invaluable insight towards creating the project, as well as being major stakeholders for our team, as they have a major say in quality assessment of our project. Our team will have regularly scheduled meetings with the core Natural Language Processing Team as well as with any other collaborative experts that can provide feedback and instruction for us.
+
+-**Mental Health Capstone Ops Team**: As this project is not solely the responsibility of 1 Capstone team, it is important that we as the Natural Language Processing team work closely with the Software Architecture Operations team to ensure team synergy, which is vital due to the direct reliance that both teams have with each other. Our primary means of accomplishing this is through regular inter-team communications and meetings to discuss any challenges or highlight key aspects of implementation to further each others understanding, as well as make sure that both projects are on the right track.
+
+-**Mental Health Professionals**: Due to the scope of this project being so closely intertwined with the work of mental health professionals, it is imperative that we arrange to receive insight from people in that field. The overall prior team associated with this project is a widely multidisciplinary effort, and luckily for us, that team includes some therapists and other mental health workers from around the world who can provide us insight and feedback on our progress. It is important to put a strong emphasis on their outlook, as they are most closely related to the codes and standards that this project should follow in order to not violate any ethical standards.
+
+-**Users of Online Mental Health Services**: It is important to conduct some user interviews with people who have either used virtual mental health services in the past or are interested in using them. Getting user feedback and input can further our understanding to give us a better idea of the virtual mental health landscape.
+
+
