@@ -8,5 +8,5 @@ endif::[]
 The successful development and deployment of the Natural Lanugage Processing for Pathological Gambling project will require the following software/hardware tools and specifications:
 
 1. Most updated version of Python
-2. Stanza - Python NLP Library
+2. Python Libraries: pandas, Gensim, and scikit-learn
 3. ERisk servers
