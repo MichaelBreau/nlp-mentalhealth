@@ -9,4 +9,3 @@ The system need not address the accisition of raw language data, this functional
 
 The system need not address providing mental health professionals access to the models. The project goal is to submit our findings to the eRisk competition, adapting the research into systems that mental health professionals can use is outside the scope of the project.
 
-{emptysec}
