@@ -5,8 +5,8 @@
 |===
 |Section | Version | Lead | Delivered | Reviewer | Approved 
 
-| **<<p1>>** | | | | |
-| **<<p2>>** | | | | |
+| **<<p1>>** | 1.0 | Matthew Curtis | 2023-10-06 | |
+| **<<p2>>** | 1.0 | Matthew Curtis | 2023-10-06 | |
 | **<<p3>>** | | | | |
 | **<<p4>>** | | | | |
 | **<<p5>>** | | | | |
