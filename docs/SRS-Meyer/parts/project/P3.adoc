@@ -5,4 +5,13 @@ ifdef::env-draft[]
 TIP: _List of tasks to be carried out and their scheduling. It defines the project's key dates._  <<BM22>>
 endif::[]
 
-{emptysec}
+- Task 1: Learn required knowledge for project development such as Natural Processing Techniques and its corresponding libraries.
+- Task 2: Initial setup and install required tools.
+- Task 3: Use the Pathological Gambling Project as reference for initial prototype. 
+- Task 4: Develop version 1 (functional prototype) for proof of concept.
+- Task 5: Train NLP model with data provided by ERisk.
+- Task 6: Analyze result and modify version 1 of product.
+- Task 7: Develop design documentation for futher product revision.
+- Task 8: Develop version 2 (final product) and test for accuracy.
+
+
