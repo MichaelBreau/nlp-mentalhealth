@@ -1,0 +1,32 @@
+digraph G {
+  rankdir=TB; // Arrange nodes from top to bottom
+
+  // Hard Goals
+  node [shape=rectangle, style=bold];
+  "Determination of signs of early-risk" [label="Determination of signs of early-risk\n(Hard Goal)"];
+
+  // Soft Goals
+  node [shape=doubleoctagon, style=bold];
+  "Reliability" [label="Reliability\n(Soft Goal)"];
+  "Precision" [label="Precision\n(Soft Goal)"];
+  "Data Security" [label="Data Security\n(Soft Goal)"];
+  
+  // Resources
+  node [shape=egg, style=bold];
+  "Training Data Set" [label="Training Data Set\n(Resource)"];
+
+  // Plans
+  node [shape=hexagon, style=bold];
+  "Natural Language Processing" [label="Natural Language Processing\n(Plan)"];
+
+  // Relationships with contributions
+
+  "Determination of signs of early-risk" -> "Training Data Set" [label=""];
+  "Determination of signs of early-risk" -> "Data Security" [label=""];
+  "Determination of signs of early-risk" -> "Reliability" [label=""];
+  "Determination of signs of early-risk" -> "Precision" [label=""];
+
+  "Training Data Set" -> "Natural Language Processing" [dir=back,label=""];
+  "Data Security" -> "Natural Language Processing" [dir=back,label=""];
+  "Reliability" -> "Natural Language Processing" [dir=back,label=""];
+}
