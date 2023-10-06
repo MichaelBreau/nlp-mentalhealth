@@ -8,18 +8,18 @@ endif::[]
 ==== Use Case 1: Process Data
 [cols='1,4']
 |===
-|Goal: |To convert raw language data into a form useable by prediction models
-|Actor: |Devloper
+|Goal: |To convert raw language data into a form usable by prediction models
+|Actor: |Developer
 |Precondition: |The developer has access to raw language data
 |Main Pattern: a|* The developer submits the raw data to the system
-* The system returns a processed form of the data usable by pediction models to the developer
+* The system returns a processed form of the data usable by prediction models to the developer
 |===
 
 ==== Use Case 2: Train Model
 [cols='1,4']
 |===
 |Goal: |To train a prediction model using processed data
-|Actor: |Devloper
+|Actor: |Developer
 |Precondition: |The developer has access to processed data with expected outputs
 |Main Pattern: a|* The developer submits the data and expected outputs to the system
 * The system returns a trained prediction model to the developer
@@ -30,7 +30,7 @@ endif::[]
 [cols='1,4']
 |===
 |Goal: |To predict a person's mental health risk from new data
-|Actor: |Devloper
+|Actor: |Developer
 |Precondition: |The developer has access to a trained prediction model and processed data the model has not seen yet
 |Main Pattern: a|* The developer submits the trained model and data to the system
 * The system returns predictions of mental health risk for each data point
@@ -40,7 +40,7 @@ endif::[]
 [cols='1,4']
 |===
 |Goal: |To compute accuracy measures for predictions made on data
-|Actor: |Devloper
+|Actor: |Developer
 |Precondition: |The developer has access to predictions made by a model and the corresponding expected values
 |Main Pattern: a|* The developer submits the predictions and expected values to the system
 * The system returns a set of accuracy measures for the model's performance
@@ -50,5 +50,4 @@ endif::[]
 image::models/use_case.svg[scale=70%,align="center"]
 
 {emptysec}
-
 
