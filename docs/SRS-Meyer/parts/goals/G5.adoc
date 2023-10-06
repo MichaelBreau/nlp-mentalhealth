@@ -49,5 +49,4 @@ endif::[]
 .High Level use cases diagram
 image::models/use_case.svg[scale=70%,align="center"]
 
-{emptysec}
 
