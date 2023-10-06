@@ -14,4 +14,3 @@ endif::[]
 - **Ethical Guideline Accountability**: The system must act in accordance with the proper ethical standards and practises provided to us from the correspondent mental health associates.
 
 - **Data Retention Guidelines**: The system must act in accordance with the nesscessary data retention guidelines of the appropriate environment, only saving and storing what is allowed.
-

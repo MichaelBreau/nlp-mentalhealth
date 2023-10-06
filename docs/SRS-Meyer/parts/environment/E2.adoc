@@ -5,4 +5,10 @@ ifdef::env-draft[]
 TIP: _List of elements of the environment that may affect or be affected by the system and project. It includes other systems to which the system must be interfaced. These components may include existing systems, particularly software systems, with which the system will interact — by using their APIs (program interfaces), or by providing APIs to them, or both. These are interfaces provided to the system from the outside world. They are distinct from both: interfaces provided by the system to the outside world (<<s3>>); and technology elements that the system's development will require (<<p5>>)._  <<BM22>>
 endif::[]
 
-{emptysec}
+- *ERisk Servers*: The system must utilize servers provided by ERisk during the testing stage to interatively get user writings and send responses.
+
+- *Stanford CoreNLP Client*: The system could interact with Stanza's Java toolkit, Stanford CoreNLP, with its server interface. Doing so will allow the system to derive linguistic annotations for text, tokenization and parsing in python.
+
+- *Text Data and Profiles*: The data sources and profile information mainly come from various platforms such as Reddit. Using their APIs will support in NLP development.
+
+- *Data Visualization Tools* Incorporating data visualization and analysis APIs and libraries such as Matplotlib and Pandas will aid in testing phase to generate an more accurate result.

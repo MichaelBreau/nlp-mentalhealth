@@ -15,5 +15,3 @@ endif::[]
 -**Mental Health Professionals**: Due to the scope of this project being so closely intertwined with the work of mental health professionals, it is imperative that we arrange to receive insight from people in that field. The overall prior team associated with this project is a widely multidisciplinary effort, and luckily for us, that team includes some therapists and other mental health workers from around the world who can provide us insight and feedback on our progress. It is important to put a strong emphasis on their outlook, as they are most closely related to the codes and standards that this project should follow in order to not violate any ethical standards.
 
 -**Users of Online Mental Health Services**: It is important to conduct some user interviews with people who have either used virtual mental health services in the past or are interested in using them. Getting user feedback and input can further our understanding to give us a better idea of the virtual mental health landscape.
-
-
