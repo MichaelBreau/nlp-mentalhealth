@@ -44,7 +44,7 @@ footer:
     right:
       content: '{page-number}'
     left:
-      content: '{course-number} -- {course-term}'
+      content: '{course-number}'
     center:
       content: 'image:license.png[pdfwidth=7.5%]'
   verso:

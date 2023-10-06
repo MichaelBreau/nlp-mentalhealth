@@ -5,7 +5,7 @@
 .2+| *Version* 2+| *Delivery* 2+| *Feedback*
 | _Deadline_ | _Delivered_ | _Received_ | _Integrated_ 
 
-| **V1** | | | |
+| **V1** |October 6, 2023 |October 6, 2023 | |
 | **V2** | | | |
 | **V3** | | | |
 |===

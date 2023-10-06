@@ -1,15 +1,16 @@
 [discrete]
 === Control Information
 
-[cols="^1,^1,^1,2,^1,2"]
+.{project-title} -- Versionning Information -- Project Book
+[cols="^1,^1,^2,^2,^2,^2"]
 |===
 |Section | Version | Lead | Delivered | Reviewer | Approved 
 
-| **<<p1>>** | 1.0 | Matthew Curtis | 2023-10-06 | |
-| **<<p2>>** | 1.0 | Matthew Curtis | 2023-10-06 | |
-| **<<p3>>** | | | | |
-| **<<p4>>** | | | | |
-| **<<p5>>** | | | | |
-| **<<p6>>** | | | | |
-| **<<p7>>** | | | | |
+| **<<p1>>** | 1.0 | Matthew Curtis | 2023-10-06 | Jessica Dawson | October 6, 2023
+| **<<p2>>** | 1.0 | Matthew Curtis | 2023-10-06 | Jessica Dawson | October 6, 2023
+| **<<p3>>** | 1.0 | Yaruo Tian | October 5, 2023 | Michael Breau | October 5, 2023
+| **<<p4>>** | 1.0 | Yaruo Tian | October 5, 2023 | Michael Breau | October 5, 2023
+| **<<p5>>** | 1.0 | Yaruo Tian | October 5, 2023 | Michael Breau | October 5, 2023
+| **<<p6>>** | 1.0 | Benjamin Chinnery | October 4, 2023 | Michael Breau | October 5, 2023
+| **<<p7>>** | 1.0 | Benjamin Chinnery | October 4, 2023 | Michael Breau | October 5, 2023
 |===

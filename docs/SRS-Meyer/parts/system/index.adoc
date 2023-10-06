@@ -1,6 +1,8 @@
 == (S) System
 
+ifdef::env-draft[]
 NOTE: _the System book refines the Goal one by focusing on more detailed requirements._
+endif::[]
 
 include::control.adoc[]
 
