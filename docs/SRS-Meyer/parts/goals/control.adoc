@@ -4,13 +4,13 @@
 .{project-title} -- Versionning Information -- Goal Book
 [cols="^1,^1,^2,^2,^2,^2"]
 |===
-|Section | Version | Lead | Delivered on| Reviewer | Approved on
+|Section | Version | Lead | Delivered | Reviewer | Approved
 
 | **<<g1>>** |  |  |  |  |
 | **<<g2>>** |  |  |  |  |
-| **<<g3>>** |  |  |  |  |
-| **<<g4>>** |  |  |  |  |
-| **<<g5>>** | v1 | Jessica Dawson | October 6, 2023 |  |
-| **<<g6>>** |  |  |  |  |
+| **<<g3>>** | 1.0 | Michael Breau | October 2, 2023 | Jessica Dawson | October 6, 2023
+| **<<g4>>** | 1.0 | Michael Breau | October 2, 2023 | Jessica Dawson | October 6, 2023
+| **<<g5>>** | 1.0 | Jessica Dawson | October 6, 2023 |  |
+| **<<g6>>** | 1.0 | Jessica Dawson | October 6, 2023 |  |
 | **<<g7>>** |  |  |  |  |
 |===
