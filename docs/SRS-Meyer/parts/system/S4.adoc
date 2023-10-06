@@ -5,4 +5,39 @@ ifdef::env-draft[]
 TIP: _Examples of interaction between the environment (or human users) and the system, expressed as user stories. Such scenarios are not by themselves a substitute for precise descriptions of functionality (<<s3>>), but provide an important complement by specifying cases that these behavior descriptions must support; they also serve as a basis for developing test cases. The scenarios most relevant for stakeholders are given in chapter <<g5>> in the Goals book, at a general level, as use cases; in contrast, <<s4>> can refer to system components and functionality (from other chapters of the System book) as well as special and erroneous cases, and introduce more specific scenarios._  <<BM22>>
 endif::[]
 
-{emptysec}
+==== Use Case 1: Process Data
+. A developer has some raw text data.
+. The developer calls pre_process() and passes it this data and a list of settings.
+.. If pre_process() fails to process the data the developer recieves an error message describing what went wrong. The developer reformats the data and/or adjusts settings and then returns to step 2.
+. The developer recieves data processed into a format specified by the given settings.
+
+==== Use Case 2: Vectorize Data
+. A developer has some processed data.
+. The developer calls vectorize() and passes it this data and a list of settings.
+.. If vectorize() fails to process the data the developer recieves an error message describing what went wrong. The developer reformats the data and/or adjusts settings and then returns to step 2.
+. The developer recieves data vectorized into a format specified by the given settings.
+
+==== Use Case 3: Train Model
+. A developer has some vectorized data.
+. The developer has an untrained model.
+. The developer calls train_model() and passes it the untrained model, the data, and a list of settings.
+.. If the model fails to train effectively on the data the developer recieves an error message describing what went wrong. The developer returns to step 3 and adjusts settings accordingly.
+.. If the model can not train on the given data the developer recieves an error message describing what is wrong with the data. The developer reformats the data and returns to step 3.
+. The developer recieves a model trained based on the given settings.
+. The developer also recieves some statistics on the model's training performance.
+
+==== Use Case 4: Predict
+. A developer has a trained model.
+. The developer has some test data the trained model has not yet seen.
+. The developer calls predict() and passes it the model and the data.
+.. If the model can not use the given data the developer recieves an error message describing what is wrong with the test data. The developer reformats the test data and returns to step 3.
+. The developer recieves a set of predictions the model made.
+
+==== Use Case 5: Measure
+. A developer has some predicted values.
+. The developer has the corresponding expected values.
+. The developer calls measure() and passes it the predicted and expected values.
+.. If the two sets of values do not align with eachother (mismatched lengths, format, etc.) the developer recieves an error message describing what is wrong with the data. The developer reformats or re-acquires the data and returns to step 3.
+.. If the format of the data can not be processed into a particular measure the developer recieves an error message describing what is wrong with the data. The developer reformats or re-acquires the data and returns to step 3.
+. The developer recieves a set of accuracy measures detailing how close the predicted values are to the expected values.
+
