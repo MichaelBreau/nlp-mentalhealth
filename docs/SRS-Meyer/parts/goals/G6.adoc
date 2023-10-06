@@ -5,7 +5,7 @@ ifdef::env-draft[]
 TIP: _Aspects that the system need not address. It states what the system will not do. This chapter addresses a key quality attribute of good requirements: the requirements must be delimited (or “scoped”). <<g6>> is not, however, the place for an analysis of risks and obstacles, which pertain to the project rather than the goals and correspondingly appears in chapter <<p6>>._  <<BM22>>
 endif::[]
 
-The system need not address the accisition of raw language data, this functionality will be handled by a system developed by capstone team 8, who are working on the ops side of this project.
+The system need not address the acquisition of raw language data, this functionality will be handled by a system developed by capstone team 8, who are working on the ops side of this project.
 
 The system need not address providing mental health professionals access to the models. The project goal is to submit our findings to the eRisk competition, adapting the research into systems that mental health professionals can use is outside the scope of the project.
 
