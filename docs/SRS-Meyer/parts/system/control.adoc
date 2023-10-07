@@ -8,8 +8,8 @@
 
 | **<<s1>>** | 1.0 | Michael Breau | October 5, 2023 | Jessica Dawson | October 6, 2023
 | **<<s2>>** | 1.0 | Michael Breau | October 5, 2023 | Jessica Dawson | October 6, 2023
-| **<<s3>>** | | | | |
-| **<<s4>>** | | | | |
+| **<<s3>>** | 1.0 | Jessica Dawson | October 6, 2023 | Michael Breau | October 6, 2023
+| **<<s4>>** | 1.0 | Jessica Dawson | October 6, 2023 | Michael Breau | October 6, 2023
 | **<<s5>>** | 1.0 | Michael Breau | October 5, 2023 | Jessica Dawson | October 6, 2023
-| **<<s6>>** | | | | |
+| **<<s6>>** | 1.0 | Jessica Dawson | October 6, 2023 | Michael Breau | October 6, 2023
 |===
