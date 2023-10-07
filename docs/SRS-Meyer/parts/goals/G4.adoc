@@ -1,0 +1,18 @@
+[#g4,reftext=G.4]
+=== (G.4) Functionality overview
+
+ifdef::env-draft[]
+TIP: _Overview of the functions (behavior) of the system. Principal properties only (details are in the System book). It is a short overview of the functions of the future system, a kind of capsule version of book S, skipping details but enabling readers to get a quick grasp of what the system will do._  <<BM22>>
+endif::[]
+
+The requirements listed represent the core functionality of the Natural Language Processing system used to detect early signs of mental health issues. Detailed descriptions are available in the system section of this document.
+
+**Functional Requirements**
+
+- **Process Training Data:** The system will process training data to be used later on for natural language processing.
+- **Natural Language Processing:** The system will process data using a natural language processing model to determine if the messages exhibit early signs of mental health issues.
+
+**Non-Functional Requirements**
+
+- **Precise Detection of Early Signs**: The system should replicated similar precision to be competitive with past eRisk competition participants in various detection tasks (less than 100% difference).
+- **Security of Data**: Due to the nature of the data used with training as well as for detection purposes, the system should be free from security risks that could compromise the data.

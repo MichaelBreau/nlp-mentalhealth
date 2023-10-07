@@ -1,0 +1,19 @@
+[#p1,reftext=P.1]
+=== (P.1) Roles and personnel
+
+ifdef::env-draft[]
+TIP: _Main responsibilities in the project; required project staff and their needed qualifications. It defines the roles (as a human responsibility) involved in the project._  <<BM22>>
+endif::[]
+
+- **Developers**: Matthew Curtis, Jessica Dawson, Michael Breau, Benjamin Chinnery, Yaruo Tian
+
+We will be working with professors and many different other teams throughout our project with our project as one specific task (Developing a NLP architecture). We are unsure of the exact specifics for our projects as of right now due to the fact eRisk has not released the topics that we will be choosing from for the 2024 competition we will be taking part in. As a result, each of our main roles at the moment are just general developers.
+
+
+- **GitHub Issue Tracker**: Michael Breau
+
+Michael will be responsible for organizing and managing all of our github issues. This includes creating issues, creating the respective tags and categories and also making sure they are closed when they are finished.
+
+- **Team Liaison**: Benjamin Chinnery
+
+Benjamin will be our team liaison and as a result he will be the primary person reasonable for organizing our meeting as a group with all of our input put into consideration. He will also be our primary contact between our team and Professor Mosser along with the other teams involved as well. We all will of course have access to talk with Professor Mosser and the other teams and will do so. Benjamin will just act as our primary point of contact.

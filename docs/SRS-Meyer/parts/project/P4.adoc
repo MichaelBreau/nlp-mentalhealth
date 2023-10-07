@@ -1,0 +1,22 @@
+[#p4,reftext=P.4]
+=== (P.4) Tasks and deliverables
+
+ifdef::env-draft[]
+TIP: _**This is the core of the Project book**. It details the individual tasks listed under <<p3>> and their expected outcomes. It define the project's main activities and the results they must produce, associated with the milestone dates defined in <<p3>>._  <<BM22>>
+endif::[]
+
+Iteration #1: Weeks 1-4::
+- Task 1: Learning the required Natural Language Processing techniques is essential for development. As the majority of the product is focused on the AI aspect with minimal front end component, all developers are required to know NLP techniques and how to implement them. 
+- Task 2: Installing the required tools and setting up the environment will streamline NLP projects as they require strict reproducibility, performance optimization and dependency management.
+
+Iteration #2: Weeks 5-8::
+- Task 3: Using the Pathological Gambling Project as reference for initial prototype will not only help developers familiarize with the NLP procedures but also further mimic and improve the exisiting project.
+- Task 4: Develop the initial functional aspect of the system to process basic data. This task should be completed prior to the proof of concept.
+
+Iteration #3: Weeks 9-12::
+- Task 5: Further develop the product until it could train using the data provided by ERisk. The result should yield 50% of the expected outcome with moderate accuracy.
+- Task 6: Taken the results into consideration, modify the system according to the results from previous task. The modified system should achieve a result greater than 50% of the expected outcome.
+
+Iteration #4: Weeks 13-16::
+- Task 7: Develop design documentation to further analyze aspects of improvement for the system. 
+- Task 8: Modify and test the system to yield data with a high degree of accuracy. The system should be able to process training data efficiently and yield 90% of the expect outcome.

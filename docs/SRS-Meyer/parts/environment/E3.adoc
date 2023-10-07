@@ -1,0 +1,16 @@
+[#e3,reftext=E.3]
+=== (E.3) Constraints
+
+ifdef::env-draft[]
+TIP: _Obligations and limits imposed on the project and system by the environment. This chapter defines non-negotiable restrictions coming from the environment (business rules, physical laws, engineering decisions), which the development will have to take into account._  <<BM22>>
+endif::[]
+
+- *User Privacy and Data Protection*: The system must keep profile information provided by ERisk private and protected. Profile data shall never be exposed.
+
+- *Scalability*: The system must be built to handle and process different sizes of data provided by ERisk and process them without significant performance deterioration.
+
+- *Time Constraint*: The system must be built following the schedule of the ERisk's important dates, such as releasing training data and deployment on servers.
+
+- *Compatibility* The system must follow ERisk's specification during deployment and testing phases in order to qualify for the program.
+
+

@@ -1,0 +1,11 @@
+[#s1,reftext=S.1]
+=== (S.1) Components
+
+ifdef::env-draft[]
+TIP: _Overall structure expressed by the list of major software and, if applicable, hardware parts._  <<BM22>>
+endif::[]
+
+- **Text Pre-Processing Component**: Text is processed with the following methods: Tokenization, Lowercasing, Stopword Removal, and Stemming or Lemmatization.
+- **Vectorization Component**: Converting words/tokens into numerical vectors.
+- **Prediction Component**: Generate a prediction on wether there are early signs of gambling addiction present in the text.
+- **Output Component**: Due to a lack of a need for usability, the output will be printed to the console.

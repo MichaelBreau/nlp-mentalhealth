@@ -1,0 +1,21 @@
+[#s3,reftext=S.3]
+=== (S.3) Interfaces
+
+ifdef::env-draft[]
+TIP: _How the system makes the functionality of <<s2>> available to the rest of the world, particularly user interfaces and program interfaces (APIs). It specifies how that functionality will be made available to the rest of the world, including people (users) and other systems. These are interfaces provided by the system to the outside; the other way around, interfaces from other systems, which the system may use, are specified in <<e2>>._  <<BM22>>
+endif::[]
+
+[cols="2,3"]
+|===
+| Interface | Description
+| pre_process(raw_text_data, settings[]) +
+-> returns processed_data | Tokenizes, converts to lowercase, removes stopword tokens, and reduces tokens to root forms in order to convert raw text data into data that can be vectorized. Settings specify the processing that takes place.
+| vectorize(processed_data, settings[]) +
+-> returns model_data | Converts processed data into numerical vectors that a model can be trained on. Settings specify the processing that takes place.
+| train_model(model, model_data, settings) +
+-> returns model | Trains a given model on model_data, returns the model after training. Settings specify how the model is formed and trained.
+| predict(model, test_data) +
+-> returns predictions | Runs a trained model on test_data, returns the model's predictions.
+| measure(predictions, expected_values) +
+-> returns measures[] | Takes in predicted values and the corresponding expected values, returns a set of accuracy measures detailing the performance of the predictor.
+|===

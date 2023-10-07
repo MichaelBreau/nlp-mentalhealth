@@ -1,0 +1,6 @@
+Michael Breau <breaum1@mcmaster.ca>; Jessica Dawson <dawsor1@mcmaster.ca>; Benjamin Chinnery <chinnerb@mcmaster.ca>; Yaruo Tian <tiany38@mcmaster.ca>; Matthew Curtis <curtim7@mcmaster.ca>
+:project-title: Natural Language Processing for Mental Health Risk Prediction
+:course-number: SE 4G06 Capstone
+:course-term:
+:revnumber: 1
+:milestone: 1

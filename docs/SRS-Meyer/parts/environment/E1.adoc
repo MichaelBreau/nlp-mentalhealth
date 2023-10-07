@@ -1,0 +1,19 @@
+[#e1,reftext=E.1]
+=== (E.1) Glossary
+
+ifdef::env-draft[]
+TIP: _Clear and precise definitions of all the vocabulary specific to the application domain, including technical terms, words from ordinary language used in a special meaning, and acronyms. It introduces the terminology of the project; not just of the environment in the strict sense, but of all its parts._  <<BM22>>
+endif::[]
+
+
+- **Natural Language Processing (NLP)**: A subfield of computer science concerned with giving computers the ability to understand and manipulate human language.
+
+- **Neural Networks**: Sometimes referred to as Artificial Neural Networks, are machine learning systems modeled on the neural pathways of the human brain. This type of system endeavors to recognize underlying relationships in a set of data.
+
+- **Mental Health**: Mental health encompasses emotional, psychological, and social well-being, influencing cognition, perception, and behavior
+
+- **Training Models**: Data provided to machine learning systems to help teach it correct assumptions about a given topic
+
+- **Early Risk Detection Error (ERDE)**: An Evaluation Metric that evaluates the number of writings processed by the algorithm before producing a positive prediction 
+
+- **eRisk**: eRisk organizes a competition every year to compete various Artificial Intelligences against each other to help identify mental health issues. We will be entering our NLP into their contest this year, and as a result are tuning our algorithm to their specifications.

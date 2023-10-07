@@ -1,0 +1,17 @@
+[#e5,reftext=E.5]
+=== (E.5) Effects
+
+ifdef::env-draft[]
+TIP: _Elements and properties of the environment that the system will affect. It defines effects of the system's operations on properties of the environment. Where the previous two categories (<<e3>>, <<e4>>) defined influences of the environment on the system, effects are influences in the reverse direction._  <<BM22>>
+endif::[]
+
+
+- **Workload of Mental Health Specialists**: The system could help ease up on the workload of Mental Health Professionals by being an additional tool they could use which could help provide support with diagnosis.
+
+- **Barriers to Accessing Mental Health Services**: The online and virtual nature of the system was designed to help ease the barriers to support that people in remote communities often face. 
+
+- **Improved Detection**: The system may result in better detection of symptoms at varying stages by altering mental health professionals of signs that they might have missed.
+
+- **Improved Treatment Plans**: Improved detection may result in mental health professionals being able to create more efficient treatment plans.
+
+- **Cost of Mental Health Services**: The assistance and accessibility of these tools may reduce the overall cost of certain Mental Health Diagnostic Services.

@@ -1,0 +1,17 @@
+@startuml
+
+!include ../_style/puml.style
+  
+left to right direction
+
+actor Developer as U
+
+
+rectangle "System" {
+  U --> (Process Data)
+  U --> (Train Model)
+  U --> (Predict Risk)
+  U --> (Measure Accuracy)
+}
+@enduml
+  

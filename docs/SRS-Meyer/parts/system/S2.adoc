@@ -1,0 +1,51 @@
+[#s2,reftext=S.2]
+=== (S.2) Functionality
+
+ifdef::env-draft[]
+TIP: _**This is the bulk of the System book, describing elements of functionality (behaviors)**. This chapter corresponds to the traditional view of requirements as defining "**what the system does**”. It is organized as one section, S.2.n, for each of the components identified in <<s1>>, describing the corresponding behaviors (functional and non-functional properties)._  <<BM22>>
+endif::[]
+
+This section describes in further detail the components listed in the previous section by describing their functional and non-functional requirements.
+
+**Text Pre-Processing Component**
+
+Functional Requirements:
+
+- The system will divide text into individual units of words and or sub-words (Tokenization).
+- The system will convert generated tokens into lowercase to preserve consistency.
+- The system will remove stopword tokens (Common words that do not commonly have an effect on the meaning).
+- The system will reduce tokens to their root forms (Ex: "moving" to "move").
+
+Non-Functional Requirements:
+
+- The system will produce an output that is useable by the Vectorization Component.
+
+**Vectorization Component**
+
+Functional Requirements:
+
+- The system will convert tokens into numerical vectors.
+
+Non-Functional Requirements:
+
+- The system will produce an output that is useable by the Prediction Component.
+
+**Prediction Component**
+
+Functional Requirements:
+
+- The system will make predictions using the vectorized tokens, the trained model, as well as with the created prediction algorithm.
+
+Non-Functional Requirements:
+
+- The system will produce an output that is useable by the Output Component.
+
+**Output Component**
+
+Functional Requirements:
+
+- The system will produce the output of the predictions to the console.
+
+Non-Functional Requirements:
+
+- The system will produce output to the console that is understandable by the project team.

@@ -1,0 +1,26 @@
+[#s5,reftext=S.5]
+=== (S.5) Prioritization
+
+ifdef::env-draft[]
+TIP: _Classification of the behaviors, interfaces and scenarios (<<s2>>, <<s3>> and <<s4>>) by their degree of criticality. It is useful in particular if during the course of the project various pressures force the team to drop certain functions._  <<BM22>>
+endif::[]
+
+Due to the nature of the system, the different components are all dependent on eachother and therefore their requirements are all high priority with little room for dropping functionality in the pre-Processing component of the system.
+
+|===
+| Text Pre-Processing Component | must-have | should-have | could-have | won't-have
+| The system will divide text into individual units of words and or sub-words (Tokenization). | **x** | | |
+| The system will convert generated tokens into lowercase to preserve consistency. | | **x** | |
+| The system will remove stopword tokens (Common words that do not commonly have an effect on the meaning). | | **x** | |
+| The system will reduce tokens to their root forms (Ex: "moving" to "move"). | | **x** | |
+| The system will produce an output that is useable by the Vectorization Component. | **x** | | |
+| Vectorization Component | must-have | should-have | could-have | won't-have
+| The system will convert tokens into numerical vectors. | **x** | | |
+| The system will produce an output that is useable by the Prediction Component. | **x** | | |
+| Prediction Component | must-have | should-have | could-have | won't-have
+| The system will make predictions using the vectorized tokens, the trained model, as well as with the created prediction algorithm. | **x** | | |
+| The system will produce an output that is useable by the Output Component. | **x** | | |
+| Output Component | must-have | should-have | could-have | won't-have
+| The system will produce the output of the predictions to the console. | **x** | | |
+| The system will produce output to the console that is understandable by the project team. | **x** | | |
+|===
