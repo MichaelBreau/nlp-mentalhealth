@@ -61,6 +61,18 @@ Date2 & Name(s) & Description of changes\\
 
 \section{System Boundaries and Components}
 
+The system that the hazard analysis with be conducted on consists of:
+\begin{enumerate}
+	\item The system's security/ethical aspects which consist of the following:
+	      \begin{itemize}
+		      \item Data ingestion component
+		      \item Data processing component
+		      \item Algorithm bias feature
+		      \item Data protection component
+	      \end{itemize}
+	The major concern of this system is the security of user data provided by E-Risk. It must be known that data leaks from the system would be a potential hazard to these users. Data ingestion, processing, protection components of the system must be analyzed. 
+\end{enumerate}
+
 \section{Critical Assumptions}
 
 \wss{These assumptions that are made about the software or system.  You should
@@ -74,8 +86,17 @@ this potential failure mode.}
 
 \section{Safety and Security Requirements}
 
-\wss{Newly discovered requirements.  These should also be added to the SRS.  (A
-rationale design process how and why to fake it.)}
+\begin{enumerate}
+
+    \item[SR1.] User data must not be shared or re-used in any system not part of this system
+    \item[] \emph{Rationale:}  As users have an expectation that their personal data will be handled with care, sharing it with other systems will not guarantee their safety as it will not be under our control.
+    \item[] \emph{Associated Hazards:} H1-1
+
+    \item[SR2.] Sensitive user data is must not be present within the results generated
+    \item[] \emph{Rationale:}  This is to ensure legal compliance and uphold ethical and professional standards. In addition, exposing people's PPI could lead to unauthorized access, data breaches, or privacy violations.
+    \item[] \emph{Associated Hazards:} H1-1
+\end{enumerate}
+
 
 \section{Roadmap}
 
