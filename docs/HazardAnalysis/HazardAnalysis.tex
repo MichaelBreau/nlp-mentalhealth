@@ -12,7 +12,6 @@
 \usepackage[round]{natbib}
 \usepackage[autostyle]{csquotes}
 
-
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
     linkcolor=red,          % color of internal links (change box color with linkbordercolor)
@@ -39,6 +38,7 @@
 
 \pagenumbering{roman}
 
+
 \begin{table}[hp]
 \caption{Revision History} \label{TblRevisionHistory}
 \begin{tabularx}{\textwidth}{llX}
@@ -60,13 +60,25 @@ October 19, 2023 & Jessica Dawson & Adding section 2 and parts of FMEA\\
 
 \section{Introduction}
 
-\wss{You can include your definition of what a hazard is here.}
+This document is used for the analysis of possible hazards that could affect the NLP Early Risk Detection of Mental Health Issues project. The definition of a hazard as used in this document is any potential cause for a loss to the interests of the stakeholders of the project. The purpose of this document is to aid with resolving potential risks for hazards before they become an issue.
 
 \section{Scope and Purpose of Hazard Analysis}
 
 The purpose of this hazard analysis is to identify potential risks to stakeholders and the failure modes of the software that lead to these risks being realized. The document only covers stakeholder losses caused by a failure of our software system as the focus is on guiding the design of the system, not defining all possible stakeholder losses. The document identifies potential hazards in the system and from these derives a set of security requirements that will be used to refine our system design.
 
 \section{System Boundaries and Components}
+
+The system that the hazard analysis with be conducted on consists of:
+\begin{enumerate}
+	\item The system's security/ethical aspects which consist of the following:
+	      \begin{itemize}
+		      \item Data ingestion component
+		      \item Data processing component
+		      \item Algorithm bias feature
+		      \item Data protection component
+	      \end{itemize}
+	The major concern of this system is the security of user data provided by E-Risk. It must be known that data leaks from the system would be a potential hazard to these users. Data ingestion, processing, protection components of the system must be analyzed. 
+\end{enumerate}
 
 \section{Critical Assumptions}
 
@@ -82,7 +94,21 @@ this potential failure mode.}
         \hline
         \textbf{Component} & \textbf{Failure Modes} & \textbf{Effects of Failure} & \textbf{Causes of Failure} & \textbf{Recommended Action} & \textbf{SR} & \textbf{Ref.} \\
         \hline
-        \multirow{2}{*}{General} 
+        \multirow{4}{*}{General} 
+        & Compromised sensitive data
+        & Legal consequences and loss of trust 
+        & System security breach or compromised device from team member 
+        & The team should be careful to not expose sensitive data anywhere that could lead to it being seen by non-team members 
+        & SR1, SR2
+        & TBD \\
+        \cline{2-7}
+        & Hardware Limitation (Crashes or not enough processing power)
+        & Loss of trust from users, in the case of this project specifically: potential poor results at eRisk competition
+        & Process causes device to crash, processes errors out unexpectedly, or the code is unable to complete in a time constraint that makes sense 
+        & The system should be thoroughly tested as well as account for edge cases that could possibly lead to one of the previously mentioned failures  
+        & SR3 
+        & TBD \\
+        \cline{2-7}
         & An nlp pipeline breaks on deployment
         & Loss of time to try different models and approaches during the eRisk competition
         & Lack of comprehensive validation systems before deployment
@@ -97,7 +123,14 @@ this potential failure mode.}
         & SR5
         & TBD \\
         \hline
-        \multirow{1}{*}{Risk Prediction} 
+        \multirow{2}{*}{Risk Prediction} 
+        & An incorrect diagnosis could result in harm to the health care professional giving the diagnosis or the person being diagnosed
+        & Legal consequences and loss of trust 
+        & Upload of incorrect code that produces false results
+        & The team through tools as well as themselves hold themselves accountable to their code as the wellbeing of others can be affected by it
+        & SR4, SR8
+        & TBD \\
+        \cline(2-7)
         & Corrupted data causes incorrect model results
         & Model gives a wrong prediction, impacts success in the eRisk competition and could result in an incorrect diagnosis
         & Data is distorted in some way (entries duplicated, deleted, changed, etc.)
@@ -108,10 +141,20 @@ this potential failure mode.}
     \end{longtable}
 \end{landscape}
 
+
 \section{Safety and Security Requirements}
 
-\wss{Newly discovered requirements.  These should also be added to the SRS.  (A
-rationale design process how and why to fake it.)}
+\begin{enumerate}
+
+    \item[SR1.] User data must not be shared or re-used in any system not part of this system
+    \item[] \emph{Rationale:}  As users have an expectation that their personal data will be handled with care, sharing it with other systems will not guarantee their safety as it will not be under our control.
+    \item[] \emph{Associated Hazards:} H1-1
+
+    \item[SR2.] Sensitive user data is must not be present within the results generated
+    \item[] \emph{Rationale:}  This is to ensure legal compliance and uphold ethical and professional standards. In addition, exposing people's PPI could lead to unauthorized access, data breaches, or privacy violations.
+    \item[] \emph{Associated Hazards:} H1-1
+\end{enumerate}
+
 
 \section{Roadmap}
 
