@@ -82,10 +82,11 @@ The system that the hazard analysis with be conducted on consists of:
 
 \section{Critical Assumptions}
 
-\wss{These assumptions that are made about the software or system.  You should
-minimize the number of assumptions that remove potential hazards.  For instance,
-you could assume a part will never fail, but it is generally better to include
-this potential failure mode.}
+\begin{itemize}
+    \item We will assume that any health care provider using our product would not intentionally misuse it.
+    \item We will assume that any health care provider using our product would not use our product with malicious intent and only use it to help their patient.
+    \item We will assume that the libraries and functions we utilize in our code work as expected such as NumPy, Pandas, and SkLearn.
+  \end{itemize}
 
 \begin{landscape}
     \section{Failure Mode and Effect Analysis}
@@ -146,13 +147,26 @@ this potential failure mode.}
 
 \begin{enumerate}
 
-    \item[SR1.] User data must not be shared or re-used in any system not part of this system
-    \item[] \emph{Rationale:}  As users have an expectation that their personal data will be handled with care, sharing it with other systems will not guarantee their safety as it will not be under our control.
-    \item[] \emph{Associated Hazards:} H1-1
+    \item[SR1.] User data must not be shared or re-used in any system not part of this system\\
+    \item[] \emph{Rationale:}  As users have an expectation that their personal data will be handled with care, sharing it with other systems will not guarantee their safety as it will not be under our control.\\
+    \item[] \emph{Associated Hazards:} H1-1\\
 
-    \item[SR2.] Sensitive user data is must not be present within the results generated
-    \item[] \emph{Rationale:}  This is to ensure legal compliance and uphold ethical and professional standards. In addition, exposing people's PPI could lead to unauthorized access, data breaches, or privacy violations.
-    \item[] \emph{Associated Hazards:} H1-1
+    \item[SR2.] Sensitive user data is must not be present within the results generated\\
+    \item[] \emph{Rationale:}  This is to ensure legal compliance and uphold ethical and professional standards. In addition, exposing people's PPI could lead to unauthorized access, data breaches, or privacy violations.\\
+    \item[] \emph{Associated Hazards:} H1-1\\
+    
+    \item[SR3.] The system will be tested periodically to detect crashes and a potential lack of processing power\\
+    \item[] \emph{Rationale:} As we build our system out we will be adding more features and increasing the complexity, which increases the processing power required. This may lead to crashes or issues with a lack of processing power that will need to periodically be checked. This is to check the hardware limitations. \\
+    \item[] \emph{Associated Hazards:} H2-1\\
+
+    \item[SR4.] The system will run through a series of tests before deploying/pushing new builds\\
+    \item[] \emph{Rationale:} This will be done to ensure that the system is still working as expected with our new changes and that nothing has broken before we deploy a new build. These tests will help us detect that and allow us to go back and fix any issues that arise. \\
+    \item[] \emph{Associated Hazards:} H4-1  \\
+
+    \item[SR5.] The team will regularly push their code by committing to a repository while working on the code\\
+    \item[] \emph{Rationale:} This needs to be done in order to avoid losing code/work. If something were to happen to the team members computer for whatever reason and the work that was done after the last commit was to be deleted/lost, frequent commits would help ensure minimal lose.\\
+    \item[] \emph{Associated Hazards:} H5-1 \\
+    
 \end{enumerate}
 
 
