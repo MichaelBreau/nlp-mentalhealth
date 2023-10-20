@@ -4,11 +4,14 @@
   
 left to right direction
 
-actor User as U
+actor Developer as U
 
 
 rectangle "System" {
-  U --> (Do Something)
+  U --> (Process Data)
+  U --> (Train Model)
+  U --> (Predict Risk)
+  U --> (Measure Accuracy)
 }
 @enduml
   

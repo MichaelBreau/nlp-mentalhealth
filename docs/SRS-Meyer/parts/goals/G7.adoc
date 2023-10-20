@@ -5,4 +5,56 @@ ifdef::env-draft[]
 TIP: _Groups of people who can affect the project or be affected by it, and other places to consider for information about the project and system. It lists stakeholders and other requirements sources. It should define stakeholders as categories of people, not individuals, even if such individuals are known at the time of writing. The main goal of chapter <<g7>> is to avoid forgetting any category of people whose input is relevant to the project. It also lists documents and other information that the project, aside from soliciting input from stakeholders, can consult for requirements information._  <<BM22>>
 endif::[]
 
-{emptysec}
+.Stakeholders
+[cols=".^1,2,1,1"]
+|===
+2+|Stakeholder | Persona | Category
+
+.3+|Direct Users| Psychiatrists | <<Jessica>> | Direct
+| Police Officers | <<Joe>> | Direct
+| Family Doctors | <<Julia>> | Direct
+
+2+| eRisk Competition Organizers | N/A | Direct
+2+| University of Montreal NLP Team | N/A | Direct
+2+| Mental Health Capstone Ops Team | N/A | Direct
+
+3+| Local Community | Indirect
+
+|===
+
+==== Direct Stakeholders
+
+Direct stakeholders have an interest in the implementation and can be used to elicit requirements. The groups that will be using the eRisk data and NLP architecture directly have been provided with personas to aid with requirement elicitation. They will be the primary users and will use the architecture in order to screen individuals to hopefully discover potential early signs of different mental health disorders. Although each group may use the NLP architecture to uncover different mental health issues and their motives will be different from one another.
+
+**Potential Stakeholders:**
+
+**Jessica (Psychiatrist Persona):**
+
+Jessica is a 45-year-old Psychiatrist that works at her private practice. Her patient is a 14-year-old girl named Avery, and her mother has come to Jessica saying she is worried about Avery’s mental health and thinks she may be beginning to suffer from depression and suicidal tendencies. When Avery comes into the doctor's office, she agrees to speak with Jessica about the topic but is very shy and reserved. Understandably so since the topic can be a hard and sensitive topic to approach. She ends up not really giving Jessica any information about how she is feeling and Jessica is left with no way of understanding if she is at risk or not. In moments like this Jessica loves to use eRisks NLP architecture to look at Avery social media accounts and determine if the model thinks she would be identified as someone that may be at risk for these issues. Without this model, Jessica is unsure of other ways to get more information about Avery's situation, but the NLP model can provide some useful insight for Jessica. As a result, she can bring up the topic of Avery's social media to her and create an open discussion about the feelings she may be having.
+
+
+**Joe (Police Officer Persona):**
+
+Joe is a 40-year-old police officer working in Hamilton, Ontario. He is on duty one night and gets a call from a distressed teenager. The teenage girl says that her friend's father has been acting very strange around her and is being creepy. This is all the information Joe is provided with and is stuck on what his next steps should be. Thankfully, he has the NLP architecture model from eRisk as a tool he uses when he gets calls like these or others about potential signs of mental health problems people are exhibiting. This is a key tool to see potential signs of early risk of mental health issues before drastic actions are taken and also helps find potential dangerous situations due to mental health issues exhibited online. When he runs the NLP model for this father, it comes back with a high risk of predatory behavior for him. This helps solidify to Joe that this is not just a one-off case and needs to be investigated swiftly before anything bad happens.
+
+**Julia (Family Doctor Persona):**
+
+Julia is a 35-year-old family doctor at her local doctors office. She knows the importance of mental health and how it can be hard for people to come forward and seek the help they need whether it is due to being shy, embarrassed, or any other number of reasons. As a result, she runs the eRisk NLP model on her patients the day before they come in. By doing this, she can find if there are any potential early signs of mental health issues and, if so, she can propose starting an open dialogue with her patient when they meet or ask her patient if they have been experiencing any feelings recently that would be related to said mental health issue. A lot of the time people just need an opportunity to speak about what they are going through, and this is a good way to get the dialogue started.
+
+**eRisk Competition Organizers:**
+
+The eRisk organizers will compare our systems performance in a variety of metrics in a competition format against other teams in order to further the research in the early risk prediction on the internet field.
+
+**University of Montreal NLP Team:**
+
+As previous competitors in the competion as well as mentors to the current project, the UoM NLP team has a direct interest in the implementation of the project.
+
+**Mental Health Capstone supervisors to the current project:**
+
+The projects supervisor's have a direct interest in the implementation as well as the outcome at the competition from the project.
+
+==== Indirect Stakeholders
+
+**Local Community:**
+
+In the event that the project leads to the direct users, a change of an environment due to sucessful detection of early risk signs could provide a benefit to the local community.

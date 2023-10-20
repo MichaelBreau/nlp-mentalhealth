@@ -3,6 +3,14 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{pdflscape}
+\usepackage{float}
+\usepackage{adjustbox}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage[round]{natbib}
+\usepackage[autostyle]{csquotes}
 
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
@@ -30,15 +38,14 @@
 
 \pagenumbering{roman}
 
+
 \begin{table}[hp]
 \caption{Revision History} \label{TblRevisionHistory}
 \begin{tabularx}{\textwidth}{llX}
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+October 19, 2023 & Jessica Dawson & Adding section 2 and parts of FMEA\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -51,22 +58,29 @@ Date2 & Name(s) & Description of changes\\
 
 \pagenumbering{arabic}
 
-\wss{You are free to modify this template.}
-
 \section{Introduction}
 
-\wss{You can include your definition of what a hazard is here.}
+This document is used for the analysis of possible hazards that could affect the NLP Early Risk Detection of Mental Health Issues project. The definition of a hazard as used in this document is any potential cause for a loss to the interests of the stakeholders of the project. The purpose of this document is to aid with resolving potential risks for hazards before they become an issue.
 
 \section{Scope and Purpose of Hazard Analysis}
 
+The purpose of this hazard analysis is to identify potential risks to stakeholders and the failure modes of the software that lead to these risks being realized. The document only covers stakeholder losses caused by a failure of our software system as the focus is on guiding the design of the system, not defining all possible stakeholder losses. The document identifies potential hazards in the system and from these derives a set of security requirements that will be used to refine our system design.
+
 \section{System Boundaries and Components}
 
-\section{Critical Assumptions}
+The system that the hazard analysis with be conducted on consists of:
+\begin{enumerate}
+	\item The system's security/ethical aspects which consist of the following:
+	      \begin{itemize}
+		      \item Data ingestion component
+		      \item Data processing component
+		      \item Algorithm bias feature
+		      \item Data protection component
+	      \end{itemize}
+	The major concern of this system is the security of user data provided by E-Risk. It must be known that data leaks from the system would be a potential hazard to these users. Data ingestion, processing, protection components of the system must be analyzed. 
+\end{enumerate}
 
-\wss{These assumptions that are made about the software or system.  You should
-minimize the number of assumptions that remove potential hazards.  For instance,
-you could assume a part will never fail, but it is generally better to include
-this potential failure mode.}
+\section{Critical Assumptions}
 
 \begin{itemize}
     \item We will assume that any health care provider using our product would not intentionally misuse it.
@@ -74,27 +88,87 @@ this potential failure mode.}
     \item We will assume that the libraries and functions we utilize in our code work as expected such as NumPy, Pandas, and SkLearn.
   \end{itemize}
 
+\begin{landscape}
+    \section{Failure Mode and Effect Analysis}
+    \begin{longtable}{|p{0.20\textwidth}|p{0.17\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|p{0.35\textwidth}|p{0.1\textwidth}|p{0.05\textwidth}|}
+        \caption{Failure Mode and Effect Analysis Table} \\
+        \hline
+        \textbf{Component} & \textbf{Failure Modes} & \textbf{Effects of Failure} & \textbf{Causes of Failure} & \textbf{Recommended Action} & \textbf{SR} & \textbf{Ref.} \\
+        \hline
+        \multirow{4}{*}{General} 
+        & Compromised sensitive data
+        & Legal consequences and loss of trust 
+        & System security breach or compromised device from team member 
+        & The team should be careful to not expose sensitive data anywhere that could lead to it being seen by non-team members 
+        & SR1, SR2
+        & TBD \\
+        \cline{2-7}
+        & Hardware Limitation (Crashes or not enough processing power)
+        & Loss of trust from users, in the case of this project specifically: potential poor results at eRisk competition
+        & Process causes device to crash, processes errors out unexpectedly, or the code is unable to complete in a time constraint that makes sense 
+        & The system should be thoroughly tested as well as account for edge cases that could possibly lead to one of the previously mentioned failures  
+        & SR3 
+        & TBD \\
+        \cline{2-7}
+        & An nlp pipeline breaks on deployment
+        & Loss of time to try different models and approaches during the eRisk competition
+        & Lack of comprehensive validation systems before deployment
+        & Implementation of pipeline testing systems to ensure issues are caught early
+        & SR4
+        & TBD \\
+        \cline{2-7}
+        & Loss of code
+        & Loss of time to try different models and approaches during the eRisk competition
+        & Lost code was not backed-up
+        & Robust backup systems implemented into development processes
+        & SR5
+        & TBD \\
+        \hline
+        \multirow{2}{*}{Risk Prediction} 
+        & An incorrect diagnosis could result in harm to the health care professional giving the diagnosis or the person being diagnosed
+        & Legal consequences and loss of trust 
+        & Upload of incorrect code that produces false results
+        & The team through tools as well as themselves hold themselves accountable to their code as the wellbeing of others can be affected by it
+        & SR4, SR8
+        & TBD \\
+        \cline(2-7)
+        & Corrupted data causes incorrect model results
+        & Model gives a wrong prediction, impacts success in the eRisk competition and could result in an incorrect diagnosis
+        & Data is distorted in some way (entries duplicated, deleted, changed, etc.)
+        & System will check data to ensure it is intact before it is given to the model
+        & SR6, SR7
+        & TBD \\
+        \hline
+    \end{longtable}
+\end{landscape}
 
-\section{Failure Mode and Effect Analysis}
-
-\wss{Include your FMEA table here}
 
 \section{Safety and Security Requirements}
 
-\wss{Newly discovered requirements.  These should also be added to the SRS.  (A
-rationale design process how and why to fake it.)}
+\begin{enumerate}
 
-SR3. The system will be tested periodically to detect crashes and a potential lack of processing power\\
-    \indent \indent \emph{Rationale:} As we build our system out we will be adding more features and increasing the complexity, which increases the processing power required. This may lead to crashes or issues with a lack of processing power that will need to periodically be checked. This is to check the hardware limitations. \\
-    \indent \indent \emph{Associated Hazards:} H2-1\\
+    \item[SR1.] User data must not be shared or re-used in any system not part of this system\\
+    \item[] \emph{Rationale:}  As users have an expectation that their personal data will be handled with care, sharing it with other systems will not guarantee their safety as it will not be under our control.\\
+    \item[] \emph{Associated Hazards:} H1-1\\
 
- SR4. The system will run through a series of tests before deploying/pushing new builds\\
-    \indent \indent \emph{Rationale:} This will be done to ensure that the system is still working as expected with our new changes and that nothing has broken before we deploy a new build. These tests will help us detect that and allow us to go back and fix any issues that arise. \\
-    \indent \indent \emph{Associated Hazards:} H4-1  \\
+    \item[SR2.] Sensitive user data is must not be present within the results generated\\
+    \item[] \emph{Rationale:}  This is to ensure legal compliance and uphold ethical and professional standards. In addition, exposing people's PPI could lead to unauthorized access, data breaches, or privacy violations.\\
+    \item[] \emph{Associated Hazards:} H1-1\\
+    
+    \item[SR3.] The system will be tested periodically to detect crashes and a potential lack of processing power\\
+    \item[] \emph{Rationale:} As we build our system out we will be adding more features and increasing the complexity, which increases the processing power required. This may lead to crashes or issues with a lack of processing power that will need to periodically be checked. This is to check the hardware limitations. \\
+    \item[] \emph{Associated Hazards:} H2-1\\
 
-SR5. The team will regularly push their code by committing to a repository while working on the code\\
-     \indent \indent \emph{Rationale:} This needs to be done in order to avoid losing code/work. If something were to happen to the team members computer for whatever reason and the work that was done after the last commit was to be deleted/lost, frequent commits would help ensure minimal lose.\\
-    \indent \indent \emph{Associated Hazards:} H5-1 \\
+    \item[SR4.] The system will run through a series of tests before deploying/pushing new builds\\
+    \item[] \emph{Rationale:} This will be done to ensure that the system is still working as expected with our new changes and that nothing has broken before we deploy a new build. These tests will help us detect that and allow us to go back and fix any issues that arise. \\
+    \item[] \emph{Associated Hazards:} H4-1  \\
+
+    \item[SR5.] The team will regularly push their code by committing to a repository while working on the code\\
+    \item[] \emph{Rationale:} This needs to be done in order to avoid losing code/work. If something were to happen to the team members computer for whatever reason and the work that was done after the last commit was to be deleted/lost, frequent commits would help ensure minimal lose.\\
+    \item[] \emph{Associated Hazards:} H5-1 \\
+    
+\end{enumerate}
+
 
 \section{Roadmap}
 

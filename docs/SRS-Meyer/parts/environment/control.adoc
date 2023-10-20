@@ -6,10 +6,10 @@
 |===
 |Section | Version | Lead | Delivered | Reviewer | Approved 
 
-| **<<e1>>** |  |  |  |  |
-| **<<e2>>** |  |  |  |  |
-| **<<e3>>** |  |  |  |  |
-| **<<e4>>** |  |  |  |  |
-| **<<e5>>** |  |  |  |  |
-| **<<e6>>** |  |  |  |  |
+| **<<e1>>** | 1.0 | Benjamin Chinnery | October 2, 2023 | Michael Breau | October 2, 2023
+| **<<e2>>** | 1.0 | Yaruo Tian | October 2, 2023 | Michael Breau | October 2, 2023
+| **<<e3>>** | 1.0 | Yaruo Tian | October 2, 2023 | Michael Breau | October 2, 2023
+| **<<e4>>** | 1.0 | Yaruo Tian | October 2, 2023 | Michael Breau | October 2, 2023
+| **<<e5>>** | 1.0 | Benjamin Chinnery | October 2, 2023 | Michael Breau | October 2, 2023
+| **<<e6>>** | 1.0 | Benjamin Chinnery | October 2, 2023 | Michael Breau | October 2, 2023
 |===

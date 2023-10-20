@@ -5,7 +5,7 @@ ifdef::env-draft[]
 TIP: _Any a priori choices binding the project to specific tools, hardware, languages or other technical parameters. Not all technical choices in projects derive from a pure technical analysis; some result from company policies. While some project members may dislike non-strictly-technical decisions, they are a fact of project life and must be documented, in particular for the benefit of one of the quality factors for requirements: "requirements must be justified"._  <<BM22>>
 endif::[]
 
-Our priori choices were largely decided through technical analysis of the tools, industry best practices, company policies and relevance, and familiarity with the tools.
+Our prior choices were largely decided through technical analysis of the tools, industry best practices, company policies and relevance, and familiarity with the tools.
 
 - **Programming Language**: We will be primarily using Python for our main programming language. This is the most common language to be used for machine learning and all of the previous coding infrastructure we have to work with is written in Python as well so Python is an obvious and necessary choice for our programming language.
 
