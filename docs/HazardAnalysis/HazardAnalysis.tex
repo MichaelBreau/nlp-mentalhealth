@@ -3,6 +3,14 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{pdflscape}
+\usepackage{float}
+\usepackage{adjustbox}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage[round]{natbib}
+\usepackage[autostyle]{csquotes}
 
 \hypersetup{
     colorlinks=true,       % false: boxed links; true: colored links
@@ -55,7 +63,7 @@ Date2 & Name(s) & Description of changes\\
 
 \section{Introduction}
 
-\wss{You can include your definition of what a hazard is here.}
+This document is used for the analysis of possible hazards that could affect the NLP Early Risk Detection of Mental Health Issues project. The definition of a hazard as used in this document is any potential cause for a loss to the interests of the stakeholders of the project. The purpose of this document is to aid with resolving potential risks for hazards before they become an issue.
 
 \section{Scope and Purpose of Hazard Analysis}
 
@@ -80,9 +88,39 @@ minimize the number of assumptions that remove potential hazards.  For instance,
 you could assume a part will never fail, but it is generally better to include
 this potential failure mode.}
 
-\section{Failure Mode and Effect Analysis}
+\begin{landscape}
+    \section{Failure Mode and Effect Analysis}
+    \begin{longtable}{|p{0.20\textwidth}|p{0.17\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|p{0.35\textwidth}|p{0.1\textwidth}|p{0.05\textwidth}|}
+        \caption{Failure Mode and Effect Analysis Table} \\
+        \hline
+        \textbf{Component} & \textbf{Failure Modes} & \textbf{Effects of Failure} & \textbf{Causes of Failure} & \textbf{Recommended Action} & \textbf{SR} & \textbf{Ref.} \\
+        \hline
+        \multirow{2}{*}{General} 
+        & Compromised sensitive data
+        & Legal consequences and loss of trust 
+        & System security breach or compromised device from team member 
+        & The team should be careful to not expose sensitive data anywhere that could lead to it being seen by non-team members 
+        & SR1, SR2
+        & TBD \\
+        \cline{2-7}
+        & Hardware Limitation (Crashes or not enough processing power)
+        & Loss of trust from users, in the case of this project specifically: potential poor results at eRisk competition
+        & Process causes device to crash, processes errors out unexpectedly, or the code is unable to complete in a time constraint that makes sense 
+        & The system should be thoroughly tested as well as account for edge cases that could possibly lead to one of the previously mentioned failures  
+        & SR3 
+        & TBD \\
+        \hline
+        \multirow{1}{*}{Risk Prediction} 
+        & An incorrect diagnosis could result in harm to the health care professional giving the diagnosis or the person being diagnosed
+        & Legal consequences and loss of trust 
+        & Upload of incorrect code that produces false results
+        & The team through tools as well as themselves hold themselves accountable to their code as the wellbeing of others can be affected by it
+        & SR4, SR8
+        & TBD \\
+        \hline
+    \end{longtable}
+\end{landscape}
 
-\wss{Include your FMEA table here}
 
 \section{Safety and Security Requirements}
 
