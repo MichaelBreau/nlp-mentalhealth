@@ -38,15 +38,14 @@
 
 \pagenumbering{roman}
 
+
 \begin{table}[hp]
 \caption{Revision History} \label{TblRevisionHistory}
 \begin{tabularx}{\textwidth}{llX}
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+October 19, 2023 & Jessica Dawson & Adding section 2 and parts of FMEA\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -59,13 +58,13 @@ Date2 & Name(s) & Description of changes\\
 
 \pagenumbering{arabic}
 
-\wss{You are free to modify this template.}
-
 \section{Introduction}
 
 This document is used for the analysis of possible hazards that could affect the NLP Early Risk Detection of Mental Health Issues project. The definition of a hazard as used in this document is any potential cause for a loss to the interests of the stakeholders of the project. The purpose of this document is to aid with resolving potential risks for hazards before they become an issue.
 
 \section{Scope and Purpose of Hazard Analysis}
+
+The purpose of this hazard analysis is to identify potential risks to stakeholders and the failure modes of the software that lead to these risks being realized. The document only covers stakeholder losses caused by a failure of our software system as the focus is on guiding the design of the system, not defining all possible stakeholder losses. The document identifies potential hazards in the system and from these derives a set of security requirements that will be used to refine our system design.
 
 \section{System Boundaries and Components}
 
@@ -95,7 +94,7 @@ this potential failure mode.}
         \hline
         \textbf{Component} & \textbf{Failure Modes} & \textbf{Effects of Failure} & \textbf{Causes of Failure} & \textbf{Recommended Action} & \textbf{SR} & \textbf{Ref.} \\
         \hline
-        \multirow{2}{*}{General} 
+        \multirow{4}{*}{General} 
         & Compromised sensitive data
         & Legal consequences and loss of trust 
         & System security breach or compromised device from team member 
@@ -109,13 +108,34 @@ this potential failure mode.}
         & The system should be thoroughly tested as well as account for edge cases that could possibly lead to one of the previously mentioned failures  
         & SR3 
         & TBD \\
+        \cline{2-7}
+        & An nlp pipeline breaks on deployment
+        & Loss of time to try different models and approaches during the eRisk competition
+        & Lack of comprehensive validation systems before deployment
+        & Implementation of pipeline testing systems to ensure issues are caught early
+        & SR4
+        & TBD \\
+        \cline{2-7}
+        & Loss of code
+        & Loss of time to try different models and approaches during the eRisk competition
+        & Lost code was not backed-up
+        & Robust backup systems implemented into development processes
+        & SR5
+        & TBD \\
         \hline
-        \multirow{1}{*}{Risk Prediction} 
+        \multirow{2}{*}{Risk Prediction} 
         & An incorrect diagnosis could result in harm to the health care professional giving the diagnosis or the person being diagnosed
         & Legal consequences and loss of trust 
         & Upload of incorrect code that produces false results
         & The team through tools as well as themselves hold themselves accountable to their code as the wellbeing of others can be affected by it
         & SR4, SR8
+        & TBD \\
+        \cline(2-7)
+        & Corrupted data causes incorrect model results
+        & Model gives a wrong prediction, impacts success in the eRisk competition and could result in an incorrect diagnosis
+        & Data is distorted in some way (entries duplicated, deleted, changed, etc.)
+        & System will check data to ensure it is intact before it is given to the model
+        & SR6, SR7
         & TBD \\
         \hline
     \end{longtable}
