@@ -74,7 +74,7 @@ this potential failure mode.}
     \item We will assume that the libraries and functions we utilize in our code work as expected such as NumPy, Pandas, and SkLearn.
   \end{itemize}
 
-  
+
 \section{Failure Mode and Effect Analysis}
 
 \wss{Include your FMEA table here}
@@ -88,11 +88,11 @@ SR3. The system will be tested periodically to detect crashes and a potential la
     \indent \indent \emph{Rationale:} As we build our system out we will be adding more features and increasing the complexity, which increases the processing power required. This may lead to crashes or issues with a lack of processing power that will need to periodically be checked. This is to check the hardware limitations. \\
     \indent \indent \emph{Associated Hazards:} H2-1\\
 
- SR4. The system will run through a series of tests (GitHub Actions) before deploying/pushing new builds\\
+ SR4. The system will run through a series of tests before deploying/pushing new builds\\
     \indent \indent \emph{Rationale:} This will be done to ensure that the system is still working as expected with our new changes and that nothing has broken before we deploy a new build. These tests will help us detect that and allow us to go back and fix any issues that arise. \\
     \indent \indent \emph{Associated Hazards:} H4-1  \\
 
-SR5. The team will regularly push there commits while working on the code\\
+SR5. The team will regularly push their code by committing to a repository while working on the code\\
      \indent \indent \emph{Rationale:} This needs to be done in order to avoid losing code/work. If something were to happen to the team members computer for whatever reason and the work that was done after the last commit was to be deleted/lost, frequent commits would help ensure minimal lose.\\
     \indent \indent \emph{Associated Hazards:} H5-1 \\
 
