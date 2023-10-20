@@ -45,7 +45,11 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
+October 19, 2023 & Matthew Curtis & Adding section 4 and SR 3, 4, and 5\\
+October 19, 2023 & Michael Breau & Adding section 1 and parts of FMEA\\
 October 19, 2023 & Jessica Dawson & Adding section 2 and parts of FMEA\\
+October 20, 2023 & Yaruo Tian & Adding section 3 and SR 1 and 2\\
+October 20, 2023 & Benjamin Chinnery & Adding roadmap and SR 6, 7, and 8\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -90,7 +94,7 @@ The system that the hazard analysis with be conducted on consists of:
 
 \begin{landscape}
     \section{Failure Mode and Effect Analysis}
-    \begin{longtable}{|p{0.20\textwidth}|p{0.17\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|p{0.35\textwidth}|p{0.1\textwidth}|p{0.05\textwidth}|}
+    \begin{longtable}{|p{0.20\textwidth}|p{0.17\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|p{0.35\textwidth}|p{0.1\textwidth}|p{0.07\textwidth}|}
         \caption{Failure Mode and Effect Analysis Table} \\
         \hline
         \textbf{Component} & \textbf{Failure Modes} & \textbf{Effects of Failure} & \textbf{Causes of Failure} & \textbf{Recommended Action} & \textbf{SR} & \textbf{Ref.} \\
@@ -101,28 +105,29 @@ The system that the hazard analysis with be conducted on consists of:
         & System security breach or compromised device from team member 
         & The team should be careful to not expose sensitive data anywhere that could lead to it being seen by non-team members 
         & SR1, SR2
-        & TBD \\
+        & H1-1 \\
         \cline{2-7}
         & Hardware Limitation (Crashes or not enough processing power)
         & Loss of trust from users, in the case of this project specifically: potential poor results at eRisk competition
         & Process causes device to crash, processes errors out unexpectedly, or the code is unable to complete in a time constraint that makes sense 
         & The system should be thoroughly tested as well as account for edge cases that could possibly lead to one of the previously mentioned failures  
         & SR3 
-        & TBD \\
+        & H1-2 \\
         \cline{2-7}
         & An nlp pipeline breaks on deployment
         & Loss of time to try different models and approaches during the eRisk competition
         & Lack of comprehensive validation systems before deployment
         & Implementation of pipeline testing systems to ensure issues are caught early
         & SR4
-        & TBD \\
+        & H1-3 \\
         \cline{2-7}
+        \newpage \cline{2-7}
         & Loss of code
         & Loss of time to try different models and approaches during the eRisk competition
         & Lost code was not backed-up
         & Robust backup systems implemented into development processes
         & SR5
-        & TBD \\
+        & H1-4 \\
         \hline
         \multirow{2}{*}{Risk Prediction} 
         & An incorrect diagnosis could result in harm to the health care professional giving the diagnosis or the person being diagnosed
@@ -130,14 +135,14 @@ The system that the hazard analysis with be conducted on consists of:
         & Upload of incorrect code that produces false results
         & The team through tools as well as themselves hold themselves accountable to their code as the wellbeing of others can be affected by it
         & SR4, SR8
-        & TBD \\
-        \cline(2-7)
+        & H2-1 \\
+        \cline{2-7}
         & Corrupted data causes incorrect model results
         & Model gives a wrong prediction, impacts success in the eRisk competition and could result in an incorrect diagnosis
         & Data is distorted in some way (entries duplicated, deleted, changed, etc.)
         & System will check data to ensure it is intact before it is given to the model
         & SR6, SR7
-        & TBD \\
+        & H2-2 \\
         \hline
     \end{longtable}
 \end{landscape}
@@ -147,40 +152,41 @@ The system that the hazard analysis with be conducted on consists of:
 
 \begin{enumerate}
 
-    \item[SR1.] User data must not be shared or re-used in any system not part of this system\\
-    \item[] \emph{Rationale:}  As users have an expectation that their personal data will be handled with care, sharing it with other systems will not guarantee their safety as it will not be under our control.\\
+    \item[SR1.] User data must not be shared or re-used in any system not part of this system
+    \item[] \emph{Rationale:}  As users have an expectation that their personal data will be handled with care, sharing it with other systems will not guarantee their safety as it will not be under our control.
     \item[] \emph{Associated Hazards:} H1-1\\
 
-    \item[SR2.] Sensitive user data is must not be present within the results generated\\
-    \item[] \emph{Rationale:}  This is to ensure legal compliance and uphold ethical and professional standards. In addition, exposing people's PPI could lead to unauthorized access, data breaches, or privacy violations.\\
-    \item[] \emph{Associated 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Hazards:} H1-1\\
+    \item[SR2.] Sensitive user data is must not be present within the results generated
+    \item[] \emph{Rationale:}  This is to ensure legal compliance and uphold ethical and professional standards. In addition, exposing people's PPI could lead to unauthorized access, data breaches, or privacy violations.
+    \item[] \emph{Associated Hazards:} H1-1\\
     
-    \item[SR3.] The system will be tested periodically to detect crashes and a potential lack of processing power\\
-    \item[] \emph{Rationale:} As we build our system out we will be adding more features and increasing the complexity, which increases the processing power required. This may lead to crashes or issues with a lack of processing power that will need to periodically be checked. This is to check the hardware limitations. \\
-    \item[] \emph{Associated Hazards:} H2-1\\
+    \item[SR3.] The system will be tested periodically to detect crashes and a potential lack of processing power
+    \item[] \emph{Rationale:} As we build our system out we will be adding more features and increasing the complexity, which increases the processing power required. This may lead to crashes or issues with a lack of processing power that will need to periodically be checked. This is to check the hardware limitations.
+    \item[] \emph{Associated Hazards:} H1-2\\
 
-    \item[SR4.] The system will run through a series of tests before deploying/pushing new builds\\
-    \item[] \emph{Rationale:} This will be done to ensure that the system is still working as expected with our new changes and that nothing has broken before we deploy a new build. These tests will help us detect that and allow us to go back and fix any issues that arise. \\
-    \item[] \emph{Associated Hazards:} H4-1  \\
+    \item[SR4.] The system will run through a series of tests before deploying/pushing new builds
+    \item[] \emph{Rationale:} This will be done to ensure that the system is still working as expected with our new changes and that nothing has broken before we deploy a new build. These tests will help us detect that and allow us to go back and fix any issues that arise. 
+    \item[] \emph{Associated Hazards:} H1-3, H2-1  \\
 
-    \item[SR5.] The team will regularly push their code by committing to a repository while working on the code\\
-    \item[] \emph{Rationale:} This needs to be done in order to avoid losing code/work. If something were to happen to the team members computer for whatever reason and the work that was done after the last commit was to be deleted/lost, frequent commits would help ensure minimal lose.\\
-    \item[] \emph{Associated Hazards:} H5-1 \\
+    \item[SR5.] The team will regularly push their code by committing to a repository while working on the code
+    \item[] \emph{Rationale:} This needs to be done in order to avoid losing code/work. If something were to happen to the team members computer for whatever reason and the work that was done after the last commit was to be deleted/lost, frequent commits would help ensure minimal lose.
+    \item[] \emph{Associated Hazards:} H1-4 \\
     
     \item[SR6.] The system will operate using cleaned data that does not contain duplicates
-	  \item[] \emph{Rationale:} It is important for the system to operate off clean and effective data in order to mitigate the chances of incorrect predictions.
+	\item[] \emph{Rationale:} It is important for the system to operate off clean and effective data in order to mitigate the chances of incorrect predictions.
+	\item[] \emph{Associated Hazards:} H2-2 \\
 	
-	  \item[SR7.] The system data will only operate off of verified data free from copying errors
-	  \item[] \emph{Rationale:} It is important for the system to work off of internally approved datasets that have come from the correct sources and do not contain data transfer errors in order to help ensure a better output.
+	\item[SR7.] The system data will only operate off of verified data free from copying errors
+	\item[] \emph{Rationale:} It is important for the system to work off of internally approved datasets that have come from the correct sources and do not contain data transfer errors in order to help ensure a better output.
+	\item[] \emph{Associated Hazards:} H2-2 \\
 
-	  \item[SR8.] The system will be tested against plainly appearent data to guide and ensure prediction functionality
-	  \item[] \emph{Rationale:} The system should be able to output correct diagnosis for less nuanced dataset tests in order to help ensure consistent predication capabilites between system updates.
+	\item[SR8.] The system will be tested against plainly appearent data to guide and ensure prediction functionality
+	\item[] \emph{Rationale:} The system should be able to output correct diagnosis for less nuanced dataset tests in order to help ensure consistent predication capabilites between system updates.
+	\item[] \emph{Associated Hazards:} H2-1 \\
     
 \end{enumerate}
 
 \section{Roadmap}
 
-\wss{Which safety requirements will be implemented as part of the capstone timeline?
-Which requirements will be implemented in the future?}
 This hazard analysis has been able to identify various threats to the safety and security of this project, that will need to be accounted for in order to help keep project progress on track and reach the desired milestones. The hope for the team is to be mindful of these hazards and gradually implement protections over the course of the development project with the hopes of meeting all of these requirements in the Revision 1 implementation. Due to the nature of the project being built to the specifications of the eRisk competition, the team must be mindful of our limitations when it comes to implementation, and we recognize that aspects of the project and any corresponding requirements will be out of our hands and may not be met. The requirements that we felt were most vital and achievable in our timeline were the safety and privacy concerns from SR1 and SR2, as that falls clearly under our personal responsibilities and practises.
 \end{document}
