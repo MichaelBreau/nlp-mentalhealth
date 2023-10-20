@@ -75,9 +75,6 @@ this potential failure mode.}
 
 \section{Safety and Security Requirements}
 
-\wss{Newly discovered requirements.  These should also be added to the SRS.  (A
-rationale design process how and why to fake it.)}
-
 \begin{enumerate}[label=SR\arabic*.]
 	\item 
 	\item
@@ -87,12 +84,13 @@ rationale design process how and why to fake it.)}
 
 	\item The system will operate using cleaned data that does not contain duplicates
 	\item[] \emph{Rationale:} It is important for the system to operate off clean and effective data in order to mitigate the chances of incorrect predictions.
-
+	
 	\item The system data will only operate off of verified data free from copying errors
 	\item[] \emph{Rationale:} It is important for the system to work off of internally approved datasets that have come from the correct sources and do not contain data transfer errors in order to help ensure a better output.
 
-	\item The system will contain rudamentary dataset tests to guide prediction functionality
-	\item[] \emph{Rationale:} The system should be able to output correct diagnosis for less nuanced datasets in order to help ensure correct behaviour in more complex appllications.
+	\item The system will be tested against plainly appearent data to guide and ensure prediction functionality
+	\item[] \emph{Rationale:} The system should be able to output correct diagnosis for less nuanced dataset tests in order to help ensure consistent predication capabilites between system updates.
+
 
 \end{enumerate}
 
@@ -102,6 +100,5 @@ rationale design process how and why to fake it.)}
 
 \wss{Which safety requirements will be implemented as part of the capstone timeline?
 Which requirements will be implemented in the future?}
-This hazard analysis has been able to identify various threats to the safety and security of this project, that will need to be accounted for in order to help keep project progress on track and reach the desired milestones. The hope for the team is to be mindful of these hazards and gradually implement protections over the course of the development project with the hopes of meeting all of these requirements in the Revision 1 implementation.
-
+This hazard analysis has been able to identify various threats to the safety and security of this project, that will need to be accounted for in order to help keep project progress on track and reach the desired milestones. The hope for the team is to be mindful of these hazards and gradually implement protections over the course of the development project with the hopes of meeting all of these requirements in the Revision 1 implementation. Due to the nature of the project being built to the specifications of the eRisk competition, the team must be mindful of our limitations when it comes to implementation, and we recognize that aspects of the project and any corresponding requirements will be out of our hands and may not be met. The requirements that we felt were most vital and achievable in our timeline were the safety and privacy concerns from SR1 and SR2, as that falls clearly under our personal responsibilities and practises.
 \end{document}
