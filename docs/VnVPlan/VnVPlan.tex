@@ -12,6 +12,8 @@
 }
 \usepackage[round]{natbib}
 
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+
 \input{../Comments}
 \input{../Common}
 
@@ -222,24 +224,94 @@ as a Rev 0 demo for the supervisor.}
   cover the requirements.  References to the SRS would be good here.  If a section
   covers tests for input constraints, you should reference the data constraints
   table in the SRS.}
-		
-\paragraph{Title for Test}
+  
+\subsubsection{Models}
+
+A model is any part of the system, usually placed after data pre-processing, that \textit{learns} to map an input to an output through an algorithm. Examples include word embedding models like word2vec, topic models like LDA, and neural networks. It is not yet clear what model will be used in the final implementation, a set of potential model types and respective tests will be presented here. New potential methods will be included when learned by the team, and what model will be used in the final implementation will be indicated when that is determined.
+
+\myparagraph{Vector Embedding Models}
+
+Vector embedding models take a set of inputs and produce a vector for each one. Examples include word2vec, which learns to map a set of words to a vector space that encodes information like similarity (ie. synonyms) and opposites (ie. man vs woman) into vector operations; and LDA, which learns to map a set of documents to a vector space where each dimension represents a topic like science or sports. These models typically can not represent new, unseen inputs within the vector space, only those inputs they were trained on.
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{FRT-VEC1-1\\}
 
-Control: Manual versus Automatic
+Control: Automated
 					
-Initial State: 
+Initial State: The model has not yet been trained
 					
-Input: 
+Input: A set of properly processed inputs into the model
 					
-Output: \wss{The expected result for the given inputs}
+Output: A set of vectors, all with the same dimensionality, with each corresponding to an input
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: The output is what the model should create upon successful training
 					
-How test will be performed: 
+How test will be performed: The model will be trained on the properly processed inputs, a script will then run on the output to insure all inputs are included and all vectors have the correct dimensions
+
+\item{FRT-VEC1-2\\}
+
+Control: Manual
+					
+Initial State: The model has not yet been trained
+					
+Input: A set of properly processed inputs into the model
+					
+Output: A set of vectors, with some concept of similarity encoded into proximity within the vector space
+
+Test Case Derivation: The output is what the model should create upon successful training
+					
+How test will be performed: The model will be trained on the properly processed inputs, a test input will be chosen by a tester and the 5 vectors with the smallest angle between itself and the test input's vector will be found by a script. The tester will then manually check that these 5 vectors' corresponding inputs are similar to the test input (ie. similar topics, words are related to eachother, etc.)
+
+\item{FRT-VEC1-3\\}
+
+Control: Manual
+					
+Initial State: The model has not yet been trained
+					
+Input: A set of properly processed inputs into the model
+					
+Output: A set of vectors, with some concept of similarity encoded into proximity within the vector space
+
+Test Case Derivation: The output is what the model should create upon successful training
+					
+How test will be performed: The model will be trained on the properly processed inputs, a test input will be chosen by a tester and the 5 vectors with the largest angle between itself and the test input's vector will be found by a script. The tester will then manually check that these 5 vectors' corresponding inputs are unrelated to the test input (ie. entirely different topics, words are unrelated to eachother, etc.)
+
+\subsubsection{Prediction Formulation}
+
+Prediction formulation is everything involved in transforming model outputs to the specific values asked for by the eRisk competition (ie. survey answers, most concerning sentences, a risk percentage). This component does not handle converting these values into the correct data format for submission to eRisk, only deriving the values eRisk is interested in. Both what values will be asked for and what models will be used are both unknown as of now so it is largely unknown what this component of the system will involve.
+
+\item{FRT-PF1-1\\}
+
+Control: Automatic
+					
+Initial State: The system's models have been trained and their outputs for test data derived
+					
+Input: The model's outputs into the prediction formulation component
+					
+Output: A set of values in the form asked for by the eRisk competition
+
+Test Case Derivation: The system should output predictions in the form specified by eRisk, it is not guaranteed the model outputs will be in this form, this component needs to convert them properly
+					
+How test will be performed: Model outputs will be fed to the formulation component, it's output will be run through a script that checks that all necessary values as outlined by eRisk are present.
+
+\subsubsection{Output Formatting}
+
+Output formatting is what writes the final predictions into the data format required by eRisk. This format is not yet known so the specifics of this component are currently vague.
+
+\item{FRT-OF1-1\\}
+
+Control: Automatic
+					
+Initial State: Final predictions been derived
+					
+Input: Final predictions into the output formatting component
+					
+Output: The final predictions formatted to the data type required by the eRisk competition
+
+Test Case Derivation: It is necessary to convert predictions to the right file format to ensure successful submission to the eRisk competition
+					
+How test will be performed: Final predictions will be fed to the output formatter, a script will be run on the output to ensure it's formatting matches what is required by eRisk.
 					
 \item{test-id2\\}
 
