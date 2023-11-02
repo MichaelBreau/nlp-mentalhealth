@@ -128,72 +128,132 @@ how they relate to your VnV efforts.}
 \wss{Introduce this section.   You can provide a roadmap of the sections to
   come.}
 
-\subsection{Verification and Validation Team}
+  \subsection{Verification and Validation Team}
 
-\wss{Your teammates.  Maybe your supervisor.
-  You should do more than list names.  You should say what each person's role is
-  for the project's verification.  A table is a good way to summarize this information.}\\
-
-The verification and validation team will consist of our core team/group members (Matthew, Jessica, Ben, Yuiro and Michael) along with our professor, our TA, Marie-Jean and Diego from our Montreal team, and Professor Mosser.  Our core team will be responsible for creating team suites that ensure correctness in our solution and that will catch possible bugs and issues that may arise. The team will be responsible for creating suitable edge cases to evaluate the correctness of our work along with general automated test suites that will be automatically deployed when new code is pulled.
-
-The core team will be responsible for creating all test suites, along with executing them and documenting the results. We will also be responsible for making any changes that are required after testing our code. All core team members will have a hand in all sections of testing but different team members will have different focused responsibilities. Firstly, all core team members will be responsible for documenting the results of the automated test suites when their code enters the repository through a pull request. More specifically, Yuiro and Micheals main responsibility will be creating a set of tests including edge cases for our NLP model that will ensure that our model functions as expected for a wide variety of input data. They will be required to create test suites along with automated test suites that will be run periodically when pull requests happen. Jessica, Ben and Matthew on the other hand will have the primary responsibility for training the data vs a training data set in order to determine the results and accuracy of the model. They will also have the responsibility to ensure code structure in the test suites that are created and organize the suites while Yuiro and Michaels main role is coming up with and creating the tests. 
-
-The team will meet with Professor Mosser and their TA as well periodically throughout each checkpoint of design in order to discuss the requirements for our profile and documentations and to solidify what is expected of us. This is an opportunity for us to ask any questions we may have. We also will meet with Marie-Jean and Diego from the Montreal team periodically to help guide us on requirements and what validation means to them. They will help guide us to what the important things are to focus on within our project. Team 8 will also provide us feedback throughout every milestone. Lastly, the actual competition itself will be our final validation step when it steps our model against a new set of data and reports how our model performed.
-
-\subsection{SRS Verification Plan}
-
-\wss{List any approaches you intend to use for SRS verification.  This may include
-  ad hoc feedback from reviewers, like your classmates, or you may plan for 
-  something more rigorous/systematic.}
-
-\wss{Maybe create an SRS checklist?}\\
-
-All of the members of our core team will be taking part in the SRS Verification Plan along with Group 8, Professor Mosser and our TA. We will verify the contents of our SRS by comparing the requirements outlined by the eRisk competition and our team in Montreal with the requirements stated in our SRS. This will ensure that we have covered everything from our SRS and we can see if there is anything new we must add. Since our project is unique in the fact that we are submitting to a competition with a rigid structure of what we will be submitting, we will also compare the rubric for the SRS document with what we have done in our original SRS document to ensure that we hit all the needed checkpoints. On top of this, we will verify our SRS document by going over the feedback given to us on our SRS revision 0 from our TA along with the feedback we received from group 8 regarding our SRS revision 0. Lastly, when we are verifying our SRS document we will talk with Professor Mosser and ask him any questions that arise from us during the reviewing and verification process. 
-*Create an SRS checklist*
-
-\subsection{Design Verification Plan}
-
-\wss{Plans for design verification}
-
-\wss{The review will include reviews by your classmates}
-
-\wss{Create a checklists?}
-
-\subsection{Verification and Validation Plan Verification Plan}
-
-\wss{The verification and validation plan is an artifact that should also be
-verified.  Techniques for this include review and mutation testing.}
-
-\wss{The review will include reviews by your classmates}
-
-\wss{Create a checklists?}
-
-\subsection{Implementation Verification Plan}
-
-\wss{You should at least point to the tests listed in this document and the unit
-  testing plan.}
-
-\wss{In this section you would also give any details of any plans for static
-  verification of the implementation.  Potential techniques include code
-  walkthroughs, code inspection, static analyzers, etc.}
-
-\subsection{Automated Testing and Verification Tools}
-
-\wss{What tools are you using for automated testing.  Likely a unit testing
-  framework and maybe a profiling tool, like ValGrind.  Other possible tools
-  include a static analyzer, make, continuous integration tools, test coverage
-  tools, etc.  Explain your plans for summarizing code coverage metrics.
-  Linters are another important class of tools.  For the programming language
-  you select, you should look at the available linters.  There may also be tools
-  that verify that coding standards have been respected, like flake9 for
-  Python.}
-
-\wss{If you have already done this in the development plan, you can point to
-that document.}
-
-\wss{The details of this section will likely evolve as you get closer to the
-  implementation.}
-
+  \wss{Your teammates.  Maybe your supervisor.
+    You should do more than list names.  You should say what each person's role is
+    for the project's verification.  A table is a good way to summarize this information.}\\
+  
+  The verification and validation team will consist of our core team/group members (Matthew, Jessica, Ben, Yuiro and Michael) along with our professor, our TA, Marie-Jean and Diego from our Montreal team, and Professor Mosser.  Our core team will be responsible for creating team suites that ensure correctness in our solution and that will catch possible bugs and issues that may arise. The team will be responsible for creating suitable edge cases to evaluate the correctness of our work along with general automated test suites that will be automatically deployed when new code is pulled.\\
+  
+  The core team will be responsible for creating all test suites, along with executing them and documenting the results. We will also be responsible for making any changes that are required after testing our code. All core team members will have a hand in all sections of testing but different team members will have different focused responsibilities. Firstly, all core team members will be responsible for documenting the results of the automated test suites when their code enters the repository through a pull request. More specifically, Yuiro and Micheals main responsibility will be creating a set of tests including edge cases for our NLP model that will ensure that our model functions as expected for a wide variety of input data. They will be required to create test suites along with automated test suites that will be run periodically when pull requests happen. Jessica, Ben and Matthew on the other hand will have the primary responsibility for training the data vs a training data set in order to determine the results and accuracy of the model. They will also have the responsibility to ensure code structure in the test suites that are created and organize the suites while Yuiro and Michaels main role is coming up with and creating the tests. \\
+  
+  The team will meet with Professor Mosser and their TA as well periodically throughout each checkpoint of design in order to discuss the requirements for our profile and documentations and to solidify what is expected of us. This is an opportunity for us to ask any questions we may have. We also will meet with Marie-Jean and Diego from the Montreal team periodically to help guide us on requirements and what validation means to them. They will help guide us to what the important things are to focus on within our project. Team 8 will also provide us feedback throughout every milestone. Lastly, the actual competition itself will be our final validation step when it steps our model against a new set of data and reports how our model performed. \\
+  
+  \subsection{SRS Verification Plan}
+  
+  \wss{List any approaches you intend to use for SRS verification.  This may include
+    ad hoc feedback from reviewers, like your classmates, or you may plan for 
+    something more rigorous/systematic.}
+  
+  \wss{Maybe create an SRS checklist?}\\
+  
+  All of the members of our core team will be taking part in the SRS Verification Plan along with Group 8, Professor Mosser and our TA. We will verify the contents of our SRS by comparing the requirements outlined by the eRisk competition and our team in Montreal with the requirements stated in our SRS. This will ensure that we have covered everything from our SRS and we can see if there is anything new we must add. Since our project is unique in the fact that we are submitting to a competition with a rigid structure of what we will be submitting, we will also compare the rubric for the SRS document with what we have done in our original SRS document to ensure that we hit all the needed checkpoints. On top of this, we will verify our SRS document by going over the feedback given to us on our SRS revision 0 from our TA along with the feedback we received from group 8 regarding our SRS revision 0. Lastly, when we are verifying our SRS document we will talk with Professor Mosser and ask him any questions that arise from us during the reviewing and verification process. 
+  *Create an SRS checklist*
+  
+  
+  
+  
+  \subsection{Design Verification Plan}
+  
+  \wss{Plans for design verification}
+  
+  \wss{The review will include reviews by your classmates}
+  
+  \wss{Create a checklists?}\\
+  
+  Our plan for our design verification will be to go through our SRS documents and make sure that each of our outputs and inputs that we planned on having are accounted for and included in our design planning and document. We will also look at reviews given to us from Group 8 on our SRS document to consider any changes we may want to add or things to consider for our design. We will go through the same process for feedback received from our TA on our SRS report. We will also utilize the guidance of Marie-Jean and Diego in order to verify that we are on the right path with our design. They can help guide us in our design and verify that it checks all the boxes and functionalities that are required for the competition. \\
+  
+  Below I will go over some design verification questions that will be asked regarding the functions of each of the major components in our design.\\
+  
+  \noindent \textbf{Text Pre-Processing Component:}
+  \begin{itemize}
+  \item Does the system tokenize text by dividing it into individual units of words and or sub-words?
+  \item Does the system convert generated tokens into lowercase to preserve consistency?
+  \item Does the system remove stop word tokens (common words that do not commonly have an effect on the meaning)?
+  \item Does the system reduce tokens to their root forms (Ex: “moving” to “move”)?
+  \item Is the output from this component usable by the Vectorization Component?\\
+  \end{itemize}
+  
+  
+  
+  \noindent \textbf{Vectorization Component:}
+  \begin{itemize}
+  \item Does the system convert tokens into numerical vectors in this stage?
+  \item Are these numerical vectors usable by the Prediction Component of the model?\\
+  \end{itemize}
+  
+  \noindent \textbf{Prediction Component:}
+  \begin{itemize}
+  \item Is there a created training model within the design?
+  \item Is there a prediction algorithm that is implemented into the solution? What is the level of accuracy and what is acceptable levels of accuracy (this will be determined further down the road with our team in Montreal on what we deem acceptable)?
+  \item Does the system make predictions using the vectorization tokens, the training model, as well as with the created prediction algorithm?\\
+  \end{itemize}
+  
+  
+  \noindent \textbf{Output Component:}
+  \begin{itemize}
+  \item Does the system produce the output of the predictions to the console?
+  \item Is the output produced understandable by the project team?
+  \item Is the output in a format that a healthcare worker would be able to read and interpret the results?
+  \end{itemize}
+  \\
+  
+  
+  \subsection{Verification and Validation Plan Verification Plan}
+  
+  \wss{The verification and validation plan is an artifact that should also be
+  verified.  Techniques for this include review and mutation testing.}
+  
+  \wss{The review will include reviews by your classmates}
+  
+  \wss{Create a checklists?}\\
+  
+  For our Verification and Validation Plan Verification Plan we will be making use of the reviews given to us for our VnV Plan from group 8 as well as from our TA. This will help us gain some insight on areas that may be missing or need more work. We will also be going through our SRS and ensuring we have created at least 1 test for each functional and nonfunctional requirement. It is important to ensure that we have sufficient tests for our requirements. We would also like to do some mutation testing in our code to determine what changes will affect the tests we have created and in what way. It will also show us that there is a possibility we are missing some tests that should be included if a mutation that we would expect to result in a change, results in no failed tests.
+  
+  Below is a checklist of the type of questions and topics we would like to cover during out Verification and Validation Plan Verification Plan.\\
+  
+  \begin{itemize}
+  
+  \item Is the brief summary of the software in the summary section enough to get an understanding of what the software is that is being tested and its general functions?
+  \item Are the objectives for the VnV plan clearly outlined and is each objective covered at some point throughout the document?
+  \item Is the planning section detailed with checklists for each section and steps that will be taken for each plan?
+  \item Is there at least one test created for each requirement in the SRS document?
+  \item Are all functions of each component being tested? This includes the Text Pre-Processing, Vectorization, Prediction and Output Components.
+  \item Are there a wide variety of tests including edge cases?
+  Do the non-functional requirements contain tangible quantifiable values?
+  \item Is the traceability between test cases and requirements clearly shown in section 4.3?
+  \end{itemize}
+  
+  
+  \subsection{Implementation Verification Plan}
+  
+  \wss{You should at least point to the tests listed in this document and the unit
+    testing plan.}
+  
+  \wss{In this section you would also give any details of any plans for static
+    verification of the implementation.  Potential techniques include code
+    walkthroughs, code inspection, static analyzers, etc.}
+  
+  \subsection{Automated Testing and Verification Tools}
+  
+  \wss{What tools are you using for automated testing.  Likely a unit testing
+    framework and maybe a profiling tool, like ValGrind.  Other possible tools
+    include a static analyzer, make, continuous integration tools, test coverage
+    tools, etc.  Explain your plans for summarizing code coverage metrics.
+    Linters are another important class of tools.  For the programming language
+    you select, you should look at the available linters.  There may also be tools
+    that verify that coding standards have been respected, like flake9 for
+    Python.}
+  
+  \wss{If you have already done this in the development plan, you can point to
+  that document.}
+  
+  \wss{The details of this section will likely evolve as you get closer to the
+    implementation.}\\
+  
+  There will be three main tools we will be using for automated testing and verification. Firstly, we will be using Flake9 which is a fork of Flake8. This will help us in following proper coding standards and prevent problems arising such as syntax errors, typos, incorrect styling, bad formatting and more. This will also help save time for when we do peer code reviews as a team. We will also be creating testing suites using Pytest since it is a free open-sourced, simple and scalable Python-based Test Automation Framework. We will be using GitHub Actions in order to implement continuous integration and continuous delivery into our project. This will allow us to automatically build, test, and deploy our pipeline. This will create a pipeline that allows us to build and test every pull request when they happen and also when we deploy and merge a pull request onto another branch.
+  
 \subsection{Software Validation Plan}
 
 \wss{If there is any external data that can be used for validation, you should
