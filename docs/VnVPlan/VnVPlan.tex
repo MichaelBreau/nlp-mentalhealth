@@ -274,6 +274,27 @@ as a Rev 0 demo for the supervisor.}
 
 \wss{This section might reference back to the SRS verification section.}
 
+There are a multitude of methods and parts to our software validation plan. Firstly, our primary validation method will be the actual process of competing in the eRisk competition. During the competition they will take our modal and test it with new data and observe the output. This will be the final and largest validation step for us that will help validate the correctness and precision of our design. We will also have a set of training data that we will use throughout to train against that we can use to test how close our results are to the expected results, validating how accurate our design is. \\
+
+Another large aspect of the software validation plan will be our review sessions and meeting with Marie-Jean and Diego throughout the process. This will be a time for them to look at our software and run it themselves. A large checkpoint when they will have an opportunity to have our project demoed for them is around the Rev 0 demo. This will give them an opportunity to validate that our project passes all the requirements of the competition or if there is something else we need to add. This is an important time for us to take this feedback and use it in order to improve our project. This will also be a time for us to ask questions and for them to confirm the requirements are all being met in our design. These questions and requirements would largely surround the overall output of the design and the overall process. It would also include validation of each of the program's components individually and as a collective (components being the Text Pre-Processing, Vectorization, Prediction and Output components). \\
+
+Before that however, we will meet with professor Mosser to discuss if he thinks that all the requirements documented are captured in the right requirements for the course. We will also do this with Marie-Jean and Diego with respect to the requirements from the competition. We will also go over the SRS document one last time to ensure that every requirement is met. \\
+
+
+Regarding our demo with Professor Mosser, Marie-Jean and Diego we will include the following questions:
+
+\begin{itemize}
+\item Is the output format what is expected by the competition?
+\item Are there any requirements not being met within the competition?
+\item Are there any requirements that are not being met regarding the project rubric from McMaster (question for Professor Mosser)?
+\item Is our text pre-processing component sufficient in which we use tokenization, lowercasing, stopword removal, and stemming or Lemmatization? If not, what should we add to our text pre-processing component or what methods that we currently have employed are not needed?
+\item Is our current method of vectorization appropriate for the task we are completing in your opinion? If not, what would you change or what different approaches do you recommend we look into.
+\item Are there any areas of our code or processes we take that are not allowed in the competition or do not follow the competitions standards?
+\item What are your thoughts on our topic modeling approach? Do you have any suggestions?
+\item Are the metrics we use for determining accuracy appropriate in your opinion? If not, what form of metrics should we be using?
+What level of accuracy do you expect from our model?
+\item In your opinion is the run time of our program to output the results acceptable? If not, what would be an acceptable time?\end{itemize}
+
 \section{System Test Description}
 	
 \subsection{Tests for Functional Requirements}
