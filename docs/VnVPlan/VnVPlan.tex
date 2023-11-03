@@ -282,36 +282,6 @@ How test will be performed: After setting up the environment on to both macOS an
 
 \end{enumerate}
 
-\subsubsection{Performance Requirements}
-		
-
-\begin{enumerate}
-
-\item{NFRT-P-1\\}
-
-Type: Dynamic, Manual
-					
-Initial State: System is completed trained and deployed onto the ERisk server
-					
-Input/Condition: ERisk must make sure the system will not have interferences from other software
-					
-Output/Result: System must generate a result of over 0.7 in F-measure that ERisk must compare
-					
-How test will be performed: After generating a result from the ERisk servers, the results will be automatically compared with the correct result about who is a pathological gamblers. The criteria includes an F-measure score from 0 to 1 that will be determined by ERisk
-
-\item{NFRT-P-2\\}
-
-Type: Dynamic, Manual
-					
-Initial State: System is completed trained
-					
-Input: The system will be ran on the developer's computer
-					
-Output: The system should generate a result within 2 minutes of processing time 
-					
-How test will be performed: A timer will start when each process session is ran, and stopped when the system finishes executing
-
-\end{enumerate}
 
 \subsubsection{Safety and Security Requirements}
 
