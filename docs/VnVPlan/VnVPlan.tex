@@ -125,33 +125,36 @@ how they relate to your VnV efforts.}
 
 \section{Plan}
 
-This section will outline the plan for verification and validation of a number of different components of this project (\ref{Verification and Validation Team}). The section will first give an overview of who is part of the verification and validation team and what their roles and involvement will consist of. Next there will be sections regarding verification of the SRS documentation (\ref{SRS Verification Plan}) along with the design plan (\ref{Design Verification Plan}) and the verification and validation plan itself (\ref{Verification and Validation Plan Verification Plan}). This section will then outline the verification plan that has been created for the implementation of the project and model (\ref{Implementation Verification Plan}). Automated Testing and verification tools that will be used throughout this project is then the next section that is outlined in \ref{Automated Testing and Verification Tools} followed lastly by the validation plan for our software (\ref{Software Validation Plan}).
-
+This section will outline the plan for verification and validation of a number of different components within this project  (\ref{Verification and Validation Team}). This section will first give an overview of the members that are considered part of the verification and validation team and what their roles and involvement will consist of. Next there will be subsections regarding verification of the project's \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}{SRS} (\ref{SRS Verification Plan}) along with the design plan (\ref{Design Verification Plan}) and the verification and validation plan itself (\ref{Verification and Validation Plan Verification Plan}). This section will then outline the verification plan that has been created for the implementation of the project and model (\ref{Implementation Verification Plan}). Automated Testing and verification tools that will be used throughout this project is then the next subsection that is outlined in \ref{Automated Testing and Verification Tools} followed lastly by the validation plan for our software (\ref{Software Validation Plan}).
+  
   \subsection{Verification and Validation Team} \label{Verification and Validation Team}
 
   
-  The verification and validation team will consist of our core team/group members (Matthew, Jessica, Ben, Yuiro and Michael) along with our professor, our TA, Marie-Jean and Diego from our Montreal team, and Professor Mosser.  Our core team will be responsible for creating team suites that ensure correctness in our solution and that will catch possible bugs and issues that may arise. The team will be responsible for creating suitable edge cases to evaluate the correctness of our work along with general automated test suites that will be automatically deployed when new code is pulled.\\
+  The verification and validation team will consist of our core team members (Matthew, Jessica, Ben, Yuiro and Michael) along with our professor, our TA, Marie-Jean and Diego from our Montreal team, and Professor Mosser.  Our core team will be responsible for creating test suites that ensure correctness in our solution and that will catch possible bugs and issues that may arise. The team will be responsible for creating suitable edge cases to evaluate the correctness of our work along with general automated test suites that will be automatically deployed when new code is pulled.\\
   
-  The core team will be responsible for creating all test suites, along with executing them and documenting the results. We will also be responsible for making any changes that are required after testing our code. All core team members will have a hand in all sections of testing but different team members will have different focused responsibilities. Firstly, all core team members will be responsible for documenting the results of the automated test suites when their code enters the repository through a pull request. More specifically, Yuiro and Micheals main responsibility will be creating a set of tests including edge cases for our NLP model that will ensure that our model functions as expected for a wide variety of input data. They will be required to create test suites along with automated test suites that will be run periodically when pull requests happen. Jessica, Ben and Matthew on the other hand will have the primary responsibility for training the data vs a training data set in order to determine the results and accuracy of the model. They will also have the responsibility to ensure code structure in the test suites that are created and organize the suites while Yuiro and Michaels main role is coming up with and creating the tests. \\
+  The core team will be responsible for creating all test suites, along with executing them and documenting the results. We will also be responsible for making any changes that are required after testing our code. All core team members will have a hand in all sections of testing but different team members will have different focused responsibilities. Firstly, all core team members will be responsible for documenting the results of the automated test suites when their code enters the repository through a pull request. More specifically, Yuiro and Micheals main responsibility will be creating a set of tests including edge cases for our NLP model that will ensure that our model functions as expected for a wide variety of input data. They will be required to create test suites along with automated test suites that will be run periodically when pull requests happen. Jessica, Ben and Matthew on the other hand will have the primary responsibility for training the data vs a training data set in order to determine the accuracy of the model. They will also have the responsibility to ensure code structure in the test suites that are created along with organizing the suites while Yuiro and Michaels main role is coming up with and creating the tests.\\ 
   
-  The team will meet with Professor Mosser and their TA as well periodically throughout each checkpoint of design in order to discuss the requirements for our profile and documentations and to solidify what is expected of us. This is an opportunity for us to ask any questions we may have. We also will meet with Marie-Jean and Diego from the Montreal team periodically to help guide us on requirements and what validation means to them. They will help guide us to what the important things are to focus on within our project. Team 8 will also provide us feedback throughout every milestone. Lastly, the actual competition itself will be our final validation step when it steps our model against a new set of data and reports how our model performed. \\
+  The team will meet with Professor Mosser and their TA as well periodically throughout each milestone in order to discuss the requirements for our project regarding the current milestone and to help solidify what is expected of us. This is an opportunity for us to ask any questions we may have as well. We also will meet with Marie-Jean and Diego from the Montreal team periodically to help guide us with regard to requirements of our project and the eRisk competition along with what validation means to them. They will help guide us to what the important things are to focus on within our project. Team 8 will also provide us feedback for every milestone. Lastly, the actual competition itself will be our final validation step when it tests our model against a new set of data and reports how our model performs.\\
+
   
   \subsection{SRS Verification Plan} \label{SRS Verification Plan}
   
-  All of the members of our core team will be taking part in the SRS Verification Plan along with Group 8, Professor Mosser and our TA. We will verify the contents of our \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}{SRS} by comparing the requirements outlined by the eRisk competition and our team in Montreal with the requirements stated in our SRS. This will ensure that we have covered everything from our SRS and we can see if there is anything new we must add. Since our project is unique in the fact that we are submitting to a competition with a rigid structure of what we will be submitting, we will also compare the rubric for the SRS document with what we have done in our original SRS document to ensure that we hit all the needed checkpoints. On top of this, we will verify our SRS document by going over the feedback given to us on our SRS revision 0 from our TA along with the feedback we received from group 8 regarding our SRS revision 0. Lastly, when we are verifying our SRS document we will talk with Professor Mosser and ask him any questions that arise from us during the reviewing and verification process. \\  
-
-  These are some of the major areas we would like to cover in our SRS verification plan to ensure we have a test for each of these components:
+  All of the members of our core team will be taking part in the SRS Verification Plan along with Group 8, Professor Mosser and our TA. We will verify the contents of our \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}{SRS} by comparing the requirements outlined by the eRisk competition along with our team in Montreal with the requirements stated in our SRS document. This will ensure that we have covered everything from our SRS document and we can see if there is anything new we must add. Most of our SRS verification plan will involve inspections from us but also from the team in Montreal along with peer reviews and ad hoc feedback from group 8.\\
   
+  Since our project is unique in the fact that we are submitting to a competition with a rigid output and guideline structure, we will also have to compare the rubric for the SRS document with what we have done in our original SRS document to ensure that we have covered all the required checkpoints. On top of this, we will verify our SRS document by going over the feedback given to us on our SRS revision 0 from our TA along with the feedback we received from group 8 regarding our SRS revision 0. Lastly, when we are verifying our SRS document we will talk with Professor Mosser and ask him any questions that arise during the reviewing and verification process within the group. \\
+
+  These are some of the major areas we would like to cover in our SRS verification plan to ensure we have a test for each of these components:\\
+
   \begin{itemize}
   \item Is a functional overview of the system provided in the SRS?
   \item Are high-level usage scenarios included?
   \item Have we specified the software environment and all its elements?
-  \item Are the limitations and exclusions accurate and all encompassing the true limitations and exclusions of our project?
+  \item Are the limitations and exclusions accurate and all encompassing of the true limitations and exclusions of our project?
   \item Are the inputs and outputs of the system specified?
   \item Is there any unnecessary overlap in our requirements?
-  \item Are there any other Components outside of Text Pre-Processing, Vectorization, Prediction and Output? For those 4 sections, are there any additional functional or non-functional requirements that are missing?
+  \item Are there any other components outside of Text Pre-Processing, Vectorization, Prediction and Output? For those 4 sections, are there any additional functional or non-functional requirements that are missing?
   \item For every function that is outlined, are the inputs specified sufficient enough to perform the required functionality?
-  \item Do any requirements conflict with each other are does each requirement avoid conflicts with other requirements?
+  \item Do any requirements conflict with each other or does each requirement avoid conflicts with other requirements?
   \item Are all detailed usage scenarios covered in our document and are completed in adequate detail or are there others we could add?
   \item Does each component and requirement have a priority?
   \item Are there any chances in our prioritization chart we should add due to changes in our code since the creation of our original SRS (revision 0)?
@@ -160,16 +163,16 @@ This section will outline the plan for verification and validation of a number o
   \item Is the verification and acceptance criteria specific enough? If not, how can you add quantifiable metrics to each point?
   \item Have we defined every definition, abbreviation and acronym in our Glossary?
   \item Are all imposed technical choices listed in the document?
-  \item Are the risks along with their mitigation analysis included in this document that may be present in this project?
-  \item Are the requirements process and reports accurate to what is expected by each of the teams listed in the “Requirements process and report” section?
+  \item Are the risks that may be present in this project along with their mitigation analysis included in this document?
+  \item Is the “Requirements Process and Reports” accurate to what is expected by each of the teams listed in the “Requirements Process and Reports” section?
   \item Does the Context and Overall Objectives section paint an accurate enough description of the project's context and objectives?\\
   \end{itemize}
   
   
   \subsection{Design Verification Plan} \label{Design Verification Plan}
   
-  Our plan for our design verification will be to go through our SRS documents and make sure that each of our outputs and inputs that we planned on having are accounted for and included in our design planning and document. We will also look at reviews given to us from Group 8 on our SRS document to consider any changes we may want to add or things to consider for our design. We will go through the same process for feedback received from our TA on our SRS report. We will also utilize the guidance of Marie-Jean and Diego in order to verify that we are on the right path with our design. They can help guide us in our design and verify that it checks all the boxes and functionalities that are required for the competition. \\
-  
+  Our plan for our design verification will be to go through our SRS document and make sure that each of our outputs and inputs that we planned on having are accounted for and included in our design planning and document. We will also look at reviews given to us by Group 8 on our SRS document to consider any changes we may want to add or things to consider for our design. We will go through the same process for feedback received from our TA on our SRS report. We will also utilize the guidance of Marie-Jean and Diego in order to verify that we are on the right path with our design. They can help guide us in our design and verify that it checks all the boxes and functionalities that are required for the competition. \\
+
   Below I will go over some design verification questions that will be asked regarding the functions of each of the major components in our design.\\
   
   \noindent \textbf{Text Pre-Processing Component:}
@@ -192,6 +195,7 @@ This section will outline the plan for verification and validation of a number o
   \noindent \textbf{Prediction Component:}
   \begin{itemize}
   \item Is there a created training model within the design?
+  \item What percentage of the given data is used for training vs testing?
   \item Is there a prediction algorithm that is implemented into the solution? What is the level of accuracy and what is acceptable levels of accuracy (this will be determined further down the road with our team in Montreal on what we deem acceptable)?
   \item Does the system make predictions using the vectorization tokens, the training model, as well as with the created prediction algorithm?\\
   \end{itemize}
@@ -199,7 +203,7 @@ This section will outline the plan for verification and validation of a number o
   
   \noindent \textbf{Output Component:}
   \begin{itemize}
-  \item Does the system produce the output of the predictions to the console?
+  \item Does the system output the predictions to the console?
   \item Is the output produced understandable by the project team?
   \item Is the output in a format that a healthcare worker would be able to read and interpret the results?
   \end{itemize}
@@ -208,13 +212,13 @@ This section will outline the plan for verification and validation of a number o
   
   \subsection{Verification and Validation Plan Verification Plan}\label{Verification and Validation Plan Verification Plan}
   
-  For our Verification and Validation Plan Verification Plan we will be making use of the reviews given to us for our VnV Plan from group 8 as well as from our TA. This will help us gain some insight on areas that may be missing or need more work. We will also be going through our \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}{SRS} and ensuring we have created at least 1 test for each functional and nonfunctional requirement. It is important to ensure that we have sufficient tests for our requirements. We would also like to do some mutation testing in our code to determine what changes will affect the tests we have created and in what way. It will also show us that there is a possibility we are missing some tests that should be included if a mutation that we would expect to result in a change, results in no failed tests.\\  
+  For our Verification and Validation Plan Verification Plan we will be making use of the reviews given to us for our VnV Plan from group 8 as well as from our TA. This will help us gain some insight on areas that may be missing or need more work within the document. We will also be going through our \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}{SRS} document and ensuring we have created at least 1 test for each functional and nonfunctional requirement. It is important to ensure that we have sufficient tests for our requirements. We would also like to do some mutation testing in our code to determine what changes will affect the tests we have created and in what way. It will also show us that there is a possibility we are missing some tests that should be included if a mutation that we would expect to result in a change or failure, results in no failed tests.\\ 
 
-  Below is a checklist of the type of questions and topics we would like to cover during out Verification and Validation Plan Verification Plan.\\
+  Below is a checklist of the type of questions and topics our team would like to cover as part of our Verification and Validation Plan Verification Plan.\\
   
   \begin{itemize}
   
-  \item Is the brief summary of the software in the summary section enough to get an understanding of what the software is that is being tested and its general functions?
+  \item Is the brief summary of the software in the summary section enough to get an understanding of the software that is being tested and its general functions?
   \item Are the objectives for the VnV plan clearly outlined and is each objective covered at some point throughout the document?
   \item Is the planning section detailed with checklists for each section and steps that will be taken for each plan?
   \item Is there at least one test created for each requirement in the SRS document?
@@ -234,29 +238,27 @@ This section will outline the plan for verification and validation of a number o
   
   \subsection{Automated Testing and Verification Tools} \label{Automated Testing and Verification Tools}
 
-  There will be three main tools we will be using for automated testing and verification. Firstly, we will be using Flake9 which is a fork of Flake8. This will help us in following proper coding standards and prevent problems arising such as syntax errors, typos, incorrect styling, bad formatting and more. This will also help save time for when we do peer code reviews as a team. We will also be creating testing suites using Pytest since it is a free open-sourced, simple and scalable Python-based Test Automation Framework. We will be using GitHub Actions in order to implement continuous integration and continuous delivery into our project. This will allow us to automatically build, test, and deploy our pipeline. This will create a pipeline that allows us to build and test every pull request when they happen and also when we deploy and merge a pull request onto another branch.
+  There will be three main tools the team will be using for automated testing and verification. Firstly, we will be using Flake9 which is a fork of Flake8. This will help us in following proper coding standards and prevent problems arising regarding topics such as syntax errors, typos, incorrect styling, bad formatting and more. This will also help save time for when we do peer code reviews as a team. We will also be creating test suites using Pytest since it is a free open-sourced, simple and scalable Python-based Test Automation Framework. We will be using GitHub Actions in order to implement continuous integration and continuous delivery into our project. This will allow us to automatically build, test, and deploy our pipeline. This will create a pipeline that allows us to build and test every pull request when they happen and also when we deploy and merge a pull request onto another branch.
   
   \subsection{Software Validation Plan} \label{Software Validation Plan}
   
-  There are a multitude of methods and parts to our software validation plan. Firstly, our primary validation method will be the actual process of competing in the eRisk competition. During the competition they will take our modal and test it with new data and observe the output. This will be the final and largest validation step for us that will help validate the correctness and precision of our design. We will also have a set of training data that we will use throughout to train against that we can use to test how close our results are to the expected results, validating how accurate our design is. \\
-  
-  Another large aspect of the software validation plan will be our review sessions and meeting with Marie-Jean and Diego throughout the process. This will be a time for them to look at our software and run it themselves. A large checkpoint when they will have an opportunity to have our project demoed for them is around the Rev 0 demo. This will give them an opportunity to validate that our project passes all the requirements of the competition or if there is something else we need to add. This is an important time for us to take this feedback and use it in order to improve our project. This will also be a time for us to ask questions and for them to confirm the requirements are all being met in our design. These questions and requirements would largely surround the overall output of the design and the overall process. It would also include validation of each of the program's components individually and as a collective (components being the Text Pre-Processing, Vectorization, Prediction and Output components). \\
-  
-  Before that however, we will meet with professor Mosser to discuss if he thinks that all the requirements documented are captured in the right requirements for the course. We will also do this with Marie-Jean and Diego with respect to the requirements from the competition. We will also go over the SRS document one last time to ensure that every requirement is met. \\
-  
+  There are a multitude of methods and parts to our software validation plan. Firstly, our primary validation method will be the actual process of competing in the eRisk competition. During the competition they will take our model and test it with new data and observe the output. This will be the final and largest validation step for us that will help validate the correctness and precision of our design. We will also have a set of training data that we will use throughout the design process to train against that we can use to test how close our results are to the expected results, validating how accurate our design is. \\
+
+  Another large aspect of the software validation plan will be our review sessions and meeting with Marie-Jean and Diego throughout the project. This will be a time for them to look at our software and run it themselves. A large checkpoint when they will have an opportunity to have our project demoed for them is around the Rev 0 demo. This will give them an opportunity to validate that our project passes all the requirements of the competition or if there is something else we need to add or change. This is an important time for us to take this feedback and use it in order to improve our project. This will also be a time for us to ask questions and for them to confirm the requirements are all being met in our design. These questions and requirements would largely surround the overall output of the design and the overall process (largely focusing on the training of our data and our prediction model we create and use). It would also include validation of each of the program's components individually and as a collective (components being the Text Pre-Processing, Vectorization, Prediction and Output components). \\
+
+  Before that however, we will meet with professor Mosser to discuss if he thinks that all the requirements documented line up with and are accurate to the requirements outlined for the course. We will do this with Marie-Jean and Diego as well with respect to the requirements from the competition. We will also go over the SRS document one last time to ensure that every requirement is met. \\  
   
   Regarding our demo with Professor Mosser, Marie-Jean and Diego we will include the following questions:
   
   \begin{itemize}
   \item Is the output format what is expected by the competition?
-  \item Are there any requirements not being met within the competition?
+  \item Are there any requirements not being met within the competition (question for Marie-Jean and Diego)?
   \item Are there any requirements that are not being met regarding the project rubric from McMaster (question for Professor Mosser)?
   \item Is our text pre-processing component sufficient in which we use tokenization, lowercasing, stopword removal, and stemming or Lemmatization? If not, what should we add to our text pre-processing component or what methods that we currently have employed are not needed?
   \item Is our current method of vectorization appropriate for the task we are completing in your opinion? If not, what would you change or what different approaches do you recommend we look into.
   \item Are there any areas of our code or processes we take that are not allowed in the competition or do not follow the competitions standards?
   \item What are your thoughts on our topic modeling approach? Do you have any suggestions?
-  \item Are the metrics we use for determining accuracy appropriate in your opinion? If not, what form of metrics should we be using?
-  What level of accuracy do you expect from our model?
+  \item Are the metrics we use for determining accuracy appropriate in your opinion? If not, what form of metrics should we be using? What level of accuracy would you consider acceptable for this metric?
   \item In your opinion is the run time of our program to output the results acceptable? If not, what would be an acceptable time?\end{itemize}
   
 
