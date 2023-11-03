@@ -92,40 +92,103 @@ This document ... \wss{provide an introductory blurb and roadmap of the
 
 \subsection{Summary}
 
-\wss{Say what software is being tested.  Give its name and a brief overview of
-  its general functions.}
+The CLEF eRisk competition, better known as the Early Risk Prediction on
+the internet competition, is an organization that hosts a yearly event where
+numerous research teams come together to explore new strategies and ap-
+plications of early detection technologies, particularly in the field of health
+and safety. The team at McMaster has partnered alongside the University of
+Quebec in Montreal to help leverage their existing research and work done
+in prior years of the eRisk competition to help design a new system entry
+for this year. Our team will not be in charge of the system operations por-
+tion of the project, but instead will be focused on designing new strategies
+and implementations for the Natural Language Processing portion of the
+project. The NLP will be responsible for analyzing textual input from real
+user data, and will use its provided training data and algorithms to deter-
+mine the probability of the user showing signs of a selected mental health
+issue. The competition normally consists of three different tasks, all of which
+require different Natural Language processing techniques, to help us form our
+strategies, we are using data from the prior year competition, which was used
+to find symptoms for depression, pathological gambling and eating disorders.
 
 \subsection{Objectives}
 
-\wss{State what is intended to be accomplished.  The objective will be around
-  the qualities that are most important for your project.  You might have
-  something like: ``build confidence in the software correctness,''
-  ``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
-  just those that are most important.}
-
-\wss{You should also list the objectives that are out of scope.  You don't have 
-the resources to do everything, so what will you be leaving out.  For instance, 
-if you are not going to verify the quality of usability, state this.  It is also 
-worthwhile to justify why the objectives are left out.}
-
-\wss{The objectives are important because they highlight that you are aware of 
-limitations in your resources for verification and validation.  You can't do everything, 
-so what are you going to prioritize?  As an example, if your system depends on an 
-external library, you can explicitly state that you will assume that external library 
-has already been verified by its implementation team.}
+The primary objectives for our current process is to build confidence regard-
+ing the various techniques and libraries required to efficiently analyze the
+datasets provided by the eRisk Competition. The testing outlined in this
+document is help demonstrate our familiarity and competency to adapt to
+the various challenges presented by eRisk, whether that be through sentence
+ranking, early detection through post history, or estimation of severity level
+through user submissions. This is meant to build confidence for our stake-
+holders on our code efficiency, accuracy and reliability. The exact number of
+challenges that the team will participate in is variable, as the scope ensures
+that we will compete in at least one challenge, as even though we now have a larger team than prior years, past teams have not always been able to take on
+all three challenges, extending ourselves to take on all tasks would be going
+beyond SRS expectations. An additional objective is to increase efficiency
+and accuracy of the existing work done by the team in prior years, this is
+a goal for both the team and our stakeholders at UQAM, but it is not a
+formalized metric in the SRS, as there is no defined expectation of how much
+better our project is supposed to preform.
 
 \subsection{Relevant Documentation}
+\begin{itemize}
+	\item \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/ProblemStatementAndGoals/ProblemStatement.pdf}{Problem Statement}
+\end{itemize}
+The Problem statement document abstractly identifies the problem to be
+solved, characterizing it in terms of its inputs and outputs, which gives con-
+text to the related environment and stakeholders.
 
-\wss{Reference relevant documentation.  This will definitely include your SRS
-  and your other project documents (design documents, like MG, MIS, etc).  You
-  can include these even before they are written, since by the time the project
-  is done, they will be written.}
+\begin{itemize}
+	\item \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/DevelopmentPlan/DevelopmentPlan.pdf}{Development Plan}
+\end{itemize}
+The Development Plan contains the project development overview including
+team roles, team meeting and communication plans, git workflow and project
+schedule.
 
-\citet{SRS}
+\begin{itemize}
+	\item \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS-Meyer/index.pdf}{SRS}
+\end{itemize}
+The Software Requirements Specification identifies the various functional and
+non-functional requirements related to the project, while providing context
+for the benefits and usage scenarios of the project.
 
-\wss{Don't just list the other documents.  You should explain why they are relevant and 
-how they relate to your VnV efforts.}
+\begin{itemize}
+	\item \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/HazardAnalysis/HazardAnalysis.pdf}{Hazard Analysis}
+\end{itemize}
+The Hazard Analysis identifies various hazards and obstacles to the project’s
+development and operation, along with mitigation strategies to help deal
+with those potential hazards. It carries a focus on ensuring the project can
+be delivered to the standards of the eRisk competition while maintaining
+safety and privacy of user data.
 
+\begin{itemize}
+	\item \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/Design/SoftArchitecture/MG.pdf}{Module Guide}
+\end{itemize}
+The Module Guide decomposes the eRisk NLP project into numerous mod-
+ules based on the principle of information hiding and separating data struc-
+tures, in order to help increase understandability of various project compo-
+nents.
+
+\begin{itemize}
+	\item \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/Design/SoftDetailedDes/MIS.pdf}{Module Interface Specification}
+\end{itemize}
+The Module Interface Specification identifies modules found in the Module
+Guide and decomposes them into more primitive data types and functions,
+in order to better observe the module functionality and ensure it’s behaving
+as intended.
+
+\begin{itemize}
+	\item \href{https://mi.mcmaster.ca/generative-artificial-intelligence-in-teaching-and-learning/#tab-content-provisional-guidelines}{McMaster AI Guidelines}
+\end{itemize}
+McMaster’s Provisional Guidelines on the use of AI provides useful rulesets
+on generative AI that helps our team ensure the safe and responsible use of
+AI practises.
+
+\begin{itemize}
+	\item \href{https://ceur-ws.org/Vol-3180/paper-74.pdf}{eRisk 2022 Paper}
+\end{itemize}
+The prior efforts done by the UQAM team in the eRisk competition were in-
+strumental in our team’s foundation of understanding and served as a jump-
+ing off point for our efforts.
 \section{Plan}
 
 This section will outline the plan for verification and validation of a number of different components within this project  (\ref{Verification and Validation Team}). This section will first give an overview of the members that are considered part of the verification and validation team and what their roles and involvement will consist of. Next there will be subsections regarding verification of the project's \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}{SRS} (\ref{SRS Verification Plan}) along with the design plan (\ref{Design Verification Plan}) and the verification and validation plan itself (\ref{Verification and Validation Plan Verification Plan}). This section will then outline the verification plan that has been created for the implementation of the project and model (\ref{Implementation Verification Plan}). Automated Testing and verification tools that will be used throughout this project is then the next subsection that is outlined in \ref{Automated Testing and Verification Tools} followed lastly by the validation plan for our software (\ref{Software Validation Plan}).
