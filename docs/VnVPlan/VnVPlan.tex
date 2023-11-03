@@ -76,6 +76,9 @@ in.}
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   UQAM & Université du Québec à Montréal\\
+  RMSE & Root Mean Square Error\\
+  MZOE & Mean Zero-One Error\\
+  MAE & Mean Absolute Error\\
   \bottomrule
 \end{tabular}\\
 
@@ -342,41 +345,25 @@ How test will be performed: Predictions and expected values will be given to sys
 \wss{Static tests, review, inspections, and walkthroughs, will not follow the
 format for the tests given below.}
 
-\subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
+\subsubsection{Security}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{NFR-SEC1-1\\}
 
-Type: Functional, Dynamic, Manual, Static etc.
+Type: Automatic, Dynamic
 					
-Initial State: 
+Initial State: The system has been trained and is awaiting data to form predictions on.
 					
-Input/Condition: 
+Input/Condition: A set of data that the system can predict on.
 					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+Output/Result: The resulting predictions, in a form where no sensitive data from the input is present in the output.
 
-Type: Functional, Dynamic, Manual, Static etc.
+Test Case Derivation: Sensitive in this case refers to the post history of the subjects eRisk provides as training and test data. If these posts can be reconstructed from any part of our system outputs it is possible the identity of the individual could be discovered. This represents an unacceptable breach of privacy and can not happen.
 					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+How test will be performed: After the system has produced it's predictions a script will be run that takes all posts in the input data, forms a string out of all consecutive three word triplets (ie. "hello my good friend" forms "hello my good" and "my good friend"), both with and without processing (removal of stopwords, punctuation, etc.), and scans the output to ensure that none of these triples are present.
 
 \end{enumerate}
-
-\subsubsection{Area of Testing2}
-
-...
 
 \subsection{Traceability Between Test Cases and Requirements}
 
