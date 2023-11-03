@@ -12,7 +12,11 @@
 }
 \usepackage[round]{natbib}
 
+\usepackage{amsmath, amssymb}
+\usepackage{amsfonts}
+
 \newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
 
 \input{../Comments}
 \input{../Common}
@@ -71,12 +75,12 @@ in.}
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
-  T & Test\\
+  UQAM & Université du Québec à Montréal\\
   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations, or acronyms --- you can simply reference the SRS
-  \citep{SRS} tables, if appropriate}
+%\wss{symbols, abbreviations, or acronyms --- you can simply reference the SRS
+%  \citep{SRS} tables, if appropriate}
 
 \wss{Remove this section if it isn't needed}
 
@@ -120,7 +124,7 @@ has already been verified by its implementation team.}
   can include these even before they are written, since by the time the project
   is done, they will be written.}
 
-\citet{SRS}
+%\citet{SRS}
 
 \wss{Don't just list the other documents.  You should explain why they are relevant and 
 how they relate to your VnV efforts.}
@@ -211,127 +215,119 @@ as a Rev 0 demo for the supervisor.}
 	
 \subsection{Tests for Functional Requirements}
 
-\wss{Subsets of the tests may be in related, so this section is divided into
-  different areas.  If there are no identifiable subsets for the tests, this
-  level of document structure can be removed.}
+Our main requirements for the system are built around achieving an acceptable level of accuracy in our system's predictions. This is the primary focus of this section.
 
-\wss{Include a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.}
+\subsubsection{Ensuring Model Acceptability}
 
-\subsubsection{Area of Testing1}
+The system is based in machine learning and will therefore need to be tested and evaluated using a typical machine learning evaluation method: creating train/test splits, training models on the test sets, predicting the values of test data with these models, and then comparing these predicted values with the known expected values. This section first includes information explaining how the team plans to go about this process as well as identifying areas of uncertainty before providing relevant tests.
 
-\wss{It would be nice to have a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.  If a section
-  covers tests for input constraints, you should reference the data constraints
-  table in the SRS.}
-  
-\subsubsection{Models}
+\myparagraph{Training and Test Data} \label{TTD}
 
-A model is any part of the system, usually placed after data pre-processing, that \textit{learns} to map an input to an output through an algorithm. Examples include word embedding models like word2vec, topic models like LDA, and neural networks. It is not yet clear what model will be used in the final implementation, a set of potential model types and respective tests will be presented here. New potential methods will be included when learned by the team, and what model will be used in the final implementation will be indicated when that is determined.
+Training data given by eRisk will be split 80/20 into train and test sets. Each task has some concept of higher or lower risk, either in the form of positive/negatives, survey answers, a continuous scale, or something else. Depending on the task a metric will be created from expected values representing this risk (an example may be averaging survey answers) it is unclear what these metrics will involve currently as eRisk has not yet released this year’s tasks. Train and test splits will be created to have similar distributions of this risk metric (ie. similar numbers of low/mid/high risk individuals). How similar the distributions should be is as of yet unknown and will require further experimentation when eRisk releases their datasets for this year.
 
-\myparagraph{Vector Embedding Models}
+When testing the system three different train/test splits will be produced, all splits will be formed on the full training data provided by eRisk, thus giving three copies of said training data with the train and test subsets being different for each copy. These copies will try to maximize the difference between their splits. The model will be trained on a training split and then will give predictions on the test set. These predictions will be evaluated on a relevant set of metrics (outlined below in section \ref{metrics}), and an average of the metrics across all three splits will be used to determine model performance.
 
-Vector embedding models take a set of inputs and produce a vector for each one. Examples include word2vec, which learns to map a set of words to a vector space that encodes information like similarity (ie. synonyms) and opposites (ie. man vs woman) into vector operations; and LDA, which learns to map a set of documents to a vector space where each dimension represents a topic like science or sports. These models typically can not represent new, unseen inputs within the vector space, only those inputs they were trained on.
+\myparagraph{Metrics} \label{metrics}
+
+As the eRisk tasks have not yet been released it is unclear exactly what form the expected and predicted output will take, so it is unclear what metrics will be used to evaluate our models. If a task is a repeat from past years, metrics similar to the ones used in previous versions of the task may be used. Here are some metrics that have been deemed potentially useful to employ, whether they will be used depends on the nature of this year's eRisk tasks. Other measures will likely be added upon the release of the eRisk tasks:
 
 \begin{enumerate}
 
-\item{FRT-VEC1-1\\}
+\item{MAE} (Mean Absolute Error) was used by the UQAM team in a 2022 task about eating disorders \citep{Saravani2022MeasuringTS}. MAE measures the average distance between a predicted value $p_i$ in predictions $P$ and a ground truth (expected value) $t_i$ in ground truths $T$ for $n$ data points:
 
-Control: Automated
-					
-Initial State: The model has not yet been trained
-					
-Input: A set of properly processed inputs into the model
-					
-Output: A set of vectors, all with the same dimensionality, with each corresponding to an input
+$$\text{MAE} = \sum_{i=1}^{n} \frac{|t_i - p_i|}{n}$$
 
-Test Case Derivation: The output is what the model should create upon successful training
-					
-How test will be performed: The model will be trained on the properly processed inputs, a script will then run on the output to insure all inputs are included and all vectors have the correct dimensions
+\item{MZOE} (Mean Zero-One Error) was also used in the UQAM's 2022 eating disorder submission \citep{Saravani2022MeasuringTS}. MZOE measures the proportion of incorrect predictions:
 
-\item{FRT-VEC1-2\\}
+$$\text{MZOE} = \frac{|\{p_i \in P : t_i \neq p_i\}|}{n}$$
 
-Control: Manual
-					
-Initial State: The model has not yet been trained
-					
-Input: A set of properly processed inputs into the model
-					
-Output: A set of vectors, with some concept of similarity encoded into proximity within the vector space
+\item{F-Score} was used in the UQAM team's 2021 submission for the detection of problem gambling task \citep{Maupom2021EarlyDO}. F-Score is a combination of two other measures, precision and recall, and is used to measure the accuracy of positive/negative tests while taking into account false positive and negatives:
 
-Test Case Derivation: The output is what the model should create upon successful training
-					
-How test will be performed: The model will be trained on the properly processed inputs, a test input will be chosen by a tester and the 5 vectors with the smallest angle between itself and the test input's vector will be found by a script. The tester will then manually check that these 5 vectors' corresponding inputs are similar to the test input (ie. similar topics, words are related to eachother, etc.)
+$$\text{precision} = \frac{\text{true positives}}{\text{true positives} + \text{false positives}}$$
+$$\text{recall} = \frac{\text{true positives}}{\text{true positives} + \text{false negatives}}$$
+$$\text{F-score} = 2\frac{\text{precision} * \text{recall}}{\text{precision} + \text{recall}}$$
 
-\item{FRT-VEC1-3\\}
+\item{RMSE} (Root Mean Square Error) is a common measure of the deviation between predicted values and expected values, it somewhat analogous to MAE:
 
-Control: Manual
-					
-Initial State: The model has not yet been trained
-					
-Input: A set of properly processed inputs into the model
-					
-Output: A set of vectors, with some concept of similarity encoded into proximity within the vector space
+$$\text{RMSE} = \sqrt{\sum_{i=1}^{n} \frac{(t_i - p_i)^2}{n}}$$
 
-Test Case Derivation: The output is what the model should create upon successful training
-					
-How test will be performed: The model will be trained on the properly processed inputs, a test input will be chosen by a tester and the 5 vectors with the largest angle between itself and the test input's vector will be found by a script. The tester will then manually check that these 5 vectors' corresponding inputs are unrelated to the test input (ie. entirely different topics, words are unrelated to eachother, etc.)
+\item{$R^2$} measures how well the expected values are predicted by the model by comparing how much variation the predicted values capture against the variation in the expected values:
 
-\subsubsection{Prediction Formulation}
-
-Prediction formulation is everything involved in transforming model outputs to the specific values asked for by the eRisk competition (ie. survey answers, most concerning sentences, a risk percentage). This component does not handle converting these values into the correct data format for submission to eRisk, only deriving the values eRisk is interested in. Both what values will be asked for and what models will be used are both unknown as of now so it is largely unknown what this component of the system will involve.
-
-\item{FRT-PF1-1\\}
-
-Control: Automatic
-					
-Initial State: The system's models have been trained and their outputs for test data derived
-					
-Input: The model's outputs into the prediction formulation component
-					
-Output: A set of values in the form asked for by the eRisk competition
-
-Test Case Derivation: The system should output predictions in the form specified by eRisk, it is not guaranteed the model outputs will be in this form, this component needs to convert them properly
-					
-How test will be performed: Model outputs will be fed to the formulation component, it's output will be run through a script that checks that all necessary values as outlined by eRisk are present.
-
-\subsubsection{Output Formatting}
-
-Output formatting is what writes the final predictions into the data format required by eRisk. This format is not yet known so the specifics of this component are currently vague.
-
-\item{FRT-OF1-1\\}
-
-Control: Automatic
-					
-Initial State: Final predictions been derived
-					
-Input: Final predictions into the output formatting component
-					
-Output: The final predictions formatted to the data type required by the eRisk competition
-
-Test Case Derivation: It is necessary to convert predictions to the right file format to ensure successful submission to the eRisk competition
-					
-How test will be performed: Final predictions will be fed to the output formatter, a script will be run on the output to ensure it's formatting matches what is required by eRisk.
-					
-\item{test-id2\\}
-
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
+$$SS_{res} = \sum_{i=1}^{n} (t_i - p_i)^2$$
+$$SS_{tot} = \sum_{i=1}^{n} (t_i - \text{mean}(T))^2$$
+$$R^2 = 1 - \frac{SS_{res}}{SS_{tot}}$$
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\myparagraph{Acceptable Error Metric Values} \label{bounds}
 
-...
+The bounds for which error measures are considered acceptable will be based on the results other teams achieved in past eRisk competitions if the given task is a repeat. Our model should perform better than previous years. If the task is new, bounds will be determined through research into the accuracy of clinicians in these areas and the involvement of expert knowledge in the form of psychology faculty from the Université du Québec à Montréal. Our model should represent an improvement on clinicians’ diagnostic capabilities.
+
+\myparagraph{Tests}
+
+In practice these four tests will rarely be run separately but as one automatic test suite as the output of each test is fed to the input of the next.
+
+\begin{enumerate}
+
+\item{FRT-ACC1-1\\}
+
+Control: Automatic
+
+Initial State: No models have been trained by the system yet, the eRisk training data is available to the system.
+
+Input: The eRisk training data.
+
+Output: Three train/test splits where each train/test duo is composed of disjoint train and test sets whose union is all of the data in the original eRisk training data.
+
+Test Case Derivation: The system should properly split the data into train and test sets.
+
+How test will be performed: The eRisk training data will be fed into the system, the system will create the splits. For each split a script will check that no element exists in both the train and test split and that all training data is accounted for between both sets.
+
+\item{FRT-ACC1-2\\}
+
+Control: Automatic
+
+Initial State: No models have been trained by the system yet, three train/test splits have been created.
+
+Input: The three sets of training data.
+
+Output: The parameters and/or objects (ie. class instances) that represent trained models.
+
+Test Case Derivation: The system should train models on the train splits.
+
+How test will be performed: The three training sets will be fed into the system, the system will train a model on each set. A script will check that the models exist and can produce predictions for data in the training sets.
+
+\item{FRT-ACC1-3\\}
+
+control: Automatic
+
+Initial State: Three versions of the model have been trained on the relevant train sets.
+
+Input: The three corresponding test sets into the corresponding models.
+
+Output: Three sets of predictions.
+
+Test Case Derivation: The system should produce some sort of prediction.
+
+How test will be performed: The test data will be fed into the system and the system will use its trained models to produce a set of predictions. A script will check that there is a prediction for each test data point.
+
+\item{FRT-ACC1-4\\}
+
+Control: Automatic
+
+Initial State: Three sets of predictions have been produced by the system.
+
+Input: The three sets of predictions and corresponding expected values.
+
+Output: A set of metrics formed by averaging together the metrics for each of the three sets, the specific metrics used will depend on the nature of the specific eRisk task (see section \ref{metrics}).
+
+Acceptability of Output: For the system to be acceptable to stakeholders these metrics must be better than some baseline value determined from either past eRisk submissions for similar tasks or through research into typical clinical results (see section \ref{bounds}).
+
+Test Case Derivation: The system must reach specific accuracy measures to be considered acceptable to stakeholders.
+
+How test will be performed: Predictions and expected values will be given to system, which will calculate the relevant error metrics and how much they outperform baseline error metrics.
+
+\end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
 
@@ -511,6 +507,8 @@ How test will be performed:
 \subsection{Traceability Between Test Cases and Modules}
 
 \wss{Provide evidence that all of the modules have been considered.}
+
+\newpage
 				
 \bibliographystyle{plainnat}
 
@@ -530,12 +528,6 @@ Their values are defined in this section for easy maintenance.
 \subsection{Usability Survey Questions?}
 
 \wss{This is a section that would be appropriate for some projects.}
-
-\newpage{}
-\section*{Appendix --- Reflection}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
 
 \newpage{}
 \section*{Appendix --- Reflection}
