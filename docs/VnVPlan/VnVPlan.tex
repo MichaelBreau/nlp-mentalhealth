@@ -69,7 +69,10 @@ in.}
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
-  T & Test\\
+  UQAM & Université du Québec à Montréal\\
+  RMSE & Root Mean Square Error\\
+  MZOE & Mean Zero-One Error\\
+  MAE & Mean Absolute Error\\
   \bottomrule
 \end{tabular}\\
 
@@ -266,57 +269,119 @@ This section will outline the plan for verification and validation of a number o
 	
 \subsection{Tests for Functional Requirements}
 
-\wss{Subsets of the tests may be in related, so this section is divided into
-  different areas.  If there are no identifiable subsets for the tests, this
-  level of document structure can be removed.}
+Our main requirements for the system are built around achieving an acceptable level of accuracy in our system's predictions. This is the primary focus of this section.
 
-\wss{Include a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.}
+\subsubsection{Ensuring Model Acceptability}
 
-\subsubsection{Area of Testing1}
+The system is based in machine learning and will therefore need to be tested and evaluated using a typical machine learning evaluation method: creating train/test splits, training models on the test sets, predicting the values of test data with these models, and then comparing these predicted values with the known expected values. This section first includes information explaining how the team plans to go about this process as well as identifying areas of uncertainty before providing relevant tests.
 
-\wss{It would be nice to have a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.  If a section
-  covers tests for input constraints, you should reference the data constraints
-  table in the SRS.}
-		
-\paragraph{Title for Test}
+\myparagraph{Training and Test Data} \label{TTD}
+
+Training data given by eRisk will be split 80/20 into train and test sets. Each task has some concept of higher or lower risk, either in the form of positive/negatives, survey answers, a continuous scale, or something else. Depending on the task a metric will be created from expected values representing this risk (an example may be averaging survey answers) it is unclear what these metrics will involve currently as eRisk has not yet released this year’s tasks. Train and test splits will be created to have similar distributions of this risk metric (ie. similar numbers of low/mid/high risk individuals). How similar the distributions should be is as of yet unknown and will require further experimentation when eRisk releases their datasets for this year.
+
+When testing the system three different train/test splits will be produced, all splits will be formed on the full training data provided by eRisk, thus giving three copies of said training data with the train and test subsets being different for each copy. These copies will try to maximize the difference between their splits. The model will be trained on a training split and then will give predictions on the test set. These predictions will be evaluated on a relevant set of metrics (outlined below in section \ref{metrics}), and an average of the metrics across all three splits will be used to determine model performance.
+
+\myparagraph{Metrics} \label{metrics}
+
+As the eRisk tasks have not yet been released it is unclear exactly what form the expected and predicted output will take, so it is unclear what metrics will be used to evaluate our models. If a task is a repeat from past years, metrics similar to the ones used in previous versions of the task may be used. Here are some metrics that have been deemed potentially useful to employ, whether they will be used depends on the nature of this year's eRisk tasks. Other measures will likely be added upon the release of the eRisk tasks:
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{MAE} (Mean Absolute Error) was used by the UQAM team in a 2022 task about eating disorders \citep{Saravani2022MeasuringTS}. MAE measures the average distance between a predicted value $p_i$ in predictions $P$ and a ground truth (expected value) $t_i$ in ground truths $T$ for $n$ data points:
 
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
+$$\text{MAE} = \sum_{i=1}^{n} \frac{|t_i - p_i|}{n}$$
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+\item{MZOE} (Mean Zero-One Error) was also used in the UQAM's 2022 eating disorder submission \citep{Saravani2022MeasuringTS}. MZOE measures the proportion of incorrect predictions:
 
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
+$$\text{MZOE} = \frac{|\{p_i \in P : t_i \neq p_i\}|}{n}$$
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+\item{F-Score} was used in the UQAM team's 2021 submission for the detection of problem gambling task \citep{Maupom2021EarlyDO}. F-Score is a combination of two other measures, precision and recall, and is used to measure the accuracy of positive/negative tests while taking into account false positive and negatives:
 
-How test will be performed: 
+$$\text{precision} = \frac{\text{true positives}}{\text{true positives} + \text{false positives}}$$
+$$\text{recall} = \frac{\text{true positives}}{\text{true positives} + \text{false negatives}}$$
+$$\text{F-score} = 2\frac{\text{precision} * \text{recall}}{\text{precision} + \text{recall}}$$
+
+\item{RMSE} (Root Mean Square Error) is a common measure of the deviation between predicted values and expected values, it somewhat analogous to MAE:
+
+$$\text{RMSE} = \sqrt{\sum_{i=1}^{n} \frac{(t_i - p_i)^2}{n}}$$
+
+\item{$R^2$} measures how well the expected values are predicted by the model by comparing how much variation the predicted values capture against the variation in the expected values:
+
+$$SS_{res} = \sum_{i=1}^{n} (t_i - p_i)^2$$
+$$SS_{tot} = \sum_{i=1}^{n} (t_i - \text{mean}(T))^2$$
+$$R^2 = 1 - \frac{SS_{res}}{SS_{tot}}$$
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\myparagraph{Acceptable Error Metric Values} \label{bounds}
 
-...
+The bounds for which error measures are considered acceptable will be based on the results other teams achieved in past eRisk competitions if the given task is a repeat. Our model should perform better than previous years. If the task is new, bounds will be determined through research into the accuracy of clinicians in these areas and the involvement of expert knowledge in the form of psychology faculty from the Université du Québec à Montréal. Our model should represent an improvement on clinicians’ diagnostic capabilities.
+
+\myparagraph{Tests}
+
+In practice these four tests will rarely be run separately but as one automatic test suite as the output of each test is fed to the input of the next.
+
+\begin{enumerate}
+
+\item{FRT-ACC1-1\\}
+
+Control: Automatic
+
+Initial State: No models have been trained by the system yet, the eRisk training data is available to the system.
+
+Input: The eRisk training data.
+
+Output: Three train/test splits where each train/test duo is composed of disjoint train and test sets whose union is all of the data in the original eRisk training data.
+
+Test Case Derivation: The system should properly split the data into train and test sets.
+
+How test will be performed: The eRisk training data will be fed into the system, the system will create the splits. For each split a script will check that no element exists in both the train and test split and that all training data is accounted for between both sets.
+
+\item{FRT-ACC1-2\\}
+
+Control: Automatic
+
+Initial State: No models have been trained by the system yet, three train/test splits have been created.
+
+Input: The three sets of training data.
+
+Output: The parameters and/or objects (ie. class instances) that represent trained models.
+
+Test Case Derivation: The system should train models on the train splits.
+
+How test will be performed: The three training sets will be fed into the system, the system will train a model on each set. A script will check that the models exist and can produce predictions for data in the training sets.
+
+\item{FRT-ACC1-3\\}
+
+control: Automatic
+
+Initial State: Three versions of the model have been trained on the relevant train sets.
+
+Input: The three corresponding test sets into the corresponding models.
+
+Output: Three sets of predictions.
+
+Test Case Derivation: The system should produce some sort of prediction.
+
+How test will be performed: The test data will be fed into the system and the system will use its trained models to produce a set of predictions. A script will check that there is a prediction for each test data point.
+
+\item{FRT-ACC1-4\\}
+
+Control: Automatic
+
+Initial State: Three sets of predictions have been produced by the system.
+
+Input: The three sets of predictions and corresponding expected values.
+
+Output: A set of metrics formed by averaging together the metrics for each of the three sets, the specific metrics used will depend on the nature of the specific eRisk task (see section \ref{metrics}).
+
+Acceptability of Output: For the system to be acceptable to stakeholders these metrics must be better than some baseline value determined from either past eRisk submissions for similar tasks or through research into typical clinical results (see section \ref{bounds}).
+
+Test Case Derivation: The system must reach specific accuracy measures to be considered acceptable to stakeholders.
+
+How test will be performed: Predictions and expected values will be given to system, which will calculate the relevant error metrics and how much they outperform baseline error metrics.
+
+\end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
 \subsubsection{Usability Requirements}
@@ -542,6 +607,18 @@ Input:
 Output: 
 					
 How test will be performed: 
+
+Type: Automatic, Dynamic
+					
+Initial State: The system has been trained and is awaiting data to form predictions on.
+					
+Input/Condition: A set of data that the system can predict on.
+					
+Output/Result: The resulting predictions, in a form where no sensitive data from the input is present in the output.
+
+Test Case Derivation: Sensitive in this case refers to the post history of the subjects eRisk provides as training and test data. If these posts can be reconstructed from any part of our system outputs it is possible the identity of the individual could be discovered. This represents an unacceptable breach of privacy and can not happen.
+					
+How test will be performed: After the system has produced it's predictions a script will be run that takes all posts in the input data, forms a string out of all consecutive three word triplets (ie. "hello my good friend" forms "hello my good" and "my good friend"), both with and without processing (removal of stopwords, punctuation, etc.), and scans the output to ensure that none of these triples are present.
 
 \end{enumerate}
 
