@@ -261,7 +261,26 @@ How test will be performed:
 
 ...
 
-\subsection{Tests for Nonfunctional Requirementss}
+\subsection{Tests for Nonfunctional Requirements}
+\subsubsection{Usability Requirements}
+		
+
+\begin{enumerate}
+
+\item{NFRT-U-1\\}
+
+Type: Dynamic, Manual
+					
+Initial State: System is completed trained
+					
+Input/Condition: The system will be ran on a Windows desktop/laptop and macOS desktop/laptop device with the correct environment setup
+					
+Output/Result: The system should generate an expected result 
+					
+How test will be performed: After setting up the environment on to both macOS and Windows machines, the system will be ran on both environment with the same command. Test will pass as long as an expected result is generated from both machines.
+
+
+\end{enumerate}
 
 \subsubsection{Performance Requirements}
 		
@@ -276,9 +295,9 @@ Initial State: System is completed trained and deployed onto the ERisk server
 					
 Input/Condition: ERisk must make sure the system will not have interferences from other software
 					
-Output/Result: System must generate a result of over 90 percent accuracy that ERisk must compare
+Output/Result: System must generate a result of over 0.7 in F-measure that ERisk must compare
 					
-How test will be performed: After generating a result from the ERisk servers, the results will be automatically compared with the correct result about who is a pathological gamblers. The criteria includes an accuracy score that will be determined by ERisk
+How test will be performed: After generating a result from the ERisk servers, the results will be automatically compared with the correct result about who is a pathological gamblers. The criteria includes an F-measure score from 0 to 1 that will be determined by ERisk
 
 \item{NFRT-P-2\\}
 
@@ -290,7 +309,7 @@ Input: The system will be ran on the developer's computer
 					
 Output: The system should generate a result within 2 minutes of processing time 
 					
-How test will be performed: A timer will start when each process session is ran, and stopped when the system finishes executing.
+How test will be performed: A timer will start when each process session is ran, and stopped when the system finishes executing
 
 \end{enumerate}
 
@@ -312,6 +331,69 @@ Output/Result: The generated result should not overuse the processing power of t
 How test will be performed: CPU, GPU, RAM and live power usage will be monitored while running the software. Usage of all aspects should not increase more than 20 percent.   
 					
 \end{enumerate}
+
+\subsubsection{Maintainability and Support Requirements}
+		
+
+\begin{enumerate}
+
+\item{NFRT-MS-1\\}
+
+Type: Manual
+					
+How test will be performed: Each piece of code and documentation must be reviewed by every developer before it is considered as finalized. Developers will review by capturing metrics and matching requirements. 
+
+\end{enumerate}
+
+\subsubsection{Cultural Requirements}
+
+
+\begin{enumerate}
+
+\item{NFRT-C-1\\}
+
+Type: Static, Manual
+					
+Initial State: The system is completed trained and a result is generated
+					
+Input/Condition: The testers review the entirety of the ouput
+					
+Output/Result: All of the generated result should be in English 
+					
+How test will be performed: The testers will go through the output and make sure the entirety of the generated result is in English
+
+
+\item{NFRT-C-2\\}
+
+Type: Static, Manual
+					
+Initial State: The system is completed trained and a result is generated
+					
+Input/Condition: Users review the entirety of the ouput
+					
+Output/Result: Result should protect cultural sensitivity and not offend anyone
+					
+How test will be performed: The test will be performed by seeking actual user feedback by surveying people of different backgrounds. The question will be asked is "From this piece of information, do you feel cultually offended or believe it will offend others?" 
+
+\subsubsection{Legal Requirements}
+
+\end{enumerate}
+\begin{enumerate}
+
+\item{NFRT-L-1\\}
+
+Type: Static, Manual
+					
+Initial State: The source code and documentation is prepared
+					
+Input/Condition: The user reviews the entirety of the source code and related documentation
+					
+Output/Result: Copyright licenses, appropriate credits and/or MIT license must attached
+					
+How test will be performed: The testers will review the entirely of the project and check to see if appropriate copyright licenses and/or credits are included for resources that require them
+
+\end{enumerate}
+
 
 
 \subsection{Traceability Between Test Cases and Requirements}
