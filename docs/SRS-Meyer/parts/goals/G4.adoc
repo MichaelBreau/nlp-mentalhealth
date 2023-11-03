@@ -11,8 +11,8 @@ The requirements listed represent the core functionality of the Natural Language
 
 - **Process Training Data:** The system will process training data to be used later on for natural language processing.
 - **Natural Language Processing:** The system will process data using a natural language processing model to determine if the messages exhibit early signs of mental health issues.
+- **Precise Detection of Early Signs**: The system should replicate similar key performance indicators to be competitive with past eRisk competition participants in various detection tasks (less than 100% difference).
 
 **Non-Functional Requirements**
 
-- **Precise Detection of Early Signs**: The system should replicated similar precision to be competitive with past eRisk competition participants in various detection tasks (less than 100% difference).
 - **Security of Data**: Due to the nature of the data used with training as well as for detection purposes, the system should be free from security risks that could compromise the data.

@@ -7,45 +7,55 @@ endif::[]
 
 This section describes in further detail the components listed in the previous section by describing their functional and non-functional requirements.
 
+**Security**
+
+- SR1: User data must not be shared or re-used in any system not part of this system.
+- SR2: Sensitive user data is must not be present within the results generated.
+- SR3: The system will be tested periodically to detect crashes and a potential lack of processing power.
+- SR4: The system will run through a series of tests before deploying/pushing new builds.
+- SR5: The team will regularly push their code by committing to a repository while working on the code.
+- SR6: The system will operate using cleaned data that does not contain duplicates.
+- SR7: The system data will only operate off of verified data free from copying errors.
+- SR8: The system will be tested against plainly appearent data to guide and ensure prediction functionality.
+
+
 **Text Pre-Processing Component**
 
 Functional Requirements:
 
-- The system will divide text into individual units of words and or sub-words (Tokenization).
-- The system will convert generated tokens into lowercase to preserve consistency.
-- The system will remove stopword tokens (Common words that do not commonly have an effect on the meaning).
-- The system will reduce tokens to their root forms (Ex: "moving" to "move").
+- FR-1: The system will divide text into individual units of words and or sub-words (Tokenization).
+- FR-2: The system will convert generated tokens into lowercase to preserve consistency.
+- FR-3: The system will remove stopword tokens (Common words that do not commonly have an effect on the meaning).
+- FR-4: The system will reduce tokens to their root forms (Ex: "moving" to "move").
 
 Non-Functional Requirements:
 
-- The system will produce an output that is useable by the Vectorization Component.
+- NFR-1: The system will produce an output that is useable by the Vectorization Component.
 
 **Vectorization Component**
 
 Functional Requirements:
 
-- The system will convert tokens into numerical vectors.
+- FR-5: The system will convert tokens into numerical vectors.
 
 Non-Functional Requirements:
 
-- The system will produce an output that is useable by the Prediction Component.
+- NFR-2: The system will produce an output that is useable by the Prediction Component.
 
 **Prediction Component**
 
 Functional Requirements:
 
-- The system will make predictions using the vectorized tokens, the trained model, as well as with the created prediction algorithm.
+- FR-6: The system will make predictions using the vectorized tokens, the trained model, as well as with the created prediction algorithm.
 
 Non-Functional Requirements:
 
-- The system will produce an output that is useable by the Output Component.
+- NFR-3: The system will produce an output that is useable by the Output Component.
 
 **Output Component**
 
 Functional Requirements:
 
-- The system will produce the output of the predictions to the console.
-
-Non-Functional Requirements:
-
-- The system will produce output to the console that is understandable by the project team.
+- FR-7: The system will produce output to a specified file with either a range of magnitude or a classification prediction.
+- FR-8: If the system is producing an output corresponding to a range of magnitude, it will satisfy the KPI ranges for MZOE and MAE.
+- FR-9: If the system is producing an output corresponding to a classification, it will satisfy the KPI range for F-score.
