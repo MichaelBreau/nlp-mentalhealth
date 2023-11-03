@@ -125,9 +125,9 @@ how they relate to your VnV efforts.}
 
 \section{Plan}
 
-This section will outline the plan for verification and validation of a number of different components of this project (3.1). The section will first give an overview of who is part of the verification and validation team and what their roles and involvement will consist of. Next there will be sections regarding verification of the SRS documentation (3.2) along with the design plan (3.3) and the verification and validation plan itself (3.4). This section will then outline the verification plan that has been created for the implementation of the project and model (3.5). Automated Testing and verification tools that will be used throughout this project is then the next section that is outlined in 3.6 followed lastly by the validation plan for our software (3.7).
+This section will outline the plan for verification and validation of a number of different components of this project (\ref{Verification and Validation Team}). The section will first give an overview of who is part of the verification and validation team and what their roles and involvement will consist of. Next there will be sections regarding verification of the SRS documentation (\ref{SRS Verification Plan}) along with the design plan (\ref{Design Verification Plan}) and the verification and validation plan itself (\ref{Verification and Validation Plan Verification Plan}). This section will then outline the verification plan that has been created for the implementation of the project and model (\ref{Implementation Verification Plan}). Automated Testing and verification tools that will be used throughout this project is then the next section that is outlined in \ref{Automated Testing and Verification Tools} followed lastly by the validation plan for our software (\ref{Software Validation Plan}).
 
-  \subsection{Verification and Validation Team}
+  \subsection{Verification and Validation Team} \label{Verification and Validation Team}
 
   
   The verification and validation team will consist of our core team/group members (Matthew, Jessica, Ben, Yuiro and Michael) along with our professor, our TA, Marie-Jean and Diego from our Montreal team, and Professor Mosser.  Our core team will be responsible for creating team suites that ensure correctness in our solution and that will catch possible bugs and issues that may arise. The team will be responsible for creating suitable edge cases to evaluate the correctness of our work along with general automated test suites that will be automatically deployed when new code is pulled.\\
@@ -136,7 +136,7 @@ This section will outline the plan for verification and validation of a number o
   
   The team will meet with Professor Mosser and their TA as well periodically throughout each checkpoint of design in order to discuss the requirements for our profile and documentations and to solidify what is expected of us. This is an opportunity for us to ask any questions we may have. We also will meet with Marie-Jean and Diego from the Montreal team periodically to help guide us on requirements and what validation means to them. They will help guide us to what the important things are to focus on within our project. Team 8 will also provide us feedback throughout every milestone. Lastly, the actual competition itself will be our final validation step when it steps our model against a new set of data and reports how our model performed. \\
   
-  \subsection{SRS Verification Plan}
+  \subsection{SRS Verification Plan} \label{SRS Verification Plan}
   
   All of the members of our core team will be taking part in the SRS Verification Plan along with Group 8, Professor Mosser and our TA. We will verify the contents of our \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}{SRS} by comparing the requirements outlined by the eRisk competition and our team in Montreal with the requirements stated in our SRS. This will ensure that we have covered everything from our SRS and we can see if there is anything new we must add. Since our project is unique in the fact that we are submitting to a competition with a rigid structure of what we will be submitting, we will also compare the rubric for the SRS document with what we have done in our original SRS document to ensure that we hit all the needed checkpoints. On top of this, we will verify our SRS document by going over the feedback given to us on our SRS revision 0 from our TA along with the feedback we received from group 8 regarding our SRS revision 0. Lastly, when we are verifying our SRS document we will talk with Professor Mosser and ask him any questions that arise from us during the reviewing and verification process. \\  
 
@@ -166,7 +166,7 @@ This section will outline the plan for verification and validation of a number o
   \end{itemize}
   
   
-  \subsection{Design Verification Plan}
+  \subsection{Design Verification Plan} \label{Design Verification Plan}
   
   Our plan for our design verification will be to go through our SRS documents and make sure that each of our outputs and inputs that we planned on having are accounted for and included in our design planning and document. We will also look at reviews given to us from Group 8 on our SRS document to consider any changes we may want to add or things to consider for our design. We will go through the same process for feedback received from our TA on our SRS report. We will also utilize the guidance of Marie-Jean and Diego in order to verify that we are on the right path with our design. They can help guide us in our design and verify that it checks all the boxes and functionalities that are required for the competition. \\
   
@@ -206,7 +206,7 @@ This section will outline the plan for verification and validation of a number o
   \\
   
   
-  \subsection{Verification and Validation Plan Verification Plan}
+  \subsection{Verification and Validation Plan Verification Plan}\label{Verification and Validation Plan Verification Plan}
   
   For our Verification and Validation Plan Verification Plan we will be making use of the reviews given to us for our VnV Plan from group 8 as well as from our TA. This will help us gain some insight on areas that may be missing or need more work. We will also be going through our \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}{SRS} and ensuring we have created at least 1 test for each functional and nonfunctional requirement. It is important to ensure that we have sufficient tests for our requirements. We would also like to do some mutation testing in our code to determine what changes will affect the tests we have created and in what way. It will also show us that there is a possibility we are missing some tests that should be included if a mutation that we would expect to result in a change, results in no failed tests.\\  
 
@@ -225,18 +225,18 @@ This section will outline the plan for verification and validation of a number o
   \end{itemize}
   
   
-  \subsection{Implementation Verification Plan}
+  \subsection{Implementation Verification Plan} \label{Implementation Verification Plan}
   
   The large majority of the implementation for this project will revolve around achieving an acceptable level of accuracy in our system’s predictions. This document goes more in depth about how we will do this in our implementation in section 4.1.1 but the basis of this process to ensure acceptable model accuracy levels is done through train/test splits, training models on the test sets, predicting the values of test data with these models, and then comparing these predicted values with the known expected values. All of the sections just listed are key areas of the implementation and will need to be tested in order to verify our implementation. There are 4 tests that will be run, typically in tandem with each other in one automatic test suite as outlined in 4.1.1. The largest area will be involving training and testing the data. Data will be provided by eRisk and the data will be used 3 times using different splits for each copy regarding what data is used for training vs testing. These predictions on the testing data will then be evaluated on a relevant set of metrics in order to test the program's accuracy and implementation. This set of metrics has yet to be determined due to the fact that the eRisk tasks have not been released yet for this year so we are unclear what metrics would be appropriate to evaluate our model at the current time. We will also be running a series of unit tests on our program in order to test the implementation of each part and function of the code. These tests will be recorded in the unit testing plan.\\
     
   As new code is added to our repository and as we work on our model, we will be using implementation verification techniques like code walk-throughs and code inspections periodically. Every time a new pull request is made, a fellow teammate will be required to perform a code inspection for that pull request and give feedback. If there is something unclear, the two teammates will meet and the reviewer will receive a code walk-through from the reviewee. We will also perform code walk-throughs for new changes made to the model when we meet as a team. Lastly we plan to have continuous integration that will allow us to run automated testing for every pull request that gets created as well as utilizing Fake9 as mentioned below to ensure our implementation follows proper coding standards.
   
   
-  \subsection{Automated Testing and Verification Tools}
-  
+  \subsection{Automated Testing and Verification Tools} \label{Automated Testing and Verification Tools}
+
   There will be three main tools we will be using for automated testing and verification. Firstly, we will be using Flake9 which is a fork of Flake8. This will help us in following proper coding standards and prevent problems arising such as syntax errors, typos, incorrect styling, bad formatting and more. This will also help save time for when we do peer code reviews as a team. We will also be creating testing suites using Pytest since it is a free open-sourced, simple and scalable Python-based Test Automation Framework. We will be using GitHub Actions in order to implement continuous integration and continuous delivery into our project. This will allow us to automatically build, test, and deploy our pipeline. This will create a pipeline that allows us to build and test every pull request when they happen and also when we deploy and merge a pull request onto another branch.
   
-  \subsection{Software Validation Plan}
+  \subsection{Software Validation Plan} \label{Software Validation Plan}
   
   There are a multitude of methods and parts to our software validation plan. Firstly, our primary validation method will be the actual process of competing in the eRisk competition. During the competition they will take our modal and test it with new data and observe the output. This will be the final and largest validation step for us that will help validate the correctness and precision of our design. We will also have a set of training data that we will use throughout to train against that we can use to test how close our results are to the expected results, validating how accurate our design is. \\
   
