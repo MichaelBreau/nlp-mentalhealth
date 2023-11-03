@@ -262,53 +262,109 @@ How test will be performed:
 ...
 
 \subsection{Tests for Nonfunctional Requirements}
-
-\wss{The nonfunctional requirements for accuracy will likely just reference the
-  appropriate functional tests from above.  The test cases should mention
-  reporting the relative error for these tests.  Not all projects will
-  necessarily have nonfunctional requirements related to accuracy}
-
-\wss{Tests related to usability could include conducting a usability test and
-  survey.  The survey will be in the Appendix.}
-
-\wss{Static tests, review, inspections, and walkthroughs, will not follow the
-format for the tests given below.}
-
-\subsubsection{Area of Testing1}
+\subsubsection{Usability Requirements}
 		
-\paragraph{Title for Test}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{NFRT-U-1\\}
 
-Type: Functional, Dynamic, Manual, Static etc.
+Type: Dynamic, Manual
 					
-Initial State: 
+Initial State: System is completed trained
 					
-Input/Condition: 
+Input/Condition: The system will be ran on a Windows desktop/laptop and macOS desktop/laptop device with the correct environment setup
 					
-Output/Result: 
+Output/Result: The system should generate an expected result 
 					
-How test will be performed: 
-					
-\item{test-id2\\}
+How test will be performed: After setting up the environment on to both macOS and Windows machines, the system will be ran on both environment with the same command. Test will pass as long as an expected result is generated from both machines.
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
 
-...
+\subsubsection{Safety and Security Requirements}
+
+
+\begin{enumerate}
+
+\item{NFRT-SS-1\\}
+
+Type: Dynamic, Manual
+					
+Initial State: The system is completed trained 
+					
+Input/Condition: The system will be ran on the developer's computer
+					
+Output/Result: The generated result should not overuse the processing power of the developer's computer
+					
+How test will be performed: CPU, GPU, RAM and live power usage will be monitored while running the software. Usage of all aspects should not increase more than 20 percent.   
+					
+\end{enumerate}
+
+\subsubsection{Maintainability and Support Requirements}
+		
+
+\begin{enumerate}
+
+\item{NFRT-MS-1\\}
+
+Type: Manual
+					
+How test will be performed: Each piece of code and documentation must be reviewed by every developer before it is considered as finalized. Developers will review by capturing metrics and matching requirements. 
+
+\end{enumerate}
+
+\subsubsection{Cultural Requirements}
+
+
+\begin{enumerate}
+
+\item{NFRT-C-1\\}
+
+Type: Static, Manual
+					
+Initial State: The system is completed trained and a result is generated
+					
+Input/Condition: The testers review the entirety of the ouput
+					
+Output/Result: All of the generated result should be in English 
+					
+How test will be performed: The testers will go through the output and make sure the entirety of the generated result is in English
+
+
+\item{NFRT-C-2\\}
+
+Type: Static, Manual
+					
+Initial State: The system is completed trained and a result is generated
+					
+Input/Condition: Users review the entirety of the ouput
+					
+Output/Result: Result should protect cultural sensitivity and not offend anyone
+					
+How test will be performed: The test will be performed by seeking actual user feedback by surveying people of different backgrounds. The question will be asked is "From this piece of information, do you feel cultually offended or believe it will offend others?" 
+
+\subsubsection{Legal Requirements}
+
+\end{enumerate}
+\begin{enumerate}
+
+\item{NFRT-L-1\\}
+
+Type: Static, Manual
+					
+Initial State: The source code and documentation is prepared
+					
+Input/Condition: The user reviews the entirety of the source code and related documentation
+					
+Output/Result: Copyright licenses, appropriate credits and/or MIT license must attached
+					
+How test will be performed: The testers will review the entirely of the project and check to see if appropriate copyright licenses and/or credits are included for resources that require them
+
+\end{enumerate}
+
+
 
 \subsection{Traceability Between Test Cases and Requirements}
 
