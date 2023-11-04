@@ -11,6 +11,13 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+\usepackage{amsmath, amssymb}
+\usepackage{amsfonts}
+\usepackage{pdflscape}
+\usepackage{longtable}
+
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
 
 \input{../Comments}
 \input{../Common}
@@ -30,35 +37,17 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+11/03/2023 & 1.0 & Revision 0\\
 \bottomrule
 \end{tabularx}
 
 ~\\
-\wss{The intention of the VnV plan is to increase confidence in the software.
-However, this does not mean listing every verification and validation technique
-that has ever been devised.  The VnV plan should also be a \textbf{feasible}
-plan. Execution of the plan should be possible with the time and team available.
-If the full plan cannot be completed during the time available, it can either be
-modified to ``fake it'', or a better solution is to add a section describing
-what work has been completed and what work is still planned for the future.}
-
-\wss{The VnV plan is typically started after the requirements stage, but before
-the design stage.  This means that the sections related to unit testing cannot
-initially be completed.  The sections will be filled in after the design stage
-is complete.  the final version of the VnV plan should have all sections filled
-in.}
 
 \newpage
 
 \tableofcontents
 
 \listoftables
-\wss{Remove this section if it isn't needed}
-
-\listoffigures
-\wss{Remove this section if it isn't needed}
 
 \newpage
 
@@ -76,17 +65,9 @@ in.}
   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations, or acronyms --- you can simply reference the SRS
-  \citep{SRS} tables, if appropriate}
-
-\wss{Remove this section if it isn't needed}
-
 \newpage
 
 \pagenumbering{arabic}
-
-This document ... \wss{provide an introductory blurb and roadmap of the
-  Verification and Validation plan}
 
 \section{General Information}
 
@@ -196,9 +177,9 @@ This section will outline the plan for verification and validation of a number o
   \subsection{Verification and Validation Team} \label{Verification and Validation Team}
 
   
-  The verification and validation team will consist of our core team members (Matthew, Jessica, Ben, Yuiro and Michael) along with our professor, our TA, Marie-Jean and Diego from our Montreal team, and Professor Mosser.  Our core team will be responsible for creating test suites that ensure correctness in our solution and that will catch possible bugs and issues that may arise. The team will be responsible for creating suitable edge cases to evaluate the correctness of our work along with general automated test suites that will be automatically deployed when new code is pulled.\\
+  The verification and validation team will consist of our core team members (Matthew, Jessica, Ben, Yaruo and Michael) along with our professor, our TA, Marie-Jean and Diego from our Montreal team, and Professor Mosser.  Our core team will be responsible for creating test suites that ensure correctness in our solution and that will catch possible bugs and issues that may arise. The team will be responsible for creating suitable edge cases to evaluate the correctness of our work along with general automated test suites that will be automatically deployed when new code is pulled.\\
   
-  The core team will be responsible for creating all test suites, along with executing them and documenting the results. We will also be responsible for making any changes that are required after testing our code. All core team members will have a hand in all sections of testing but different team members will have different focused responsibilities. Firstly, all core team members will be responsible for documenting the results of the automated test suites when their code enters the repository through a pull request. More specifically, Yuiro and Micheals main responsibility will be creating a set of tests including edge cases for our NLP model that will ensure that our model functions as expected for a wide variety of input data. They will be required to create test suites along with automated test suites that will be run periodically when pull requests happen. Jessica, Ben and Matthew on the other hand will have the primary responsibility for training the data vs a training data set in order to determine the accuracy of the model. They will also have the responsibility to ensure code structure in the test suites that are created along with organizing the suites while Yuiro and Michaels main role is coming up with and creating the tests.\\ 
+  The core team will be responsible for creating all test suites, along with executing them and documenting the results. We will also be responsible for making any changes that are required after testing our code. All core team members will have a hand in all sections of testing but different team members will have different focused responsibilities. Firstly, all core team members will be responsible for documenting the results of the automated test suites when their code enters the repository through a pull request. More specifically, Yuiro and Micheals main responsibility will be creating a set of tests including edge cases for our NLP model that will ensure that our model functions as expected for a wide variety of input data. They will be required to create test suites along with automated test suites that will be run periodically when pull requests happen. Jessica, Ben and Matthew on the other hand will have the primary responsibility for training the data vs a training data set in order to determine the accuracy of the model. They will also have the responsibility to ensure code structure in the test suites that are created along with organizing the suites while Yaruo and Michaels main role is coming up with and creating the tests.\\ 
   
   The team will meet with Professor Mosser and their TA as well periodically throughout each milestone in order to discuss the requirements for our project regarding the current milestone and to help solidify what is expected of us. This is an opportunity for us to ask any questions we may have as well. We also will meet with Marie-Jean and Diego from the Montreal team periodically to help guide us with regard to requirements of our project and the eRisk competition along with what validation means to them. They will help guide us to what the important things are to focus on within our project. Team 8 will also provide us feedback for every milestone. Lastly, the actual competition itself will be our final validation step when it tests our model against a new set of data and reports how our model performs.\\
 
@@ -273,7 +254,6 @@ This section will outline the plan for verification and validation of a number o
   \item Is the output produced understandable by the project team?
   \item Is the output in a format that a healthcare worker would be able to read and interpret the results?
   \end{itemize}
-  \\
   
   
   \subsection{Verification and Validation Plan Verification Plan}\label{Verification and Validation Plan Verification Plan}
@@ -456,7 +436,7 @@ How test will be performed: Predictions and expected values will be given to sys
 
 Type: Dynamic, Manual
 					
-Initial State: System is completed trained
+Initial State: System is completed and trained
 					
 Input/Condition: The system will be ran on a Windows desktop/laptop and macOS desktop/laptop device with the correct environment setup
 					
@@ -477,7 +457,7 @@ How test will be performed: After setting up the environment on to both macOS an
 
 Type: Dynamic, Manual
 					
-Initial State: The system is completed trained 
+Initial State: The system is completed and trained 
 					
 Input/Condition: The system will be ran on the developer's computer
 					
@@ -487,52 +467,26 @@ How test will be performed: CPU, GPU, RAM and live power usage will be monitored
 					
 \end{enumerate}
 
-\subsubsection{Maintainability and Support Requirements}
-		
-
 \begin{enumerate}
 
-\item{NFRT-MS-1\\}
-
-Type: Manual
-					
-How test will be performed: Each piece of code and documentation must be reviewed by every developer before it is considered as finalized. Developers will review by capturing metrics and matching requirements. 
-
+	\item{NFRT-SS-2\\}
+	
+	Type: Automatic, Dynamic
+						
+	Initial State: The system has been trained and is awaiting data to form predictions on.
+						
+	Input/Condition: A set of data that the system can predict on.
+						
+	Output/Result: The resulting predictions, in a form where no sensitive data from the input is present in the output.
+	
+	Test Case Derivation: Sensitive in this case refers to the post history of the subjects eRisk provides as training and test data. If these posts can be reconstructed from any part of our system outputs it is possible the identity of the individual could be discovered. This represents an unacceptable breach of privacy and can not happen.
+						
+	How test will be performed: After the system has produced it's predictions a script will be run that takes all posts in the input data, forms a string out of all consecutive three word triplets (ie. "hello my good friend" forms "hello my good" and "my good friend"), both with and without processing (removal of stopwords, punctuation, etc.), and scans the output to ensure that none of these triples are present.
+	
 \end{enumerate}
-
-\subsubsection{Cultural Requirements}
-
-
-\begin{enumerate}
-
-\item{NFRT-C-1\\}
-
-Type: Static, Manual
-					
-Initial State: The system is completed trained and a result is generated
-					
-Input/Condition: The testers review the entirety of the ouput
-					
-Output/Result: All of the generated result should be in English 
-					
-How test will be performed: The testers will go through the output and make sure the entirety of the generated result is in English
-
-
-\item{NFRT-C-2\\}
-
-Type: Static, Manual
-					
-Initial State: The system is completed trained and a result is generated
-					
-Input/Condition: Users review the entirety of the ouput
-					
-Output/Result: Result should protect cultural sensitivity and not offend anyone
-					
-How test will be performed: The test will be performed by seeking actual user feedback by surveying people of different backgrounds. The question will be asked is "From this piece of information, do you feel cultually offended or believe it will offend others?" 
 
 \subsubsection{Legal Requirements}
 
-\end{enumerate}
 \begin{enumerate}
 
 \item{NFRT-L-1\\}
@@ -550,11 +504,43 @@ How test will be performed: The testers will review the entirely of the project 
 \end{enumerate}
 
 
+\begin{landscape}
 
-\subsection{Traceability Between Test Cases and Requirements}
+		\subsection{Traceability Between Test Cases and Requirements}
 
-\wss{Provide a table that shows which test cases are supporting which
-  requirements.}
+		Requirement traceability from S2 of SRS to testing in this document.
+
+		\begin{longtable}{|l|cccccccccccccccc|}
+			\caption{Traceability Between Functional Test Cases and Functional Requirements, FR-1 to FR-10}                                                                                                                                                                                                                           \\
+			\hline
+			\textbf{Test IDs}   & \multicolumn{11}{c|}{\textbf{Functional Requirement IDs}}                                                                                                                                                                                                                                         \\
+			\hline
+			~                   & \textbf{FR1}                                              & \textbf{FR2} & \textbf{FR3} & \textbf{FR4} & \textbf{FR5} & \textbf{FR6} & \textbf{FR7} & \textbf{FR8} & \textbf{FR9} & \textbf{FR10}  \\
+			\hline
+			\textbf{FRT-ACC1-1}  & ~                                                         & ~            & ~            & ~            & ~            & X            & ~            & ~            & ~            & ~             \\
+			\textbf{FRT-ACC1-2}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & X            & ~            & ~            & ~             \\
+			\textbf{FRT-ACC1-3}  & X                                                         & X            & X            & X            & X            & ~            & ~            & X            & ~            & ~             \\
+			\textbf{FRT-ACC1-4}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & X            & X             \\
+			\hline
+		\end{longtable}
+
+		\begin{longtable}{|l|cccccccccccccccc|}
+			\caption{Traceability Between Non-Functional Test Cases and Non-Functional Requirements}                                                                                                                                                                                                                           \\
+			\hline
+			\textbf{Test IDs}   & \multicolumn{11}{c|}{\textbf{Non-Functional Requirement IDs}}                                                                                                                                                                                                                                         \\
+			\hline
+			~                   & \textbf{GR1}                                              & \textbf{GR2} & \textbf{SR1} & \textbf{SR2} \\
+			\hline
+			\textbf{NFRT-U-1}  & X                                                         & ~            & ~            & ~             \\
+			\textbf{NFRT-SS-1}  & ~                                                         & ~            & X            & ~            \\
+			\textbf{NFRT-SS-2}  & ~                                                         & ~            & ~            & X            \\
+			\textbf{NFRT-L-1}  & ~                                                         & X            & ~            & ~             \\
+			\hline
+		\end{longtable}
+\end{landscape}
+
+\newpage
+
 
 \section{Unit Test Description}
 
@@ -701,30 +687,11 @@ How test will be performed: After the system has produced it's predictions a scr
 
 \section{Appendix}
 
-This is where you can place additional information.
-
 \subsection{Symbolic Parameters}
 
-The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.
+None.
 
-\subsection{Usability Survey Questions?}
-
-\wss{This is a section that would be appropriate for some projects.}
-
-\newpage{}
-\section*{Appendix --- Reflection}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
-
-\newpage{}
-\section*{Appendix --- Reflection}
-
-\wss{This section is not required for CAS 741}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
+\subsection{Reflection}
 
 \begin{enumerate}
   \item What knowledge and skills will the team collectively need to acquire to
@@ -732,10 +699,50 @@ graduate attribute of Lifelong Learning.  Please answer the following questions:
   Examples of possible knowledge and skills include dynamic testing knowledge,
   static testing knowledge, specific tool usage etc.  You should look to
   identify at least one item for each team member.
+
+The following knowledge and skills will need to be acquired by the team to sucesfully
+complete the verification and validation for the project.
+
+1. Github Actions
+
+2. Pytest
+
+3. Mental Health Diagonostic Basics (For creating expected values)
+
+4. Python script for parsing and checking files
+
+5. System performance diagonistic skills
+
   \item For each of the knowledge areas and skills identified in the previous
   question, what are at least two approaches to acquiring the knowledge or
   mastering the skill?  Of the identified approaches, which will each team
   member pursue, and why did they make this choice?
+
+1. Michael will acquire the skill/knowledge required for this skill due to being
+the owner of the repository. Approaches for this skill/knowledge can be to either
+research the topic on the github actions webpage or watch YouTube tutorials to
+find the required skillset.
+
+2. Jessica will acquire the skill/knowledge required for this skill due to being
+interested in the skill. Approaches for this skill/knowledge can be to either
+research the topic on the pytest documention webpage or watch YouTube tutorials to
+find the required skillset.
+
+3. Ben will acquire the skill/knowledge required for this skill due to being
+interested in the skill. Approaches for this skill/knowledge can be to either
+research the topic with various papers or watch YouTube lectures to
+learn more about the required skillset.
+
+4. Matthew will acquire the skill/knowledge required for this skill due to being
+interested in the skill. Approaches for this skill/knowledge can be to either
+research the skill using the documentation of
+some python libraries for parsing documents or watch YouTube tutorials to
+find the required skillset.
+
+5. Yaruo will acquire the skill/knowledge required for this skill due to being
+interested in the skill. Approaches for this skill/knowledge can be to either
+research the topic on various papers or watch YouTube tutorials to
+find the required skillset.
 \end{enumerate}
 
 \end{document}
