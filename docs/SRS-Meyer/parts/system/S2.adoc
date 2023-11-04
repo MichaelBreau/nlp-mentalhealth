@@ -7,45 +7,46 @@ endif::[]
 
 This section describes in further detail the components listed in the previous section by describing their functional and non-functional requirements.
 
+**General and Security**
+
+Non-Functional Requirements:
+
+- GR1: The system should be compatible on MacOS, Windows, and Linux.
+- GR2: Copyrighted content should not be included in the output without reference.
+- SR1: The system will be tested periodically to detect a potential lack of processing power.
+- SR2: Sensitive user data must not be present within the results generated.
+
 **Text Pre-Processing Component**
 
 Functional Requirements:
 
-- The system will divide text into individual units of words and or sub-words (Tokenization).
-- The system will convert generated tokens into lowercase to preserve consistency.
-- The system will remove stopword tokens (Common words that do not commonly have an effect on the meaning).
-- The system will reduce tokens to their root forms (Ex: "moving" to "move").
-
-Non-Functional Requirements:
-
-- The system will produce an output that is useable by the Vectorization Component.
+- FR-1: The system will divide text into individual units of words and or sub-words (Tokenization).
+- FR-2: The system will convert generated tokens into lowercase to preserve consistency.
+- FR-3: The system will remove stopword tokens (Common words that do not commonly have an effect on the meaning).
+- FR-4: The system will reduce tokens to their root forms (Ex: "moving" to "move").
 
 **Vectorization Component**
 
 Functional Requirements:
 
-- The system will convert tokens into numerical vectors.
+- FR-5: The system will convert tokens into numerical vectors.
 
-Non-Functional Requirements:
+**Model Component**
 
-- The system will produce an output that is useable by the Prediction Component.
+Functional Requirements:
+- FR-6: The system will divide test data into train and test sets.
+- FR-7: The system will train the model using corresponding train data set.
 
 **Prediction Component**
 
 Functional Requirements:
 
-- The system will make predictions using the vectorized tokens, the trained model, as well as with the created prediction algorithm.
-
-Non-Functional Requirements:
-
-- The system will produce an output that is useable by the Output Component.
+- FR-7: The system will make predictions using the vectorized tokens, the trained model, as well as with the created prediction algorithm.
 
 **Output Component**
 
 Functional Requirements:
 
-- The system will produce the output of the predictions to the console.
-
-Non-Functional Requirements:
-
-- The system will produce output to the console that is understandable by the project team.
+- FR-8: The system will produce output to a specified file with either a range of magnitude or a classification prediction.
+- FR-9: If the system is producing an output corresponding to a range of magnitude, it will satisfy the KPI ranges for MZOE and MAE.
+- FR-10: If the system is producing an output corresponding to a classification, it will satisfy the KPI range for F-score.
