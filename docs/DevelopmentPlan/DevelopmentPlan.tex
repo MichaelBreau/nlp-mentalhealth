@@ -1,4 +1,4 @@
-\documentclass{article}
+  \documentclass{article}
 
 \usepackage{booktabs}
 \usepackage{tabularx}
@@ -78,9 +78,15 @@ We are currently using the issues tab in GitHub to organize our team meetings, a
 
 \section{Proof of Concept Demonstration Plan}
 
-The end goal of the team this year will be to complete and submit a working model during the 2024 eRisk competition. No information regarding the tasks to be completed during the competition are released until it starts. The primary challenge the team will face prior to the start of the competition will be gaining the knowledge of natural language processing necessary to build a successful model during the competition. The main risk the team faces during this time is being unprepared for the competition.
+The end goal of the team this year will be to complete and submit working models during the 2024 eRisk competition. No information regarding the tasks to be completed during the competition are released until it starts late November. The primary challenge the team will face prior to the start of the competition will be gaining the knowledge of natural language processing necessary to build a sucessful model during the competition. The main risk the team faces during this time is being unprepared for the competition.
 
-During the proof of concept demonstration the team plans to present a successful recreation of the gambling task in this past eRisk submission: \url{https://ceur-ws.org/Vol-2936/paper-83.pdf}. The goal is to demonstrate how much the team has learned and to set a clear timeline for where the team's knowledge should be in November.
+During the proof of concept demonstration the team plans to present a successful recreation of the eating disorder task in this past eRisk submission: \url{https://ceur-ws.org/Vol-3180/paper-74.pdf}. The goal is to demonstrate how much the team has learned and to set a clear timeline for where the team's knowledge should be in November. 
+
+The 2022 eating disorder task consists of predicting the answers to the 22 questions from an eating disorder questionnaire (\url{https://www.corc.uk.net/media/1273/ede-q_quesionnaire.pdf}) using only their posts on reddit. For example, for the first question of 
+"ON HOW MANY OF THE PAST 28 DAYS ... Have you been deliberately trying to limit the amount of food you eat to influence your shape or weight (whether or not you have succeeded)?" the goal is to sucessfully predict the answer 
+from zero to six that the user answered when completing this questionnaire. The POC demo should contain a working model
+ that creates predictions for each of these 22 questions for each user in the format: username predictionq1 
+ predictionq2 ... predictionq22. Each user should take up one line in the output text document.
 
 \section{Technology}
 
