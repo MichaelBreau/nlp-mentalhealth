@@ -10,8 +10,8 @@ endif::[]
 
 - *Accuracy of User Profiles*: The assumption is made that all profile data provided for testing are formatted correctly and will be able to be processed without any errors, disruptions or further development procedures beyond the scope.
 
-- *Distruption of ERisk's Schedule*: It is assumed that ERisk's schedule, including the date and time provided for important dates, are executed on time and in sync with the development process.
+- *Disruption of ERisk's Schedule*: It is assumed that ERisk's schedule, including the date and time provided for important dates, are executed on time and in sync with the development process.
 
-- *Connection Stability*: It is assumed that the connection between the system and ERisk labs' servers are smooth and stable, without connectivity disruptions from internet service providers.
+- *Connection Stability*: It is assumed that the connection between the system and ERisk labs' servers is smooth and stable, without connectivity disruptions from internet service providers.
 
 - *Consistent Development Platforms*: The assumption is made that documentation and utilization will be consistent throughout the development process without sudden changes in stakeholders or business plans.
