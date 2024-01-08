@@ -1,4 +1,4 @@
-= {project-title}: Requirements Standard Plan
+= {project-title}: Requirements Standard Plan | Meyers Template
 include::metadata.adoc[]
 :revdate: {docdate}
 :sectlinks:
