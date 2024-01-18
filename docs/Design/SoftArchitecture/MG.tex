@@ -16,8 +16,8 @@
     urlcolor=blue
 }
 
-\input{../../Comments}
-\input{../../Common}
+\input{../Comments}
+\input{../Common}
 
 \newcounter{acnum}
 \newcommand{\actheacnum}{AC\theacnum}
@@ -30,6 +30,12 @@
 \newcounter{mnum}
 \newcommand{\mthemnum}{M\themnum}
 \newcommand{\mref}[1]{M\ref{#1}}
+
+\newcounter{edmnum}
+\newcommand{\edmthemnum}{EDM\theedmnum}
+\newcommand{\edmref}[1]{EDM\ref{#1}}
+
+\setcounter{secnumdepth}{5}
 
 \begin{document}
 
@@ -141,6 +147,31 @@ the completeness of the design against the requirements provided in the SRS. The
 other shows the relation between anticipated changes and the modules. Section
 \ref{SecUse} describes the use relation between modules.
 
+\section{General Structure of an NLP Pipeline} \label{SecPipeline}
+
+All NLP pipelines in this system can be thought of as following a general structure. This is not a hard description of the structure each diagnosis component will use but a soft description of what the system's NLP pipelines will look like. This pattern is likely to show up throughout the system in various locations and is included here to provide context and a conceptual model the reader can use for the rest of the document. The proposed structure is as follows: \newline
+
+\noindent Input $\rightarrow$ Tokenizer $\rightarrow$ Representation Model $\rightarrow$ Prediction Model $\rightarrow$ Predictions \newline
+
+\noindent Where the Prediciton Model can be further broken up into: \newline
+
+\noindent $\rightarrow$ Transformation $\rightarrow$ ... $\rightarrow$ Transformation $\rightarrow$ \newline
+
+\noindent A brief description of each stage is as follows:
+
+\begin{itemize}
+    \item Input: The input text to the pipeline.
+    \item Tokenizer: Responsible for "cleaning" the text, can perform many different tasks: removing junk words (often referred to as stopwords) like the, and, a, etc.; expanding contractions; removing numerics and URLS. Leaves the text as text, just with the less useful features removed.
+    \item Representation Model: Machine learning models can not directly operate on text, they need numerical inputs. The representation model converts from the text to some numerical format. Different representation models output different formats and encode different information into these formats.
+    \item Prediction Model: Transforms the numerical format provided by the representation model into the mental health predictions of interest. The prediction model may transform the data mutliple times in different ways before reaching a final prediction.
+    \begin{itemize}
+        \item Transformation: A specific transformation in the prediction model's pipeline
+    \end{itemize}
+    \item Predictions: The final predictions produced by the pipeline.
+\end{itemize}
+
+Due to the interconnected nature of this pipeline and the research based nature of this project large changes to this pipeline are both expected and unavoidable. This is because changes in one section of pipeline can require large changes in other sections, trying a new prediction model may require an entirely different representation model do what it's meant tobe used.
+
 \section{Anticipated and Unlikely Changes} \label{SecChange}
 
 This section lists possible changes to the system. According to the likeliness
@@ -157,11 +188,14 @@ adapted here is called design for
 change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
-  hardware on which the software is running.
-\item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data.
-\item ...
+\item[\refstepcounter{acnum} \actheacnum \label{acInput}:] What format the input data takes.
+\item[\refstepcounter{acnum} \actheacnum \label{acOutput}:] What format the output data takes.
+\item[\refstepcounter{acnum} \actheacnum \label{acPipelineStages}:] What stages there are in a task's NLP pipeline.
+\item[\refstepcounter{acnum} \actheacnum \label{acTokenization}:] How the raw text data is "cleaned" (see \ref{SecPipeline}: tokenizer).
+\item[\refstepcounter{acnum} \actheacnum \label{acRepModel}:] How the cleaned text data is converted into numerical data.
+\item[\refstepcounter{acnum} \actheacnum \label{acPredModel}:] How many manipulations of the numerical data are performed before producing a prediction.
+\item[\refstepcounter{acnum} \actheacnum \label{acTrans}:] How the numerical data is manipulated to produce predictions.
+\item[\refstepcounter{acnum} \actheacnum \label{acOps}:] How the system will integrate with the tools the operations team is developing.
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
@@ -175,8 +209,8 @@ decisions will be changed.
 
 \begin{description}
 \item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
-  (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
-\item ...
+  (Input: File, Output: File).
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucTasks}:] What diagnosis tools the system will provide.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -184,37 +218,45 @@ decisions will be changed.
 This section provides an overview of the module design. Modules are summarized
 in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed
 below, which are leaves in the hierarchy tree, are the modules that will
-actually be implemented.
+actually be implemented. As the details of the NLP pipelines are not as of yet determined some modules are left quite general and vague (ie. how many transformation modules will be used, what representation models will be used, etc.).
 
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
+\item [\refstepcounter{mnum} \mthemnum \label{m2}:] Search for Symptoms of Depression Module
+\item [\refstepcounter{mnum} \mthemnum \label{m3}:] Early Risk Detection for Symptoms of Anorexia Module
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmI}:] ED Input
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmO}:] ED Output
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmPipeline}:] ED Pipeline Manager
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmToken}:] ED Tokenizer
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmRM}:] ED Representation Model
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmPM}:] ED Prediction Model
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmTrans}:] ED Transformation 1...n
 \end{description}
 
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
+\begin{tabular}{p{0.2\textwidth} p{0.3\textwidth} p{0.5\textwidth}}
 \toprule
-\textbf{Level 1} & \textbf{Level 2}\\
+\textbf{Level 1} & \textbf{Level 2} & \textbf{Level 3}\\
 \midrule
 
-{Hardware-Hiding Module} & ~ \\
+{Hardware-Hiding} & None \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
+\multirow{3}{*}{Behaviour-Hiding} & \\ \cline{2-3}
+& \multirow{2}{*}{Eating Disorder IO} & ED Input\\
+& & ED Output\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
+\multirow{3}{*}{Software Decision} 
+& Depression Module\\
+& Anorexia Module\\ \cline{2-3}
+& \multirow{5}{*}{Eating Disorder Pipeline} & ED Pipeline Manager\\
+& & ED Tokenizer\\
+& & ED Representation Model\\
+& & ED Prediction Model\\
+& & ED Transformation 1...n (represents multiple modules)\\
 \bottomrule
 
 \end{tabular}
@@ -264,25 +306,98 @@ to be implemented.
   documents. This module serves as a communication layer between the
   hardware-hiding module and the software decision module. The programs in this
   module will need to change if there are changes in the SRS.
-\item[Implemented By:] --
+\item[Implemented By:] Depression IO, Anorexia IO, Eating Disorder IO
 \end{description}
 
-\subsubsection{Input Format Module (\mref{mInput})}
-
+\subsubsection{Eating Disorder IO (-)}
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
-\item[Implemented By:] [Your Program Name Here]
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]
+\item[Secrets:]How input and output is handled for the eating disorder diagnosis tool.
+\item[Services:]Includes programs that provide reading from an input file and outputting to an output file for the eating disorder diagnosis tool.
+\item[Implemented By:] ED Input, ED Output
 \end{description}
 
-\subsubsection{Etc.}
+\paragraph{ED Input (\edmref{edmI})}
+\begin{description}
+\item[Secrets:]What format the input file is provided in.
+\item[Services:] Provides functionality for reading user posts from a file and formatting them into a data structure usable by the rest of the system.
+\item[Implemented By:] ed\_input.py
+\item[Type of Module:] Library
+\end{description}
+
+\paragraph{ED Output (\edmref{edmO})}
+\begin{description}
+\item[Secrets:]What format the output file is written in.
+\item[Services:] Provides functionality for writing predictions to a file.
+\item[Implemented By:] ed\_output.py
+\item[Type of Module:] Library
+\end{description}
+
+\subsubsection{Search for Symptoms of Depression Module (\mref{m2})}
+\begin{description}
+\item[Secrets:]The format and structures of detecting symptoms of depression data objects.
+\item[Services:] Sorts and ranks 1000 sentences of users to a BDI Questionnaire with 21 questions in correspondence. Each question of the questionnaire will correspond to 1000 related sentences.
+\item[Implemented By:] Natural Language Processing for Mental Health Risk Prevention
+\end{description}
 
 
 \subsection{Software Decision Module}
+\subsubsection{Early Risk Detection for Symptoms of Anorexia Module (\mref{m3})}
+\begin{description}
+\item[Secrets:] The Natural Language processor which will analyze inputted user data to determine a risk for anorexia
+\item[Services:] Anorexia training data
+  do not provide direct interaction with the user. 
+\item[Implemented By:] Natural Language Processing for Mental Health Risk Prevention
+\end{description}
 
+\subsubsection{Eating Disorder Pipeline (-)}
+\begin{description}
+\item[Secrets:] The structure and design of the eating disorder NLP pipeline.
+\item[Services:] Includes programs that manage the overall pipeline and others that define the specific transformations used to produce a prediction.
+\item[Implemented By:] ED Pipeline Manager, ED Tokenizer, ED Representation Model, ED Prediction Model, ED Transformation 1...n
+\end{description}
+
+\paragraph{ED Pipeline Manager (\edmref{edmPipeline})}
+\begin{description}
+\item[Secrets:] What components the NLP pipeline for the eating disorder task is comprised of.
+\item[Services:] Orchestrates and runs all the components of the eating disorder NLP pipeline.
+\item[Implemented By:] ed\_pipeline.py
+\item[Type of Module:] Library
+\end{description}
+
+\paragraph{ED Tokenizer (\edmref{edmToken})}
+\begin{description}
+\item[Secrets:] How the raw text data is cleaned in preparation of the model.
+\item[Services:] Provides a routine for the cleaning and stripping of less useful information from raw text.
+\item[Implemented By:] ed\_tokenizer.py
+\item[Type of Module:] Library
+\end{description}
+
+\paragraph{ED Representation Model (\edmref{edmRM})}
+\begin{description}
+\item[Secrets:] How text data is converted into a numerical format.
+\item[Services:] Provides a routine for converting text data into a numerical format.
+\item[Implemented By:] ed\_rep\_model.py
+\item[Type of Module:] Library
+\end{description}
+
+\paragraph{ED Prediction Model (\edmref{edmPM})}
+\begin{description}
+\item[Secrets:] The overall structure of the transformations used to produce a prediction from the numerical representation of the text.
+\item[Services:] Orchestrates and runs all the transformations that make up the prediction model.
+\item[Implemented By:] ed\_pred\_model.py
+\item[Type of Module:] Library
+\end{description}
+
+\paragraph{ED Transformation 1...n (\edmref{edmTrans})}
+\begin{description}
+\item[Note:] Currently represents multiple modules, when a clearer picture of what structure the eating disorder pipeline will take on is reached this will be updated and expanded into multiple specific transformations
+\item[Secrets:] What transformations are used to produce a prediction from the numerical representation of the text.
+\item[Services:] Provides a routine for transforming numerical data from one form to another.
+\item[Implemented By:] ed\_transformation1...n.py
+\item[Type of Module:] Library
+\end{description}
+
+\subsubsection{ETC (\mref{?})}
 \begin{description}
 \item[Secrets:] The design decision based on mathematical theorems, physical
   facts, or programming considerations. The secrets of this module are
@@ -291,10 +406,8 @@ to be implemented.
   do not provide direct interaction with the user. 
   % Changes in these modules are more likely to be motivated by a desire to
   % improve performance than by externally imposed changes.
-\item[Implemented By:] --
+\item[Implemented By:] Natural Language Processing for Mental Health Risk Prevention
 \end{description}
-
-\subsubsection{Etc.}
 
 \section{Traceability Matrix} \label{SecTM}
 
@@ -309,17 +422,21 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-R1 & \mref{mHH}, \mref{mInput}, \mref{mParams}, \mref{mControl}\\
-R2 & \mref{mInput}, \mref{mParams}\\
-R3 & \mref{mVerify}\\
-R4 & \mref{mOutput}, \mref{mControl}\\
-R5 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R6 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R7 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R8 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R9 & \mref{mVerifyOut}\\
-R10 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}\\
-R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
+T1FR-1 & \mref{m2}\\
+T1FR-2 & \mref{m2}\\
+T1FR-3 & \mref{m2}\\
+T2FR-1 & \mref{m3}\\
+T2FR-2 & \mref{m3}\\
+T2FR-3 & \mref{m3}\\
+T2FR-4 & \mref{m3}\\
+T3FR-1 & \edmref{edmI}\\
+T3FR-2 & \edmref{edmO}\\
+T3FR-3 & \edmref{edmO}\\
+GR1 & \mref{m2}, \mref{m3}, \edmref{edmI}, \edmref{edmO}\\
+GR2 & \mref{m2}, \mref{m3}, \edmref{edmO}\\
+SR1 & \mref{m2}, \mref{m3}, \edmref{edmO}\\
+SR2 & \mref{m2}, \mref{m3}, \edmref{edmO}\\
+
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
@@ -332,18 +449,24 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acHardware} & \mref{mHH}\\
-\acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
-\acref{acVerify} & \mref{mVerify}\\
-\acref{acOutput} & \mref{mOutput}\\
-\acref{acVerifyOut} & \mref{mVerifyOut}\\
-\acref{acODEs} & \mref{mODEs}\\
-\acref{acEnergy} & \mref{mEnergy}\\
-\acref{acControl} & \mref{mControl}\\
-\acref{acSeqDS} & \mref{mSeqDS}\\
-\acref{acSolver} & \mref{mSolver}\\
-\acref{acPlot} & \mref{mPlot}\\
+\acref{acInput} & \mref{mD}, \mref{mA}, \mref{mC}\\
+\acref{acOutput} & \mref{mD}, \mref{mA}, \mref{mC}\\
+\acref{acPipelineStages} & \mref{mD}, \mref{mA}, \mref{mC}\\
+\acref{acTokenization} & \mref{mD}, \mref{mA}, \mref{mC}\\
+\acref{acRepModel} & \mref{mD}, \mref{mA}, \mref{mC}\\
+\acref{acPredModel} & \mref{mD}, \mref{mA}, \mref{mC}\\
+\acref{acTrans} & \mref{mD}, \mref{mA}, \mref{mC}\\
+\acref{acOps} & \mref{mD}, \mref{mA}, \mref{mC}\\
+
+item[\refstepcounter{acnum} \actheacnum \label{acInput}:] What format the input data takes.
+\item[\refstepcounter{acnum} \actheacnum \label{acOutput}:] What format the output data takes.
+\item[\refstepcounter{acnum} \actheacnum \label{acPipelineStages}:] What stages there are in a task's NLP pipeline.
+\item[\refstepcounter{acnum} \actheacnum \label{acTokenization}:] How the raw text data is "cleaned" (see \ref{SecPipeline}: tokenizer).
+\item[\refstepcounter{acnum} \actheacnum \label{acRepModel}:] How the cleaned text data is converted into numerical data.
+\item[\refstepcounter{acnum} \actheacnum \label{acPredModel}:] How many manipulations of the numerical data are performed before producing a prediction.
+\item[\refstepcounter{acnum} \actheacnum \label{acTrans}:] How the numerical data is manipulated to produce predictions.
+\item[\refstepcounter{acnum} \actheacnum \label{acOps}:] How the system will integrate with the tools the operations team is developing.
+
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
@@ -369,6 +492,8 @@ because they use modules from the lower levels.
 \caption{Use hierarchy among modules}
 \label{FigUH}
 \end{figure}
+
+\section{Timeline}
 
 %\section*{References}
 
