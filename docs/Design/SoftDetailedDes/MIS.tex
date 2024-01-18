@@ -33,8 +33,8 @@ urlcolor=cyan          % color of external links
 
 \externaldocument{../../SRS/SRS}
 
-\input{../Comments}
-\input{../Common}
+\input{../../Comments}
+\input{../../Common}
 
 \begin{document}
 
@@ -53,7 +53,7 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-1/17/2024 & 1.0 & Initial Rev 0\\
+January 17, 2024 & 1.0 & Revision 0\\
 \bottomrule
 \end{tabularx}
 
@@ -61,13 +61,7 @@ urlcolor=cyan          % color of external links
 
 \section{Symbols, Abbreviations and Acronyms}
 
-See SRS Documentation at \url{https://github.com/MichaelBreau/nlp-mentalhealth}
-
-g - (Task 2) golden truth label \{0, 1\}
-
-d - (Task 2) system prediction label \{0, 1\}
-
-u - (Task 2) user u, member of set of Users (U)
+See SRS Documentation at \url{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}
 
 \newpage
 
@@ -105,10 +99,11 @@ The following table summarizes the primitive data types used by \progname.
 \textbf{Data Type} & \textbf{Notation} & \textbf{Description}\\ 
 \midrule
 character & char & a single symbol or digit\\
+list & $$[item, item,...]$$ & a list of objects of the same type\\
+dict & $<key: T, val: T>$ & a dictionary of key value pairs\\
 integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
 natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
-symbol & $\in$ & member of symbol\\
 \bottomrule
 \end{tabular} 
 \end{center}
@@ -127,26 +122,27 @@ The following table is taken directly from the Module Guide document for this pr
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
+\begin{tabular}{p{0.2\textwidth} p{0.3\textwidth} p{0.5\textwidth}}
 \toprule
-\textbf{Level 1} & \textbf{Level 2}\\
+\textbf{Level 1} & \textbf{Level 2} & \textbf{Level 3}\\
 \midrule
 
-{Hardware-Hiding} & ~ \\
+{Hardware-Hiding} & None \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding} & Input Parameters\\
-& Output Format\\
-& Output Verification\\
-& Temperature ODEs\\
-& Energy Equations\\ 
-& Control Module\\
-& Specification Parameters Module\\
+\multirow{3}{*}{Behaviour-Hiding} & \\ \cline{2-3}
+& \multirow{2}{*}{Eating Disorder IO} & ED Input\\
+& & ED Output\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision} & {Sequence Data Structure}\\
-& ODE Solver\\
-& Plotting\\
+\multirow{3}{*}{Software Decision} 
+& Depression Module\\
+& Anorexia Module\\ \cline{2-3}
+& \multirow{5}{*}{Eating Disorder Pipeline} & ED Pipeline Manager\\
+& & ED Tokenizer\\
+& & ED Representation Model\\
+& & ED Prediction Model\\
+& & ED Transformation 1...n (represents multiple modules)\\
 \bottomrule
 
 \end{tabular}
@@ -372,32 +368,28 @@ None
 
 \newpage
 
-\section{MIS for Measuring the Severity of the Signs of Eating Disorders} \label{Module} \wss{Use labels for
-  cross-referencing}
+\section{MIS for Measuring the Severity of the Signs of Eating Disorders} \label{Module}
 
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
-
-\subsection{Module}
-
-\wss{Short name for the module}
+\subsection{Module ed\_input}
 
 \subsection{Uses}
 
+None
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
 
+None
+
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{2cm} p{3cm} p{3cm} p{4cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+read\_file & $String$ & $Dict$ & $IncorrectFileFormat$ \\
 \hline
 \end{tabular}
 \end{center}
@@ -406,53 +398,350 @@ None
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+None
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+None
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+The input to read\_file will be a path to a file on the disk.
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent read\_file($pathaddress: String$):
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition: None
+\item output: $Dict\ of <username: String,\ posts: [post : String \vert post \in user's\ posts]>$
+\item exception: If the input file is not correctly formatted
 \end{itemize}
-
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
-
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+None
+
+
+\subsection{Module ed\_output}
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+write\_file & $Str,\ Dict$ & None & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The rest of the pipeline up to this point will produce a $Dict\ of\ <username: String,\ scores: [s_1, s_2, ..., s_{22}]>$ where $s_1, s_2, ..., s_{22}$ are the predicted scores for each of the eating disorder questionnaire's 22 questions
+
+\subsubsection{Access Routine Semantics}
+
+\noindent write\_file($file: Str,\ scores: Dict\ of\ <username: Str,\ scores: [s_1, s_2, ..., s_{22}]>$):
+\begin{itemize}
+\item transition: writes $scores$ to the file specified by $file$ where each line is of the format "username: s1, s2, ..., s22" for each user.
+\item output: None
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ed\_pipeline}
+
+\subsection{Uses}
+
+ed\_input, ed\_tokenizer, ed\_rep\_model, ed\_pred\_model, ed\_output
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+run\_pipeline & $Str,\ Str$ & None & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The first input to run\_pipeline is a path to a file on the disk
+
+\subsubsection{Access Routine Semantics}
+
+\noindent write\_file($in\_file: Str,\ out\_file: Str$):
+\begin{itemize}
+\item transition: calls ed\_input to read from $in\_file$, runs the full pipeline, and calls ed\_output to write user scores to $out\_file$.
+\item output: None
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ed\_tokenizer}
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+tokenize & $Str,\ [Bool]$ & $List\ of\ Str$ & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent write\_file($text: Str,\ options: List\ of\ Bool$):
+\begin{itemize}
+\item transition: None
+\item output: A list of words representing $text$ split by whitespace after $text$ is processed in a number of ways specified by $options$.
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ed\_rep\_model}
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+represent & $[Str],\ [Bool]$ & $[Float]$ & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The first input to represent will be the output of ed\_tokenizer: a processed list of the words in the input text split by whitespace.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent represent($text: List\ of\ Str,\ options: List\ of\ Bool$):
+\begin{itemize}
+\item transition: None
+\item output: A list of floats representing $text$ encoded by some method into a numerical format, the details of the conversion are specified by $options$.
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ed\_pred\_model}
+
+\subsection{Uses}
+
+ed\_transform
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{5cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+predict & $<Str, [Float]>,\ [Bool]$ & $<Str, [Float]>$ & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The first input to predict will be a dictionary of the outputs of ed\_rep\_model for each user.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent represent($user\_data: <username: text, representation: [Float]>,\ options: List\ of\ Bool$):
+\begin{itemize}
+\item transition: None
+\item output: A dictionary of $<username: String,\ scores: [s_1, s_2, ..., s_{22}]>$ where $s_1, s_2, ..., s_{22}$ are the predicted scores for each of the eating disorder questionnaire's 22 questions for each user $username$.
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ed\_transform}
+
+\subsection{Uses}
+
+ed\_transform
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{5cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+predict & $<Str, [Float]>,\ [Bool]$ & $<Str, [Float]>$ & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent represent($user\_data: <username: text, representation: [Float]>,\ options: List\ of\ Bool$):
+\begin{itemize}
+\item transition: None
+\item output: A dictionary of $<username: String,\ representation: [Float]>$ where each of the output's $representation$s is a transformation of the input $representation$s.
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
 
 \newpage
 
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References}
 
-\newpage
+\newpage    
 
 \section{Appendix} \label{Appendix}
-
-\subsection{Reflection} 
+\subsection{Reflection}
 
 \subsubsection{Limitations of the proposed solution.}
 One of the primary limitations recognized in our design is that the performance of the various risk detectors are all turtlenecked with the spread of training data available to them. This primarily being enforced by biases present in the data which may skew results incorrectly, a prominent issue with all projects that rely on artificial intelligence to help predict an outcome. This bias can present itself as a decreased effectiveness for variations in cultural and linguistic backgrounds of the analyzed user data.
@@ -461,6 +750,5 @@ Additionally, this ties into the overall limitation of the system of how this to
 
 \subsubsection{Benefits and trade-offs of other potential solutions.}
 Early in the design and planning process, the team experimented with the idea of using large language models similar to ChatGPT for diagnosis. This would allow us to leverage well documented and existing technologies in our efforts, providing a strong jumping off point for our workflow. Unfortunately, the team was able to soon discover research which showed that models like ChatGPT tend to draw undesirable parallels with their training data, resulting in the system unknowingly fabricating information in the input data which would provide incorrect results.
-
 
 \end{document}
