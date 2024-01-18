@@ -16,37 +16,28 @@ Non-Functional Requirements:
 - SR1: The system will be tested periodically to detect a potential lack of processing power.
 - SR2: Sensitive user data must not be present within the results generated.
 
-**Text Pre-Processing Component**
+**Task 1: Search for Symptoms of Depression Component**
 
 Functional Requirements:
 
-- FR-1: The system will divide text into individual units of words and or sub-words (Tokenization).
-- FR-2: The system will convert generated tokens into lowercase to preserve consistency.
-- FR-3: The system will remove stopword tokens (Common words that do not commonly have an effect on the meaning).
-- FR-4: The system will reduce tokens to their root forms (Ex: "moving" to "move").
+- T1FR-1: The system will be able to parse both xml and jsonl files.
+- T1FR-2: The system will rank input sentences from users based on their correlation to 21 depression symptoms from the beck depression index.
+- T1FR-3: The system will send the predictions to a txt file in the format "{symptom_number}, Q0, {sentence-id}, {position_in_ranking}, {score}, {system_name}".
 
-**Vectorization Component**
-
-Functional Requirements:
-
-- FR-5: The system will convert tokens into numerical vectors.
-
-**Model Component**
-
-Functional Requirements:
-- FR-6: The system will divide test data into train and test sets.
-- FR-7: The system will train the model using corresponding train data set.
-
-**Prediction Component**
+**Task 2: Early Detection of Signs of Anorexia Component**
 
 Functional Requirements:
 
-- FR-7: The system will make predictions using the vectorized tokens, the trained model, as well as with the created prediction algorithm.
+- T2FR-1: The system will be able to parse both xml and jsonl files.
+- T2FR-2: The system will make predictions given a set of a user's posts.
+- T2FR-3: The system will allow posts to be added to a user's set of posts and the system will update the prediction for that user.
+- T2FR-4: The system will send the predictions to a txt file in the format "{username} {prediction (0 or 1)}" with each entry being on a separate line.
 
-**Output Component**
+
+**Task 3: Measuring the Severity of the Signs of Eating Disorders Component**
 
 Functional Requirements:
 
-- FR-8: The system will produce output to a specified file with either a range of magnitude or a classification prediction.
-- FR-9: If the system is producing an output corresponding to a range of magnitude, it will satisfy the KPI ranges for MZOE and MAE.
-- FR-10: If the system is producing an output corresponding to a classification, it will satisfy the KPI range for F-score.
+- T3FR-1: The system will be able to parse both xml and jsonl files.
+- T3FR-2: The system will make predictions given a set of a user's posts.
+- T3FR-3: The system will send the predictions to a txt file in the format "{username} {prediction (0-6) for Q1} ... {prediction (0-6) for Q28}" with each entry being on a separate line.

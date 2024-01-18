@@ -53,8 +53,7 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+January 17, 2024 & 1.0 & Revision 0\\
 \bottomrule
 \end{tabularx}
 
@@ -62,9 +61,7 @@ Date 2 & 1.1 & Notes\\
 
 \section{Symbols, Abbreviations and Acronyms}
 
-See SRS Documentation at \wss{give url}
-
-\wss{Also add any additional symbols, abbreviations or acronyms}
+See SRS Documentation at \url{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}
 
 \newpage
 
@@ -77,16 +74,13 @@ See SRS Documentation at \wss{give url}
 \section{Introduction}
 
 The following document details the Module Interface Specifications for
-\wss{Fill in your project name and description}
+Natural Language Processing for Mental Health Risk Prediction 
 
 Complementary documents include the System Requirement Specifications
 and Module Guide.  The full documentation and implementation can be
-found at \url{...}.  \wss{provide the url for your repo}
+found at \url{https://github.com/MichaelBreau/nlp-mentalhealth}.
 
 \section{Notation}
-
-\wss{You should describe your notation.  You can use what is below as
-  a starting point.}
 
 The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
@@ -105,6 +99,8 @@ The following table summarizes the primitive data types used by \progname.
 \textbf{Data Type} & \textbf{Notation} & \textbf{Description}\\ 
 \midrule
 character & char & a single symbol or digit\\
+list & $$[item, item,...]$$ & a list of objects of the same type\\
+dict & $<key: T, val: T>$ & a dictionary of key value pairs\\
 integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
 natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
@@ -126,26 +122,27 @@ The following table is taken directly from the Module Guide document for this pr
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
+\begin{tabular}{p{0.2\textwidth} p{0.3\textwidth} p{0.5\textwidth}}
 \toprule
-\textbf{Level 1} & \textbf{Level 2}\\
+\textbf{Level 1} & \textbf{Level 2} & \textbf{Level 3}\\
 \midrule
 
-{Hardware-Hiding} & ~ \\
+{Hardware-Hiding} & None \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding} & Input Parameters\\
-& Output Format\\
-& Output Verification\\
-& Temperature ODEs\\
-& Energy Equations\\ 
-& Control Module\\
-& Specification Parameters Module\\
+\multirow{3}{*}{Behaviour-Hiding} & \\ \cline{2-3}
+& \multirow{2}{*}{Eating Disorder IO} & ED Input\\
+& & ED Output\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision} & {Sequence Data Structure}\\
-& ODE Solver\\
-& Plotting\\
+\multirow{3}{*}{Software Decision} 
+& Depression Module\\
+& Anorexia Module\\ \cline{2-3}
+& \multirow{5}{*}{Eating Disorder Pipeline} & ED Pipeline Manager\\
+& & ED Tokenizer\\
+& & ED Representation Model\\
+& & ED Prediction Model\\
+& & ED Transformation 1...n (represents multiple modules)\\
 \bottomrule
 
 \end{tabular}
@@ -156,32 +153,38 @@ The following table is taken directly from the Module Guide document for this pr
 \newpage
 ~\newpage
 
-\section{MIS of \wss{Module Name}} \label{Module} \wss{Use labels for
-  cross-referencing}
-
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
+\section{MIS for Search for Symptoms of Depression Module} \label{Module} 
 
 \subsection{Module}
 
-\wss{Short name for the module}
+Task 1 - Search for Symptoms of Depression for User Sentences 
+
 
 \subsection{Uses}
 
+Used to rank each input sentence by its correlation to a given depression symptom and returns the 1000 sentences with the highest correlation to said depression symptom. Each sentence will receive a level of correlation for each of the 21 given depression symptoms (totaling an output of 21,000 sentences). These results for user sentences will be tested against the results each user gave when filling out the BDI Questionnaire regarding there depression symptoms.
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
 
+None 
+
+
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{p{5cm} p{4.5cm} p{3cm} p{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+path\_address & String & String & - \\
+parse\_data & String & Dictionary & - \\
+filter\_sentences & Dictionary & Dictionary & - \\
+write\_top\_sentences & List, String & - & - \\ 
+detect\_depression\_symptom & String, String & Integer & - \\ 
+normalize\_symptom\_scores & Dictionary & List & - \\ 
+
 \hline
 \end{tabular}
 \end{center}
@@ -190,52 +193,562 @@ The following table is taken directly from the Module Guide document for this pr
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+None
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+None
 
 \subsubsection{Assumptions}
 
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+\begin{itemize}
+\item Data for each users sentences are in there own .trec file and the jsonl file acts as a master list of sentences containing all sentences across all users in one jsonl file.
+\item The users answered the BDI questionnaire honestly so we can take that data as being accurate when we use it. 
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent path\_address():
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition: None
+\item output: A string representing the address's of all trec files
+\item exception:  
 \end{itemize}
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
+\noindent parse\_data():
+\begin{itemize}
+\item transition: None
+\item output: A dictionary containing every sentence where the key is the sentence id and the value is the sentence itself.
+\item exception: None
+\end{itemize}
 
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
+\noindent filter\_sentences():
+\begin{itemize}
+\item transition: None
+\item output: A dictionary containing all sentences that were not filtered out by the filter function due to being deemed as low quality or irrelevant sentences for testing. The key for each dictionary entry is the sentence id and the value is the sentence itself.
+\item exception: None 
+\end{itemize}
+
+\noindent write\_top\_sentences():
+\begin{itemize}
+\item transition: None
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent detect\_depression\_symptom():
+\begin{itemize}
+\item transition: None
+\item output: A integer that represents the correlation of the inputted sentence to the inputted symptom.
+\item exception: 
+\end{itemize}
+
+\noindent normalize\_symptom\_scores():
+\begin{itemize}
+\item transition: None
+\item output: A list of lists where each inner array represents a sentence. The first element in the inner list is the sentence id and the second is the score for the given depression symptom from 1-10. The outputted list of lists will be sorted by there depression symptom score from highest to lowest.
+\item exception: 
+\end{itemize}
+
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+None
+
+\newpage
+
+\section{MIS for Early Detection of Signs of Anorexia Module} \label{Module} 
+
+\subsection{Module}
+
+Task 2 - Early Detection of Signs of Anorexia using User Posts
+
+\subsection{Uses}
+
+Used for predicting early signs of anorexia using aggregates of user posts trained on data from users who were to known to not have or have anorexia symptoms.
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3.5cm} p{4.5cm} p{3cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+pathaddress & String & String & - \\
+parsedata & String & Dictionary & - \\
+goldentruth & String & Dictionary & - \\
+bert & Dictionary & List, List & - \\
+predictor & List, List & Dictionary & - \\
+calculateaccuracy & Dictionary, Dictionary & None & - \\
+gettopicdistribution & List, List & None & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item Data from user posts are in an xml file and the ground truth file is in a txt file and are present in the current working directory.
+\item The model is trained on accurate data with correctly linked user-truth values.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent pathaddress():
+\begin{itemize}
+\item transition: None
+\item output: The path address for the data files
+\item exception: None
+\end{itemize}
+
+\noindent parsedata():
+\begin{itemize}
+\item transition: None
+\item output: Dictionary with usernames as keys connected to a list of strings containing user posts
+\item exception: None
+\end{itemize}
+
+\noindent goldentruth():
+\begin{itemize}
+\item transition: None
+\item output: Dictionary with usernames as keys connected to an integer representing their anorexia status (0 or 1)
+\item exception: None
+\end{itemize}
+
+\noindent bert():
+\begin{itemize}
+\item transition: None
+\item output: List 1: List of usernames, List 2: List of topics generated from the bertopic model with the indexes corresponding to the usernames from the first list
+\item exception: None
+\end{itemize}
+
+\noindent predictor():
+\begin{itemize}
+\item transition: None
+\item output: Dictionary with usernames as keys and the predicted 0 or 1 integer linked
+\item exception: None
+\end{itemize}
+
+\noindent calculateaccuracy():
+\begin{itemize}
+\item transition: None
+\item output: Accuracy scores comparing golden truth to predictor values
+\[ Precision (P) = \frac{|u \in U: d = g = 1|}{|u \in U: d = 1|} \]
+\[ Recall (R) = \frac{|u \in U: d = g = 1|}{|u \in U: g = 1|} \]
+\[ F-Score (F) = \frac{2*P*R}{P+R} \]
+\item exception: None
+\end{itemize}
+
+\noindent gettopicdistribution():
+\begin{itemize}
+\item transition: None
+\item output: List with index representing the topic distribution of users with sepperation into golden truth of 0 and 1s
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{MIS for Measuring the Severity of the Signs of Eating Disorders} \label{Module}
+
+\subsection{Module ed\_input}
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{3cm} p{3cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+read\_file & $String$ & $Dict$ & $IncorrectFileFormat$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The input to read\_file will be a path to a file on the disk.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent read\_file($pathaddress: String$):
+\begin{itemize}
+\item transition: None
+\item output: $Dict\ of <username: String,\ posts: [post : String \vert post \in user's\ posts]>$
+\item exception: If the input file is not correctly formatted
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ed\_output}
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+write\_file & $Str,\ Dict$ & None & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The rest of the pipeline up to this point will produce a $Dict\ of\ <username: String,\ scores: [s_1, s_2, ..., s_{22}]>$ where $s_1, s_2, ..., s_{22}$ are the predicted scores for each of the eating disorder questionnaire's 22 questions
+
+\subsubsection{Access Routine Semantics}
+
+\noindent write\_file($file: Str,\ scores: Dict\ of\ <username: Str,\ scores: [s_1, s_2, ..., s_{22}]>$):
+\begin{itemize}
+\item transition: writes $scores$ to the file specified by $file$ where each line is of the format "username: s1, s2, ..., s22" for each user.
+\item output: None
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ed\_pipeline}
+
+\subsection{Uses}
+
+ed\_input, ed\_tokenizer, ed\_rep\_model, ed\_pred\_model, ed\_output
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+run\_pipeline & $Str,\ Str$ & None & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The first input to run\_pipeline is a path to a file on the disk
+
+\subsubsection{Access Routine Semantics}
+
+\noindent write\_file($in\_file: Str,\ out\_file: Str$):
+\begin{itemize}
+\item transition: calls ed\_input to read from $in\_file$, runs the full pipeline, and calls ed\_output to write user scores to $out\_file$.
+\item output: None
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ed\_tokenizer}
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+tokenize & $Str,\ [Bool]$ & $List\ of\ Str$ & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent write\_file($text: Str,\ options: List\ of\ Bool$):
+\begin{itemize}
+\item transition: None
+\item output: A list of words representing $text$ split by whitespace after $text$ is processed in a number of ways specified by $options$.
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ed\_rep\_model}
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+represent & $[Str],\ [Bool]$ & $[Float]$ & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The first input to represent will be the output of ed\_tokenizer: a processed list of the words in the input text split by whitespace.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent represent($text: List\ of\ Str,\ options: List\ of\ Bool$):
+\begin{itemize}
+\item transition: None
+\item output: A list of floats representing $text$ encoded by some method into a numerical format, the details of the conversion are specified by $options$.
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ed\_pred\_model}
+
+\subsection{Uses}
+
+ed\_transform
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{5cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+predict & $<Str, [Float]>,\ [Bool]$ & $<Str, [Float]>$ & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The first input to predict will be a dictionary of the outputs of ed\_rep\_model for each user.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent represent($user\_data: <username: text, representation: [Float]>,\ options: List\ of\ Bool$):
+\begin{itemize}
+\item transition: None
+\item output: A dictionary of $<username: String,\ scores: [s_1, s_2, ..., s_{22}]>$ where $s_1, s_2, ..., s_{22}$ are the predicted scores for each of the eating disorder questionnaire's 22 questions for each user $username$.
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ed\_transform}
+
+\subsection{Uses}
+
+ed\_transform
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{5cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+predict & $<Str, [Float]>,\ [Bool]$ & $<Str, [Float]>$ & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent represent($user\_data: <username: text, representation: [Float]>,\ options: List\ of\ Bool$):
+\begin{itemize}
+\item transition: None
+\item output: A dictionary of $<username: String,\ representation: [Float]>$ where each of the output's $representation$s is a transformation of the input $representation$s.
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
 
 \newpage
 
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References}
 
-\newpage
+\newpage    
 
 \section{Appendix} \label{Appendix}
+\subsection{Reflection}
 
-\wss{Extra information if required}
+\subsubsection{Limitations of the proposed solution.}
+One of the primary limitations recognized in our design is that the performance of the various risk detectors are all turtlenecked with the spread of training data available to them. This primarily being enforced by biases present in the data which may skew results incorrectly, a prominent issue with all projects that rely on artificial intelligence to help predict an outcome. This bias can present itself as a decreased effectiveness for variations in cultural and linguistic backgrounds of the analyzed user data.
+
+Additionally, this ties into the overall limitation of the system of how this tool is intended to be assistive and supplementary to trained mental health professionals, it is not meant to be the sole source of a diagnosis. Biases and limitations of the code structure will always offer an amount of machine error, which is why this program is to be used under the guidance of professionals who can help corroborate the results using their situation context and emotional intelligence, an ability that cannot ever truly be given to a computer.  
+
+\subsubsection{Benefits and trade-offs of other potential solutions.}
+Early in the design and planning process, the team experimented with the idea of using large language models similar to ChatGPT for diagnosis. This would allow us to leverage well documented and existing technologies in our efforts, providing a strong jumping off point for our workflow. Unfortunately, the team was able to soon discover research which showed that models like ChatGPT tend to draw undesirable parallels with their training data, resulting in the system unknowingly fabricating information in the input data which would provide incorrect results.
 
 \end{document}
