@@ -52,8 +52,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+January 17, 2024 & 1.0 & Revision 0\\
 \bottomrule
 \end{tabularx}
 
@@ -78,9 +77,7 @@ This section records information for easy reference.
   R & Requirement\\
   SC & Scientific Computing \\
   SRS & Software Requirements Specification\\
-  \progname & Explanation of program name\\
   UC & Unlikely Change \\
-  \wss{etc.} & \wss{...}\\
   \bottomrule
 \end{tabular}\\
 
@@ -219,7 +216,6 @@ This section provides an overview of the module design. Modules are summarized
 in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed
 below, which are leaves in the hierarchy tree, are the modules that will
 actually be implemented. As the details of the NLP pipelines are not as of yet determined some modules are left quite general and vague (ie. how many transformation modules will be used, what representation models will be used, etc.).
-
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
 \item [\refstepcounter{mnum} \mthemnum \label{m2}:] Search for Symptoms of Depression Module
@@ -236,7 +232,7 @@ actually be implemented. As the details of the NLP pipelines are not as of yet d
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{p{0.2\textwidth} p{0.3\textwidth} p{0.5\textwidth}}
+\begin{tabular}{p{0.2\textwidth} p{0.3\textwidth} p{0.4\textwidth}}
 \toprule
 \textbf{Level 1} & \textbf{Level 2} & \textbf{Level 3}\\
 \midrule
@@ -263,6 +259,8 @@ actually be implemented. As the details of the NLP pipelines are not as of yet d
 \caption{Module Hierarchy}
 \label{TblMH}
 \end{table}
+
+\newpage
 
 \section{Connection Between Requirements and Design} \label{SecConnection}
 
@@ -332,6 +330,7 @@ to be implemented.
 \item[Type of Module:] Library
 \end{description}
 
+\subsection{Software Decision Module}
 \subsubsection{Search for Symptoms of Depression Module (\mref{m2})}
 \begin{description}
 \item[Secrets:]The format and structures of detecting symptoms of depression data objects.
@@ -339,8 +338,6 @@ to be implemented.
 \item[Implemented By:] Natural Language Processing for Mental Health Risk Prevention
 \end{description}
 
-
-\subsection{Software Decision Module}
 \subsubsection{Early Risk Detection for Symptoms of Anorexia Module (\mref{m3})}
 \begin{description}
 \item[Secrets:] The Natural Language processor which will analyze inputted user data to determine a risk for anorexia
@@ -397,18 +394,6 @@ to be implemented.
 \item[Type of Module:] Library
 \end{description}
 
-\subsubsection{ETC (\mref{?})}
-\begin{description}
-\item[Secrets:] The design decision based on mathematical theorems, physical
-  facts, or programming considerations. The secrets of this module are
-  \emph{not} described in the SRS.
-\item[Services:] Includes data structure and algorithms used in the system that
-  do not provide direct interaction with the user. 
-  % Changes in these modules are more likely to be motivated by a desire to
-  % improve performance than by externally imposed changes.
-\item[Implemented By:] Natural Language Processing for Mental Health Risk Prevention
-\end{description}
-
 \section{Traceability Matrix} \label{SecTM}
 
 This section shows two traceability matrices: between the modules and the
@@ -449,23 +434,14 @@ SR2 & \mref{m2}, \mref{m3}, \edmref{edmO}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acInput} & \mref{mD}, \mref{mA}, \mref{mC}\\
-\acref{acOutput} & \mref{mD}, \mref{mA}, \mref{mC}\\
-\acref{acPipelineStages} & \mref{mD}, \mref{mA}, \mref{mC}\\
-\acref{acTokenization} & \mref{mD}, \mref{mA}, \mref{mC}\\
-\acref{acRepModel} & \mref{mD}, \mref{mA}, \mref{mC}\\
-\acref{acPredModel} & \mref{mD}, \mref{mA}, \mref{mC}\\
-\acref{acTrans} & \mref{mD}, \mref{mA}, \mref{mC}\\
-\acref{acOps} & \mref{mD}, \mref{mA}, \mref{mC}\\
-
-item[\refstepcounter{acnum} \actheacnum \label{acInput}:] What format the input data takes.
-\item[\refstepcounter{acnum} \actheacnum \label{acOutput}:] What format the output data takes.
-\item[\refstepcounter{acnum} \actheacnum \label{acPipelineStages}:] What stages there are in a task's NLP pipeline.
-\item[\refstepcounter{acnum} \actheacnum \label{acTokenization}:] How the raw text data is "cleaned" (see \ref{SecPipeline}: tokenizer).
-\item[\refstepcounter{acnum} \actheacnum \label{acRepModel}:] How the cleaned text data is converted into numerical data.
-\item[\refstepcounter{acnum} \actheacnum \label{acPredModel}:] How many manipulations of the numerical data are performed before producing a prediction.
-\item[\refstepcounter{acnum} \actheacnum \label{acTrans}:] How the numerical data is manipulated to produce predictions.
-\item[\refstepcounter{acnum} \actheacnum \label{acOps}:] How the system will integrate with the tools the operations team is developing.
+\acref{acInput} & \mref{m2}, \mref{m3}, \edmref{edmI}\\
+\acref{acOutput} & \mref{m2}, \mref{m3}, \edmref{edmO}\\
+\acref{acPipelineStages} & \mref{m2}, \mref{m3}, \edmref{edmPipeline}\\
+\acref{acTokenization} & \mref{m2}, \mref{m3}, \edmref{edmToken}\\
+\acref{acRepModel} & \mref{m2}, \mref{m3}, \edmref{edmRM}\\
+\acref{acPredModel} & \mref{m2}, \mref{m3}, \edmref{edmPM}\\
+\acref{acTrans} & \mref{m2}, \mref{m3}, \edmref{edmTrans}\\
+\acref{acOps} & \mref{m2}, \mref{m3}\\
 
 \bottomrule
 \end{tabular}
@@ -494,6 +470,20 @@ because they use modules from the lower levels.
 \end{figure}
 
 \section{Timeline}
+
+\begin{itemize}
+    \item Module: \edmref{edmI} Finish Date: Jan 20 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmO} Finish Date: Jan 22 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmPipeline} Finish Date: Jan 24 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmToken} Finish Date: Jan 26 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmRM} Finish Date: Jan 28 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmPM} Finish Date: Jan 28 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmTrans} Finish Date: Feb 1 2024 Assignee(s): Jessica
+    \item Module: \mref{m2} Finish Date: Feb 1 2024 Assignee(s): Franklin, Matthew
+    \item Module: \mref{m3} Finish Date: Feb 1 2024 Assignee(s): Michael, Ben
+    \item Module: \mref{mHH} Finish Date: Feb 1 2024 Assignee(s): All
+    \item Testing: All Modules Finish Date: Feb 4 2024 Assignee(s): All
+\end{itemize}
 
 %\section*{References}
 
