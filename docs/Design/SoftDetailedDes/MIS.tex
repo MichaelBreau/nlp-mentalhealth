@@ -33,8 +33,8 @@ urlcolor=cyan          % color of external links
 
 \externaldocument{../../SRS/SRS}
 
-\input{../../Comments}
-\input{../../Common}
+\input{../Comments}
+\input{../Common}
 
 \begin{document}
 
@@ -77,11 +77,11 @@ See SRS Documentation at \wss{give url}
 \section{Introduction}
 
 The following document details the Module Interface Specifications for
-\wss{Fill in your project name and description}
+Natural Language Processing for Mental Health Risk Prediction 
 
 Complementary documents include the System Requirement Specifications
 and Module Guide.  The full documentation and implementation can be
-found at \url{...}.  \wss{provide the url for your repo}
+found at \url{https://github.com/MichaelBreau/nlp-mentalhealth}.
 
 \section{Notation}
 
@@ -156,7 +156,226 @@ The following table is taken directly from the Module Guide document for this pr
 \newpage
 ~\newpage
 
-\section{MIS of \wss{Module Name}} \label{Module} \wss{Use labels for
+\section{MIS for Search for Symptoms of Depression Module} \label{Module} 
+
+\subsection{Module}
+
+Task 1 - Search for Symptoms of Depression for User Sentences 
+
+
+\subsection{Uses}
+
+Used to rank each input sentence by its correlation to a given depression symptom and returns the 1000 sentences with the highest correlation to said depression symptom. Each sentence will receive a level of correlation for each of the 21 given depression symptoms (totaling an output of 21,000 sentences). These results for user sentences will be tested against the results each user gave when filling out the BDI Questionnaire regarding there depression symptoms.
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None 
+
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{5cm} p{4.5cm} p{3cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+path\_address & String & String & - \\
+parse\_data & String & Dictionary & - \\
+filter\_sentences & Dictionary & Dictionary & - \\
+write\_top\_sentences & List, String & - & - \\ 
+detect\_depression\_symptom & String, String & Integer & - \\ 
+normalize\_symptom\_scores & Dictionary & List & - \\ 
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item Data for each users sentences are in there own .trec file and the jsonl file acts as a master list of sentences containing all sentences across all users in one jsonl file.
+\item The users answered the BDI questionnaire honestly so we can take that data as being accurate when we use it. 
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent path\_address():
+\begin{itemize}
+\item transition: None
+\item output: A string representing the address's of all trec files
+\item exception:  
+\end{itemize}
+
+\noindent parse\_data():
+\begin{itemize}
+\item transition: None
+\item output: A dictionary containing every sentence where the key is the sentence id and the value is the sentence itself.
+\item exception: None
+\end{itemize}
+
+\noindent filter\_sentences():
+\begin{itemize}
+\item transition: None
+\item output: A dictionary containing all sentences that were not filtered out by the filter function due to being deemed as low quality or irrelevant sentences for testing. The key for each dictionary entry is the sentence id and the value is the sentence itself.
+\item exception: None 
+\end{itemize}
+
+\noindent write\_top\_sentences():
+\begin{itemize}
+\item transition: None
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent detect\_depression\_symptom():
+\begin{itemize}
+\item transition: None
+\item output: A integer that represents the correlation of the inputted sentence to the inputted symptom.
+\item exception: 
+\end{itemize}
+
+\noindent normalize\_symptom\_scores():
+\begin{itemize}
+\item transition: None
+\item output: A list of lists where each inner array represents a sentence. The first element in the inner list is the sentence id and the second is the score for the given depression symptom from 1-10. The outputted list of lists will be sorted by there depression symptom score from highest to lowest.
+\item exception: 
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{MIS for Early Detection of Signs of Anorexia Module} \label{Module} 
+
+\subsection{Module}
+
+Task 2 - Early Detection of Signs of Anorexia using User Posts
+
+\subsection{Uses}
+
+Used for predicting early signs of anorexia using aggregates of user posts trained on data from users who were to known to not have or have anorexia symptoms.
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3.5cm} p{4.5cm} p{3cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+pathaddress & String & String & - \\
+parsedata & String & Dictionary & - \\
+goldentruth & String & Dictionary & - \\
+bert & Dictionary & List, List & - \\
+predictor & List, List & Dictionary & - \\
+calculateaccuracy & Dictionary, Dictionary & None & - \\
+gettopicdistribution & List, List & None & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item Data from user posts are in an xml file and the ground truth file is in a txt file and are present in the current working directory.
+\item The model is trained on accurate data with correctly linked user-truth values.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent pathaddress():
+\begin{itemize}
+\item transition: \wss{if appropriate} 
+\item output: \wss{if appropriate} 
+\item exception: \wss{if appropriate} 
+\end{itemize}
+
+\noindent parsedata():
+\begin{itemize}
+\item transition: \wss{if appropriate} 
+\item output: \wss{if appropriate} 
+\item exception: \wss{if appropriate} 
+\end{itemize}
+
+\noindent goldentruth():
+\begin{itemize}
+\item transition: \wss{if appropriate} 
+\item output: \wss{if appropriate} 
+\item exception: \wss{if appropriate} 
+\end{itemize}
+
+\noindent bert():
+\begin{itemize}
+\item transition: \wss{if appropriate} 
+\item output: \wss{if appropriate} 
+\item exception: \wss{if appropriate} 
+\end{itemize}
+
+\noindent predictor():
+\begin{itemize}
+\item transition: \wss{if appropriate} 
+\item output: \wss{if appropriate} 
+\item exception: \wss{if appropriate} 
+\end{itemize}
+
+\noindent calculateaccuracy():
+\begin{itemize}
+\item transition: \wss{if appropriate} 
+\item output: \wss{if appropriate} 
+\item exception: \wss{if appropriate} 
+\end{itemize}
+
+\noindent gettopicdistribution():
+\begin{itemize}
+\item transition: \wss{if appropriate} 
+\item output: \wss{if appropriate} 
+\item exception: \wss{if appropriate} 
+\end{itemize}
+
+\wss{A module without environment variables or state variables is unlikely to
+  have a state transition.  In this case a state transition can only occur if
+  the module is changing the state of another module.}
+
+\wss{Modules rarely have both a transition and an output.  In most cases you
+  will have one or the other.}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{MIS for Measuring the Severity of the Signs of Eating Disorders} \label{Module} \wss{Use labels for
   cross-referencing}
 
 \wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
