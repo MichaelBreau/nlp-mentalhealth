@@ -74,14 +74,14 @@ The purpose of this hazard analysis is to identify potential risks to stakeholde
 \section{System Boundaries and Components}
 
 The system that the hazard analysis with be conducted on consists of:
+
 \begin{enumerate}
 	\item The system's security/ethical aspects which consist of the following:
 	      \begin{itemize}
-		      \item Data ingestion component
-		      \item Data processing component
-		      \item Algorithm bias feature
-		      \item Data protection component
-		      \item Accuracy of model prediction component
+              \item\textbf{Data ingestion component: } Functions as a data creation process that comprises of gathering, preparing and loading raw data into the system for futher processing. The data ingestion component is a crucial element when it comes to making different, irregular looking, and unstructured raw data efficient for the use of NLP tasks.
+		      \item \textbf{Data processing component} Converts the raw data gathered from the data ingestion component to a format that could be processed by other NLP algorithms and models.
+		      \item \textbf{Data protection component} Implementation of appropriate controls in securing sensitive information available as data through text processing.
+		      \item \textbf{Accuracy of model prediction component} This component will assess the accuracy by comparing the generated result to a golden truth values (if exists).
 	      \end{itemize}
 	The major concern of this system is the security of user data provided by E-Risk. It must be known that data leaks from the system would be a potential hazard to these users. Data ingestion, processing, protection components of the system must be analyzed. 
 \end{enumerate}
