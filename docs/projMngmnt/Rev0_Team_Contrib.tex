@@ -75,7 +75,7 @@ This data represents the number of commits to both the Document Repository and t
 \midrule
 Total & 75 & 100\% \\
 Benjamin Chinnery & 8 & 11\%\\
-Micheal Breau & 39 & 52\%\\
+Michael Breau & 39 & 52\%\\
 Jessica Dawson & 3 & 4\%\\
 Matthew Curtis & 13 & 17\%\\
 Yaruo Tian & 12 & 16\%\\
@@ -90,10 +90,6 @@ Finally, certain efforts from team members may not be sufficiently displayed, if
 
 
 \section{Issue Tracker}
-
-\wss{For each team member how many issues have they authored (including open and
-closed issues) and how many have they been assigned (only counting closed
-issues).}
 
 \begin{table}[H]
 \centering
@@ -114,6 +110,12 @@ These numbers are determined using the issue tracker's filter function.
 
 \section{CICD}
 
-\wss{Say how CICD is used in your project}
+The team's work has been divided into two repositories, the capstone repository with all the documentation and the code repository with all the code for the project and both have different CICD pipelines.
+
+Capstone Repository: Main and dev branches are protected and requires a reviewer to accept changes before merging into dev/main branch.
+
+Code Repository: Github actions setup for pylint checking of all python files. Unit testing will be added soon (at the time of writing this it has not been implemented but it is likely to be added for rev 0).
+
+
 
 \end{document}
