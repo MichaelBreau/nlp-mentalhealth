@@ -110,6 +110,10 @@ These numbers are determined using the issue tracker's filter function.
 
 \section{CICD}
 
-\wss{Say how CICD is used in your project}
+The team's work has been divided into two repositories, the capstone repository with all the documentation and the code repository with all the code for the project and both have different CICD pipelines.
+
+Capstone Repository: Main and dev branches are protected and requires a reviewer to accept changes before merging into dev/main branch.
+
+Code Repository: Github actions setup for pylint checking of all python files. Unit testing will be added soon (at the time of writing this it has not been implemented but it is likely to be added for rev 0).
 
 \end{document}
