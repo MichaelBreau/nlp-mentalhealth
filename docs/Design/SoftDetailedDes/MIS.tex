@@ -136,8 +136,11 @@ The following table is taken directly from the Module Guide document for this pr
 \midrule
 
 \multirow{3}{*}{Software Decision} 
-& Depression Module\\
-& Anorexia Module\\ \cline{2-3}
+& Depression Module\\ \cline{2-3}
+& \multirow{4}{*}{Anorexia Pipeline} & Anorexia Main\\ 
+& & Anorexia Parser\\
+& & Anorexia Training\\
+& & Anorexia Predictor\\ \cline{2-3}
 & \multirow{5}{*}{Eating Disorder Pipeline} & ED Pipeline Manager\\
 & & ED Tokenizer\\
 & & ED Representation Model\\
@@ -259,13 +262,61 @@ None
 
 \section{MIS for Early Detection of Signs of Anorexia Module} \label{Module} 
 
-\subsection{Module}
+\subsection{anorexia\_main}
 
-Task 2 - Early Detection of Signs of Anorexia using User Posts
+Task 2 - Early Detection of Signs of Anorexia using User Posts - Main Module
 
 \subsection{Uses}
 
-Used for predicting early signs of anorexia using aggregates of user posts trained on data from users who were to known to not have or have anorexia symptoms.
+Used for combining the various module functionalities in a pipeline format
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3.5cm} p{4.5cm} p{3cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+N/A & N/A & N/A & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+None
+
+\subsubsection{Local Functions}
+
+None
+
+\subsection{anorexia\_parser}
+
+Task 2 - Early Detection of Signs of Anorexia using User Posts - Parser Module
+
+\subsection{Uses}
+
+Used for parsing user posts and golden truth files
 
 \subsection{Syntax}
 
@@ -283,10 +334,6 @@ None
 pathaddress & String & String & - \\
 parsedata & String & Dictionary & - \\
 goldentruth & String & Dictionary & - \\
-bert & Dictionary & List, List & - \\
-predictor & List, List & Dictionary & - \\
-calculateaccuracy & Dictionary, Dictionary & None & - \\
-gettopicdistribution & List, List & None & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -305,7 +352,6 @@ None
 
 \begin{itemize}
 \item Data from user posts are in an xml file and the ground truth file is in a txt file and are present in the current working directory.
-\item The model is trained on accurate data with correctly linked user-truth values.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
@@ -331,6 +377,56 @@ None
 \item exception: None
 \end{itemize}
 
+\subsubsection{Local Functions}
+
+None
+
+\subsection{anorexia\_training}
+
+Task 2 - Early Detection of Signs of Anorexia using User Posts - Training Module
+
+\subsection{Uses}
+
+Used for training bertopic model on parsed data using golden truth values
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3.5cm} p{4.5cm} p{3cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+bert & Dictionary & List, List & - \\
+predictor & List, List & Dictionary & - \\
+calculateaccuracy & Dictionary, Dictionary & None & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+\item The model is trained on accurate data with correctly linked user-truth values.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+
 \noindent bert():
 \begin{itemize}
 \item transition: None
@@ -355,10 +451,56 @@ None
 \item exception: None
 \end{itemize}
 
-\noindent gettopicdistribution():
+\subsubsection{Local Functions}
+
+None
+
+\subsection{anorexia\_predictor}
+
+Task 2 - Early Detection of Signs of Anorexia using User Posts - Predictor Module
+
+\subsection{Uses}
+
+Used for predicting new documents unseen by training
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3.5cm} p{4.5cm} p{3cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+predict\_new & String & Integer & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent predict\_new():
 \begin{itemize}
 \item transition: None
-\item output: List with index representing the topic distribution of users with sepperation into golden truth of 0 and 1s
+\item output: Integer 0 or 1 corresponding to the model prediction of anorexia negative or positive 
 \item exception: None
 \end{itemize}
 
