@@ -65,14 +65,183 @@ Date 2 & 1.1 & Notes\\
 This document ...
 
 \section{Functional Requirements Evaluation}
+\subsection{Task 1}
+
+\begin{enumerate}
+\item \textbf{FRT-T1-1}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 1 system yet, input data as jsonl files are available
+
+Input: The Task 1 Input data
+
+Output: The system will extract required sentences from the jsonl files and output data that is appropriate to be fed into Task 1.
+
+Test Case Derivation: The system will receive its input data, process then parse according to the Task's input format.
+
+How test will be performed: The tester will run the parser with the given jsonl files as input and compare the parsed data.
+
+Results: Passed
+
+\item \textbf{FRT-T1-2}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 1 system yet, past years input data, training data, and golden truth values are available
+
+Input: The Task 1 Training Data, Input data, and Golden Truth Values from a past year eRisk Competition
+
+Output: The system will output sentence ranking and diagnostic metrics based on the input data. 
+
+Test Case Derivation: The system will receive its training data and input data corresponding to a prior year. It's analysis will output RP and NDCG accuracy metrics.
+
+How test will be performed: The system should derive its training data and feature sets based on correlation to 21 depression symptoms of beck depression index. The outputted metrics will be compared to golden truth data to ensure the accuracy is within the desired bounds and is improving on prior year implementation.
+
+Results: Passed
+
+\item \textbf{FRT-T1-3}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 1 system yet, input data is available
+
+Input: The Task 1 Input data
+
+Output: The system will output sentence ranking and diagnostic metrics based on the input data to a txt file.
+
+Test Case Derivation: The system will make an analysis based off the provided input data and return each prediction to a test file in a specified formatting.
+
+How test will be performed: The system's output txt file will be verified that each entry is on its own line in the format "\{symptom\_number\}, Q0, \{sentence-id\}, \{position\_in\_ranking\}, \{score\}, \{system\_name\}".
+
+Results: Passed
+
+\end{enumerate}
+
+\subsection{Task 2}
+
+ \begin{enumerate}
+ 
+ \item \textbf{FRT-T2-1}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 2 system yet, input data is available
+
+Input: The Task 2 Input data consisting of user posts
+
+Output: The system will output sentence ranking and diagnostic metrics based on the input data to a txt file.
+
+Test Case Derivation: The system will make an analysis based off the provided input data and return each prediction to a test file in a specified formatting.
+
+How test will be performed: The system's output txt file will be verified that each entry is on its own line in the format "\{Username\} \{prediction\}".
+
+Results: Passed
+
+ \item \textbf{FRT-T2-2}
+ Control: Automatic
+
+Initial State: The task 2 system has received input data on a given individual and made a corresponding prediction.
+
+Input: More data corresponding to the same user analyzed in the input state.
+
+Output: The system will output an updated prediction taking into account all data provided.
+
+Test Case Derivation: The system should create a new prediction for the chosen user taking into account all data provided.
+
+How test will be performed: The system should provide a prediction based off the original data input, after receiving new data, the system should combine posts made by the same user to create a new prediction. 
+
+Results: Passed
+ \end{enumerate}
+
+ \subsection{Task 3}
+ \begin{enumerate}
+     \item 
+ \end{enumerate}
 
 \section{Nonfunctional Requirements Evaluation}
 
-\subsection{Usability}
-		
-\subsection{Performance}
+\subsection{Usability Requirements}
 
-\subsection{etc.}
+\begin{enumerate}
+
+\item \textbf{NFRT-U-1}
+    
+Type: Dynamic, Manual
+    					
+Initial State: System is completed and trained
+    					https://www.overleaf.com/project/6549512c2dfdbe59123ef8bb/doc/65dfbe7e3ce527bbcf232fcb/download
+Input/Condition: The system will be ran on a Windows desktop/laptop and macOS desktop/laptop device with the correct environment setup
+    					
+Output/Result: The system should generate an expected result 
+    					
+How test will be performed: After setting up the environment on to both macOS and Windows machines, the system will be ran on both environment with the same command. Test will pass as long as an expected result is generated from both machines.
+
+Results: Passed
+    
+\end{enumerate}
+		
+\subsection{Safety and Security Requirements}
+
+\begin{enumerate}
+
+\item \textbf{NFRT-SS-1}
+
+Type: Dynamic, Manual
+					
+Initial State: The system is completed and trained 
+					
+Input/Condition: The system will be ran on the developer's computer
+					
+Output/Result: The generated result should not overuse the processing power of the developer's computer
+					
+How test will be performed: CPU, GPU, RAM and live power usage will be monitored while running the software. Usage of all aspects should not increase more than 20 percent.   
+
+Results: Passed
+					
+\end{enumerate}
+
+
+\begin{enumerate}
+
+\item \textbf{NFRT-SS-2}
+	
+Type: Automatic, Dynamic
+						
+Initial State: The system has been trained and is awaiting data to form predictions on.
+						
+Input/Condition: A set of data that the system can predict on.
+						
+Output/Result: The resulting predictions, in a form where no sensitive data from the input is present in the output.
+	
+Test Case Derivation: Sensitive in this case refers to the post history of the subjects eRisk provides as training and test data. If these posts can be reconstructed from any part of our system outputs it is possible the identity of the individual could be discovered. This represents an unacceptable breach of privacy and can not happen.
+						
+How test will be performed: After the system has produced it's predictions a script will be run that takes all posts in the input data, forms a string out of all consecutive three word triplets (ie. "hello my good friend" forms "hello my good" and "my good friend"), both with and without processing (removal of stopwords, punctuation, etc.), and scans the output to ensure that none of these triples are present.
+
+Results: Passed
+	
+\end{enumerate}
+
+\subsection{Legal Requirements}
+
+\begin{enumerate}
+
+\item \textbf{NFRT-L-1}
+
+Type: Static, Manual
+					
+Initial State: The source code and documentation is prepared
+					
+Input/Condition: The user reviews the entirety of the source code and related documentation
+					
+Output/Result: Copyright licenses, appropriate credits and/or MIT license must attached
+					
+How test will be performed: The testers will review the entirely of the project and check to see if appropriate copyright licenses and/or credits are included for resources that require them
+
+Results: Passed
+
+\end{enumerate}
+
 	
 \section{Comparison to Existing Implementation}	
 
@@ -114,5 +283,7 @@ graduate attribute of Reflection.  Please answer the following question:
   evidence that demonstrates the required quality?  (It is expected that most
   teams will have had to deviate from their original VnV Plan.)
 \end{enumerate}
+
+When the team originally created the VnVPlan, our understanding of our project and the eRisk competition requirements were much more lacking at the time and as a result we have had to change a lot of our requirements as well as the tests for those requirements to fit our project. Originally our understanding of the fundamental structure of the NLP pipeline lacked depth and as such our tests did not make much sense after we completed the code for th In future projects 
 
 \end{document}
