@@ -11,6 +11,8 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+\usepackage{pdflscape}
+\usepackage{longtable}
 
 \input{../Comments}
 \input{../Common}
@@ -30,8 +32,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+3/6/2024 & 1.0 & Revision 0\\
 \bottomrule
 \end{tabularx}
 
@@ -44,11 +45,11 @@ Date 2 & 1.1 & Notes\\
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
-  T & Test\\
+  Precision & the proportion of positive guesses that were correct\\
+  Recall & the proportion of positive individuals that were correctly predicted\\
+  F-score & combination of precision and recall\\
   \bottomrule
 \end{tabular}\\
-
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
 
 \newpage
 
@@ -170,7 +171,7 @@ Results: Passed
 Type: Dynamic, Manual
     					
 Initial State: System is completed and trained
-    					https://www.overleaf.com/project/6549512c2dfdbe59123ef8bb/doc/65dfbe7e3ce527bbcf232fcb/download
+    					
 Input/Condition: The system will be ran on a Windows desktop/laptop and macOS desktop/laptop device with the correct environment setup
     					
 Output/Result: The system should generate an expected result 
@@ -245,24 +246,125 @@ Results: Passed
 	
 \section{Comparison to Existing Implementation}	
 
-This section will not be appropriate for every project.
+A large portion of our validation is deploying our models for the eRisk 2024 competition to determine how well they perform compared to models from other participants. As the current competition is not over, the metrics to compare against were derived from the performances of teams from previous year eRisk competitions.
+
+\subsection{Task 1}
+Metrics were compared against tbd
+
+\subsubsection{Our Model}
+\begin{itemize}
+\item tbd
+\end{itemize}
+
+\subsubsection{Best Performing Model from Previous Years}
+\begin{itemize}
+\item tbd
+\end{itemize}
+
+\subsubsection{Discussion}
+
+
+\subsection{Task 2}
+Metrics were compared against eRisk's 2021 Task 1: Early Detection of Pathological Gambling
+
+\subsubsection{Our Model}
+\begin{itemize}
+    \item Precision: 0.627
+    \item Recall: 0.644
+    \item F-score: 0.635
+\end{itemize}
+
+\subsubsection{Best Performing Model from Previous Years}
+\begin{itemize}
+    \item Precision: 0.586
+    \item Recall: 0.939
+    \item F-score: 0.721
+\end{itemize}
+
+\subsubsection{Discussion}
+Overall F-score of our model was slightly lower than the best performing model from the previous year, our model is lacking heavily compared to other models in the recall section but has the best overall precision of any model and would place second out of the six teams during that eRisk competition. It is important to note that this was early risk prediction for gambling addiction whereas ours is for anorexia and therefore cannot be directly compared and should just be used as overall reference for the broad category of positive negative classification.
+
+\subsection{Task 3}
+Metrics were compared against tbd
+
+\subsubsection{Our Model}
+\begin{itemize}
+\item tbd
+\end{itemize}
+
+\subsubsection{Best Performing Model from Previous Years}
+\begin{itemize}
+\item tbd
+\end{itemize}
+
+\subsubsection{Discussion}
+
 
 \section{Unit Testing}
 
+Due to the nature of our project being almost entirely output focused. Our
+tests do not directly test the individual modules as the code is verified directly by the
+fact that the metrics of the output are directly showing that the model is
+performing as intended. Any error in individual units would produce incorrect output or error and as a result was deemed to not be necessary. 
+
 \section{Changes Due to Testing}
 
-\wss{This section should highlight how feedback from the users and from 
-the supervisor (when one exists) shaped the final product.  In particular 
-the feedback from the Rev 0 demo to the supervisor (or to potential users) 
-should be highlighted.}
+The supervisors for this project as individuals who had participated in previous competitions were instrumental in the understanding of the project and bi-weekly update meetings led to iterative improvements to the methodology of the choices in our models as well as the performance in regards to metrics.
 
 \section{Automated Testing}
-		
+
+Automated testing for each individual task was done using pytest by analyzing the output and checking for correct output and checking that the models are running as intended. To do this the test module calculates the metrics of the results and checks if the resulting metrics are above a certain threshold where if it was below this threshold, something is most likely going wrong with the model.
+
+
+
+\begin{landscape}
 \section{Trace to Requirements}
+		\subsection{Traceability Between Test Cases and Requirements}
+
+		Requirement traceability from S2 of SRS to testing in this document.
+
+		\begin{longtable}{|l|cccccccccccccccc|}
+			\caption{Traceability Between Functional Test Cases and Functional Requirements, FR-1 to FR-10}                                                                                                                                                                                                                           \\
+			\hline
+			\textbf{Test IDs}   & \multicolumn{11}{c|}{\textbf{Functional Requirement IDs}}                                                                                                                                                                                                                                         \\
+			\hline
+			~                   & \textbf{T1FR-1}                                              & \textbf{T1FR-2} & \textbf{T1FR-3} & \textbf{T2FR-1} & \textbf{T2FR-2} & \textbf{T2FR-3} & \textbf{T2FR-4} & \textbf{T3FR-1} & \textbf{T3FR-2} & \textbf{T3FR-3}  \\
+			\hline
+   		\textbf{FRT-INP-1}  & X                                                         & ~            & ~            & X            & ~            & ~            & ~            & X            & ~            & ~             \\
+        	\textbf{FRT-INP-2}  & X                                                         & ~            & ~            & X            & ~            & ~            & ~            & X            & ~            & ~             \\
+			\textbf{FRT-T1-1}  & ~                                                         & X            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\
+      	\textbf{FRT-T1-2}  & ~                                                         & ~            & X            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\
+            \textbf{FRT-T2-1}  & ~                                                         & ~            & ~            & ~            & X            & ~            & X            & ~            & ~            & ~             \\
+            \textbf{FRT-T2-2}  & ~                                                         & ~            & ~            & ~            & ~            & X            & ~            & ~            & ~            & ~             \\
+            \textbf{FRT-T3-1}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & X            & X             \\     
+			\hline
+		\end{longtable}
+
+		\begin{longtable}{|l|cccccccccccccccc|}
+			\caption{Traceability Between Non-Functional Test Cases and Non-Functional Requirements}                                                                                                                                                                                                                           \\
+			\hline
+			\textbf{Test IDs}   & \multicolumn{11}{c|}{\textbf{Non-Functional Requirement IDs}}                                                                                                                                                                                                                                         \\
+			\hline
+			~                   & \textbf{GR1}                                              & \textbf{GR2} & \textbf{SR1} & \textbf{SR2} \\
+			\hline
+			\textbf{NFRT-U-1}  & X                                                         & ~            & ~            & ~             \\
+			\textbf{NFRT-SS-1}  & ~                                                         & ~            & X            & ~            \\
+			\textbf{NFRT-SS-2}  & ~                                                         & ~            & ~            & X            \\
+			\textbf{NFRT-L-1}  & ~                                                         & X            & ~            & ~             \\
+			\hline
+		\end{longtable}
+\end{landscape}
 		
-\section{Trace to Modules}		
+\section{Traceability Between Test Cases and Modules}
+\begin{longtable}{|l|cccc|}
+\hline
+	\textbf{Test IDs}  & \multicolumn{7}{c|}{\textbf{Module IDs}}                         \\
+ ~                  & \textbf{M3}                              & \textbf{M4} & \textbf{M5} & \textbf{M6} & \textbf{M7} & \textbf{M8} & \textbf{M9} \\
+\hline
+\end{longtable}
 
 \section{Code Coverage Metrics}
+Due to the nature of our project being almost entirely output focused. Our tests do not directly test the code as the code is verified directly by the fact that the metrics of the output are directly showing that the model is performing as intended.
 
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References}
@@ -284,6 +386,6 @@ graduate attribute of Reflection.  Please answer the following question:
   teams will have had to deviate from their original VnV Plan.)
 \end{enumerate}
 
-When the team originally created the VnVPlan, our understanding of our project and the eRisk competition requirements were much more lacking at the time and as a result we have had to change a lot of our requirements as well as the tests for those requirements to fit our project. Originally our understanding of the fundamental structure of the NLP pipeline lacked depth and as such our tests did not make much sense after we completed the code for th In future projects 
+When the team originally created the VnVPlan, our understanding of our project and the eRisk competition requirements were much more lacking at the time and as a result we have had to change a lot of our requirements as well as the tests for those requirements to fit our project. Originally our understanding of the fundamental structure of the NLP pipeline lacked depth and as such our tests did not make much sense after we completed the code for the three tasks. In future projects we can anticipate that we currently do not know the full extent of what we are undertaking so being more clear about what we do not know in our VnV plan would lead to less need for large amount of changes in test structure and content.
 
 \end{document}
