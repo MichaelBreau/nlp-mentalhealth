@@ -13,4 +13,5 @@
 | **<<s5>>** | 1.0 | Michael Breau | October 5, 2023 | Jessica Dawson | October 6, 2023
 | **<<s6>>** | 1.0 | Jessica Dawson | October 6, 2023 | Michael Breau | October 6, 2023
 | **<<s2>>** | 1.1 | Michael Breau | November 2, 2023 | Jessica Dawson | November 2, 2023
+| **<<s2>>** | 1.2 | Jessica Dawson | March 6, 2024 | Michael Breau | March 6, 2024
 |===

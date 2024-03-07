@@ -48,6 +48,13 @@
   Precision & the proportion of positive guesses that were correct\\
   Recall & the proportion of positive individuals that were correctly predicted\\
   F-score & combination of precision and recall\\
+  RMSE & Root Mean Square Error\\
+  MZOE & Mean Zero-One Error\\
+  MAE & Mean Absolute Error\\
+  RS & Restraint Subscale\\
+  ECS & Eating Concern Subscale\\
+  SCS & Shape Concern Subscale\\
+  WCS & Weight Concern Subscale\\
   \bottomrule
 \end{tabular}\\
 
@@ -157,7 +164,87 @@ Results: Passed
 
  \subsection{Task 3}
  \begin{enumerate}
-     \item 
+ 
+ \item \textbf{FRT-T3-1}
+
+Control: Manual
+
+Initial State: The task 3 model has been trained on a section of the training data provided by eRisk
+
+Input: A section of the training data that the model has not yet seen
+
+Output: The system will output predictions to a txt file where each line is of the format "\{Username\} \{prediction for Q1\} ... \{prediction for Q28\}"
+
+How test will be performed: A tester will run the system on the input data and verify that an output file is created and that it is of the correct format
+
+Result: Passed (due to privacy concerns the output text file can not be included here for verification)
+
+\item \textbf{FRT-T3-2}
+
+Control: Manual
+
+Initial State: The task 3 model has been trained on a section of the training data provided by eRisk
+
+Input: A section of the training data that the model has not yet seen
+
+Output: The system will output predictions to a txt file where each prediction should be between 0 and 6
+
+How test will be performed: A tester will run the system on the input data and verify that none of the predictions in the output file are less than 0 or greater than 6
+
+Result: Passed (due to privacy concerns the output text file can not be included here for verification)
+
+\item \textbf{FRT-T3-3}
+
+For test FRT-T3-3, FRT-T3-4, and FRT-T3-5 the system produced the following results:
+
+\begin{tabular}{c|ccccccc}
+  &  MAE   & MZOE  & RS    & ECS   & SCS   & WCS   & GED \\ \hline
+zeros  & 3.58  & 0.88  & 3.63  & 2.93  & 4.04  & 3.64  & 3.45 \\
+sixes  & 2.42  & \textbf{0.65}  & 3.13  & 3.68  & 2.91  & 2.91  & 3.02 \\
+average & \textbf{2.00}  & 0.90  & \textbf{1.63}  & 1.59  & 2.04  & \textbf{1.65}  & \textbf{1.47} \\
+model  & 2.60  & 0.82  & 2.45  & \textbf{1.47}  & \textbf{1.98}  & 1.79  & 1.59 \\
+\end{tabular}
+
+Control: Manual
+
+Initial State: The task 3 model has been trained on a section of the training data provided by eRisk and accuracy measures have been calculated for a baseline strategy where a score of 0 is guessed for every question
+
+Input: A section of the training data that the model has not yet seen
+
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
+
+How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
+
+Result: Passed
+
+\item \textbf{FRT-T3-4}
+
+Control: Manual
+
+Initial State: The task 3 model has been trained on a section of the training data provided by eRisk and accuracy measures have been calculated for a baseline strategy where a score of 6 is guessed for every question
+
+Input: A section of the training data that the model has not yet seen
+
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
+
+How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
+
+Result: Passed
+
+\item \textbf{FRT-T3-5}
+
+Control: Manual
+
+Initial State: The task 3 model has been trained on a section of the training data provided by eRisk and accuracy measures have been calculated for a baseline strategy where the average score for a question based on the training data is guessed
+
+Input: A section of the training data that the model has not yet seen
+
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
+
+How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
+
+Result: Passed
+
  \end{enumerate}
 
 \section{Nonfunctional Requirements Evaluation}
@@ -285,19 +372,16 @@ Metrics were compared against eRisk's 2021 Task 1: Early Detection of Pathologic
 Overall F-score of our model was slightly lower than the best performing model from the previous year, our model is lacking heavily compared to other models in the recall section but has the best overall precision of any model and would place second out of the six teams during that eRisk competition. It is important to note that this was early risk prediction for gambling addiction whereas ours is for anorexia and therefore cannot be directly compared and should just be used as overall reference for the broad category of positive negative classification.
 
 \subsection{Task 3}
-Metrics were compared against tbd
+A comparison between our model and the best metric scores from last year's iteration of the task are compared. The best scores are the highest accuracy achieved on that metric accross all teams, not the metrics from a "best" model.
 
-\subsubsection{Our Model}
-\begin{itemize}
-\item tbd
-\end{itemize}
-
-\subsubsection{Best Performing Model from Previous Years}
-\begin{itemize}
-\item tbd
-\end{itemize}
+\begin{tabular}{c|ccccccc}
+  &  MAE   & MZOE  & RS    & ECS   & SCS   & WCS   & GED \\ \hline
+our model  & 2.60  & 0.82  & 2.45  & \textbf{1.47}  & 1.98  & \textbf{1.79}  & \textbf{1.59} \\
+2023's best  & \textbf{2.19}  & \textbf{0.67}  & \textbf{1.59}  & 1.92  & \textbf{1.90}  & 2.00  & 2.00 \\
+\end{tabular}
 
 \subsubsection{Discussion}
+The model does manage to outperform previous years on the ECS, WCS, and GED metrics. While we fail to outperform MZOE and RS these metrics were achieved by baselines like guessing all zero, sixes, or the average last year, and given we failed to outperform these baselines on these metrics again this year it is possible this has more to do with the nature of the data and the task itself than our model under performing compared to previous year's models. We only failed to outperform previous year's models on MAE and SCS.
 
 
 \section{Unit Testing}
@@ -316,7 +400,6 @@ The supervisors for this project as individuals who had participated in previous
 Automated testing for each individual task was done using pytest by analyzing the output and checking for correct output and checking that the models are running as intended. To do this the test module calculates the metrics of the results and checks if the resulting metrics are above a certain threshold where if it was below this threshold, something is most likely going wrong with the model.
 
 
-
 \begin{landscape}
 \section{Trace to Requirements}
 		\subsection{Traceability Between Test Cases and Requirements}
@@ -324,7 +407,7 @@ Automated testing for each individual task was done using pytest by analyzing th
 		Requirement traceability from S2 of SRS to testing in this document.
 
 		\begin{longtable}{|l|cccccccccccccccc|}
-			\caption{Traceability Between Functional Test Cases and Functional Requirements, FR-1 to FR-10}                                                                                                                                                                                                                           \\
+			\caption{Traceability Between Functional Test Cases and Functional Requirements, T1FR-1 to T3FR-3}                                                                                                                                                                                                                           \\
 			\hline
 			\textbf{Test IDs}   & \multicolumn{11}{c|}{\textbf{Functional Requirement IDs}}                                                                                                                                                                                                                                         \\
 			\hline
@@ -337,7 +420,34 @@ Automated testing for each individual task was done using pytest by analyzing th
             \textbf{FRT-T2-1}  & ~                                                         & ~            & ~            & ~            & X            & ~            & X            & ~            & ~            & ~             \\
             \textbf{FRT-T2-2}  & ~                                                         & ~            & ~            & ~            & ~            & X            & ~            & ~            & ~            & ~             \\
             \textbf{FRT-T3-1}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & X            & X             \\     
+            \textbf{FRT-T3-2}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & X            & X             \\     
+            \textbf{FRT-T3-3}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\     
+            \textbf{FRT-T3-4}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\     
+            \textbf{FRT-T3-5}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\     
 			\hline
+		\end{longtable}
+
+  \begin{longtable}{|l|ccc|}
+			\caption{Traceability Between Functional Test Cases and Functional Requirements, T3FR-4 to T3FR-6}                                                                                                                                                                                                                           \\
+			\hline
+			\textbf{Test IDs}   & \multicolumn{3}{c|}{\textbf{Functional Requirement IDs}}                                                                                                                                                                                                                                         \\
+			\hline
+			~                   & \textbf{T3FR-4} & \textbf{T3FR-5} & \textbf{T3FR-6}  \\
+			\hline
+   		\textbf{FRT-INP-1}  & ~ & ~ & ~ \\
+        	\textbf{FRT-INP-2}  & ~ & ~ & ~ \\
+          \textbf{FRT-T1-1}  & ~ & ~ & ~ \\
+          \textbf{FRT-T1-2}  & ~ & ~ & ~ \\
+      	\textbf{FRT-T1-3}  & ~ & ~ & ~ \\
+            \textbf{FRT-T2-1} & ~ & ~ & ~ \\
+            \textbf{FRT-T2-2} & ~ & ~ & ~ \\
+            \textbf{FRT-T2-1} & ~ & ~ & ~ \\     
+            \textbf{FRT-T3-2} & ~ & ~ & ~ \\     
+            \textbf{FRT-T3-3} & X & ~ & ~ \\     
+            \textbf{FRT-T3-4} & ~ & X & ~ \\     
+            \textbf{FRT-T3-5} & ~ & ~ & X \\     
+			\hline
+			
 		\end{longtable}
 
 		\begin{longtable}{|l|cccccccccccccccc|}
@@ -354,13 +464,27 @@ Automated testing for each individual task was done using pytest by analyzing th
 			\hline
 		\end{longtable}
 \end{landscape}
-		
-\section{Traceability Between Test Cases and Modules}
-\begin{longtable}{|l|cccc|}
-\hline
-	\textbf{Test IDs}  & \multicolumn{7}{c|}{\textbf{Module IDs}}                         \\
- ~                  & \textbf{M3}                              & \textbf{M4} & \textbf{M5} & \textbf{M6} & \textbf{M7} & \textbf{M8} & \textbf{M9} \\
-\hline
+
+\section{Traceability of Test Cases and Modules}
+\begin{longtable}{|l|ccccccccc|}
+    \hline
+    \textbf{Test IDs}  & \multicolumn{9}{c|}{\textbf{Module IDs}}                                               \\
+    \hline
+    ~                  & \textbf{M2}                              & \textbf{M3} & \textbf{EDM1} & \textbf{EDM2} & \textbf{EDM3} & \textbf{EDM4} & \textbf{EDM5} & \textbf{EDM6} & \textbf{EDM7} \\
+    \hline
+    \textbf{FRT-INP-1}  & X                                        & X           & X             & X             & ~ & ~ & ~ & ~ & ~\\
+    \textbf{FRT-INP-2}  & X                                        & X           & X             & X             & ~ & ~ & ~ & ~ & ~\\
+    \textbf{FRT-T1-1}  & X                                        & ~           & ~             & ~             & ~ & ~ & ~ & ~ & ~\\
+    \textbf{FRT-T1-2}  & X                                        & ~           & ~             & ~             & ~ & ~ & ~ & ~ & ~\\
+    \textbf{FRT-T1-3}  & X                                        & ~           & ~             & ~             & ~ & ~ & ~ & ~ & ~\\
+    \textbf{FRT-T2-1}  & ~                                        & X           & ~             & ~             & ~ & ~ & ~ & ~ & ~\\
+    \textbf{FRT-T2-2}  & ~                                        & X           & ~             & ~             & ~ & ~ & ~ & ~ & ~\\
+    \textbf{FRT-T3-1}  & ~                                        & ~           & X             & X             & ~ & ~ & ~ & ~ & ~\\
+    \textbf{FRT-T3-2}  & ~                                        & ~           & X             & X             & ~ & ~ & ~ & ~ & ~\\
+    \textbf{FRT-T3-3}  & ~                                        & ~           & ~             & ~             & X & X & X & X & X\\
+    \textbf{FRT-T3-4}  & ~                                        & ~           & ~             & ~             & X & X & X & X & X\\
+    \textbf{FRT-T3-5}  & ~                                        & ~           & ~             & ~             & X & X & X & X & X\\
+    \hline
 \end{longtable}
 
 \section{Code Coverage Metrics}
