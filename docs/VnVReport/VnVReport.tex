@@ -32,8 +32,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+3/6/2024 & 1.0 & Revision 0\\
 \bottomrule
 \end{tabularx}
 
@@ -46,11 +45,18 @@ Date 2 & 1.1 & Notes\\
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
-  T & Test\\
+  Precision & the proportion of positive guesses that were correct\\
+  Recall & the proportion of positive individuals that were correctly predicted\\
+  F-score & combination of precision and recall\\
+  RMSE & Root Mean Square Error\\
+  MZOE & Mean Zero-One Error\\
+  MAE & Mean Absolute Error\\
+  RS & Restraint Subscale\\
+  ECS & Eating Concern Subscale\\
+  SCS & Shape Concern Subscale\\
+  WCS & Weight Concern Subscale\\
   \bottomrule
 \end{tabular}\\
-
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
 
 \newpage
 
@@ -67,6 +73,94 @@ Date 2 & 1.1 & Notes\\
 This document ...
 
 \section{Functional Requirements Evaluation}
+\subsection{Task 1}
+
+\begin{enumerate}
+\item \textbf{FRT-T1-1}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 1 system yet, input data as jsonl files are available
+
+Input: The Task 1 Input data
+
+Output: The system will extract required sentences from the jsonl files and output data that is appropriate to be fed into Task 1.
+
+Test Case Derivation: The system will receive its input data, process then parse according to the Task's input format.
+
+How test will be performed: The tester will run the parser with the given jsonl files as input and compare the parsed data.
+
+Results: Passed
+
+\item \textbf{FRT-T1-2}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 1 system yet, past years input data, training data, and golden truth values are available
+
+Input: The Task 1 Training Data, Input data, and Golden Truth Values from a past year eRisk Competition
+
+Output: The system will output sentence ranking and diagnostic metrics based on the input data. 
+
+Test Case Derivation: The system will receive its training data and input data corresponding to a prior year. It's analysis will output RP and NDCG accuracy metrics.
+
+How test will be performed: The system should derive its training data and feature sets based on correlation to 21 depression symptoms of beck depression index. The outputted metrics will be compared to golden truth data to ensure the accuracy is within the desired bounds and is improving on prior year implementation.
+
+Results: Passed
+
+\item \textbf{FRT-T1-3}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 1 system yet, input data is available
+
+Input: The Task 1 Input data
+
+Output: The system will output sentence ranking and diagnostic metrics based on the input data to a txt file.
+
+Test Case Derivation: The system will make an analysis based off the provided input data and return each prediction to a test file in a specified formatting.
+
+How test will be performed: The system's output txt file will be verified that each entry is on its own line in the format "\{symptom\_number\}, Q0, \{sentence-id\}, \{position\_in\_ranking\}, \{score\}, \{system\_name\}".
+
+Results: Passed
+
+\end{enumerate}
+
+\subsection{Task 2}
+
+ \begin{enumerate}
+ 
+ \item \textbf{FRT-T2-1}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 2 system yet, input data is available
+
+Input: The Task 2 Input data consisting of user posts
+
+Output: The system will output sentence ranking and diagnostic metrics based on the input data to a txt file.
+
+Test Case Derivation: The system will make an analysis based off the provided input data and return each prediction to a test file in a specified formatting.
+
+How test will be performed: The system's output txt file will be verified that each entry is on its own line in the format "\{Username\} \{prediction\}".
+
+Results: Passed
+
+ \item \textbf{FRT-T2-2}
+ Control: Automatic
+
+Initial State: The task 2 system has received input data on a given individual and made a corresponding prediction.
+
+Input: More data corresponding to the same user analyzed in the input state.
+
+Output: The system will output an updated prediction taking into account all data provided.
+
+Test Case Derivation: The system should create a new prediction for the chosen user taking into account all data provided.
+
+How test will be performed: The system should provide a prediction based off the original data input, after receiving new data, the system should combine posts made by the same user to create a new prediction. 
+
+Results: Passed
+ \end{enumerate}
 
  \subsection{Task 3}
  \begin{enumerate}
@@ -155,13 +249,127 @@ Result: Passed
 
 \section{Nonfunctional Requirements Evaluation}
 
-\subsection{Usability}
-		
-\subsection{Performance}
+\subsection{Usability Requirements}
 
-\subsection{etc.}
+\begin{enumerate}
+
+\item \textbf{NFRT-U-1}
+    
+Type: Dynamic, Manual
+    					
+Initial State: System is completed and trained
+    					
+Input/Condition: The system will be ran on a Windows desktop/laptop and macOS desktop/laptop device with the correct environment setup
+    					
+Output/Result: The system should generate an expected result 
+    					
+How test will be performed: After setting up the environment on to both macOS and Windows machines, the system will be ran on both environment with the same command. Test will pass as long as an expected result is generated from both machines.
+
+Results: Passed
+    
+\end{enumerate}
+		
+\subsection{Safety and Security Requirements}
+
+\begin{enumerate}
+
+\item \textbf{NFRT-SS-1}
+
+Type: Dynamic, Manual
+					
+Initial State: The system is completed and trained 
+					
+Input/Condition: The system will be ran on the developer's computer
+					
+Output/Result: The generated result should not overuse the processing power of the developer's computer
+					
+How test will be performed: CPU, GPU, RAM and live power usage will be monitored while running the software. Usage of all aspects should not increase more than 20 percent.   
+
+Results: Passed
+					
+\end{enumerate}
+
+
+\begin{enumerate}
+
+\item \textbf{NFRT-SS-2}
+	
+Type: Automatic, Dynamic
+						
+Initial State: The system has been trained and is awaiting data to form predictions on.
+						
+Input/Condition: A set of data that the system can predict on.
+						
+Output/Result: The resulting predictions, in a form where no sensitive data from the input is present in the output.
+	
+Test Case Derivation: Sensitive in this case refers to the post history of the subjects eRisk provides as training and test data. If these posts can be reconstructed from any part of our system outputs it is possible the identity of the individual could be discovered. This represents an unacceptable breach of privacy and can not happen.
+						
+How test will be performed: After the system has produced it's predictions a script will be run that takes all posts in the input data, forms a string out of all consecutive three word triplets (ie. "hello my good friend" forms "hello my good" and "my good friend"), both with and without processing (removal of stopwords, punctuation, etc.), and scans the output to ensure that none of these triples are present.
+
+Results: Passed
+	
+\end{enumerate}
+
+\subsection{Legal Requirements}
+
+\begin{enumerate}
+
+\item \textbf{NFRT-L-1}
+
+Type: Static, Manual
+					
+Initial State: The source code and documentation is prepared
+					
+Input/Condition: The user reviews the entirety of the source code and related documentation
+					
+Output/Result: Copyright licenses, appropriate credits and/or MIT license must attached
+					
+How test will be performed: The testers will review the entirely of the project and check to see if appropriate copyright licenses and/or credits are included for resources that require them
+
+Results: Passed
+
+\end{enumerate}
+
 	
 \section{Comparison to Existing Implementation}	
+
+A large portion of our validation is deploying our models for the eRisk 2024 competition to determine how well they perform compared to models from other participants. As the current competition is not over, the metrics to compare against were derived from the performances of teams from previous year eRisk competitions.
+
+\subsection{Task 1}
+Metrics were compared against tbd
+
+\subsubsection{Our Model}
+\begin{itemize}
+\item tbd
+\end{itemize}
+
+\subsubsection{Best Performing Model from Previous Years}
+\begin{itemize}
+\item tbd
+\end{itemize}
+
+\subsubsection{Discussion}
+
+
+\subsection{Task 2}
+Metrics were compared against eRisk's 2021 Task 1: Early Detection of Pathological Gambling
+
+\subsubsection{Our Model}
+\begin{itemize}
+    \item Precision: 0.627
+    \item Recall: 0.644
+    \item F-score: 0.635
+\end{itemize}
+
+\subsubsection{Best Performing Model from Previous Years}
+\begin{itemize}
+    \item Precision: 0.586
+    \item Recall: 0.939
+    \item F-score: 0.721
+\end{itemize}
+
+\subsubsection{Discussion}
+Overall F-score of our model was slightly lower than the best performing model from the previous year, our model is lacking heavily compared to other models in the recall section but has the best overall precision of any model and would place second out of the six teams during that eRisk competition. It is important to note that this was early risk prediction for gambling addiction whereas ours is for anorexia and therefore cannot be directly compared and should just be used as overall reference for the broad category of positive negative classification.
 
 \subsection{Task 3}
 A comparison between our model and the best metric scores from last year's iteration of the task are compared. The best scores are the highest accuracy achieved on that metric accross all teams, not the metrics from a "best" model.
@@ -175,19 +383,23 @@ our model  & 2.60  & 0.82  & 2.45  & \textbf{1.47}  & 1.98  & \textbf{1.79}  & \
 \subsubsection{Discussion}
 The model does manage to outperform previous years on the ECS, WCS, and GED metrics. While we fail to outperform MZOE and RS these metrics were achieved by baselines like guessing all zero, sixes, or the average last year, and given we failed to outperform these baselines on these metrics again this year it is possible this has more to do with the nature of the data and the task itself than our model under performing compared to previous year's models. We only failed to outperform previous year's models on MAE and SCS.
 
+
 \section{Unit Testing}
+
+Due to the nature of our project being almost entirely output focused. Our
+tests do not directly test the individual modules as the code is verified directly by the
+fact that the metrics of the output are directly showing that the model is
+performing as intended. Any error in individual units would produce incorrect output or error and as a result was deemed to not be necessary. 
 
 \section{Changes Due to Testing}
 
-\wss{This section should highlight how feedback from the users and from 
-the supervisor (when one exists) shaped the final product.  In particular 
-the feedback from the Rev 0 demo to the supervisor (or to potential users) 
-should be highlighted.}
+The supervisors for this project as individuals who had participated in previous competitions were instrumental in the understanding of the project and bi-weekly update meetings led to iterative improvements to the methodology of the choices in our models as well as the performance in regards to metrics.
 
 \section{Automated Testing}
-		
-\section{Trace to Requirements}
-		
+
+Automated testing for each individual task was done using pytest by analyzing the output and checking for correct output and checking that the models are running as intended. To do this the test module calculates the metrics of the results and checks if the resulting metrics are above a certain threshold where if it was below this threshold, something is most likely going wrong with the model.
+
+
 \begin{landscape}
 \section{Trace to Requirements}
 		\subsection{Traceability Between Test Cases and Requirements}
@@ -207,7 +419,7 @@ should be highlighted.}
       	\textbf{FRT-T1-2}  & ~                                                         & ~            & X            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\
             \textbf{FRT-T2-1}  & ~                                                         & ~            & ~            & ~            & X            & ~            & X            & ~            & ~            & ~             \\
             \textbf{FRT-T2-2}  & ~                                                         & ~            & ~            & ~            & ~            & X            & ~            & ~            & ~            & ~             \\
-            \textbf{FRT-T2-1}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & X            & X             \\     
+            \textbf{FRT-T3-1}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & X            & X             \\     
             \textbf{FRT-T3-2}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & X            & X             \\     
             \textbf{FRT-T3-3}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\     
             \textbf{FRT-T3-4}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\     
@@ -276,6 +488,7 @@ should be highlighted.}
 \end{longtable}
 
 \section{Code Coverage Metrics}
+Due to the nature of our project being almost entirely output focused. Our tests do not directly test the code as the code is verified directly by the fact that the metrics of the output are directly showing that the model is performing as intended.
 
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References}
@@ -296,5 +509,7 @@ graduate attribute of Reflection.  Please answer the following question:
   evidence that demonstrates the required quality?  (It is expected that most
   teams will have had to deviate from their original VnV Plan.)
 \end{enumerate}
+
+When the team originally created the VnVPlan, our understanding of our project and the eRisk competition requirements were much more lacking at the time and as a result we have had to change a lot of our requirements as well as the tests for those requirements to fit our project. Originally our understanding of the fundamental structure of the NLP pipeline lacked depth and as such our tests did not make much sense after we completed the code for the three tasks. In future projects we can anticipate that we currently do not know the full extent of what we are undertaking so being more clear about what we do not know in our VnV plan would lead to less need for large amount of changes in test structure and content.
 
 \end{document}
