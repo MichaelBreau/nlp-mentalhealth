@@ -219,7 +219,10 @@ actually be implemented. As the details of the NLP pipelines are not as of yet d
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
 \item [\refstepcounter{mnum} \mthemnum \label{m2}:] Search for Symptoms of Depression Module
-\item [\refstepcounter{mnum} \mthemnum \label{m3}:] Early Risk Detection for Symptoms of Anorexia Module
+\item [\refstepcounter{mnum} \mthemnum \label{ANOM1}:] Anorexia Main Module
+\item [\refstepcounter{mnum} \mthemnum \label{ANOM2}:] Anorexia Parser Module
+\item [\refstepcounter{mnum} \mthemnum \label{ANOM3}:] Anorexia Training Module
+\item [\refstepcounter{mnum} \mthemnum \label{ANOM4}:] Anorexia Predictor Module
 \item [\refstepcounter{edmnum} \edmthemnum \label{edmI}:] ED Input
 \item [\refstepcounter{edmnum} \edmthemnum \label{edmO}:] ED Output
 \item [\refstepcounter{edmnum} \edmthemnum \label{edmPipeline}:] ED Pipeline Manager
@@ -246,8 +249,11 @@ actually be implemented. As the details of the NLP pipelines are not as of yet d
 \midrule
 
 \multirow{3}{*}{Software Decision} 
-& Depression Module\\
-& Anorexia Module\\ \cline{2-3}
+& Depression Module\\ \cline{2-3}
+& \multirow{4}{*}{Anorexia Pipeline} & Anorexia Main\\ 
+& & Anorexia Parser\\
+& & Anorexia Training\\
+& & Anorexia Predictor\\ \cline{2-3}
 & \multirow{5}{*}{Eating Disorder Pipeline} & ED Pipeline Manager\\
 & & ED Tokenizer\\
 & & ED Representation Model\\
@@ -307,11 +313,11 @@ to be implemented.
 \item[Implemented By:] Depression IO, Anorexia IO, Eating Disorder IO
 \end{description}
 
-\subsubsection{Eating Disorder IO (-)}
+\subsubsection{Eating Disorder IO (\edmref{edmI}, \edmref{edmO})}
 \begin{description}
 \item[Secrets:]How input and output is handled for the eating disorder diagnosis tool.
 \item[Services:]Includes programs that provide reading from an input file and outputting to an output file for the eating disorder diagnosis tool.
-\item[Implemented By:] ED Input, ED Output
+\item[Implemented By:] ed\_input.py, ed\_output.py
 \end{description}
 
 \paragraph{ED Input (\edmref{edmI})}
@@ -338,12 +344,36 @@ to be implemented.
 \item[Implemented By:] Natural Language Processing for Mental Health Risk Prevention
 \end{description}
 
-\subsubsection{Early Risk Detection for Symptoms of Anorexia Module (\mref{m3})}
+\subsubsection{Anorexia Main Module (\mref{ANOM1})}
+\begin{description}
+\item[Secrets:] The Natural Language processor which will combine the parser, training, and predictor modules to compute anorexia risk in new documents.
+\item[Services:] Anorexia training data
+  do not provide direct interaction with the user. 
+\item[Implemented By:] task2\_main
+\end{description}
+
+\subsubsection{Anorexia Parser Module (\mref{ANOM2})}
+\begin{description}
+\item[Secrets:] The parser for taking user posts and converting them into a format readable by the nlp model.
+\item[Services:] Anorexia training data
+  do not provide direct interaction with the user. 
+\item[Implemented By:] task2\_parser
+\end{description}
+
+\subsubsection{Anorexia Training Module (\mref{ANOM3})}
+\begin{description}
+\item[Secrets:] The Natural Language processor which will train the model on parsed data.
+\item[Services:] Anorexia training data
+  do not provide direct interaction with the user. 
+\item[Implemented By:] task2\_training
+\end{description}
+
+\subsubsection{Anorexia Predictor Module (\mref{ANOM4})}
 \begin{description}
 \item[Secrets:] The Natural Language processor which will analyze inputted user data to determine a risk for anorexia
 \item[Services:] Anorexia training data
   do not provide direct interaction with the user. 
-\item[Implemented By:] Natural Language Processing for Mental Health Risk Prevention
+\item[Implemented By:] task2\_predictor
 \end{description}
 
 \subsubsection{Eating Disorder Pipeline (-)}
@@ -410,17 +440,17 @@ requirements and between the modules and the anticipated changes.
 T1FR-1 & \mref{m2}\\
 T1FR-2 & \mref{m2}\\
 T1FR-3 & \mref{m2}\\
-T2FR-1 & \mref{m3}\\
-T2FR-2 & \mref{m3}\\
-T2FR-3 & \mref{m3}\\
-T2FR-4 & \mref{m3}\\
+T2FR-1 & \mref{ANOM1}, \mref{ANOM2}\\
+T2FR-2 & \mref{ANOM1}, \mref{ANOM4}\\
+T2FR-3 & \mref{ANOM1}, \mref{ANOM3}, \mref{ANOM4}\\
+T2FR-4 & \mref{ANOM1}, \mref{ANOM4}\\
 T3FR-1 & \edmref{edmI}\\
 T3FR-2 & \edmref{edmO}\\
 T3FR-3 & \edmref{edmO}\\
-GR1 & \mref{m2}, \mref{m3}, \edmref{edmI}, \edmref{edmO}\\
-GR2 & \mref{m2}, \mref{m3}, \edmref{edmO}\\
-SR1 & \mref{m2}, \mref{m3}, \edmref{edmO}\\
-SR2 & \mref{m2}, \mref{m3}, \edmref{edmO}\\
+GR1 & \mref{m2}, \mref{ANOM1}, \edmref{edmI}, \edmref{edmO}\\
+GR2 & \mref{m2}, \mref{ANOM4}, \edmref{edmO}\\
+SR1 & \mref{m2}, \mref{ANOM1}, \edmref{edmO}\\
+SR2 & \mref{m2}, \mref{ANOM4}, \edmref{edmO}\\
 
 \bottomrule
 \end{tabular}
@@ -434,14 +464,14 @@ SR2 & \mref{m2}, \mref{m3}, \edmref{edmO}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acInput} & \mref{m2}, \mref{m3}, \edmref{edmI}\\
-\acref{acOutput} & \mref{m2}, \mref{m3}, \edmref{edmO}\\
-\acref{acPipelineStages} & \mref{m2}, \mref{m3}, \edmref{edmPipeline}\\
-\acref{acTokenization} & \mref{m2}, \mref{m3}, \edmref{edmToken}\\
-\acref{acRepModel} & \mref{m2}, \mref{m3}, \edmref{edmRM}\\
-\acref{acPredModel} & \mref{m2}, \mref{m3}, \edmref{edmPM}\\
-\acref{acTrans} & \mref{m2}, \mref{m3}, \edmref{edmTrans}\\
-\acref{acOps} & \mref{m2}, \mref{m3}\\
+\acref{acInput} & \mref{m2}, \mref{ANOM2}, \edmref{edmI}\\
+\acref{acOutput} & \mref{m2}, \mref{ANOM4}, \edmref{edmO}\\
+\acref{acPipelineStages} & \mref{m2}, \mref{ANOM1}, \edmref{edmPipeline}\\
+\acref{acTokenization} & \mref{m2}, \mref{ANOM2}, \edmref{edmToken}\\
+\acref{acRepModel} & \mref{m2}, \mref{ANOM3}, \edmref{edmRM}\\
+\acref{acPredModel} & \mref{m2}, \mref{ANOM3}, \edmref{edmPM}\\
+\acref{acTrans} & \mref{m2}, \mref{ANOM4}, \edmref{edmTrans}\\
+\acref{acOps} & \mref{m2}, \mref{ANOM1}\\
 
 \bottomrule
 \end{tabular}
@@ -480,7 +510,7 @@ because they use modules from the lower levels.
     \item Module: \edmref{edmPM} Finish Date: Jan 28 2024 Assignee(s): Jessica
     \item Module: \edmref{edmTrans} Finish Date: Feb 1 2024 Assignee(s): Jessica
     \item Module: \mref{m2} Finish Date: Feb 1 2024 Assignee(s): Franklin, Matthew
-    \item Module: \mref{m3} Finish Date: Feb 1 2024 Assignee(s): Michael, Ben
+    \item Module: \mref{ANOM1} Finish Date: Feb 1 2024 Assignee(s): Michael, Ben
     \item Module: \mref{mHH} Finish Date: Feb 1 2024 Assignee(s): All
     \item Testing: All Modules Finish Date: Feb 4 2024 Assignee(s): All
 \end{itemize}

@@ -1,5 +1,6 @@
 [#s2,reftext=S.2]
 === (S.2) Functionality
+:stem: latexmath
 
 ifdef::env-draft[]
 TIP: _**This is the bulk of the System book, describing elements of functionality (behaviors)**. This chapter corresponds to the traditional view of requirements as defining "**what the system does**”. It is organized as one section, S.2.n, for each of the components identified in <<s1>>, describing the corresponding behaviors (functional and non-functional properties)._  <<BM22>>
@@ -16,7 +17,9 @@ Non-Functional Requirements:
 - SR1: The system will be tested periodically to detect a potential lack of processing power.
 - SR2: Sensitive user data must not be present within the results generated.
 
-**Task 1: Search for Symptoms of Depression Component**
+Each task will have their own accuracy metrics that the quality of the models predictions will be evaluated on.
+
+==== Task 1: Search for Symptoms of Depression Component
 
 Functional Requirements:
 
@@ -24,7 +27,7 @@ Functional Requirements:
 - T1FR-2: The system will rank input sentences from users based on their correlation to 21 depression symptoms from the beck depression index.
 - T1FR-3: The system will send the predictions to a txt file in the format "{symptom_number}, Q0, {sentence-id}, {position_in_ranking}, {score}, {system_name}".
 
-**Task 2: Early Detection of Signs of Anorexia Component**
+==== Task 2: Early Detection of Signs of Anorexia Component
 
 Functional Requirements:
 
@@ -34,10 +37,93 @@ Functional Requirements:
 - T2FR-4: The system will send the predictions to a txt file in the format "{username} {prediction (0 or 1)}" with each entry being on a separate line.
 
 
-**Task 3: Measuring the Severity of the Signs of Eating Disorders Component**
+==== Task 3: Measuring the Severity of the Signs of Eating Disorders Component
 
-Functional Requirements:
+**General Functional Requirements:**
 
-- T3FR-1: The system will be able to parse both xml and jsonl files.
+- T3FR-1: The system will be able to parse jsonl files.
 - T3FR-2: The system will make predictions given a set of a user's posts.
 - T3FR-3: The system will send the predictions to a txt file in the format "{username} {prediction (0-6) for Q1} ... {prediction (0-6) for Q28}" with each entry being on a separate line.
+
+**Accuracy Functional Requirements:**
+
+These functional requirements cover how the accuracy of the model will be evaluated. Some background information
+on chosen accuracy metrics and evaluation methodology will be supplied.
+
+The following is taken from <<EROV>> and discusses the metrics that will be used to evaluate acuracy for task 3:
+
+Evaluation is based on the following effectiveness metrics:
+
+- Mean Zero-One Error (_MZOE_) between the questionnaire filled by the real user and
+the questionnaire filled by the system (i.e. fraction of incorrect predictions).
++
+image::equations/MZOE.png[scale=50%,align="center"]
++
+where _f_ denotes the classification done by an automatic system, _Q_ is the set of questions
+of each questionnaire, _q~i~_ is the i-th question, _R(q~i~)_ is the real user’s answer for the i-th
+question and _f(q~i~)_ is the predicted answer of the system for the i-th question. Each user
+produces a single _MZOE_ score and the reported _MZOE_ is the average over all _MZOE_
+values (mean _MZOE_ over all users).
+
+- Mean Absolute Error (_MAE_) between the questionnaire filled by the real user and the
+questionnaire filled by the system (i.e. average deviation of the predicted response from
+the true response).
++
+image::equations/MAE.png[scale=50%,align="center"]
++
+Again, each user produces a single _MAE_ score and the reported _MAE_ is the average
+over all _MAE_ values (mean _MAE_ over all users).
+
+The following measures are based on aggregated scores obtained from the questionnaires.
+Further details about the EDE-Q instruments can be found in appendix A.
+
+- Restraint Subscale (RS): Given a questionnaire, its restraint score is obtained as the
+mean response to the first five questions. This measure computes the RMSE between the
+restraint ED score obtained from the questionnaire filled by the real user and the restraint
+ED score obtained from the questionnaire filled by the system.
+Each user _u~i~_ is associated with a real subscale ED score (referred to as _R~RS~(u~i~)_) and an
+estimated subscale ED score (referred to as _f~RS~(u~i~)_). This metric computes the RMSE
+between the real and an estimated subscale ED scores as follows:
++
+image::equations/RS.png[scale=50%,align="center"]
++
+where _U_ is the user set.
+
+- Eating Concern Subscale (ECS): Given a questionnaire, its eating concern score is
+obtained as the mean response to the following questions (7, 9, 19, 21, 20). This metric
+computes the RMSE between the eating concern ED score obtained from
+the questionnaire filled by the real user and the eating concern ED score obtained from
+the questionnaire filled by the system.
++
+image::equations/ECS.png[scale=50%,align="center"]
+
+- Shape Concern Subscale (SCS): Given a questionnaire, its shape concern score is
+obtained as the mean response to the following questions (6, 8, 23, 10, 26, 27, 28, 11). This
+metric computes the RMSE between the shape concern ED score obtained
+from the questionnaire filled by the real user and the shape concern ED score obtained
+from the questionnaire filled by the system.
++
+image::equations/SCS.png[scale=50%,align="center"]
+
+- Weight Concern Subscale (WCS): Given a questionnaire, its weight concern score is
+obtained as the mean response to the following questions (22, 24, 8, 25, 12). This metric
+computes the RMSE between the weight concern ED score obtained from
+the questionnaire filled by the real user and the weight concern ED score obtained from
+the questionnaire filled by the system.
++
+image::equations/WCS.png[scale=50%,align="center"]
+
+- Global ED (GED): To obtain an overall or ‘global’ score, the four subscales scores are
+summed and the resulting total divided by the number of subscales (i.e. four). This
+metric computes the RMSE between the real and an estimated global ED scores as follows:
++
+image::equations/GED.png[scale=50%,align="center"]
+
+The accuracy of the model will be evaluated by comparing between the value of these metrics for the model's predictions
+and the values of these metrics for answering zero for all questions, answering six for all questions, or answering the average score for each question.
+If the model fails to outperform any of these guessing strategies in any metrics then it is not providing any increase in accuracy.
+
+- T3FR-4: The model will outperform guessing all zeros on at least one of the above accuracy metrics.
+- T3FR-5: The model will outperform guessing all sixes on at least one of the above accuracy metrics.
+- T3FR-6: The model will outperform guessing the average on at least one of the above accuracy metrics.
+

@@ -39,6 +39,10 @@
 \midrule
 11/03/2023 & 1.0 & Revision 0\\
 1/08/2024 & 1.1 & Verbiage Changes \& adjustments to AI Guidelines \\
+3/03/2024 & 1.2 & Updated Tests to reflect updates to functional requirements \\
+3/04/2024 & 1.3 & Added more evaluation metrics and updated Tests to reflect updates to functional requirements \\
+3/04/2024 & 1.4 & Updated traceability table \\
+3/06/2024 & 1.5 & Updated task 3 information \\
 \bottomrule
 \end{tabularx}
 
@@ -63,6 +67,14 @@
   RMSE & Root Mean Square Error\\
   MZOE & Mean Zero-One Error\\
   MAE & Mean Absolute Error\\
+  RS & Restraint Subscale\\
+  ECS & Eating Concern Subscale\\
+  SCS & Shape Concern Subscale\\
+  WCS & Weight Concern Subscale\\
+  RP & Reciprocal Rank\\
+  DCG & Discounted Cumulative Gain\\
+  IDCG & Ideal Discounted Cumulative Gain\\
+  NDCG & Normalized Discounted Cumulative Gain\\
   \bottomrule
 \end{tabular}\\
 
@@ -178,7 +190,7 @@ This section will outline the plan for verification and validation of a number o
   \subsection{Verification and Validation Team} \label{Verification and Validation Team}
 
   
-  The verification and validation team will consist of the core team members (Matthew, Jessica, Ben, Yaruo and Michael) along with the Capstone professor, the team's TA, Marie-Jean and Diego from the Montreal team, and Professor Mosser.  The core team will b responsible for creating test suites that ensure correctness in the solution along with catching possible bugs and issues that may arise. The team will be responsible for creating suitable edge cases to evaluate the correctness of the work along with general automated test suites that will be automatically deployed when new code is pulled.\\
+  The verification and validation team will consist of the core team members (Matthew, Jessica, Ben, Yaruo and Michael) along with the Capstone professor, the team's TA, Marie-Jean and Diego from the Montreal team, and Professor Mosser.  The core team will be responsible for creating test suites that ensure correctness in the solution along with catching possible bugs and issues that may arise. The team will be responsible for creating suitable edge cases to evaluate the correctness of the work along with general automated test suites that will be automatically deployed when new code is pulled.\\
   
   The core team will be responsible for creating all test suites, along with executing them and documenting the results. The team will also be responsible for making any changes that are required after testing the code. All core team members will have a hand in all sections of testing but different team members will have different focused responsibilities. Firstly, all core team members will be responsible for documenting the results of the automated test suites when their code enters the repository through a pull request. More specifically, Yaruo and Michaels main responsibility will be creating a set of tests including edge cases for the NLP model that will ensure that our model functions as expected for a wide variety of input data. They will be required to create test suites along with automated test suites that will be run periodically when pull requests happen. Jessica, Ben and Matthew on the other hand will have the primary responsibility for training the data vs a training data set in order to determine the accuracy of the model. They will also have the responsibility to ensure code structure in the test suites that are created along with organizing the suites while Yaruo and Michaels main role is coming up with and creating the tests.\\ 
   
@@ -327,17 +339,27 @@ When testing the system three different train/test splits will be produced, all 
 
 \myparagraph{Metrics} \label{metrics}
 
-As the eRisk tasks have not yet been released it is unclear exactly what form the expected and predicted output will take, so it is unclear what metrics will be used to evaluate our models. If a task is a repeat from past years, metrics similar to the ones used in previous versions of the task may be used. Here are some metrics that have been deemed potentially useful to employ, whether they will be used depends on the nature of this year's eRisk tasks. Other measures will likely be added upon the release of the eRisk tasks:
+The following metrics will be used to evaluate the accuracy of the model for each task. These metrics were selected based on recommendations of the eRisk competition:\newline
+
+\noindent \textbf{Task 1:}
 
 \begin{enumerate}
 
-\item{MAE} (Mean Absolute Error) was used by the UQAM team in a 2022 task about eating disorders \citep{Saravani2022MeasuringTS}. MAE measures the average distance between a predicted value $p_i$ in predictions $P$ and a ground truth (expected value) $t_i$ in ground truths $T$ for $n$ data points:
+\item{Reciprocal Rank (RP)} is a measure used to evaluate the effectiveness of a ranked list of items. It is often used in the context of question answering or information retrieval systems.
 
-$$\text{MAE} = \sum_{i=1}^{n} \frac{|t_i - p_i|}{n}$$
+$$RP = \frac{1}{\text{rank}}$$
 
-\item{MZOE} (Mean Zero-One Error) was also used in the UQAM's 2022 eating disorder submission \citep{Saravani2022MeasuringTS}. MZOE measures the proportion of incorrect predictions:
+\item{Normalized Discounted Cumulative Gain (NDCG)} is a metric used to evaluate the quality of a ranked list of items, considering both the relevance and the position of each item in the list:
 
-$$\text{MZOE} = \frac{|\{p_i \in P : t_i \neq p_i\}|}{n}$$
+$$DCG = \sum_{i=1}^{n} \frac{2^{rel_i} - 1}{\log_2(i + 1)}$$
+$$IDCG = \sum_{i=1}^{n} \frac{2^{rel_i} - 1}{\log_2(i + 1)}$$
+$$NDCG = \frac{DCG}{IDCG}$$
+
+\end{enumerate}
+
+\noindent \textbf{Task 2:}
+
+\begin{enumerate}
 
 \item{F-Score} was used in the UQAM team's 2021 submission for the detection of problem gambling task \citep{Maupom2021EarlyDO}. F-Score is a combination of two other measures, precision and recall, and is used to measure the accuracy of positive/negative tests while taking into account false positive and negatives:
 
@@ -345,85 +367,219 @@ $$\text{precision} = \frac{\text{true positives}}{\text{true positives} + \text{
 $$\text{recall} = \frac{\text{true positives}}{\text{true positives} + \text{false negatives}}$$
 $$\text{F-score} = 2\frac{\text{precision} * \text{recall}}{\text{precision} + \text{recall}}$$
 
-\item{RMSE} (Root Mean Square Error) is a common measure of the deviation between predicted values and expected values, it somewhat analogous to MAE:
+\end{enumerate}
 
-$$\text{RMSE} = \sqrt{\sum_{i=1}^{n} \frac{(t_i - p_i)^2}{n}}$$
+\noindent \textbf{Task 3:}
 
-\item{$R^2$} measures how well the expected values are predicted by the model by comparing how much variation the predicted values capture against the variation in the expected values:
+The details of the metrics used for task 3 can be found in the SRS: section S2 task 3. In light of this only a brief overview will be provided here.
 
-$$SS_{res} = \sum_{i=1}^{n} (t_i - p_i)^2$$
-$$SS_{tot} = \sum_{i=1}^{n} (t_i - \text{mean}(T))^2$$
-$$R^2 = 1 - \frac{SS_{res}}{SS_{tot}}$$
+\begin{enumerate}
+
+\item MZOE evaluates what proportion of the predictions are incorrect, smaller is better.
+
+$$MZOE(f,Q) = \frac{\vert\{q_i \in Q : R(q_i) \neq f(q_i)\}\vert}{\vert Q \vert}$$
+
+\item MAE evaluates the average error in the predictions, smaller is better.
+
+$$MAE(f,Q) = \frac{\Sigma_{q_i \in Q}\vert R(q_i) - f(q_i)\vert}{\vert Q \vert}$$
+
+\item The restraint subscale measures specific ED symptoms by looking at specific questions in the questionnaire, smaller is better.
+
+$$RMSE(f,U) = \sqrt{\frac{\Sigma_{u_i \in U}(R_{RS}(u_i) - f_{RS}(u_i))^2}{\vert U \vert}}$$
+
+\item The eating concern subscale measures specific ED symptoms by looking at specific questions in the questionnaire, smaller is better.
+
+$$RMSE(f,U) = \sqrt{\frac{\Sigma_{u_i \in U}(R_{ECS}(u_i) - f_{ECS}(u_i))^2}{\vert U \vert}}$$
+
+\item The shape concern subscale measures specific ED symptoms by looking at specific questions in the questionnaire, smaller is better.
+
+$$RMSE(f,U) = \sqrt{\frac{\Sigma_{u_i \in U}(R_{SCS}(u_i) - f_{SCS}(u_i))^2}{\vert U \vert}}$$
+
+\item The weight concern subscale measures specific ED symptoms by looking at specific questions in the questionnaire, smaller is better.
+
+$$RMSE(f,U) = \sqrt{\frac{\Sigma_{u_i \in U}(R_{WCS}(u_i) - f_{WCS}(u_i))^2}{\vert U \vert}}$$
+
+\item The global ED is a combination of the previous four subscales that attempts to capture the overall ED symptomology in an individual, smaller is better.
+
+$$RMSE(f,U) = \sqrt{\frac{\Sigma_{u_i \in U}(R_{GED}(u_i) - f_{GED}(u_i))^2}{\vert U \vert}}$$
 
 \end{enumerate}
 
 \myparagraph{Acceptable Error Metric Values} \label{bounds}
 
-The bounds for which error measures are considered acceptable will be based on the results other teams achieved in past eRisk competitions if the given task is a repeat. Our model should perform better than previous years. If the task is new, bounds will be determined through research into the accuracy of clinicians in these areas and the involvement of expert knowledge in the form of psychology faculty from the Université du Québec à Montréal. Our model should represent an improvement on clinicians’ diagnostic capabilities.
+The bounds for which error measures are considered acceptable will be based on a combination of the results other teams achieved in past eRisk competitions and a comparison against certain baselines like guessing an average answer for every prediction. Our model should perform better than previous years and outperform baselines in at least one metric.
 
 \myparagraph{Tests}
 
-In practice these four tests will rarely be run separately but as one automatic test suite as the output of each test is fed to the input of the next.
-
 \begin{enumerate}
 
-\item{FRT-ACC1-1\\}
+\item{FRT-INP-1\\}
 
 Control: Automatic
 
-Initial State: No models have been trained by the system yet, the eRisk training data is available to the system.
+Initial State: No models have been trained by the system yet, input data is available to the system.
 
-Input: The eRisk training data.
+Input: Data matching the organizational structure of eRisk competition Data in xml formatting
 
-Output: Three train/test splits where each train/test duo is composed of disjoint train and test sets whose union is all of the data in the original eRisk training data.
+Output: The model will run to completion and return all required outputs.
 
-Test Case Derivation: The system should properly split the data into train and test sets.
+Test Case Derivation: The system should run all functions and statements without halting runtime or throwing any errors.
 
-How test will be performed: The eRisk training data will be fed into the system, the system will create the splits. For each split a script will check that no element exists in both the train and test split and that all training data is accounted for between both sets.
+How test will be performed: The appropriate xml data will be fed into the system, the system should complete run without throwing any errors.
 
-\item{FRT-ACC1-2\\}
-
-Control: Automatic
-
-Initial State: No models have been trained by the system yet, three train/test splits have been created.
-
-Input: The three sets of training data.
-
-Output: The parameters and/or objects (ie. class instances) that represent trained models.
-
-Test Case Derivation: The system should train models on the train splits.
-
-How test will be performed: The three training sets will be fed into the system, the system will train a model on each set. A script will check that the models exist and can produce predictions for data in the training sets.
-
-\item{FRT-ACC1-3\\}
-
-control: Automatic
-
-Initial State: Three versions of the model have been trained on the relevant train sets.
-
-Input: The three corresponding test sets into the corresponding models.
-
-Output: Three sets of predictions.
-
-Test Case Derivation: The system should produce some sort of prediction.
-
-How test will be performed: The test data will be fed into the system and the system will use its trained models to produce a set of predictions. A script will check that there is a prediction for each test data point.
-
-\item{FRT-ACC1-4\\}
+\item{FRT-INP-2\\}
 
 Control: Automatic
 
-Initial State: Three sets of predictions have been produced by the system.
+Initial State: No models have been trained by the system yet, input data is available to the system.
 
-Input: The three sets of predictions and corresponding expected values.
+Input: Data matching the organizational structure of eRisk competition Data in jsonl formatting
 
-Output: A set of metrics formed by averaging together the metrics for each of the three sets, the specific metrics used will depend on the nature of the specific eRisk task (see section \ref{metrics}).
+Output: The model will run to completion and return all required outputs.
 
-Acceptability of Output: For the system to be acceptable to stakeholders these metrics must be better than some baseline value determined from either past eRisk submissions for similar tasks or through research into typical clinical results (see section \ref{bounds}).
+Test Case Derivation: The system should run all functions and statements without halting runtime or throwing any errors.
 
-Test Case Derivation: The system must reach specific accuracy measures to be considered acceptable to stakeholders.
+How test will be performed: The appropriate jsonl data will be fed into the system, the system should complete run without throwing any errors.
 
-How test will be performed: Predictions and expected values will be given to system, which will calculate the relevant error metrics and how much they outperform baseline error metrics.
+\item{FRT-T1-1\\}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 1 system yet, input data as jsonl files are available
+
+Input: The Task 1 Input data
+
+Output: The system will extract required sentences from the jsonl files and output data that is appropriate to be fed into Task 1.
+
+Test Case Derivation: The system will receive its input data, process then parse according to the Task's input format.
+
+How test will be performed: The tester will run the parser with the given jsonl files as input and compare the parsed data.
+
+\item{FRT-T1-2\\}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 1 system yet, past years input data, training data, and golden truth values are available
+
+Input: The Task 1 Training Data, Input data, and Golden Truth Values from a past year eRisk Competition
+
+Output: The system will output sentence ranking and diagnostic metrics based on the input data. 
+
+Test Case Derivation: The system will receive its training data and input data corresponding to a prior year. It's analysis will output RP and NDCG accuracy metrics.
+
+How test will be performed: The system should derive its training data and feature sets based on correlation to 21 depression symptoms of beck depression index. The outputted metrics will be compared to golden truth data to ensure the accuracy is within the desired bounds and is improving on prior year implementation.
+
+\item{FRT-T1-3\\}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 1 system yet, input data is available
+
+Input: The Task 1 Input data
+
+Output: The system will output sentence ranking and diagnostic metrics based on the input data to a txt file.
+
+Test Case Derivation: The system will make an analysis based off the provided input data and return each prediction to a test file in a specified formatting.
+
+How test will be performed: The system's output txt file will be verified that each entry is on its own line in the format "\{symptom\_number\}, Q0, \{sentence-id\}, \{position\_in\_ranking\}, \{score\}, \{system\_name\}".
+
+\item{FRT-T2-1\\}
+
+Control: Automatic
+
+Initial State: No models have been trained by the task 2 system yet, input data is available
+
+Input: The Task 2 Input data consisting of user posts
+
+Output: The system will output sentence ranking and diagnostic metrics based on the input data to a txt file.
+
+Test Case Derivation: The system will make an analysis based off the provided input data and return each prediction to a test file in a specified formatting.
+
+How test will be performed: The system's output txt file will be verified that each entry is on its own line in the format "\{Username\} \{prediction\}".
+
+\item{FRT-T2-2\\}
+
+Control: Automatic
+
+Initial State: The task 2 system has received input data on a given individual and made a corresponding prediction.
+
+Input: More data corresponding to the same user analyzed in the input state.
+
+Output: The system will output an updated prediction taking into account all data provided.
+
+Test Case Derivation: The system should create a new prediction for the chosen user taking into account all data provided.
+
+How test will be performed: The system should provide a prediction based off the original data input, after receiving new data, the system should combine posts made by the same user to create a new prediction. 
+
+\item{FRT-T3-1\\}
+
+Control: Manual
+
+Initial State: The task 3 model has been trained on a section of the training data provided by eRisk
+
+Input: A section of the training data that the model has not yet seen
+
+Output: The system will output predictions to a txt file where each line is of the format "\{Username\} \{prediction for Q1\} ... \{prediction for Q28\}"
+
+Test Case Derivation: The system should output predictions in the format required for the eRisk competition
+
+How test will be performed: A tester will run the system on the input data and verify that an output file is created and that it is of the correct format
+
+\item{FRT-T3-2\\}
+
+Control: Manual
+
+Initial State: The task 3 model has been trained on a section of the training data provided by eRisk
+
+Input: A section of the training data that the model has not yet seen
+
+Output: The system will output predictions to a txt file where each prediction should be between 0 and 6
+
+Test Case Derivation: The system should output predictions that conform to the questions on the EDE-Q questionnaire
+
+How test will be performed: A tester will run the system on the input data and verify that none of the predictions in the output file are less than 0 or greater than 6
+
+\item{FRT-T3-3\\}
+
+Control: Manual
+
+Initial State: The task 3 model has been trained on a section of the training data provided by eRisk and accuracy measures have been calculated for a baseline strategy where a score of 0 is guessed for every question
+
+Input: A section of the training data that the model has not yet seen
+
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
+
+Test Case Derivation: If the system fails to outperform a simple guess 0 strategy on at least one metric it is highly likely it does not have any actual prediction power
+
+How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
+
+\item{FRT-T3-4\\}
+
+Control: Manual
+
+Initial State: The task 3 model has been trained on a section of the training data provided by eRisk and accuracy measures have been calculated for a baseline strategy where a score of 6 is guessed for every question
+
+Input: A section of the training data that the model has not yet seen
+
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
+
+Test Case Derivation: If the system fails to outperform a simple guess 6 strategy on at least one metric it is highly likely it does not have any actual prediction power
+
+How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
+
+\item{FRT-T3-5\\}
+
+Control: Manual
+
+Initial State: The task 3 model has been trained on a section of the training data provided by eRisk and accuracy measures have been calculated for a baseline strategy where the average score for a question based on the training data is guessed
+
+Input: A section of the training data that the model has not yet seen
+
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
+
+Test Case Derivation: If the system fails to outperform a simple guess average strategy on at least one metric it is highly likely it does not have any actual prediction power
+
+How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
 
 \end{enumerate}
 
@@ -512,17 +668,49 @@ How test will be performed: The testers will review the entirely of the project 
 		Requirement traceability from S2 of SRS to testing in this document.
 
 		\begin{longtable}{|l|cccccccccccccccc|}
-			\caption{Traceability Between Functional Test Cases and Functional Requirements, FR-1 to FR-10}                                                                                                                                                                                                                           \\
+			\caption{Traceability Between Functional Test Cases and Functional Requirements, T1FR-1 to T3FR-4}                                                                                                                                                                                                                           \\
 			\hline
 			\textbf{Test IDs}   & \multicolumn{11}{c|}{\textbf{Functional Requirement IDs}}                                                                                                                                                                                                                                         \\
 			\hline
-			~                   & \textbf{FR1}                                              & \textbf{FR2} & \textbf{FR3} & \textbf{FR4} & \textbf{FR5} & \textbf{FR6} & \textbf{FR7} & \textbf{FR8} & \textbf{FR9} & \textbf{FR10}  \\
+			~                   & \textbf{T1FR-1}                                              & \textbf{T1FR-2} & \textbf{T1FR-3} & \textbf{T2FR-1} & \textbf{T2FR-2} & \textbf{T2FR-3} & \textbf{T2FR-4} & \textbf{T3FR-1} & \textbf{T3FR-2} & \textbf{T3FR-3}  \\
 			\hline
-			\textbf{FRT-ACC1-1}  & ~                                                         & ~            & ~            & ~            & ~            & X            & ~            & ~            & ~            & ~             \\
-			\textbf{FRT-ACC1-2}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & X            & ~            & ~            & ~             \\
-			\textbf{FRT-ACC1-3}  & X                                                         & X            & X            & X            & X            & ~            & ~            & X            & ~            & ~             \\
-			\textbf{FRT-ACC1-4}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & X            & X             \\
+   		\textbf{FRT-INP-1}  & X                                                         & ~            & ~            & X            & ~            & ~            & ~            & X            & ~            & ~             \\
+        	\textbf{FRT-INP-2}  & X                                                         & ~            & ~            & X            & ~            & ~            & ~            & X            & ~            & ~             \\
+          \textbf{FRT-T1-1}  & X                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\
+          \textbf{FRT-T1-2}  & ~                                                         & X            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\
+      	\textbf{FRT-T1-3}  & ~                                                         & ~            & X            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\
+            \textbf{FRT-T2-1}  & ~                                                         & ~            & ~            & ~            & X            & ~            & X            & ~            & ~            & ~             \\
+            \textbf{FRT-T2-2}  & ~                                                         & ~            & ~            & ~            & ~            & X            & ~            & ~            & ~            & ~             \\
+            \textbf{FRT-T3-1}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & X            & X             \\     
+            \textbf{FRT-T3-2}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & X            & X             \\     
+            \textbf{FRT-T3-3}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\     
+            \textbf{FRT-T3-4}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\     
+            \textbf{FRT-T3-5}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\     
 			\hline
+			
+		\end{longtable}
+		
+		\begin{longtable}{|l|ccc|}
+			\caption{Traceability Between Functional Test Cases and Functional Requirements, T3FR-4 to T3FR-6}                                                                                                                                                                                                                           \\
+			\hline
+			\textbf{Test IDs}   & \multicolumn{3}{c|}{\textbf{Functional Requirement IDs}}                                                                                                                                                                                                                                         \\
+			\hline
+			~                   & \textbf{T3FR-4} & \textbf{T3FR-5} & \textbf{T3FR-6}  \\
+			\hline
+   		\textbf{FRT-INP-1}  & ~ & ~ & ~ \\
+        	\textbf{FRT-INP-2}  & ~ & ~ & ~ \\
+          \textbf{FRT-T1-1}  & ~ & ~ & ~ \\
+          \textbf{FRT-T1-2}  & ~ & ~ & ~ \\
+      	\textbf{FRT-T1-3}  & ~ & ~ & ~ \\
+            \textbf{FRT-T2-1} & ~ & ~ & ~ \\
+            \textbf{FRT-T2-2} & ~ & ~ & ~ \\
+            \textbf{FRT-T2-1} & ~ & ~ & ~ \\     
+            \textbf{FRT-T3-2} & ~ & ~ & ~ \\     
+            \textbf{FRT-T3-3} & X & ~ & ~ \\     
+            \textbf{FRT-T3-4} & ~ & X & ~ \\     
+            \textbf{FRT-T3-5} & ~ & ~ & X \\     
+			\hline
+			
 		\end{longtable}
 
 		\begin{longtable}{|l|cccccccccccccccc|}
