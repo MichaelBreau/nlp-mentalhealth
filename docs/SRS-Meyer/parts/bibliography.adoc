@@ -3,3 +3,5 @@
 
 * [[[BM22,1]]] Bertrand Meyer. _Handbook of Requirements and Business Analysis_. Springer. 2022.
 * [[[RE97,2]]] Ian Sommerville and Peter Sawyer. _Requirements Engineering: A good Practice Guide_. Wiley. 1997.
+* [[[EROV,3]]] Javier Parapar, Patricia Martín-Rodilla, David E. Losada, and Fabio Crestan. _Overview of eRisk at CLEF 2022: Early Risk Prediction
+on the Internet (Extended Overview)_. Springer. 2022.

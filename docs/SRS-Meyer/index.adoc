@@ -12,6 +12,7 @@ include::metadata.adoc[]
 :unknown: icon:question-circle[]
 :clock: icon:clock-o[]
 :ec: icon:square-o[]
+:stem: latexmath
 
 
 include::parts/core.adoc[]
