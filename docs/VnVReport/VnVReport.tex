@@ -48,6 +48,8 @@
   Precision & the proportion of positive guesses that were correct\\
   Recall & the proportion of positive individuals that were correctly predicted\\
   F-score & combination of precision and recall\\
+  R-PREC & represents balancing recall and precision\\
+  NDCG & measures the effectiveness of a ranked list in information retrieval\\
   RMSE & Root Mean Square Error\\
   MZOE & Mean Zero-One Error\\
   MAE & Mean Absolute Error\\
@@ -70,7 +72,6 @@
 
 \pagenumbering{arabic}
 
-This document ...
 
 \section{Functional Requirements Evaluation}
 \subsection{Task 1}
@@ -336,19 +337,22 @@ Results: Passed
 A large portion of our validation is deploying our models for the eRisk 2024 competition to determine how well they perform compared to models from other participants. As the current competition is not over, the metrics to compare against were derived from the performances of teams from previous year eRisk competitions.
 
 \subsection{Task 1}
-Metrics were compared against tbd
+Metrics were compared against eRisk's 2022 Task 1: Search for symptoms of depression
 
 \subsubsection{Our Model}
 \begin{itemize}
-\item tbd
+\item R-PREC: 0.219
+\item NDCG: 0.683
 \end{itemize}
 
 \subsubsection{Best Performing Model from Previous Years}
 \begin{itemize}
-\item tbd
+\item R-PREC: 0.375
+\item NDCG: 0.596
 \end{itemize}
 
 \subsubsection{Discussion}
+In comparison to the accuracy metric of the 2022's best performing model for this task, which were 0.375 for R-PREC and 0.596 for NDCG. We outperformed it in terms of the NDCG metric with a value of 0.683 but lacking in R-PREC with a value of 0.219. The greater NDCG, which shows better performance in rating relevant phrases despite the lower R-PREC, highlights how well the system prioritizes the quality of relevant sentence placement. The best metric to use will rely on the particular objectives of the NLP work connected to depression, taking into account the trade-off between recall and precision. Although the recall precision score from the prior year was greater, indicating a better balance, our system performs very well in NDCG, emphasizing the importance of quality ranking for recognizing important sentences.
 
 
 \subsection{Task 2}
