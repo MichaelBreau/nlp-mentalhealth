@@ -370,31 +370,31 @@ The details of the metrics used for task 3 can be found in the SRS: section S2 t
 
 \begin{enumerate}
 
-\item MZOE evaluates what proportion of the predictions are incorrect.
+\item MZOE evaluates what proportion of the predictions are incorrect, smaller is better.
 
 $$MZOE(f,Q) = \frac{\vert\{q_i \in Q : R(q_i) \neq f(q_i)\}\vert}{\vert Q \vert}$$
 
-\item MAE evaluates the average error in the predictions.
+\item MAE evaluates the average error in the predictions, smaller is better.
 
 $$MAE(f,Q) = \frac{\Sigma_{q_i \in Q}\vert R(q_i) - f(q_i)\vert}{\vert Q \vert}$$
 
-\item The restraint subscale measures specific ED symptoms by looking at specific questions in the questionnaire.
+\item The restraint subscale measures specific ED symptoms by looking at specific questions in the questionnaire, smaller is better.
 
 $$RMSE(f,U) = \sqrt{\frac{\Sigma_{u_i \in U}(R_{RS}(u_i) - f_{RS}(u_i))^2}{\vert U \vert}}$$
 
-\item The eating concern subscale measures specific ED symptoms by looking at specific questions in the questionnaire.
+\item The eating concern subscale measures specific ED symptoms by looking at specific questions in the questionnaire, smaller is better.
 
 $$RMSE(f,U) = \sqrt{\frac{\Sigma_{u_i \in U}(R_{ECS}(u_i) - f_{ECS}(u_i))^2}{\vert U \vert}}$$
 
-\item The shape concern subscale measures specific ED symptoms by looking at specific questions in the questionnaire.
+\item The shape concern subscale measures specific ED symptoms by looking at specific questions in the questionnaire, smaller is better.
 
 $$RMSE(f,U) = \sqrt{\frac{\Sigma_{u_i \in U}(R_{SCS}(u_i) - f_{SCS}(u_i))^2}{\vert U \vert}}$$
 
-\item The weight concern subscale measures specific ED symptoms by looking at specific questions in the questionnaire.
+\item The weight concern subscale measures specific ED symptoms by looking at specific questions in the questionnaire, smaller is better.
 
 $$RMSE(f,U) = \sqrt{\frac{\Sigma_{u_i \in U}(R_{WCS}(u_i) - f_{WCS}(u_i))^2}{\vert U \vert}}$$
 
-\item The global ED is a combination of the previous four subscales that attempts to capture the overall ED symptomology in an individual.
+\item The global ED is a combination of the previous four subscales that attempts to capture the overall ED symptomology in an individual, smaller is better.
 
 $$RMSE(f,U) = \sqrt{\frac{\Sigma_{u_i \in U}(R_{GED}(u_i) - f_{GED}(u_i))^2}{\vert U \vert}}$$
 
