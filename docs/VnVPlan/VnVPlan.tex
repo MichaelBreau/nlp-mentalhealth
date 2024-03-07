@@ -40,6 +40,8 @@
 11/03/2023 & 1.0 & Revision 0\\
 1/08/2024 & 1.1 & Verbiage Changes \& adjustments to AI Guidelines \\
 3/03/2024 & 1.2 & Updated Tests to reflect updates to functional requirements \\
+3/04/2024 & 1.3 & Added more evaluation metrics and updated Tests to reflect updates to functional requirements \\
+3/04/2024 & 1.4 & Updated traceability table \\
 \bottomrule
 \end{tabularx}
 
@@ -64,6 +66,10 @@
   RMSE & Root Mean Square Error\\
   MZOE & Mean Zero-One Error\\
   MAE & Mean Absolute Error\\
+  RP & Reciprocal Rank\\
+  DCG & Discounted Cumulative Gain\\
+  IDCG & Ideal Discounted Cumulative Gain\\
+  NDCG & Normalized Discounted Cumulative Gain\\
   \bottomrule
 \end{tabular}\\
 
@@ -179,7 +185,7 @@ This section will outline the plan for verification and validation of a number o
   \subsection{Verification and Validation Team} \label{Verification and Validation Team}
 
   
-  The verification and validation team will consist of the core team members (Matthew, Jessica, Ben, Yaruo and Michael) along with the Capstone professor, the team's TA, Marie-Jean and Diego from the Montreal team, and Professor Mosser.  The core team will b responsible for creating test suites that ensure correctness in the solution along with catching possible bugs and issues that may arise. The team will be responsible for creating suitable edge cases to evaluate the correctness of the work along with general automated test suites that will be automatically deployed when new code is pulled.\\
+  The verification and validation team will consist of the core team members (Matthew, Jessica, Ben, Yaruo and Michael) along with the Capstone professor, the team's TA, Marie-Jean and Diego from the Montreal team, and Professor Mosser.  The core team will be responsible for creating test suites that ensure correctness in the solution along with catching possible bugs and issues that may arise. The team will be responsible for creating suitable edge cases to evaluate the correctness of the work along with general automated test suites that will be automatically deployed when new code is pulled.\\
   
   The core team will be responsible for creating all test suites, along with executing them and documenting the results. The team will also be responsible for making any changes that are required after testing the code. All core team members will have a hand in all sections of testing but different team members will have different focused responsibilities. Firstly, all core team members will be responsible for documenting the results of the automated test suites when their code enters the repository through a pull request. More specifically, Yaruo and Michaels main responsibility will be creating a set of tests including edge cases for the NLP model that will ensure that our model functions as expected for a wide variety of input data. They will be required to create test suites along with automated test suites that will be run periodically when pull requests happen. Jessica, Ben and Matthew on the other hand will have the primary responsibility for training the data vs a training data set in order to determine the accuracy of the model. They will also have the responsibility to ensure code structure in the test suites that are created along with organizing the suites while Yaruo and Michaels main role is coming up with and creating the tests.\\ 
   
@@ -356,6 +362,18 @@ $$SS_{res} = \sum_{i=1}^{n} (t_i - p_i)^2$$
 $$SS_{tot} = \sum_{i=1}^{n} (t_i - \text{mean}(T))^2$$
 $$R^2 = 1 - \frac{SS_{res}}{SS_{tot}}$$
 
+\item{Reciprocal Rank (RP)} is a measure used to evaluate the effectiveness of a ranked list of items. It is often used in the context of question answering or information retrieval systems:
+
+$$RP = \frac{1}{\text{rank}}$$
+
+\item{Normalized Discounted Cumulative Gain (NDCG)} is a metric used to evaluate the quality of a ranked list of items, considering both the relevance and the position of each item in the list:
+
+$$DCG = \sum_{i=1}^{n} \frac{2^{rel_i} - 1}{\log_2(i + 1)}$$
+$$IDCG = \sum_{i=1}^{n} \frac{2^{rel_i} - 1}{\log_2(i + 1)}$$
+$$NDCG = \frac{DCG}{IDCG}$$
+
+
+
 \end{enumerate}
 
 \myparagraph{Acceptable Error Metric Values} \label{bounds}
@@ -363,8 +381,6 @@ $$R^2 = 1 - \frac{SS_{res}}{SS_{tot}}$$
 The bounds for which error measures are considered acceptable will be based on the results other teams achieved in past eRisk competitions if the given task is a repeat. Our model should perform better than previous years. If the task is new, bounds will be determined through research into the accuracy of clinicians in these areas and the involvement of expert knowledge in the form of psychology faculty from the Université du Québec à Montréal. Our model should represent an improvement on clinicians’ diagnostic capabilities.
 
 \myparagraph{Tests}
-
-In practice these four tests will rarely be run separately but as one automatic test suite as the output of each test is fed to the input of the next.
 
 \begin{enumerate}
 
@@ -400,6 +416,20 @@ How test will be performed: The appropriate jsonl data will be fed into the syst
 
 Control: Automatic
 
+Initial State: No models have been trained by the task 1 system yet, input data as jsonl files are available
+
+Input: The Task 1 Input data
+
+Output: The system will extract required sentences from the jsonl files and output data that is appropriate to be fed into Task 1.
+
+Test Case Derivation: The system will receive its input data, process then parse according to the Task's input format.
+
+How test will be performed: The tester will run the parser with the given jsonl files as input and compare the parsed data.
+
+\item{FRT-T1-2\\}
+
+Control: Automatic
+
 Initial State: No models have been trained by the task 1 system yet, past years input data, training data, and golden truth values are available
 
 Input: The Task 1 Training Data, Input data, and Golden Truth Values from a past year eRisk Competition
@@ -410,7 +440,7 @@ Test Case Derivation: The system will receive its training data and input data c
 
 How test will be performed: The system should derive its training data and feature sets based on correlation to 21 depression symptoms of beck depression index. The outputted metrics will be compared to golden truth data to ensure the accuracy is within the desired bounds and is improving on prior year implementation.
 
-\item{FRT-T1-2\\}
+\item{FRT-T1-3\\}
 
 Control: Automatic
 
@@ -561,8 +591,9 @@ How test will be performed: The testers will review the entirely of the project 
 			\hline
    		\textbf{FRT-INP-1}  & X                                                         & ~            & ~            & X            & ~            & ~            & ~            & X            & ~            & ~             \\
         	\textbf{FRT-INP-2}  & X                                                         & ~            & ~            & X            & ~            & ~            & ~            & X            & ~            & ~             \\
-			\textbf{FRT-T1-1}  & ~                                                         & X            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\
-      	\textbf{FRT-T1-2}  & ~                                                         & ~            & X            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\
+          \textbf{FRT-T1-1}  & X                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\
+          \textbf{FRT-T1-2}  & ~                                                         & X            & ~            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\
+      	\textbf{FRT-T1-3}  & ~                                                         & ~            & X            & ~            & ~            & ~            & ~            & ~            & ~            & ~             \\
             \textbf{FRT-T2-1}  & ~                                                         & ~            & ~            & ~            & X            & ~            & X            & ~            & ~            & ~             \\
             \textbf{FRT-T2-2}  & ~                                                         & ~            & ~            & ~            & ~            & X            & ~            & ~            & ~            & ~             \\
             \textbf{FRT-T3-1}  & ~                                                         & ~            & ~            & ~            & ~            & ~            & ~            & ~            & X            & X             \\     
