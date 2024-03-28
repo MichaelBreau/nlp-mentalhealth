@@ -13,6 +13,8 @@
 \input{../Comments}
 \input{../Common}
 
+\usepackage[round]{natbib}
+
 \begin{document}
 
 \maketitle
@@ -23,7 +25,8 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-\today &  Benjamin Chinnery, Yaruo Tian & Initial Release\\
+September 24, 2023 &  Benjamin Chinnery, Yaruo Tian & Initial Release\\
+March 27, 2024 &  Jessica Dawson & Initial rework for Rev 1\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -31,53 +34,67 @@
 \section{Problem Statement}
 
 \subsection{Problem}
-As society grows to become more conscious of the ever-growing issues surrounding mental health, the demand for support services only seems to be increasing, especially in a post pandemic world, where more and more people are no longer satisfied with just having a higher visibility on their own mental health issues, they wish to actively work on themselves using support services. Unfortunately, many Canadians find themselves in remote communities where they are unable to receive the support they require. In responce a joint effort from Dr. Mosser's past teams, along with support from UQAM and several psychologists from around the world have developed methods and approaches to assist psychiatrists with diagnosing mental health issues.
 
-In this capstone project, the team will be designing and validating a Natural Language Processing architecture based off the works and methods described prior. This NLP would be capable of recognizing and diagnosing behaviour which displays signs of pathological gambling. Our team's goal is to successfully replicate and hopefully improve upon the results of the original studies, to eventually create an NLP architecture that would be capable of assisting mental health professionals in their field.
+As society grows to become more conscious of the ever-growing issues surrounding mental health, the demand for support services only increases, especially in a post pandemic world, where more and more people are no longer satisfied with just having a higher visibility on their own mental health issues, they wish to actively work on themselves using support services. Unfortunately, many Canadians find themselves in remote communities where they are unable to receive the support they require. Many of these people turn to the internet as a way to express their struggles and find support.
+
+This online activity represents an untapped body of information that could be used to assist in diagnosing and identifying mental health conditions quicker, helping mental health professionals work more efficiently and assist more people. Natural language processing (NLP), a branch of machine learning, can be used to analyze this online activity and make predictions relating to a mental health diagnosis. However research and development of tools in this area is lacking and more work is required. This capstone project will focus on developing tools and furthering research in this area to assist psychologists.
+
+%In responce a joint effort from Dr. Mosser's past teams, along with support from UQAM and several psychologists from around the world have developed methods and approaches to assist psychiatrists with diagnosing mental health issues.
+%
+%In this capstone project, the team will be designing and validating a Natural Language Processing architecture based off the works and methods described prior. This NLP would be capable of recognizing and diagnosing behaviour which displays signs of pathological gambling. Our team's goal is to successfully replicate and hopefully improve upon the results of the original studies, to eventually create an NLP architecture that would be capable of assisting mental health professionals in their field.
 
 \subsection{Inputs and Outputs}
-At a high level, the inputs for the system's initialization would be the data provided from the Early Risk Prediction on the Internet (eRisk) initiative, this data would be used alongside the prior studies done by the team to train the Natural Language Processor. Once the system has been trained, it would require text communications of people speaking to mental health services, to analyze these texts and produce an output.
 
-This output would be using its natural language processing abilities to assist psychiatrists by pointing out behaviour of people who display warning signs of Mental Health issues such as gambling addiction.
+The system built in this capstone project will take the posts written by a person in online forums and provide predictions relating to various mental health diagnoses the person may have. These predictions will be of a form that can assist mental health professionals in reaching an accurate diagnosis quickly.
+
+%At a high level, the inputs for the system's initialization would be the data provided from the Early Risk Prediction on the Internet (eRisk) initiative, this data would be used alongside the prior studies done by the team to train the Natural Language Processor. Once the system has been trained, it would require text communications of people speaking to mental health services, to analyze these texts and produce an output.
+%
+%This output would be using its natural language processing abilities to assist psychiatrists by pointing out behaviour of people who display warning signs of Mental Health issues such as gambling addiction.
 
 \subsection{Stakeholders}
-A major external stakeholder for this project would be the CLEF eRisk Organizers. They are responsible for providing project guidelines, datasets and performs evaluation of the project. Meeting their specifications and requirements is essential for the project's success. Secondly, the dataset involves potential "pathological gamblers" which are the researched communities. These individuals are also considered the external stakeholders.
 
-Few important internal stakeholders to note are ourselves, the student developers of the project, Dr.Sebastien Mosser, researchers of UQAM (University of Quebec in Montreal), and few psychologists from around the world. These individuals have a direct interest in the project's operation and success.
+The primary stakeholders for this project are psychiatrists and other researchers in this space. The tools we build have the potentially to directly benefit psychiatrists who will be able to work more efficiently. The techniques and approaches we try also directly impacts researchers in this space who may build upon or reference our work in the future.
+
+Secondary stakeholders are people searching for a mental health diagnosis. More efficient and effective mental health professionals means more patients seen and less time bouncing around diagnoses trying to find the correct one.
+
+Tertiary stakeholders include government and professional organizations  dedicated to privacy concerns and patient confidentiality. A system in this space has to conform to various regulations and rules to not breach the privacy of patients.
+
+%A major external stakeholder for this project would be the CLEF eRisk Organizers. They are responsible for providing project guidelines, datasets and performs evaluation of the project. Meeting their specifications and requirements is essential for the project's success. Secondly, the dataset involves potential "pathological gamblers" which are the researched communities. These individuals are also considered the external stakeholders.
+%
+%Few important internal stakeholders to note are ourselves, the student developers of the project, Dr.Sebastien Mosser, researchers of UQAM (University of Quebec in Montreal), and few psychologists from around the world. These individuals have a direct interest in the project's operation and success.
 
 \subsection{Environment}
 \subsubsection{Hardware}
 \begin{itemize}
-    \item The product will be supported on desktops and laptops with connections to the servers that CLEF eRisk 2023 provides to us. 
+    \item The systems will be supported on desktops and laptops with connections to the servers that CLEF eRisk 2023 provides to us. 
 \end{itemize}
 
 \subsubsection{Software}
 \begin{itemize}
-    \item The product will be supported on Windows and macOS. 
+    \item The system will be supported on Windows and macOS. 
 \end{itemize}
 
 \section{Goals}
-\subsection{Ease of Use}
-In terms of operations, the product should be intuitive and require no further instructions from the external stakeholders such as CLEF eRisk Organizers.
 
-\subsection{Natural Language Processing}
-The product should use Natural Language Processing techniques to accurately determine which users have commited pathological gambling.
+\subsection{Ease of Setup}
+The system should not be difficult to set up and get running.
 
-\subsection{Training on eRisk dataset}
-The product should be able to process and analyze the test dataset and server data of pathological gamblers and non-pathological gamblers provided by eRisk.
+\subsection{Accuracy}
+The system should outperform prior research and/or certain baselines in at least one area. The exact details of these areas, prior research, baselines, and what it means to outperform will depend on the specific diagnosis task the system is performing and will be expanded on more in the project's SRS \citep{CogCareCrewSRS}.
 
 \subsection{Safety of Data}
 The product should never leak personal data of any user being analyzed.
 
 \section{Stretch Goals}
 
-\subsection{Detection accuracy}
-The detected pathological gamblers of the product matches with the actual pathological gamblers 100\% of the time.
-
-\subsection{Detect other disorders}
-In addition of pathological gambling, the product could also perform other tasks provided by CLEF eRisk (TBA).
+\subsection{Improved Accuracy}
+The system should outperform prior research and/or certain baselines in more than one area. Again see the SRS \citep{CogCareCrewSRS} for more details.
 
 \subsection{Support for public usage}
 The product could have an user interface that allows general public could enter their own inputs and able to generate an accurate result.
+
+\bibliographystyle{plainnat}
+
+\bibliography{../../refs/References}
 
 \end{document}
