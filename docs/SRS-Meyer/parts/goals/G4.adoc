@@ -9,10 +9,11 @@ The requirements listed represent the core functionality of the Natural Language
 
 **Functional Requirements**
 
-- **Process Training Data:** The system will process training data to be used later on for natural language processing.
-- **Natural Language Processing:** The system will process data using a natural language processing model to determine if the messages exhibit early signs of mental health issues.
-- **Precise Detection of Early Signs**: The system should replicate similar key performance indicators to be competitive with past eRisk competition participants in various detection tasks (less than 100% difference).
+- **Detecting Signs of Depression:** The system will be able to rank a set of written sentences based on how related they are to various symptoms of depression.
+- **Early Detection of Anorexia:** The system will be able to predict whether an individual shows signs of anorexia based on their online posting history. The system will aim to do this quickly, in other words, with as few posts as possible.
+- **Detecting Signs of Eating Disorders**: The system will be able to fill out a copy of the Eating Disorder Examination Questionnaire (the EDE-Q) for an individual based on their online posting history.
 
 **Non-Functional Requirements**
 
-- **Security of Data**: Due to the nature of the data used with training as well as for detection purposes, the system should be free from security risks that could compromise the data.
+- **Security of Data**: The system should maintain privacy standards and not leak confidential information (see section E.3 "Data Privacy Regulations" for more information).
+

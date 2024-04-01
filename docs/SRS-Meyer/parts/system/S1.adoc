@@ -5,7 +5,6 @@ ifdef::env-draft[]
 TIP: _Overall structure expressed by the list of major software and, if applicable, hardware parts._  <<BM22>>
 endif::[]
 
-- **Text Pre-Processing Component**: Text is processed with the following methods: Tokenization, Lowercasing, Stopword Removal, and Stemming or Lemmatization.
-- **Vectorization Component**: Converting words/tokens into numerical vectors.
-- **Prediction Component**: Generate a prediction on wether there are early signs of gambling addiction present in the text.
-- **Output Component**: Due to a lack of a need for usability, the output will be printed to the console.
+- **Depression Component**: Handles the ranking of sentences based on depression symptoms, takes in a database of sentences and returns a ranking of the sentences for each symptom.
+- **Anorexia Component**: Handles the quick identification of anorexia in an individual, takes in an individuals posting history one post at a time and returns a warning when it is confident it has identified signs of anorexia.
+- **Eating Disorders Component**: Handles filling out a copy of the EDE-Q for an individual, takes in an individuals posting history and returns a filled questionnaire.
