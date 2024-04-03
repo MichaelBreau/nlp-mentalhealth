@@ -73,8 +73,7 @@ image::equations/MAE.png[scale=50%,align="center"]
 Again, each user produces a single _MAE_ score and the reported _MAE_ is the average
 over all _MAE_ values (mean _MAE_ over all users).
 
-The following measures are based on aggregated scores obtained from the questionnaires.
-Further details about the EDE-Q instruments can be found in appendix A.
+The following measures are based on aggregated scores obtained from the EDE-Q questionnaires.
 
 - Restraint Subscale (RS): Given a questionnaire, its restraint score is obtained as the
 mean response to the first five questions. This measure computes the RMSE between the
