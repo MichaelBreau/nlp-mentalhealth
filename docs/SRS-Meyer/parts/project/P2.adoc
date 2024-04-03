@@ -5,16 +5,5 @@ ifdef::env-draft[]
 TIP: _Any a priori choices binding the project to specific tools, hardware, languages or other technical parameters. Not all technical choices in projects derive from a pure technical analysis; some result from company policies. While some project members may dislike non-strictly-technical decisions, they are a fact of project life and must be documented, in particular for the benefit of one of the quality factors for requirements: "requirements must be justified"._  <<BM22>>
 endif::[]
 
-Our prior choices were largely decided through technical analysis of the tools, industry best practices, company policies and relevance, and familiarity with the tools.
+From our research and the advice of our supervision team it was determined that the majority of libraries and common tools for natural language processing are written for python. As such the system will be written in python to maximize the number of available techniques that can be explored. This will also allow for easy interoperability with the ops team who have made the choice to use python as well.
 
-- **Programming Language**: We will be primarily using Python for our main programming language. This is the most common language to be used for machine learning and all of the previous coding infrastructure we have to work with is written in Python as well so Python is an obvious and necessary choice for our programming language.
-
-- **Version Control**: GitHub will be our version control vehicle of choice for this project. We have a repository with just this group for the document and reporting side of the project and we also have a shared repository with Professor Mosser, the Ops team and the team in Montreal as well for our actual code.
-
-- **Testing**: Pytest will be used to validate code.
-
-- **Linter**: We will be using Pylint as our linter of choice to ensure code quality
-
-- **Framework**: The frameworks we will be utilizing for this project will stem from what was used by Professor Mossers team in past iterations of this competition. We will be utilizing the Torch machine learning framework 
-
-- **Libraries**: There are a number of libraries that have been used for previous years iterations of this competition by Professor Mossers team. We plan on sticking with these as best practices and to keep consistency. These Libraries include pandas for data manipulation and analysis, Gensim for a number of NLP functionalities and scikit-learn for machine learning as well.
