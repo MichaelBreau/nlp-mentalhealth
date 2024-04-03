@@ -16,4 +16,5 @@ endif::[]
 scientific publication derived from the use of this collection should explicitly refer to: D. Losada, F. Crestani. A Test Collection for Research on Depression and Language Use. Conference and Labs of the Evaluation Forum (CLEF), Évora, Portugal, 2016.
 . You shall not use results obtained through the use of the collection for profitable purposes including advertisement and/or defamatory or slanderous purposes.
 . If we or the copyright holders request you to discontinue the use of the collection, or your use of the collection is deemed to be in violation of this agreement, you shall immediately discontinue use of the collection and promptly delete the collection and all data obtained by processing it from any computer or media onto which it has been copied.
+- *eRisk Specification* The system must follow ERisk’s output specification in order to be able to submit to the competition.
 
