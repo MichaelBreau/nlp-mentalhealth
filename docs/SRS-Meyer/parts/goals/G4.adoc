@@ -9,9 +9,11 @@ The requirements listed represent the core functionality of the Natural Language
 
 **Functional Requirements**
 
-- **Detecting Signs of Depression:** The system will be able to rank a set of written sentences based on how related they are to various symptoms of depression.
-- **Early Detection of Anorexia:** The system will be able to predict whether an individual shows signs of anorexia based on their online posting history. The system will aim to do this quickly, in other words, with as few posts as possible.
-- **Detecting Signs of Eating Disorders**: The system will be able to fill out a copy of the Eating Disorder Examination Questionnaire (the EDE-Q) for an individual based on their online posting history.
+The functionality of the system is built around each of eRisk's three tasks for the year:
+
+- **Detecting Signs of Depression:** The system will be able to rank a set of written sentences based on how related they are to the 21 symptoms of depression laid out in the Beck Depression Inventory (the BDI) <<BDI>>. The system should produce a separate ranking for each of the 21 symptoms.
+- **Early Detection of Anorexia:** The system will be able to predict whether an individual shows signs of anorexia based on their online posting history. The system will do this post by post, like it is monitoring an individuals online activity in real-time, and will attempt to make the prediction as quickly as possible.
+- **Detecting Signs of Eating Disorders**: The system will be able to fill 22 of the 28 questions on the Eating Disorder Examination Questionnaire (the EDE-Q, for an overview see: https://www.corc.uk.net/outcome-experience-measures/eating-disorder-examination-questionnaire-ede-q/) <<EDEQ1>><<EDEQ2>> for an individual based on their online posting history. The six questions that were left out of the questionnaire, questions 13 to 18, do not follow the same answer format as the rest of the questions, a 0 to 6 rating of severity, and ask for an arbitrary number instead. These questions were likely omitted to make the task more focused.
 
 **Non-Functional Requirements**
 
