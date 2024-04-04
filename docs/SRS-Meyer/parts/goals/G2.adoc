@@ -5,7 +5,9 @@ ifdef::env-draft[]
 TIP: _Current state of processes to be addressed by the project and the resulting system. It describes the current situation, upon which the system is expected to improve_  <<BM22>>
 endif::[]
 
-There are currently no tools currently existing that utilize machine learning and online posting history to make predictions about mental health issues. This area of research is quite new and exploration is still ongoing, hence why competitions like eRisk exist.
+Currently, it can be a very difficult task to diagnose people with mental health conditions. If you are suffering from a mental health condition, it can often be hard to even originally reach out for help, and it is easy to feel isolated and alone. Due to this, many people never reach out to anyone and suffer alone especially in this post pandemic world where people still often feel very isolated as a hangover effect of the pandemic isolation. That is why it is so important to be able to identify the people who need help and offer them said help.
+
+Currently there is no good system that will help you identify potential early warning signs of mental health issues based on a person’s online posting history. eRisk has been working on developing an interdisciplinary research field that aims to be applicable to a wide range of situations and to many different personal profiles. These can be used to help identify potential online predators, people with suicidal inclinations, or people that are susceptible to depression.
 
 eRisk has been running since 2017 and has grown from having just one proposed task to now having three each year. Each year the competition releases labelled training data for each task in late December, the teams then have until April to develop their models before they run them on unlabelled test data eRisk releases. The results the models produce on this test data are submitted to the competition for evaluation and results are released in May. Each task is built around predicting mental health indicators from online posts but each explores a different facet of this process. The tasks for this year are as follows:
 

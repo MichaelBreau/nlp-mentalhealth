@@ -7,5 +7,7 @@ endif::[]
 
 This project aims to benefit this area of research by contributing to the literature surrounding the eRisk competition and machine learning techniques for detection of mental health issues. The team intends to build a rudimentary system, unlikely to be fit for actual clinical use, that helps advance this area of research and serve as a proof of concept for future endeavours.
 
+The implementation of a natural language processing model that can detect early signs of mental health issues will have multiple benefits to its stakeholders. By participating in eRisk, the system aims to benefit eRisk and its participants by providing any information that could possibly provide useful for furthering this research topic. The system intends to benefit individuals who are affected by mental health issues by detecting early signs of these issues before they lead to a point that is irrecoverable for the individual.
+
 .Goal Model Diagram for {project-title}
 image::models/goals.svg[scale=50%,align="center"]
