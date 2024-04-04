@@ -10,6 +10,7 @@ on the Internet (Extended Overview)_. Springer. 2022.
 
 Matthew Curtis::
 
+In order to learn more and develop my skills regarding python scripts for parsing and checking files I took a couple of key steps. I think these skills are very important because we are given very large files to work with for this project and need to parse these files effectively including splitting them into separate parts and labeling them correctly. I love big data so this was right up my alley so I wanted to take the initiative into looking more into these skills.The largest step I took to deepen my understanding of this skill was first to complete the “Parsing Data in Python: A Tutorial for Beginners” from Pierian Training. This was very useful to refresh my memory and help me get in the right mental state for developing said scripts for parsing files. It also helped refresh my mind of the basics. Once that was done, to move onto slightly more complicated parsing I followed and read “Parsing text with Python” by vipinajayakumar. This was extremely helpful and more focused on more complex parsing then just the basics. I then moved on to practicing parsing the input data we had for testing in different ways. I practiced different manipulation techniques I learned from the two articles above and played with the output to get a deeper feel.
 
 Jessica Dawson::
 
