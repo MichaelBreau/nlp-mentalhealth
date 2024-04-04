@@ -5,3 +5,22 @@
 * [[[RE97,2]]] Ian Sommerville and Peter Sawyer. _Requirements Engineering: A good Practice Guide_. Wiley. 1997.
 * [[[EROV,3]]] Javier Parapar, Patricia Martín-Rodilla, David E. Losada, and Fabio Crestan. _Overview of eRisk at CLEF 2022: Early Risk Prediction
 on the Internet (Extended Overview)_. Springer. 2022.
+
+== Reflections
+
+Matthew Curtis::
+
+A knowledge area that I thought was imperative to acquire for success was a deeper understanding of vectors, how to manipulate them, and how they can be used in the NLP process. Task 1’s main approach we were looking at involved treating each symptom as a vector and each sentence as a vector and comparing them but for that I thought we needed a deeper knowledge of vectors and their formation. For this the main two methods I used were watching youtube videos and reading articles on vectors and nlp vectorization. To understand the basics I read the article “Understanding NLP Word Embeddings - Text Vectorization” on towardsdatascience.com which was very helpful in gaining a basic technical knowledge about vectors and vectors in the NLP space. Then I wanted a different method of learning so I wanted some youtube videos first about vectors themselves, then about vectorization and how it is used in NLP. I also watched “Word Embedding - Natural Language Processing| Deep Learning” by Krish Naik on youtube which gave me a lot of insight into how the whole process comes together and how vectors are used for word embeddings. Lastly, I looked at the article “Vectorization Techniques in NLP [Guide]” by neptune.ai to see specific examples of how vectors can be used and manipulated for NLP purposes. This was very important for me to actually see the possible use cases.
+
+
+Jessica Dawson::
+
+
+Michael Breau::
+
+
+Benjamin Chinnery::
+
+
+Yaruo Tian::
+
