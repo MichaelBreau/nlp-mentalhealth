@@ -5,3 +5,36 @@
 * [[[RE97,2]]] Ian Sommerville and Peter Sawyer. _Requirements Engineering: A good Practice Guide_. Wiley. 1997.
 * [[[EROV,3]]] Javier Parapar, Patricia Martín-Rodilla, David E. Losada, and Fabio Crestan. _Overview of eRisk at CLEF 2022: Early Risk Prediction
 on the Internet (Extended Overview)_. Springer. 2022.
+
+== Reflections
+
+1. What knowledge and skills will the team collectively need to acquire to successfully complete this capstone project? Examples of possible knowledge to acquire include domain specific knowledge from the domain of your application, or software engineering knowledge, mechatronics knowledge or computer science knowledge. Skills may be related to technology, or writing, or presentation, or team management, etc. You should look to identify at least one item for each team member.
+
+The knowledge and skills required include: NLP Architecture (Multiple different methods), File Parsing, NLP evaluation skills, Mental Health Knowledge, etc...
+
+2. For each of the knowledge areas and skills identified in the previous question, what are at least two approaches to acquiring the knowledge or mastering the skill? Of the identified approaches, which will each team member pursue, and why did they make this choice? 
+
+Matthew Curtis::
+
+A knowledge area that I thought was imperative to acquire for success was a deeper understanding of vectors, how to manipulate them, and how they can be used in the NLP process. Task 1’s main approach we were looking at involved treating each symptom as a vector and each sentence as a vector and comparing them but for that I thought we needed a deeper knowledge of vectors and their formation. For this the main two methods I used were watching youtube videos and reading articles on vectors and nlp vectorization. To understand the basics I read the article “Understanding NLP Word Embeddings - Text Vectorization” on towardsdatascience.com which was very helpful in gaining a basic technical knowledge about vectors and vectors in the NLP space. Then I wanted a different method of learning so I wanted some youtube videos first about vectors themselves, then about vectorization and how it is used in NLP. I also watched “Word Embedding - Natural Language Processing| Deep Learning” by Krish Naik on youtube which gave me a lot of insight into how the whole process comes together and how vectors are used for word embeddings. Lastly, I looked at the article “Vectorization Techniques in NLP [Guide]” by neptune.ai to see specific examples of how vectors can be used and manipulated for NLP purposes. This was very important for me to actually see the possible use cases.
+
+
+Jessica Dawson::
+
+I will be working to learn what the current state of techniques are in NLP and the eRisk competition so I can better orient myself and my work. I will do this by reading past research papers and search for anything I do not understand through google.
+
+
+Michael Breau::
+
+Since I will be working on the binary classification for anorexia I will be looking specifically into natural language processing methods that are more focused on classification. One way to gain this knowledge is from the BERTopic documentation page which is a python library used for topic modeling which can be used in a classification pipeline. The other method is from the sckit-learn documentation page which is another python library but used specifically for training and classifying documents which is directly related to the binary classification problem.
+
+
+Benjamin Chinnery::
+
+A skill that I found necessary in regards to project management, is trying to learn more about the process required for two distinct teams operating in unison. For the final project to be efficient, it is imperative that both the NLP team and the OPS team have good synergy and understanding of each other's goals. Difficulties arise in the sense that although each group member has a level of control over their own group, it’s important to also have some sort of central management that can guide the progress of the other team, without delving too far from your personal responsibilities. It is important to not extend oneself too far both because the other team would not want to take orders from someone who isn’t as intimately familiar with their task, and because it is important to not overencomber oneself and lose sight of keeping their own project on track. To improve my inter-team project management skills, I could refer to past year guides for the competition and attempt to translate their process into something that's more applicable. Alternatively, while the prior approach holds some merit, I believe a more effective strategy would be to opt for more open communication with the teams through a liaison and use the existing capstone management guidelines as a basis.
+
+
+Yaruo Tian::
+
+I needed a compounding of domain specific knowledge and technical skills. Firstly, acquiring general knowledge and having a general idea in mental health and wellness is crucial. Understanding the symptoms, risk factors associated with depression will provide the basis for designing an effective NLP system that will accurately predict depression symptoms. Additionally, knowledge of existing research and literature on depression prediction models and NLP techniques applied in healthcare contexts will be valuable as this will provide a platform to work towards and on top of. This can be achieved by finishing self study of academic papers, online courses, or consultations with experts in the field. Furthermore, gaining insights into right considerations and regulations surrounding mental health information will also be beneficial. On the technical side, understanding where and how to use natural language processing techniques and machine learning algorithms is crucial to the success of this capstone project. Acquiring skills in information preprocessing and developing models is essential to build accurate prediction models. Online courses could be found on YouTube and active projects in NLP and machine learning could aid these skills. Additionally, gaining experience with applicative programming languages and frameworks such as Python, Numpy, Scikit-Learn and TensorFlow will also streamline the development of the capstone project.
+
