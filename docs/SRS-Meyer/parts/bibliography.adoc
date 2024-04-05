@@ -3,8 +3,15 @@
 
 * [[[BM22,1]]] Bertrand Meyer. _Handbook of Requirements and Business Analysis_. Springer. 2022.
 * [[[RE97,2]]] Ian Sommerville and Peter Sawyer. _Requirements Engineering: A good Practice Guide_. Wiley. 1997.
-* [[[EROV,3]]] Javier Parapar, Patricia Martín-Rodilla, David E. Losada, and Fabio Crestan. _Overview of eRisk at CLEF 2022: Early Risk Prediction
-on the Internet (Extended Overview)_. Springer. 2022.
+* [[[BDI, 3]]] Beck, A. T., Ward, C. H., Mendelson, M., Mock, J., & ERBAUGH, J. _An inventory for measuring depression_. Archives of general psychiatry. 1961. https://arc.psych.wisc.edu/self-report/beck-depression-inventory-bdi/
+* [[[EDEQ1,4]]] Fairburn CG, Beglin SJ. _Assessment of eating disorder psychopathology: Interview or self-report questionnaire? International Journal of Eating Disorders_. 1994. https://doi.org/10.1002/1098-108X(199412)16:4%3C363::AID-EAT2260160405%3E3.0.CO;2-%23
+* [[[EDEQ2,5]]] Fairburn CG, Beglin S. _Eating disorder examination questionnaire_. In: Fairburn CG, editor. _Cognitive behavior therapy and eating disorders_. New York, NY: Guilford Press; 2008.
+* [[[EDE,6]]] Fairburn CG, Cooper Z. _The eating disorder examination_. In: Fairburn C, Wilson GT, editors. _Binge eating: nature assessment and treatment_. 12. New York, NY: Guilford Press; 1993. 
+* [[[EROV,7]]] Javier Parapar, Patricia Martín-Rodilla, David E. Losada, and Fabio Crestan. _Overview of eRisk at CLEF 2022: Early Risk Prediction
+on the Internet (Extended Overview)_. Springer. 2022. https://ceur-ws.org/Vol-3180/paper-66.pdf
+* [[[PIPEDA,8]]] _Personal Information Protection and Electronic Documents Act_. S.C. 2000, c. 5. https://laws-lois.justice.gc.ca/eng/acts/P-8.6/index.html
+* [[[PHIPA,9]]] _Personal Health Information Protection Act_. S.O. 2004, c. 3. https://www.ontario.ca/laws/statute/04p03 
+* [[[ERDATA,10]]] D. Losada, F. Crestani. _A Test Collection for Research on Depression and Language Use. Conference and Labs of the Evaluation Forum (CLEF)_. Évora, Portugal, 2016.
 
 == Reflections
 

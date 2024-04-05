@@ -5,12 +5,16 @@ ifdef::env-draft[]
 TIP: _Obligations and limits imposed on the project and system by the environment. This chapter defines non-negotiable restrictions coming from the environment (business rules, physical laws, engineering decisions), which the development will have to take into account._  <<BM22>>
 endif::[]
 
-- *Resource Constraint*: The final NLP models must be able to run on Canada Compute Servers without external processes running in conjunction.
-
-- *Data Regulatory Constraint*: The system must be built to handle and process different sizes of data provided by ERisk and process them while abide by the set of rules that eRisk defined, such as the General Data Protection Regulation (GDPR).
-
-- *Time Constraint*: The system must be built following the schedule of the ERisk's important dates, such as releasing training data and deployment on servers.
-
-- *Compatibility* The system must follow ERisk's specification during deployment and testing phases in order to qualify for the program.
-
+- *Data Privacy Regulations*: The system must adhere to the regulations of the Personal Information Protection and Electronic Documents Act <<PIPEDA>> of Canada which governs how personal information can be used by organizations in Canada, and the Personal Health Information Protection Act <<PHIPA>> of Ontario which governs how personal health information can be used by organizations in Ontario.
+- *eRisk Privacy Agreement*: The system must conform to the terms laid out in the eRisk data usage agreement, which are as follows:
+. The information may only be used for research purposes. Portions of the data maybe copyrighted, and may also have commercial value as data, so you must be careful to use it only for research purposes.
+. Summaries, analyses and interpretations of the linguistic properties of the information may be derived and published, provided it is not possible to reconstruct the information from these summaries.
+. You may not try to identify the individuals whose texts are included into this dataset. You may not cross-reference individuals with the dataset against any other dataset or collection of data. You may not try to establish any kind of contact with the individuals of this dataset.
+. You are not permitted to publish any portion of the dataset (e.g. example post) other than summary statistics, or share it with anyone else.
+. We grant you the right to access the collection's content in the manner described in this agreement. You may not otherwise make unauthorized commercial use of, reproduce, prepare derivative works, distribute copies, perform, or publicly display the collection or parts of it.
+. You may present research findings concerning knowledge obtained using the collection provided that the aforementioned presentation is within the limits of this agreement. Any
+scientific publication derived from the use of this collection should explicitly refer to: D. Losada, F. Crestani. A Test Collection for Research on Depression and Language Use. Conference and Labs of the Evaluation Forum (CLEF), Évora, Portugal, 2016.
+. You shall not use results obtained through the use of the collection for profitable purposes including advertisement and/or defamatory or slanderous purposes.
+. If we or the copyright holders request you to discontinue the use of the collection, or your use of the collection is deemed to be in violation of this agreement, you shall immediately discontinue use of the collection and promptly delete the collection and all data obtained by processing it from any computer or media onto which it has been copied.
+- *eRisk Specification* The system must follow ERisk’s output specification in order to be able to submit to the competition.
 

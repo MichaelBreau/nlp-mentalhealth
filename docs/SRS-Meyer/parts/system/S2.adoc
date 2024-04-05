@@ -41,16 +41,15 @@ Functional Requirements:
 
 **General Functional Requirements:**
 
-- T3FR-1: The system will be able to parse jsonl files.
+- T3FR-1: The system will be able to parse jsonl files of an individual's post history.
 - T3FR-2: The system will make predictions given a set of a user's posts.
-- T3FR-3: The system will send the predictions to a txt file in the format "{username} {prediction (0-6) for Q1} ... {prediction (0-6) for Q28}" with each entry being on a separate line.
+- T3FR-3: The system will send the predictions to a txt file in the format "{username} {prediction (0-6) for Q1} ... {prediction (0-6) for Q28}" with each individual being on a separate line.
 
 **Accuracy Functional Requirements:**
 
-These functional requirements cover how the accuracy of the model will be evaluated. Some background information
-on chosen accuracy metrics and evaluation methodology will be supplied.
+These functional requirements cover how the accuracy of the model will be evaluated. These requirements involve evaluating the system's performance against a set of three baselines: guess zero for every question, guess six for every question, and guess the average for every question. If the system fails to outperform these baselines it does not represent an improvement over guessing and will be considered a failure.
 
-The following is taken from <<EROV>> and discusses the metrics that will be used to evaluate acuracy for task 3:
+Performance will be evaluated on a number of metrics, the following is taken from <<EROV>> and discusses the metrics that will be used to evaluate accuracy for task 3:
 
 Evaluation is based on the following effectiveness metrics:
 
@@ -74,8 +73,7 @@ image::equations/MAE.png[scale=50%,align="center"]
 Again, each user produces a single _MAE_ score and the reported _MAE_ is the average
 over all _MAE_ values (mean _MAE_ over all users).
 
-The following measures are based on aggregated scores obtained from the questionnaires.
-Further details about the EDE-Q instruments can be found in appendix A.
+The following measures are based on aggregated scores obtained from the EDE-Q questionnaires.
 
 - Restraint Subscale (RS): Given a questionnaire, its restraint score is obtained as the
 mean response to the first five questions. This measure computes the RMSE between the
@@ -119,11 +117,11 @@ metric computes the RMSE between the real and an estimated global ED scores as f
 +
 image::equations/GED.png[scale=50%,align="center"]
 
-The accuracy of the model will be evaluated by comparing between the value of these metrics for the model's predictions
-and the values of these metrics for answering zero for all questions, answering six for all questions, or answering the average score for each question.
-If the model fails to outperform any of these guessing strategies in any metrics then it is not providing any increase in accuracy.
+MAE is the most important metric out of all of these as it gives the clearest picture of how well the system is performing overall. MZOE is less valuable as it only shows how many answers the system got exactly right, having a good MZOE but a bad MAE isn't a good result as getting a solid amount of answers exactly right but all the others very wrong is not desirable behaviour. The measures based on aggregated scores are useful for seeing what parts of the questionnaire the system is good at predicting for, but again, if any of these metrics are good while MAE is poor this does not represent desirable behaviour. The system should outperform the three baselines on MAE or at least tie them on MAE and outperform on another metric.
 
-- T3FR-4: The model will outperform guessing all zeros on at least one of the above accuracy metrics.
-- T3FR-5: The model will outperform guessing all sixes on at least one of the above accuracy metrics.
-- T3FR-6: The model will outperform guessing the average on at least one of the above accuracy metrics.
+This leads to a set of three accuracy requirements:
+
+- T3FR-4: The model will outperform guessing all zeros on MAE OR tie MAE and outperform on at least one of the other metrics.
+- T3FR-5: The model will outperform guessing all sixes on MAE OR tie MAE and outperform on at least one of the other metrics.
+- T3FR-6: The model will outperform guessing the average on MAE OR tie MAE and outperform on at least one of the other metrics.
 
