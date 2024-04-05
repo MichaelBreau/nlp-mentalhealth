@@ -791,7 +791,7 @@ None
 
 \section{MIS for Measuring the Severity of the Signs of Eating Disorders} \label{Module}
 
-\subsection{Module ed\_input}
+\subsection{Module ED Parser}
 
 \subsection{Uses}
 
@@ -810,7 +810,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-read\_file & $String$ & $Dict$ & $IncorrectFileFormat$ \\
+parse\_json & $String$ & $Dict$ & $IncorrectFileFormat$ \\
 \hline
 \end{tabular}
 \end{center}
@@ -827,15 +827,72 @@ None
 
 \subsubsection{Assumptions}
 
-The input to read\_file will be a path to a file on the disk.
+The input to parse\_json will be a path to a file on the disk.
 
 \subsubsection{Access Routine Semantics}
 
-\noindent read\_file($pathaddress: String$):
+\noindent parse\_json($pathaddress: String$):
 \begin{itemize}
 \item transition: None
-\item output: $Dict\ of <username: String,\ posts: [post : String \vert post \in user's\ posts]>$
+\item input: a path to a file on the disk
+\item output: $Dict\ of <username: <labels: [\text{questionnaire scores}],  posts: [\text{user's post history}]>>$
 \item exception: If the input file is not correctly formatted
+
+format of input file should have one user on each line and each user should be stored as:
+
+\{``id": ``subjectID", ``label": [``0-6", ``0-6", ..., ``0-6" (22 entries)], ``posts": [\{``date": ``YYYY-MM-DD HH:MM:SS", ``title": ``title text", ``body": ``body text"\}, more posts]\}
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\subsection{Module ED Cleaner}
+
+\subsection{Uses}
+
+Parser
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{3cm} p{3cm} p{4cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+clean\_data & $Dict$ & $Dict$ & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The parser is working correctly
+
+\subsubsection{Access Routine Semantics}
+
+\noindent clean\_data($pathaddress: String$):
+\begin{itemize}
+\item transition: None
+\item input: $Dict\ of <username: <labels: [\text{questionnaire scores}],  posts: [\text{user's post history}]>>$
+\item output: $Dict\ of <username: <labels: [\text{questionnaire scores}],  posts: [\text{user's post history}]>>$ where the user's posts no longer have a title and body but a single text field instead
+\item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -843,11 +900,11 @@ The input to read\_file will be a path to a file on the disk.
 None
 
 
-\subsection{Module ed\_output}
+\subsection{Module ED Output}
 
 \subsection{Uses}
 
-None
+ED Data Storage
 
 \subsection{Syntax}
 
@@ -862,8 +919,7 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-write\_file & $Str,\ $ & None & None \\
-& $\ Dict<Str:List[Int]>$ &  &  \\
+output & $DataStorage$ & None & $NoPredictions$ \\
 \hline
 
 \end{tabular}
@@ -881,13 +937,294 @@ None
 
 \subsubsection{Assumptions}
 
-The rest of the pipeline up to this point will produce a $Dict\ of\ <username: String,\ scores: [s_1, s_2, ..., s_{22}]>$ where $s_1, s_2, ..., s_{22}$ are the predicted scores for each of the eating disorder questionnaire's 22 questions
+The rest of the pipeline up to this point will function correctly
 
 \subsubsection{Access Routine Semantics}
 
-\noindent write\_file($file: Str,\ scores: Dict\ of\ <username: Str,\ scores: [s_1, s_2, ..., s_{22}]>$):
+\noindent output(ds : $DataStorage$):
 \begin{itemize}
-\item transition: writes $scores$ to the file specified by $file$ where each line is of the format "username: s1, s2, ..., s22" for each user.
+\item transition: writes predictions in $ds$ to a file where each line represents predictions for a user and is of the format "username: 0-6, 0-6, ..., 0-6" with twenty to answers of 0 to 6.
+\item output: None
+\item exception: $NoPredictions$: raised if $ds$ does not have predictions stored
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+
+\subsection{Template Module ED Data Storage}
+
+\subsection{Uses}
+
+ED Cleaner
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{5cm} p{3cm} p{2cm} p{6cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+initialize & $Dict$, $Int$ & $DataStorage$ & None \\
+get\_num\_posts & None & $Int$ & None \\
+get\_num\_users & None & $Int$ & None \\
+get\_embeddings & None & $List$ & $NoEmbeddings$ \\
+set\_embeddings & $List$ & None & $WrongSize$ \\
+get\_texts & None & $List$ & $NoText$ \\
+set\_texts & $List$ & None & $WrongSize$ \\
+get\_post\_user\_labels & None & $2d List$ & $NoLabels$ \\
+get\_post\_labels & None & $2d List$ & $NoLabels$ \\
+set\_post\_labels & $Int$, $List$ & None & $WrongSize$ \\
+get\_user\_labels & None & $Dict$ & $NoLabels$ \\
+get\_user\_predictions & None & $Dict$ & $NoLabels$ \\
+set\_user\_predictions & $String$, $List$ & None & $UserDoesNotExist$ \\
+get\_user\_embeddings & $String$ & $List$ & $NoEmbeddings$, $UserDoesNotExist$ \\
+get\_user\_texts & $String$ & $List$ & $NoText$, $UserDoesNotExist$ \\
+get\_user\_post\_labels & $String$ & $2d List$ & $NoLabels$, $UserDoesNotExist$ \\
+get\_user\_post\_label\_counts & $String$, $Int$ & $Tuple$ & $NoLabels$, $UserDoesNotExist$ \\
+get\_state & None & $Dict$ & None \\
+set\_state & $Int$, $Bool$ & None & $NotASplit$ \\
+
+\hline
+
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+Split : $Int$ stores the current train/test split the DataStorage is focused on, must be between -1 and the number of splits specified at initialization minus 1. -1 means the DataStorage is focused on the entirety of the data.
+
+\noindent Train : $Bool$ stores whether the DataStorage is currently focused on the train split or the test split
+
+\noindent TheData : Potentially multiple different data structure and lists storing the data, includes space to store a post history for each user, expected scores for each user, predicted scores for each user, embeddings for each post, and scores for each post. All of these fields can be changed and viewed through getters and setters
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+ED Cleaning is working correctly
+
+\subsubsection{Access Routine Semantics}
+
+\noindent initialize(data : $Dict$, num\_splits : $Int$)
+\begin{itemize}
+\item input: data is a dictionary of the form produced by ED Cleaning
+\item transition: constructs a DataStorage() object, stores the post history and expected scores of each user in TheData, produces num\_splits train/test splits on the data, and sets the current split to -1
+\item output: the DataStorage() object constructed
+\item exception: None
+\end{itemize}
+
+\noindent get\_num\_posts()
+\begin{itemize}
+\item input: None
+\item transition: None
+\item output: the number of posts stored in the DataStorage
+\item exception: None
+\end{itemize}
+
+\noindent get\_num\_users()
+\begin{itemize}
+\item input: None
+\item transition: None
+\item output: the number of users stored in the DataStorage
+\item exception: None
+\end{itemize}
+
+\noindent get\_embeddings()
+\begin{itemize}
+\item input: None
+\item transition: None
+\item output: a list of embeddings for the currently focused split
+\item exception: $NoEmbeddings$ thrown if the DataStorage does not currently have embeddings stored
+\end{itemize}
+
+\noindent set\_embeddings(embeddings : $List$)
+\begin{itemize}
+\item input: a list of embeddings
+\item transition: sets the embeddings for the current split to the input
+\item output: None
+\item exception: $WrongSize$ thrown if embeddings are not the same length as the currently focused split
+\end{itemize}
+
+\noindent get\_texts()
+\begin{itemize}
+\item input: None
+\item transition: None
+\item output: a list of texts for the currently focused split
+\item exception: $NoTexts$ thrown if the DataStorage does not currently have texts stored
+\end{itemize}
+
+\noindent set\_texts(texts : $List$)
+\begin{itemize}
+\item input: a list of texts
+\item transition: sets the texts for the current split to the input
+\item output: None
+\item exception: $WrongSize$ thrown if texts are not the same length as the currently focused split
+\end{itemize}
+
+\noindent get\_post\_user\_labels()
+\begin{itemize}
+\item input: None
+\item transition: None
+\item output: a list of user labels for each post, the label for each post is the score of the author of said post. Gets these labels for the currently focused split
+\item exception: $NoLabels$ thrown if the DataStorage does not currently have user labels stored
+\end{itemize}
+
+\noindent get\_post\_labels()
+\begin{itemize}
+\item input: None
+\item transition: None
+\item output: a list of labels for each post for the currently focused split
+\item exception: $NoLabels$ thrown if the DataStorage does not currently have post labels stored
+\end{itemize}
+
+\noindent set\_post\_labels(question : $int$, labels : $List$)
+\begin{itemize}
+\item input: question is the questionnaire question the labels are for, labels is the labels to set
+\item transition: sets the post labels for question to labels for the current split
+\item output: None
+\item exception: $WrongSize$ thrown if labels are not the same length as the currently focused split
+\end{itemize}
+
+\noindent get\_user\_labels()
+\begin{itemize}
+\item input: None
+\item transition: None
+\item output: a dictionary of the form $<``\text{username}" : [\text{actual scores for each question}]>$ that maps a user's username to the scores they filled on the EDE-Q
+\item exception: $NoLabels$ thrown if the DataStorage does not currently have user labels stored
+\end{itemize}
+
+\noindent get\_user\_predictions()
+\begin{itemize}
+\item input: None
+\item transition: None
+\item output: a dictionary of the form $<``\text{username}" : [\text{predicted scores for each question}]>$ that maps a user's username to the scores the model predicts they have on the EDE-Q
+\item exception: $NoLabels$ thrown if the DataStorage does not currently have predicted user labels stored
+\end{itemize}
+
+\noindent set\_user\_predictions(user : $String$, preds : $List$)
+\begin{itemize}
+\item input: user is the user to set predictions for, preds are the predictions to set
+\item transition: sets the predicted user labels for user to preds
+\item output: None
+\item exception: $UserDoesNotExist$ thrown if user does not exist in the DataStorage
+\end{itemize}
+
+\noindent get\_user\_embeddings(user : $String$)
+\begin{itemize}
+\item input: the user to get embeddings for
+\item transition: None
+\item output: list of embeddings for user
+\item exception: $NoEmbeddings$ thrown if the DataStorage does not currently have embeddings stored, $UserDoesNotExist$ thrown if user does not exist in the DataStorage
+\end{itemize}
+
+\noindent get\_user\_texts(user : $String$)
+\begin{itemize}
+\item input: the user to get texts for
+\item transition: None
+\item output: list of texts for user
+\item exception: $NoTexts$ thrown if the DataStorage does not currently have texts stored, $UserDoesNotExist$ thrown if user does not exist in the DataStorage
+\end{itemize}
+
+\noindent get\_user\_post\_labels(user : $String$)
+\begin{itemize}
+\item input: the user to get post labels for
+\item transition: None
+\item output: list of post labels for user
+\item exception: $NoLabels$ thrown if the DataStorage does not currently have post labels stored, $UserDoesNotExist$ thrown if user does not exist in the DataStorage
+\end{itemize}
+
+\noindent get\_user\_post\_label\_counts(user : $String$, question : $String$)
+\begin{itemize}
+\item input: the user and question to get counts of post labels for
+\item transition: None
+\item output: a tuple of (number of negative scores in post history for user and question, number of positive scores, proportion of positive scores)
+\item exception: $NoLabels$ thrown if the DataStorage does not currently have post labels stored, $UserDoesNotExist$ thrown if user does not exist in the DataStorage
+\end{itemize}
+
+\noindent get\_state()
+\begin{itemize}
+\item input: None
+\item transition: None
+\item output: a dictionary with entries: ``split" : number of the current split, and ``tr/te" : the string ``train" if currently focusing train ``test" otherwise
+\item exception: None
+\end{itemize}
+
+\noindent set\_state(split : $Int$, train : $Bool$)
+\begin{itemize}
+\item input: split to set focus on and whether to focus train or test
+\item transition: sets state variables split and train to input variables split and train, methods that reference a focused split will now act on the specified split
+\item output: None
+\item exception: $NotASplit$ thrown if input split refers to an invalid split
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent gen\_splits(num : $Int$, train\_prop : $Float$)
+\begin{itemize}
+\item input: number of train/test splits to create and what proportion of the data should be reserved for training in each split
+\item transition: creates splits on TheData
+\item output: None
+\item exception: None
+\end{itemize}
+
+
+\subsection{Module ED Pipeline}
+
+\subsection{Uses}
+
+ED Parser, ED Cleaner, ED Output, ED Data Storage, ED Rep Model, ED Relabeler, ED Pred Model, ED Aggregator, ED Evaluator
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+run & None & None & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent run():
+\begin{itemize}
+\item input: None
+\item transition: runs the full pipeline
 \item output: None
 \item exception: None
 \end{itemize}
@@ -897,11 +1234,11 @@ The rest of the pipeline up to this point will produce a $Dict\ of\ <username: S
 None
 
 
-\subsection{Module ed\_pipeline}
+\subsection{Template Module ED Rep Model}
 
 \subsection{Uses}
 
-ed\_input, ed\_tokenizer, ed\_rep\_model, ed\_pred\_model, ed\_output
+ED Data Storage
 
 \subsection{Syntax}
 
@@ -916,7 +1253,8 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-run\_pipeline & $Str,\ Str$ & None & None \\
+initialization & None & None & None \\
+represent & $DataStorage$ & None & None \\
 \hline
 \end{tabular}
 \end{center}
@@ -925,7 +1263,7 @@ run\_pipeline & $Str,\ Str$ & None & None \\
 
 \subsubsection{State Variables}
 
-None
+Rep Model : stores the rep model in running memory
 
 \subsubsection{Environment Variables}
 
@@ -933,13 +1271,22 @@ None
 
 \subsubsection{Assumptions}
 
-The first input to run\_pipeline is a path to a file on the disk
+DataStorage has text stored
 
 \subsubsection{Access Routine Semantics}
 
-\noindent write\_file($in\_file: Str,\ out\_file: Str$):
+\noindent initialize():
 \begin{itemize}
-\item transition: calls ed\_input to read from $in\_file$, runs the full pipeline, and calls ed\_output to write user scores to $out\_file$.
+\item input: None
+\item transition: loads the rep model from disk
+\item output: a RepModel() object
+\item exception: None
+\end{itemize}
+
+\noindent represent(ds : $DataStorage$):
+\begin{itemize}
+\item input: a $DataStorage$ object
+\item transition: stores a list of embeddings representing $ds$'s text for the current split
 \item output: None
 \item exception: None
 \end{itemize}
@@ -949,11 +1296,11 @@ The first input to run\_pipeline is a path to a file on the disk
 None
 
 
-\subsection{Module ed\_tokenizer}
+\subsection{Template Module ED Relabeler}
 
 \subsection{Uses}
 
-None
+ED Rep Model, ED Data Storage
 
 \subsection{Syntax}
 
@@ -964,11 +1311,13 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
+\begin{tabular}{p{3cm} p{5cm} p{3cm} p{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-tokenize & $Str,\ [Bool]$ & $List\ of\ Str$ & None \\
+initialization & $DataStorage$ & $Relabeler$ & None \\
+relabel\_all & $DataStorage$, Args & None & None \\
+relabel\_question & $DataStorage$, $Int$, Args & None & None \\
 \hline
 \end{tabular}
 \end{center}
@@ -985,14 +1334,31 @@ None
 
 \subsubsection{Assumptions}
 
-None
+DataStorage has embeddings and user labels stored
 
 \subsubsection{Access Routine Semantics}
 
-\noindent write\_file($text: Str,\ options: [Bool]$):
+\noindent initialize(ds : $DataStorage$):
 \begin{itemize}
-\item transition: None
-\item output: A list of words representing $text$ split by whitespace after $text$ is processed in a number of ways specified by $options$.
+\item input: a $DataStorage$ object
+\item transition: initializes the relabeler to use the current split of $ds$ to relabel posts
+\item output: a $Relabeler$ object
+\item exception: None
+\end{itemize}
+
+\noindent relabel\_all(ds : $DataStorage$, HyperParameters : set of Args):
+\begin{itemize}
+\item input: a $DataStorage$ object and some number of hyper parameters used to calibrate the relabeling process (depends on implementation)
+\item transition: calculates and stores a list of post labels in the current $ds$ split
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent relabel\_question(ds : $DataStorage$, question : $Int$, HyperParameters : set of Args):
+\begin{itemize}
+\item input: a $DataStorage$ object, an int specify the questionnaire question to relabel, and some number of hyper parameters used to calibrate the relabeling process (depends on implementation)
+\item transition: calculates and stores a list of post labels in the current $ds$ split for the specified question
+\item output: None
 \item exception: None
 \end{itemize}
 
@@ -1001,63 +1367,11 @@ None
 None
 
 
-\subsection{Module ed\_rep\_model}
+\subsection{Template Module ED Pred Model}
 
 \subsection{Uses}
 
-None
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-
-None
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\begin{tabular}{p{3cm} p{4cm} p{4cm} p{3cm}}
-\hline
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-\hline
-represent & $[Str],\ [Bool]$ & $[Float]$ & None \\
-\hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-
-None
-
-\subsubsection{Environment Variables}
-
-None
-
-\subsubsection{Assumptions}
-
-The first input to represent will be the output of ed\_tokenizer: a processed list of the words in the input text split by whitespace.
-
-\subsubsection{Access Routine Semantics}
-
-\noindent represent($text: [Str],\ options: [Bool]$):
-\begin{itemize}
-\item transition: None
-\item output: A list of floats representing $text$ encoded by some method into a numerical format, the details of the conversion are specified by $options$.
-\item exception: None
-\end{itemize}
-
-\subsubsection{Local Functions}
-
-None
-
-
-\subsection{Module ed\_pred\_model}
-
-\subsection{Uses}
-
-ed\_transform
+ED Relabeler, ED Rep Model, ED Data Storage
 
 \subsection{Syntax}
 
@@ -1072,7 +1386,9 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-predict & $<Str, [Float]>,\ [Bool]$ & $<Str, [Float]>$ & None \\
+initialize & $DataStorage$ & None & None \\
+train & None & None & None \\
+predict & $DataStorage$ & None & None \\
 \hline
 \end{tabular}
 \end{center}
@@ -1089,14 +1405,31 @@ None
 
 \subsubsection{Assumptions}
 
-The first input to predict will be a dictionary of the outputs of ed\_rep\_model for each user.
+The DataStorage should have embeddings and post labels to train on
 
 \subsubsection{Access Routine Semantics}
 
-\noindent represent($user\_data: <username: text, representation: [Float]>,\ options: List\ of\ Bool$):
+\noindent initialize(ds : $DataStorage$):
 \begin{itemize}
-\item transition: None
-\item output: A dictionary of $<username: String,\ scores: [s_1, s_2, ..., s_{22}]>$ where $s_1, s_2, ..., s_{22}$ are the predicted scores for each of the eating disorder questionnaire's 22 questions for each user $username$.
+\item input: a $DataStorage$ object
+\item transition: initializes a $PredModel$ object to use the current ds split to train on
+\item output: the initialized $PredModel$
+\item exception: None
+\end{itemize}
+
+\noindent train():
+\begin{itemize}
+\item input: None
+\item transition: trains the pred model on the ds split it was initialized on, saves the trained model to disk
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent predict(ds : $DataStorage$):
+\begin{itemize}
+\item input: a $DataStorage$ object
+\item transition: loads the previously trained pred model from disk, predicts scores for the currently focused ds split, and stores the predictions in ds
+\item output: None
 \item exception: None
 \end{itemize}
 
@@ -1105,11 +1438,11 @@ The first input to predict will be a dictionary of the outputs of ed\_rep\_model
 None
 
 
-\subsection{Module ed\_transform}
+\subsection{Template Module ED Aggregator}
 
 \subsection{Uses}
 
-ed\_transform
+ED Relabeler, ED Pred Model, ED Data Storage
 
 \subsection{Syntax}
 
@@ -1120,11 +1453,14 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{3cm} p{5cm} p{4cm} p{3cm}}
+\begin{tabular}{p{3cm} p{5cm} p{3cm} p{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-predict & $<Str, [Float]>,\ [Bool]$ & $<Str, [Float]>$ & None \\
+initialization & $DataStorage$, Args & $Aggregator$ & None \\
+aggregate\_all & $DataStorage$, Args & None & None \\
+aggregate\_question & $DataStorage$, $Int$, Args & None & None \\
+score\_users & $DataStorage$, Args & None & None \\
 \hline
 \end{tabular}
 \end{center}
@@ -1141,20 +1477,286 @@ None
 
 \subsubsection{Assumptions}
 
-None
+DataStorage has embeddings and user labels stored
 
 \subsubsection{Access Routine Semantics}
 
-\noindent represent($user\_data: <username: text, representation: [Float]>,\ options: [Bool]$):
+\noindent initialize(ds : $DataStorage$):
 \begin{itemize}
-\item transition: None
-\item output: A dictionary of $<username: String,\ representation: [Float]>$ where each of the output's $representation$s is a transformation of the input $representation$s.
+\item input: a $DataStorage$ object
+\item transition: initializes the aggregator to use the current split of $ds$ to aggregate posts
+\item output: an $Aggregator$ object
+\item exception: None
+\end{itemize}
+
+\noindent aggregate\_all(ds : $DataStorage$, HyperParameters : set of Args):
+\begin{itemize}
+\item input: a $DataStorage$ object and some number of hyper parameters used to calibrate the aggregating process (depends on implementation)
+\item transition: initializes the aggregator to score users based on ds and HyperParameters
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent aggregate\_question(ds : $DataStorage$, question : $Int$, HyperParameters : set of Args):
+\begin{itemize}
+\item input: a $DataStorage$ object, the question to initialize on, and some number of hyper parameters used to calibrate the aggregating process (depends on implementation)
+\item transition: initializes the aggregator to score users based on ds and HyperParameters for the specified question
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent score\_users(ds : $DataStorage$, HyperParameters : set of Args):
+\begin{itemize}
+\item input: a $DataStorage$ object and some number of hyper parameters used to calibrate the aggregating process (depends on implementation)
+\item transition: calculates and stores user labels in the current $ds$ split based off of the $ds$'s post labels
+\item output: None
 \item exception: None
 \end{itemize}
 
 \subsubsection{Local Functions}
 
 None
+
+
+\subsection{Module ED Trainer}
+
+\subsection{Uses}
+
+ED Parser, ED Cleaner, ED Output, ED Data Storage, ED Rep Model, ED Relabeler, ED Pred Model, ED Aggregator, ED Evaluator
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{5cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+train & None & None & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+DataStorage has embeddings and user labels stored
+
+\subsubsection{Access Routine Semantics}
+
+\noindent train():
+\begin{itemize}
+\item input: None
+\item transition: finds the optimal hyperparameters for the different parts of the pipeline and writes them to a file
+\item output: None
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Template Module ED Evaluator}
+
+\subsection{Uses}
+
+ED Aggregator, ED Metrics, ED Data Storage
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{5cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+initialization & $DataStorage$ & $Evaluator$ & None \\
+evaluate & $DataStorage$ & None & None \\
+get\_baselines & $DataStorage$ & $Tuple$ & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+DataStorage has embeddings and user labels stored
+
+\subsubsection{Access Routine Semantics}
+
+\noindent initialize(ds : $DataStorage$):
+\begin{itemize}
+\item input: a $DataStorage$ object
+\item transition: initializes the evaluator to use the current split of $ds$ to calculate baselines posts
+\item output: an $Evaluator$ object
+\item exception: None
+\end{itemize}
+
+\noindent evaluate(ds : $DataStorage$):
+\begin{itemize}
+\item input: a $DataStorage$ object
+\item transition: calculates accuracy metrics and prints a comparison between a set of baselines and the predictions stored in ds to the console
+\item output: None
+\item exception: None
+\end{itemize}
+
+\noindent get\_baselins(ds : $DataStorage$):
+\begin{itemize}
+\item input: a $DataStorage$ object
+\item transition: calculates accuracy metrics for a set of baselines
+\item output: a tuple where each entry is a list of metric scores for a baseline
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+
+\subsection{Module ED Metrics}
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3cm} p{5cm} p{3cm} p{3cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+all\_metrics & $List$, $List$ & $List$ & None \\
+MAE & $List$, $List$ & $Float$ & None \\
+MZOE & $List$, $List$ & $Float$ & None \\
+RS & $List$, $List$ & $Float$ & None \\
+ECS & $List$, $List$ & $Float$ & None \\
+SCS & $List$, $List$ & $Float$ & None \\
+WCS & $List$, $List$ & $Float$ & None \\
+GED & $List$, $List$ & $Float$ & None \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+DataStorage has embeddings and user labels stored
+
+\subsubsection{Access Routine Semantics}
+
+\noindent all\_metrics(preds : $List$, expects : $List$):
+\begin{itemize}
+\item input: predicted values and expected values
+\item transition: None
+\item output: returns all relevant error metrics evaluated for preds and expects
+\item exception: None
+\end{itemize}
+
+\noindent MAE(preds : $List$, expects : $List$):
+\begin{itemize}
+\item input: predicted values and expected values
+\item transition: None
+\item output: returns MAE calculated for preds and expects
+\item exception: None
+\end{itemize}
+
+\noindent MZOE(preds : $List$, expects : $List$):
+\begin{itemize}
+\item input: predicted values and expected values
+\item transition: None
+\item output: returns MAE calculated for preds and expects
+\item exception: None
+\end{itemize}
+
+\noindent RS(preds : $List$, expects : $List$):
+\begin{itemize}
+\item input: predicted values and expected values
+\item transition: None
+\item output: returns MAE calculated for preds and expects
+\item exception: None
+\end{itemize}
+
+\noindent ECS(preds : $List$, expects : $List$):
+\begin{itemize}
+\item input: predicted values and expected values
+\item transition: None
+\item output: returns MAE calculated for preds and expects
+\item exception: None
+\end{itemize}
+
+\noindent SCS(preds : $List$, expects : $List$):
+\begin{itemize}
+\item input: predicted values and expected values
+\item transition: None
+\item output: returns MAE calculated for preds and expects
+\item exception: None
+\end{itemize}
+
+\noindent WCS(preds : $List$, expects : $List$):
+\begin{itemize}
+\item input: predicted values and expected values
+\item transition: None
+\item output: returns MAE calculated for preds and expects
+\item exception: None
+\end{itemize}
+
+\noindent GED(preds : $List$, expects : $List$):
+\begin{itemize}
+\item input: predicted values and expected values
+\item transition: None
+\item output: returns MAE calculated for preds and expects
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
 
 \newpage
 
@@ -1173,5 +1775,7 @@ Additionally, this ties into the overall limitation of the system of how this to
 
 \subsubsection{Benefits and trade-offs of other potential solutions.}
 Early in the design and planning process, the team experimented with the idea of using large language models similar to ChatGPT for diagnosis. This would allow us to leverage well documented and existing technologies in our efforts, providing a strong jumping off point for our workflow. Unfortunately, the team was able to soon discover research which showed that models like ChatGPT tend to draw undesirable parallels with their training data, resulting in the system unknowingly fabricating information in the input data which would provide incorrect results.
+
+Something that was discovered while coding the project was that certain modules that could be represented as libraries benefited from being made abstract data types as the stored state of ADTs could be used to cache information in between calls to the module. This helped improve performance in various areas like when tuning a models parameters where a module needs to be run over and over.
 
 \end{document}
