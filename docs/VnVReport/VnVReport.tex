@@ -2,6 +2,7 @@
 
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{float}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
@@ -164,87 +165,83 @@ Results: Passed
  \end{enumerate}
 
  \subsection{Task 3}
+
+FRT-T3-1 and FRT-T3-2 ensure the output format of task 3 is correct
+ 
  \begin{enumerate}
  
  \item \textbf{FRT-T3-1}
 
-Control: Manual
-
-Initial State: The task 3 model has been trained on a section of the training data provided by eRisk
-
-Input: A section of the training data that the model has not yet seen
-
 Output: The system will output predictions to a txt file where each line is of the format "\{Username\} \{prediction for Q1\} ... \{prediction for Q28\}"
 
-How test will be performed: A tester will run the system on the input data and verify that an output file is created and that it is of the correct format
-
-Result: Passed (due to privacy concerns the output text file can not be included here for verification)
+Result: Passed
 
 \item \textbf{FRT-T3-2}
 
-Control: Manual
-
-Initial State: The task 3 model has been trained on a section of the training data provided by eRisk
-
-Input: A section of the training data that the model has not yet seen
-
 Output: The system will output predictions to a txt file where each prediction should be between 0 and 6
 
-How test will be performed: A tester will run the system on the input data and verify that none of the predictions in the output file are less than 0 or greater than 6
+Result: Passed
 
-Result: Passed (due to privacy concerns the output text file can not be included here for verification)
+\end{enumerate}
+
+\subsubsection{Overview of Eating Disorder Models}
+
+\paragraph{Development Process\newline}
+
+Initial exploration into models for this task looked at predicting a score directly from a user's post history. This ran into problems quickly though as there are a lot of posts for each user and not that many users meaning you are trying to train a model with relatively few training examples to predict a score from a large amount of input information, which is unlikely to give good results. Thus development in this direction halted early.
+
+In order to find a new direction to go in a literature review was conducted of the submissions made for this task last year, of which there were three with available papers. This resulted in two general directions to go in.
+
+The first method was to reduce the amount of information the model was taking as input in some way. This could involve finding a way to filter the user's post history to only the most relevant posts, using dedicated dimensionality reduction techniques on the numerical representations of posts, or transforming the representation of posts in some way. A team last year did something similar to how the anorexia task was tackled by our team this year where they represented a user's post history as a distribution of topics and predicted on those instead of the specific embeddings \citep{Grigore}.
+
+The second method was to create labels for each post instead of each user. This approach has the potential to be quite powerful as if done correctly it can provide a lot more data to train a model on. Last year a team did try this however their approach was very naive, they simple labeled each post with the author's score \citep{Pan}. This resulted in some posts that had nothing to do with eating disorders having a very alarming questionnaire attached to them. This area had a lot of space for improvement so it was the direction that was gone in for task 3.
+
+After discussing with Diego of our supervision team he suggested adapting a method used by a team on a different task in a prior year. This method would relabel a post as positive or negative based on how many posts by positive and negative authors were near it in the space represented by the numerical representations of posts \citep{Fabregat}. This approach could not be directly applied to this task though as users have 0 to 6 scores. A modification of the approach was developed by team member Jessica using Bayes Theorem that could produce a probability for how likely it was that a post was related to one of the EDE-Q questions and convert that probability into a positive or negative score. The details of the approach are in appendix A (\ref{apA}), this appendix is suggested reading as it is cool and one of the team's members is quite proud of it. This approach was validated with the supervision team during a meeting and was thusly developed.
+
+The next part of this approach involves training a model to predict a score for a post from it's text. After consulting with Diego he suggested building a model on top of the MentalRoBERTa pre-trained model. This is a model that has been trained on prior mental health information that can be adapted to this task and as such has the potential to pick out patterns and details a blank model might otherwise miss.
+
+The final stage of the prediction pipeline involves aggregating from these post level scores to a user level score. This was done by simply plotting the proportion of positive posts in a user's post history against their known answers to the questionnaire for a set of train users, fitting a line to this data, and using said line to aggregate on test users.
+
+This was the final model that was developed, however an secondary model was also developed largely through coincidence. This used the relabeling technique to make predictions on posts directly, without training the MentalRoBERTa model and then aggregated to user scores from there. This technique performed okay but deploying it would also require sharing user's post history which presented privacy concerns, as such this approach was not considered as viable. This approach is still included in the table of accuracy results for completeness's sake.
+
+\paragraph{Generalizability\newline}
+
+An important quality for these sorts of models to have is the ability to use them outside they data they were developed on. In terms of this approach building on top of MentalRoBERTa creates a model that can be shared without concerns over privacy. This type of pre-trained model also tends to be quite powerful and good at working outside it's training data. Some limitations to this are of course the question of how representative of the general population the eRisk data is, does it contain any biases, as these would impact the generalizability of the developed model. This is not a question I am capable of answering though as I didn't collect the data. One area in this pipeline that has the potential to be quite weak to these effects is the aggregation method. It's very simple currently and if it turns out the individuals in our data talk about eating disorders more or less often than the general population this can result in the aggregated user level scores being wrong. However even if this is the case the MentalRoBERTa model will still be valuable.
+
+The following are accuracy metrics for the explored models.
+
+\begin{table}[H]
+\begin{tabular}{c|ccccccc}                                                                                                                                                                                                                          
+  &  MAE   & MZOE  & RS    & ECS   & SCS   & WCS   & GED \\ \hline
+zeros  & 2.85  & \textbf{0.73}  & 3.17  & 2.80  & 3.42  & 3.02  & 3.03 \\
+sixes  & 3.15  & 0.76  & 3.86  & 4.23  & 3.74  & 3.85  & 3.86 \\
+average & 2.10  & 0.94  & 1.86  & 1.79  & 1.96  & 1.68  & 1.68 \\
+secondary model  & 1.80  & 0.80  & 1.86  & 1.43  & 1.58  & 1.51  & 1.40 \\
+final model  & \textbf{1.67}  & 0.75  & \textbf{1.59}  & \textbf{1.41}  & \textbf{1.48}  & \textbf{1.16} & \textbf{1.16} \\
+\end{tabular}
+\caption{Accuracy results for task 3 models}
+\label{T3Acc}
+\end{table}
+
+\begin{enumerate}
 
 \item \textbf{FRT-T3-3}
 
-For test FRT-T3-3, FRT-T3-4, and FRT-T3-5 the system produced the following results:
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline zero strategy on MAE or ties MAE and improves on at least one other metric
 
-\begin{tabular}{c|ccccccc}
-  &  MAE   & MZOE  & RS    & ECS   & SCS   & WCS   & GED \\ \hline
-zeros  & 3.58  & 0.88  & 3.63  & 2.93  & 4.04  & 3.64  & 3.45 \\
-sixes  & 2.42  & \textbf{0.65}  & 3.13  & 3.68  & 2.91  & 2.91  & 3.02 \\
-average & \textbf{2.00}  & 0.90  & \textbf{1.63}  & 1.59  & 2.04  & \textbf{1.65}  & \textbf{1.47} \\
-model  & 2.60  & 0.82  & 2.45  & \textbf{1.47}  & \textbf{1.98}  & 1.79  & 1.59 \\
-\end{tabular}
-
-Control: Manual
-
-Initial State: The task 3 model has been trained on a section of the training data provided by eRisk and accuracy measures have been calculated for a baseline strategy where a score of 0 is guessed for every question
-
-Input: A section of the training data that the model has not yet seen
-
-Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
-
-How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
-
-Result: Passed
+Result: \textbf{Passed}
 
 \item \textbf{FRT-T3-4}
 
-Control: Manual
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline six strategy on MAE or ties MAE and improves on at least one other metric
 
-Initial State: The task 3 model has been trained on a section of the training data provided by eRisk and accuracy measures have been calculated for a baseline strategy where a score of 6 is guessed for every question
-
-Input: A section of the training data that the model has not yet seen
-
-Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
-
-How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
-
-Result: Passed
+Result: \textbf{Passed}
 
 \item \textbf{FRT-T3-5}
 
-Control: Manual
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline average strategy on MAE or ties MAE and improves on at least one other metric
 
-Initial State: The task 3 model has been trained on a section of the training data provided by eRisk and accuracy measures have been calculated for a baseline strategy where the average score for a question based on the training data is guessed
-
-Input: A section of the training data that the model has not yet seen
-
-Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
-
-How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
-
-Result: Passed
+Result: \textbf{Passed}
 
  \end{enumerate}
 
@@ -275,25 +272,6 @@ Results: Passed
 \begin{enumerate}
 
 \item \textbf{NFRT-SS-1}
-
-Type: Dynamic, Manual
-					
-Initial State: The system is completed and trained 
-					
-Input/Condition: The system will be ran on the developer's computer
-					
-Output/Result: The generated result should not overuse the processing power of the developer's computer
-					
-How test will be performed: CPU, GPU, RAM and live power usage will be monitored while running the software. Usage of all aspects should not increase more than 20 percent.   
-
-Results: Passed
-					
-\end{enumerate}
-
-
-\begin{enumerate}
-
-\item \textbf{NFRT-SS-2}
 	
 Type: Automatic, Dynamic
 						
@@ -380,12 +358,12 @@ A comparison between our model and the best metric scores from last year's itera
 
 \begin{tabular}{c|ccccccc}
   &  MAE   & MZOE  & RS    & ECS   & SCS   & WCS   & GED \\ \hline
-our model  & 2.60  & 0.82  & 2.45  & \textbf{1.47}  & 1.98  & \textbf{1.79}  & \textbf{1.59} \\
-2023's best  & \textbf{2.19}  & \textbf{0.67}  & \textbf{1.59}  & 1.92  & \textbf{1.90}  & 2.00  & 2.00 \\
+final model  & \textbf{1.67}  & 0.75  & \textbf{1.59}  & \textbf{1.41}  & \textbf{1.48}  & \textbf{1.16} & \textbf{1.16} \\
+2023's best  & 2.19  & \textbf{0.67}  & \textbf{1.59}  & 1.92  & 1.90  & 2.00  & 2.00 \\
 \end{tabular}
 
 \subsubsection{Discussion}
-The model does manage to outperform previous years on the ECS, WCS, and GED metrics. While we fail to outperform MZOE and RS these metrics were achieved by baselines like guessing all zero, sixes, or the average last year, and given we failed to outperform these baselines on these metrics again this year it is possible this has more to do with the nature of the data and the task itself than our model under performing compared to previous year's models. We only failed to outperform previous year's models on MAE and SCS.
+Our final model outperforms the best accuracy metrics from last year on all metrics except RS which we tie, and MZOE which was achieved by a baseline last year. Given that we also fail to outperform the baselines on MZOE this year this is not much of a loss.
 
 
 \section{Unit Testing}
@@ -496,6 +474,36 @@ Due to the nature of our project being almost entirely output focused. Our tests
 
 \bibliographystyle{plainnat}
 \bibliography{../../refs/References}
+
+\newpage{}
+\section*{Appendix A --- Relabeling Method} \label{apA}
+
+Note: this is the calculation of a score for one post and one question, assume that we've already picked a post and question to calculate for
+
+$$P(Pos) = probability\ that\ the\ post\ is\ positive$$
+$$k = number\ of\ neighbors\ queried$$
+$$D = [S_{1}, S_{2}, ..., S_{k}]$$
+$$Where:\ S_{n} = score\ of\ neighbor\ n\ of\ the\ post$$
+$$P(D) = probability\ of\ specific\ set\ of\ scores$$
+$$P(Pos|D) = \frac{P(D|Pos)P(Pos)}{P(D)}$$
+
+The marginal $P(D)$ is easily calculable from the probabilities of each neighbor:
+
+$$P(D) = P(S_1 = s_1)*P(S_2 = s_2)*...*P(S_k = s_k)$$
+
+Which in turn are just:
+
+$$P(S_n = s_n) = \frac{number\ of\ posts\ with\ score\ s_n}{total\ number\ of\ posts}$$
+
+The prior $P(Pos)$ becomes a hyper parameter for the question.
+
+$P(D|Pos)$ can be expanded similarly to $P(D)$:
+
+$$P(D|Pos) = P(S_1 = s_1|Pos)*P(S_2 = s_2|Pos)*...*P(S_k = s_k|Pos)$$
+
+Where $P(S_n = s_n|Pos)$ is defined by a discrete probability distribution over the points $s_n \in {0,1,2,3,4,5,6}$ where the parameters of the distribution become hyper parameters for the question.
+
+Thus for each question you have the hyper parameters: k, the prior, and any parameters of the distribution used to define $P(S_n = s_n|Pos)$
 
 \newpage{}
 \section*{Appendix --- Reflection}
