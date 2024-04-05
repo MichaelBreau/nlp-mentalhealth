@@ -88,40 +88,32 @@
 
 The CLEF eRisk competition, better known as the Early Risk Prediction on
 the internet competition, is an organization that hosts a yearly event where
-numerous research teams come together to explore new strategies and ap-
-plications of early detection technologies, particularly in the field of health
+numerous research teams come together to explore new strategies and applications of early detection technologies, particularly in the field of health
 and safety. The team at McMaster has partnered alongside the University of
 Quebec in Montreal to help leverage their existing research and work done
 in prior years of the eRisk competition to help design a new system entry
-for this year. The team will not be in charge of the system operations por-
-tion of the project, but instead will be focused on designing new strategies
+for this year. The team will not be in charge of the system operations portion of the project, but instead will be focused on designing new strategies
 and implementations for the Natural Language Processing portion of the
-project. The NLP will be responsible for analyzing textual input from real
+project.
+
+The NLP team will be responsible for analyzing textual input from real
 user data, and will use its provided training data and algorithms to deter-
 mine the probability of the user showing signs of a selected mental health
-issue. The competition normally consists of three different tasks, all of which
-require different Natural Language processing techniques, and to help select
-strategies, the team will be using data from the prior year's competition, which was used
-to find symptoms for depression, pathological gambling and eating disorders.
+issue. The primary goal of the project is to explore applications of machine learning in this area and it is unlikely a system suitable for clinical use will actually be developed.
+
+The structure of the system will be built around the three tasks laid out by eRisk: search for symptoms of depression, a sentence ranking task; early detection of signs of anorexia, a task built around detecting signs of anorexia in as few posts as possible; and measuring the severity of the signs of eating disorders, a task built around filling out a self-report question for an individual.
+
+More details about the eRisk tasks can be found in the project's SRS \citep{CogCareCrewSRS}.
 
 \subsection{Objectives}
 
-The primary objectives of the current process are to build confidence regard-
-ing the various techniques and libraries required to efficiently analyze the
-datasets provided by the eRisk Competition. The testing outlined in this
-document is to help demonstrate the team's familiarity and competency to adapt to
-the various challenges presented by eRisk, whether that be through sentence
-ranking, early detection through post history, or estimation of severity level
-through user submissions. This is meant to build confidence for the project's stake-
-holders on the code efficiency, accuracy and reliability. The exact number of
-challenges that the team will participate in is variable, as the scope ensures
-competing in at least one challenge, as even though the project consists of a larger team than prior years, past teams have not always been able to take on
-all three challenges, extending ourselves to take on all tasks would be going
-beyond SRS expectations. An additional objective is to increase efficiency
-and accuracy of the existing work done by the team in prior years, this is
-a goal for both the team and the stakeholders at UQAM, but it is not a
-formalized metric in the SRS, as there is no defined expectation of how much
-better the project is supposed to preform.
+The primary objective of VnV for this project is to ensure the system's prediction models outperform certain baselines in order to prove the models hold some form of predictive power and value.
+
+Another objective of VnV for this project is to ensure the system takes input and produces output in forms that will allow it to compete in eRisk. This is to ensure the competition can be used to evaluate the system's performance against other competing models.
+
+A final objective is to ensure the system follows guidelines surrounding data privacy and confidentiality. More details about this can be found in the project's SRS section E.3 \citep{CogCareCrewSRS}.
+
+Usability is a low priority for this project, the focus is on research and trying different approaches, not creating a piece of software ready for clinical use. 
 
 \subsection{Relevant Documentation}
 \begin{itemize}
@@ -201,7 +193,7 @@ This section will outline the plan for verification and validation of a number o
   
   All of the members of the core team will be taking part in the SRS Verification Plan along with Group 8, Professor Mosser and the TA. The team will verify the contents of the \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}{SRS} by comparing the requirements outlined by the eRisk competition along with our team in Montreal with the requirements stated in our SRS document. This will ensure that the team has covered everything from the SRS document and can see if there is anything new that must be added. Most of the SRS verification plan will involve inspections not only from our team, but also from the team in Montreal along with peer reviews and ad hoc feedback from group 8.\\
   
-  Since our project is unique in the fact that the team is submitting to a competition with a rigid output and guideline structure, the team will also have to compare the rubric for the SRS document with what has been done in the original SRS document to ensure that all the required checkpoints have been covered. On top of this, the team will verify the SRS document by going over the feedback given to on the SRS revision 0 from TA along with the feedback received from group 8 regarding the SRS revision 0. Lastly, when verifying the SRS document, the teamwe will talk with Professor Mosser and ask him any questions that arise during the reviewing and verification process within the group. \\
+  Since our project is unique in the fact that the team is submitting to a competition with a rigid output and guideline structure, the team will also have to compare the rubric for the SRS document with what has been done in the original SRS document to ensure that all the required checkpoints have been covered. On top of this, the team will verify the SRS document by going over the feedback given to on the SRS revision 0 from TA along with the feedback received from group 8 regarding the SRS revision 0. Lastly, when verifying the SRS document, the team will talk with Professor Mosser and ask him any questions that arise during the reviewing and verification process within the group. \\
 
   These are some of the major areas the team would like to cover in the SRS verification plan to ensure a test exists for each of these components:\\
 
@@ -212,7 +204,6 @@ This section will outline the plan for verification and validation of a number o
   \item Are the limitations and exclusions accurate and all encompassing of the true limitations and exclusions of the project?
   \item Are the inputs and outputs of the system specified?
   \item Is there any unnecessary overlap in our requirements?
-  \item Are there any other components outside of Text Pre-Processing, Vectorization, Prediction and Output? For those 4 sections, are there any additional functional or non-functional requirements that are missing?
   \item For every function that is outlined, are the inputs specified sufficient enough to perform the required functionality?
   \item Do any requirements conflict with each other or does each requirement avoid conflicts with other requirements?
   \item Are all detailed usage scenarios covered in the document and are completed in adequate detail or are there others we could add?
@@ -235,40 +226,6 @@ This section will outline the plan for verification and validation of a number o
 
   The following section will go over some design verification questions that will be asked regarding the functions of each of the major components in our design.\\
   
-  \noindent \textbf{Text Pre-Processing Component:}
-  \begin{itemize}
-  \item Does the system tokenize text by dividing it into individual units of words and or sub-words?
-  \item Does the system convert generated tokens into lowercase to preserve consistency?
-  \item Does the system remove stop word tokens (common words that do not commonly have an effect on the meaning)?
-  \item Does the system reduce tokens to their root forms (Ex: “moving” to “move”)?
-  \item Is the output from this component usable by the Vectorization Component?\\
-  \end{itemize}
-  
-  
-  
-  \noindent \textbf{Vectorization Component:}
-  \begin{itemize}
-  \item Does the system convert tokens into numerical vectors in this stage?
-  \item Are these numerical vectors usable by the Prediction Component of the model?\\
-  \end{itemize}
-  
-  \noindent \textbf{Prediction Component:}
-  \begin{itemize}
-  \item Is there a created training model within the design?
-  \item What percentage of the given data is used for training vs testing?
-  \item Is there a prediction algorithm that is implemented into the solution? What is the level of accuracy and what is acceptable levels of accuracy (this will be determined further down the road with our team in Montreal on what the team deems acceptable)?
-  \item Does the system make predictions using the vectorization tokens, the training model, as well as with the created prediction algorithm?\\
-  \end{itemize}
-  
-  
-  \noindent \textbf{Output Component:}
-  \begin{itemize}
-  \item Does the system output the predictions to the console?
-  \item Is the output produced understandable by the project team?
-  \item Is the output in a format that a healthcare worker would be able to read and interpret the results?
-  \end{itemize}
-  
-  
   \subsection{Verification and Validation Plan Verification Plan}\label{Verification and Validation Plan Verification Plan}
   
   For the Verification and Validation Plan Verification Plan the team will be making use of the reviews given for the VnV Plan from group 8 as well as from the TA. This will help the team gain some insight on areas that may be missing or need more work within the document. The team will also be going through the \href{https://github.com/MichaelBreau/nlp-mentalhealth/blob/main/docs/SRS/index.pdf}{SRS} document and ensuring they have created at least 1 test for each functional and nonfunctional requirement. It is important to ensure that they have sufficient tests for the requirements. The team would also like to do some mutation testing in the code to determine what changes will affect the tests created and in what way. It will also show that there is a possibility of missing some important tests if a mutation expected to result in a change or failure, results in no failed tests.\\ 
@@ -281,18 +238,16 @@ This section will outline the plan for verification and validation of a number o
   \item Are the objectives for the VnV plan clearly outlined and is each objective covered at some point throughout the document?
   \item Is the planning section detailed with checklists for each section and steps that will be taken for each plan?
   \item Is there at least one test created for each requirement in the SRS document?
-  \item Are all functions of each component being tested? This includes the Text Pre-Processing, Vectorization, Prediction and Output Components.
+  \item Are all functions of each component being tested?
   \item Are there a wide variety of tests including edge cases?
-  Do the non-functional requirements contain tangible quantifiable values?
+  \item Do the non-functional requirements contain tangible quantifiable values?
   \item Is the traceability between test cases and requirements clearly shown in section 4.3?
   \end{itemize}
   
   
   \subsection{Implementation Verification Plan} \label{Implementation Verification Plan}
   
-  The large majority of the implementation for this project will revolve around achieving an acceptable level of accuracy in our system’s predictions. This document goes more in depth about how the team will do this in the implementation in section 4.1.1 but the basis of this process to ensure acceptable model accuracy levels is done through train/test splits, training models on the test sets, predicting the values of test data with these models, and then comparing these predicted values with the known expected values. All of the sections just listed are key areas of the implementation and will need to be tested in order to verify our implementation. There are 4 tests that will be run, typically in tandem with each other in one automatic test suite as outlined in 4.1.1. The largest area will be involving training and testing the data. Data will be provided by eRisk and the data will be used 3 times using different splits for each copy regarding what data is used for training vs testing. These predictions on the testing data will then be evaluated on a relevant set of metrics in order to test the program's accuracy and implementation. This set of metrics has yet to be determined due to the fact that the eRisk tasks have not been released yet for this year so the team is currently unclear what metrics would be appropriate to evaluate our model at the current time. The team will also be running a series of unit tests on the program in order to test the implementation of each part and function of the code. These tests will be recorded in the unit testing plan.\\
-    
-  As new code is added to our repository and as the team works on our model, we will be using implementation verification techniques like code walk-throughs and code inspections periodically. Every time a new pull request is made, a fellow teammate will be required to perform a code inspection for that pull request and give feedback. If there is something unclear, the two teammates will meet and the reviewer will receive a code walk-through from the reviewee. We will also perform code walk-throughs for new changes made to the model when we meet as a team. Lastly we plan to have continuous integration that will allow the team to run automated testing for every pull request that gets created as well as utilizing Fake9 as mentioned below to ensure our implementation follows proper coding standards.
+  The tests for accuracy will be one of the primary ways we verify our implementation. As new code is added to our repository and as the team works on our model, we will be using implementation verification techniques like code walk-throughs and code inspections periodically. Every time a new pull request is made, a fellow teammate will be required to perform a code inspection for that pull request and give feedback. If there is something unclear, the two teammates will meet and the reviewer will receive a code walk-through from the reviewee. We will also perform code walk-throughs for new changes made to the model when we meet as a team. Lastly we plan to have continuous integration that will allow the team to run automated testing for every pull request that gets created as well as utilizing Fake9 as mentioned below to ensure our implementation follows proper coding standards.
   
   
   \subsection{Automated Testing and Verification Tools} \label{Automated Testing and Verification Tools}
@@ -313,8 +268,6 @@ This section will outline the plan for verification and validation of a number o
   \item Is the output format what is expected by the competition?
   \item Are there any requirements not being met within the competition (question for Marie-Jean and Diego)?
   \item Are there any requirements that are not being met regarding the project rubric from McMaster (question for Professor Mosser)?
-  \item Is our text pre-processing component sufficient in which we use tokenization, lowercasing, stopword removal, and stemming or Lemmatization? If not, what should we add to our text pre-processing component or what methods that we currently have employed are not needed?
-  \item Is our current method of vectorization appropriate for the task we are completing in your opinion? If not, what would you change or what different approaches do you recommend we look into.
   \item Are there any areas of our code or processes we take that are not allowed in the competition or do not follow the competitions standards?
   \item What are your thoughts on our topic modeling approach? Do you have any suggestions?
   \item Are the metrics we use for determining accuracy appropriate in your opinion? If not, what form of metrics should we be using? What level of accuracy would you consider acceptable for this metric?
@@ -325,19 +278,9 @@ This section will outline the plan for verification and validation of a number o
 	
 \subsection{Tests for Functional Requirements}
 
-Our main requirements for the system are built around achieving an acceptable level of accuracy in our system's predictions. This is the primary focus of this section.
+Our main requirements for the system are built around achieving an acceptable level of accuracy in our system's predictions.
 
-\subsubsection{Ensuring Model Acceptability}
-
-The system is based in machine learning and will therefore need to be tested and evaluated using a typical machine learning evaluation method: creating train/test splits, training models on the test sets, predicting the values of test data with these models, and then comparing these predicted values with the known expected values. This section first includes information explaining how the team plans to go about this process as well as identifying areas of uncertainty before providing relevant tests.
-
-\myparagraph{Training and Test Data} \label{TTD}
-
-Training data given by eRisk will be split 80/20 into train and test sets. Each task has some concept of higher or lower risk, either in the form of positive/negatives, survey answers, a continuous scale, or something else. Depending on the task a metric will be created from expected values representing this risk (an example may be averaging survey answers) it is unclear what these metrics will involve currently as eRisk has not yet released this year’s tasks. Train and test splits will be created to have similar distributions of this risk metric (ie. similar numbers of low/mid/high risk individuals). How similar the distributions should be is as of yet unknown and will require further experimentation when eRisk releases their datasets for this year.
-
-When testing the system three different train/test splits will be produced, all splits will be formed on the full training data provided by eRisk, thus giving three copies of said training data with the train and test subsets being different for each copy. These copies will try to maximize the difference between their splits. The model will be trained on a training split and then will give predictions on the test set. These predictions will be evaluated on a relevant set of metrics (outlined below in section \ref{metrics}), and an average of the metrics across all three splits will be used to determine model performance.
-
-\myparagraph{Metrics} \label{metrics}
+\subsubsection{Metrics} \label{metrics}
 
 The following metrics will be used to evaluate the accuracy of the model for each task. These metrics were selected based on recommendations of the eRisk competition:\newline
 
@@ -409,7 +352,15 @@ $$RMSE(f,U) = \sqrt{\frac{\Sigma_{u_i \in U}(R_{GED}(u_i) - f_{GED}(u_i))^2}{\ve
 
 The bounds for which error measures are considered acceptable will be based on a combination of the results other teams achieved in past eRisk competitions and a comparison against certain baselines like guessing an average answer for every prediction. Our model should perform better than previous years and outperform baselines in at least one metric.
 
-\myparagraph{Tests}
+\subsubsection{Methodology} \label{splits}
+
+Models need to be evaluated on data they have not ``seen" yet. A model performing well on data it has been trained on does not mean it will perform well on the general problem it's attempting to solve, it may just be good at predicting on that data. As such it is necessary to reserve some of the data provided by eRisk for the models to be evaluated on after being trained on the rest of the data. This is known as a train/test split. Depending on the time it takes to train, a model may be trained and then evaluated on multiple splits in order to try and control for variations in accuracy metrics produced by differences in what data is in the train split and what data is in the test split.
+
+\subsubsection{Tests}
+
+\myparagraph{Tests for Input}
+
+These tests check that the system can take in both xml and json data.
 
 \begin{enumerate}
 
@@ -433,7 +384,7 @@ Control: Automatic
 
 Initial State: No models have been trained by the system yet, input data is available to the system.
 
-Input: Data matching the organizational structure of eRisk competition Data in jsonl formatting
+Input: Data matching the organizational structure of eRisk competition Data in json formatting
 
 Output: The model will run to completion and return all required outputs.
 
@@ -441,9 +392,17 @@ Test Case Derivation: The system should run all functions and statements without
 
 How test will be performed: The appropriate jsonl data will be fed into the system, the system should complete run without throwing any errors.
 
+\end{enumerate}
+
+\myparagraph{Task 1: Search for Symptoms of Depression}
+
+These tests check that the results for task 1 are in a format suitable for eRisk and that the accuracy of the model improves on prior years.
+
+\begin{enumerate}
+
 \item{FRT-T1-1\\}
 
-Control: Automatic
+Control: Manual
 
 Initial State: No models have been trained by the task 1 system yet, input data as jsonl files are available
 
@@ -457,7 +416,7 @@ How test will be performed: The tester will run the parser with the given jsonl 
 
 \item{FRT-T1-2\\}
 
-Control: Automatic
+Control: Manual
 
 Initial State: No models have been trained by the task 1 system yet, past years input data, training data, and golden truth values are available
 
@@ -471,7 +430,7 @@ How test will be performed: The system should derive its training data and featu
 
 \item{FRT-T1-3\\}
 
-Control: Automatic
+Control: Manual
 
 Initial State: No models have been trained by the task 1 system yet, input data is available
 
@@ -483,9 +442,17 @@ Test Case Derivation: The system will make an analysis based off the provided in
 
 How test will be performed: The system's output txt file will be verified that each entry is on its own line in the format "\{symptom\_number\}, Q0, \{sentence-id\}, \{position\_in\_ranking\}, \{score\}, \{system\_name\}".
 
+\end{enumerate}
+
+\myparagraph{Task 2: Early Detection of Signs of Anorexia}
+
+These tests check that the results for task 2 are in a format suitable for eRisk.
+
+\begin{enumerate}
+
 \item{FRT-T2-1\\}
 
-Control: Automatic
+Control: Manual
 
 Initial State: No models have been trained by the task 2 system yet, input data is available
 
@@ -499,7 +466,7 @@ How test will be performed: The system's output txt file will be verified that e
 
 \item{FRT-T2-2\\}
 
-Control: Automatic
+Control: Manual
 
 Initial State: The task 2 system has received input data on a given individual and made a corresponding prediction.
 
@@ -509,7 +476,15 @@ Output: The system will output an updated prediction taking into account all dat
 
 Test Case Derivation: The system should create a new prediction for the chosen user taking into account all data provided.
 
-How test will be performed: The system should provide a prediction based off the original data input, after receiving new data, the system should combine posts made by the same user to create a new prediction. 
+How test will be performed: The system should provide a prediction based off the original data input, after receiving new data, the system should combine posts made by the same user to create a new prediction.
+
+\end{enumerate}
+
+\myparagraph{Task 3: Early Detection of Signs of Anorexia}
+
+These tests check that the results for task 3 are in a format suitable for eRisk and that the accuracy of the model outperforms a trio of simple baseline strategies.
+
+\begin{enumerate}
 
 \item{FRT-T3-1\\}
 
@@ -547,11 +522,11 @@ Initial State: The task 3 model has been trained on a section of the training da
 
 Input: A section of the training data that the model has not yet seen
 
-Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on MAE or ties MAE and improves on at least one other metric
 
 Test Case Derivation: If the system fails to outperform a simple guess 0 strategy on at least one metric it is highly likely it does not have any actual prediction power
 
-How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
+How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline
 
 \item{FRT-T3-4\\}
 
@@ -561,11 +536,11 @@ Initial State: The task 3 model has been trained on a section of the training da
 
 Input: A section of the training data that the model has not yet seen
 
-Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on MAE or ties MAE and improves on at least one other metric
 
 Test Case Derivation: If the system fails to outperform a simple guess 6 strategy on at least one metric it is highly likely it does not have any actual prediction power
 
-How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
+How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline
 
 \item{FRT-T3-5\\}
 
@@ -575,15 +550,16 @@ Initial State: The task 3 model has been trained on a section of the training da
 
 Input: A section of the training data that the model has not yet seen
 
-Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on at least one metric
+Output: The system will print accuracy metrics for the model to the console where the model scores higher than the baseline strategy on MAE or ties MAE and improves on at least one other metric
 
 Test Case Derivation: If the system fails to outperform a simple guess average strategy on at least one metric it is highly likely it does not have any actual prediction power
 
-How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline on at least one metric
+How test will be performed: A tester will run the system on the input data and verify that the model outperforms the baseline
 
 \end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
+
 \subsubsection{Usability Requirements}
 		
 
@@ -610,25 +586,9 @@ How test will be performed: After setting up the environment on to both macOS an
 
 \begin{enumerate}
 
-\item{NFRT-SS-1\\}
-
-Type: Dynamic, Manual
-					
-Initial State: The system is completed and trained 
-					
-Input/Condition: The system will be ran on the developer's computer
-					
-Output/Result: The generated result should not overuse the processing power of the developer's computer
-					
-How test will be performed: CPU, GPU, RAM and live power usage will be monitored while running the software. Usage of all aspects should not increase more than 20 percent.   
-					
-\end{enumerate}
-
-\begin{enumerate}
-
-	\item{NFRT-SS-2\\}
+	\item{NFRT-SS-1\\}
 	
-	Type: Automatic, Dynamic
+	Type: Manual, Dynamic
 						
 	Initial State: The system has been trained and is awaiting data to form predictions on.
 						
@@ -638,7 +598,7 @@ How test will be performed: CPU, GPU, RAM and live power usage will be monitored
 	
 	Test Case Derivation: Sensitive in this case refers to the post history of the subjects eRisk provides as training and test data. If these posts can be reconstructed from any part of our system outputs it is possible the identity of the individual could be discovered. This represents an unacceptable breach of privacy and can not happen.
 						
-	How test will be performed: After the system has produced it's predictions a script will be run that takes all posts in the input data, forms a string out of all consecutive three word triplets (ie. "hello my good friend" forms "hello my good" and "my good friend"), both with and without processing (removal of stopwords, punctuation, etc.), and scans the output to ensure that none of these triples are present.
+	How test will be performed: After the system has produced it's predictions 
 	
 \end{enumerate}
 
@@ -721,8 +681,7 @@ How test will be performed: The testers will review the entirely of the project 
 			~                   & \textbf{GR1}                                              & \textbf{GR2} & \textbf{SR1} & \textbf{SR2} \\
 			\hline
 			\textbf{NFRT-U-1}  & X                                                         & ~            & ~            & ~             \\
-			\textbf{NFRT-SS-1}  & ~                                                         & ~            & X            & ~            \\
-			\textbf{NFRT-SS-2}  & ~                                                         & ~            & ~            & X            \\
+			\textbf{NFRT-SS-1}  & ~                                                         & ~            & ~            & X            \\
 			\textbf{NFRT-L-1}  & ~                                                         & X            & ~            & ~             \\
 			\hline
 		\end{longtable}
@@ -907,28 +866,15 @@ complete the verification and validation for the project.
   mastering the skill?  Of the identified approaches, which will each team
   member pursue, and why did they make this choice?
 
-1. Michael will acquire the skill/knowledge required for this skill due to being
-the owner of the repository. Approaches for this skill/knowledge can be to either
-research the topic on the github actions webpage or watch YouTube tutorials to
-find the required skillset.
+1. I will learn more about GitHub actions because using GitHub actions can let us test iteratively every time we push to GitHub repository without interrupting our workflow. One way to acquire this skill is to use the github actions documentation page in order to help with learning the coding skills required to add it to the coding pipeline. Another way to acquire this knowledge is using YouTube videos such as the “GitHub Actions Tutorial” by “TechWorld with Nana” which includes all the necessary information needed for the scope of github actions testing for our project.
 
-2. Jessica will acquire the skill/knowledge required for this skill due to being
-interested in the skill. Approaches for this skill/knowledge can be to either
-research the topic on the pytest documention webpage or watch YouTube tutorials to
-find the required skillset.
+2. Jessica: I will learn more about train/test splits, different distributions of scores in populations and how to control for this in testing.
 
-3. Ben will acquire the skill/knowledge required for this skill due to being
-interested in the skill. Approaches for this skill/knowledge can be to either
-research the topic with various papers or watch YouTube lectures to
-learn more about the required skillset.
+3. Ben: In order to further enhance my understanding and as a result my skillset of the project’s trajectory, I wish to learn more about the specificities of evaluation metrics used for Natural Language Processors. Testing and tuning are essential aspects of creating an artificial intelligence system, but without accurate methods of tracking metrics there is no way to measure the effectiveness of the model. The first strategy presented to learn more would be to look at corresponding scholarly articles endorsed by the creators of each corresponding AI, for example, see how effectiveness is measured by the people who have created that methodology. A secondary approach would be to use more baseline metrics discussed in prior papers from the Montreal Team, as well as studies done by the eRisk competition itself, and use those as a standard to compare other metrics off of.
 
 4. Matthew: In order to learn more and develop my skills regarding python scripts for parsing and checking files I took a couple of key steps. I think these skills are very important because we are given very large files to work with for this project and need to parse these files effectively including splitting them into separate parts and labeling them correctly. I love big data so this was right up my alley so I wanted to take the initiative into looking more into these skills.The largest step I took to deepen my understanding of this skill was first to complete the “Parsing Data in Python: A Tutorial for Beginners” from Pierian Training. This was very useful to refresh my memory and help me get in the right mental state for developing said scripts for parsing files. It also helped refresh my mind of the basics. Once that was done, to move onto slightly more complicated parsing I followed and read “Parsing text with Python” by vipinajayakumar. This was extremely helpful and more focused on more complex parsing then just the basics. I then moved on to practicing parsing the input data we had for testing in different ways. I practiced different manipulation techniques I learned from the two articles above and played with the output to get a deeper feel.
 
-
-5. Yaruo will acquire the skill/knowledge required for this skill due to being
-interested in the skill. Approaches for this skill/knowledge can be to either
-research the topic on various papers or watch YouTube tutorials to
-find the required skillset.
+5. Franklin: I will learn more about Pytest, one method is to research the official documentation provided by Pytest itself. This will include installation instructions, usage examples, and various detailed explanations of versatile features and functionalities of Pytest. Another method to learn about Pytest is online courses on platforms like Udemy and Coursera. Courses such as Python Testing with Pytest by Brian Okken will provide everything I need to know to test systems extensively as they provide video lectures, learning paths, exercise and tests to reinforce learning.
 \end{enumerate}
 
 \end{document}

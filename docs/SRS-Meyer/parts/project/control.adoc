@@ -13,4 +13,6 @@
 | **<<p5>>** | 1.0 | Yaruo Tian | October 5, 2023 | Michael Breau | October 5, 2023
 | **<<p6>>** | 1.0 | Benjamin Chinnery | October 4, 2023 | Michael Breau | October 5, 2023
 | **<<p7>>** | 1.0 | Benjamin Chinnery | October 4, 2023 | Michael Breau | October 5, 2023
+| **<<p2>>** | 1.1 | Jessica Dawson | April 3, 2024 | Michael Breau | April 3, 2024
+| **<<p5>>** | 1.1 | Jessica Dawson | April 3, 2024 | Michael Breau | April 3, 2024
 |===

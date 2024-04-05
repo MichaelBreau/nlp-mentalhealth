@@ -1,2 +1,1 @@
-Instructions for installing your software.  You should also include uninstall
-instructions.
+Dependencies can be found in the Requirements folder of the source code repository. 

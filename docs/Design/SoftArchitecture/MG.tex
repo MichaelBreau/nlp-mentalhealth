@@ -6,6 +6,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{graphicx}
+\usepackage{circuitikz}
 \usepackage{float}
 \usepackage{hyperref}
 \hypersetup{
@@ -36,6 +37,8 @@
 \newcommand{\edmref}[1]{EDM\ref{#1}}
 
 \setcounter{secnumdepth}{5}
+
+\graphicspath{ {./figs/} }
 
 \begin{document}
 
@@ -70,6 +73,7 @@ This section records information for easy reference.
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   AC & Anticipated Change\\
+  ED & Eating Disorder\\
   DAG & Directed Acyclic Graph \\
   M & Module \\
   MG & Module Guide \\
@@ -159,7 +163,7 @@ All NLP pipelines in this system can be thought of as following a general struct
 \begin{itemize}
     \item Input: The input text to the pipeline.
     \item Tokenizer: Responsible for "cleaning" the text, can perform many different tasks: removing junk words (often referred to as stopwords) like the, and, a, etc.; expanding contractions; removing numerics and URLS. Leaves the text as text, just with the less useful features removed.
-    \item Representation Model: Machine learning models can not directly operate on text, they need numerical inputs. The representation model converts from the text to some numerical format. Different representation models output different formats and encode different information into these formats.
+    \item Representation Model: Machine learning models can not directly operate on text, they need numerical inputs. The representation model converts from the text to some numerical format, typically a vector. Different representation models output different formats and encode different information into these formats.
     \item Prediction Model: Transforms the numerical format provided by the representation model into the mental health predictions of interest. The prediction model may transform the data mutliple times in different ways before reaching a final prediction.
     \begin{itemize}
         \item Transformation: A specific transformation in the prediction model's pipeline
@@ -167,7 +171,7 @@ All NLP pipelines in this system can be thought of as following a general struct
     \item Predictions: The final predictions produced by the pipeline.
 \end{itemize}
 
-Due to the interconnected nature of this pipeline and the research based nature of this project large changes to this pipeline are both expected and unavoidable. This is because changes in one section of pipeline can require large changes in other sections, trying a new prediction model may require an entirely different representation model do what it's meant tobe used.
+Due to the interconnected nature of this pipeline and the research based nature of this project large changes to the system's models are both expected and unavoidable. This is because changes in one section of pipeline can require large changes in other sections, trying a new prediction model may require an entirely different representation model to be used for example.
 
 \section{Anticipated and Unlikely Changes} \label{SecChange}
 
@@ -187,11 +191,14 @@ change.
 \begin{description}
 \item[\refstepcounter{acnum} \actheacnum \label{acInput}:] What format the input data takes.
 \item[\refstepcounter{acnum} \actheacnum \label{acOutput}:] What format the output data takes.
+\item[\refstepcounter{acnum} \actheacnum \label{acData}:] In what format the data is stored during runtime. Different layouts can change how quickly certain information can be accessed and effect performance.
 \item[\refstepcounter{acnum} \actheacnum \label{acPipelineStages}:] What stages there are in a task's NLP pipeline.
 \item[\refstepcounter{acnum} \actheacnum \label{acTokenization}:] How the raw text data is "cleaned" (see \ref{SecPipeline}: tokenizer).
 \item[\refstepcounter{acnum} \actheacnum \label{acRepModel}:] How the cleaned text data is converted into numerical data.
 \item[\refstepcounter{acnum} \actheacnum \label{acPredModel}:] How many manipulations of the numerical data are performed before producing a prediction.
 \item[\refstepcounter{acnum} \actheacnum \label{acTrans}:] How the numerical data is manipulated to produce predictions.
+\item[\refstepcounter{acnum} \actheacnum \label{acParams}:] What the optimal parameters for a pipeline will be.
+\item[\refstepcounter{acnum} \actheacnum \label{acMets}:] How the accuracy of a pipeline will be evaluated.
 \item[\refstepcounter{acnum} \actheacnum \label{acOps}:] How the system will integrate with the tools the operations team is developing.
 \end{description}
 
@@ -215,25 +222,35 @@ decisions will be changed.
 This section provides an overview of the module design. Modules are summarized
 in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed
 below, which are leaves in the hierarchy tree, are the modules that will
-actually be implemented. As the details of the NLP pipelines are not as of yet determined some modules are left quite general and vague (ie. how many transformation modules will be used, what representation models will be used, etc.).
+actually be implemented:
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item [\refstepcounter{mnum} \mthemnum \label{m2}:] Search for Symptoms of Depression Module
+\item [\refstepcounter{mnum} \mthemnum \label{DNOM1}:] Depression Main Module
+\item [\refstepcounter{mnum} \mthemnum \label{DNOM2}:] Depression Data Processing Module
+\item [\refstepcounter{mnum} \mthemnum \label{DNOM3}:] Depression Feature Extraction Module
+\item [\refstepcounter{mnum} \mthemnum \label{DNOM4}:] Depression Output Module
+\item [\refstepcounter{mnum} \mthemnum \label{DNOM5}:] Depression Evaluation Module
 \item [\refstepcounter{mnum} \mthemnum \label{ANOM1}:] Anorexia Main Module
 \item [\refstepcounter{mnum} \mthemnum \label{ANOM2}:] Anorexia Parser Module
 \item [\refstepcounter{mnum} \mthemnum \label{ANOM3}:] Anorexia Training Module
 \item [\refstepcounter{mnum} \mthemnum \label{ANOM4}:] Anorexia Predictor Module
-\item [\refstepcounter{edmnum} \edmthemnum \label{edmI}:] ED Input
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmPars}:] ED Parsing
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmClean}:] ED Cleaning
 \item [\refstepcounter{edmnum} \edmthemnum \label{edmO}:] ED Output
 \item [\refstepcounter{edmnum} \edmthemnum \label{edmPipeline}:] ED Pipeline Manager
-\item [\refstepcounter{edmnum} \edmthemnum \label{edmToken}:] ED Tokenizer
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmTr}:] ED Trainer
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmData}:] ED Data Storage
 \item [\refstepcounter{edmnum} \edmthemnum \label{edmRM}:] ED Representation Model
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmRel}:] ED Relabeler
 \item [\refstepcounter{edmnum} \edmthemnum \label{edmPM}:] ED Prediction Model
-\item [\refstepcounter{edmnum} \edmthemnum \label{edmTrans}:] ED Transformation 1...n
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmAgg}:] ED Aggregator
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmMets}:] ED Metrics
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmEval}:] ED Evaluator
+\item [\refstepcounter{edmnum} \edmthemnum \label{edmViz}:] ED Visualization
 \end{description}
 
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{p{0.2\textwidth} p{0.3\textwidth} p{0.4\textwidth}}
 \toprule
@@ -248,22 +265,68 @@ actually be implemented. As the details of the NLP pipelines are not as of yet d
 & & ED Output\\
 \midrule
 
-\multirow{3}{*}{Software Decision} 
-& Depression Module\\ \cline{2-3}
+\multirow{16}{*}{Software Decision} 
+& \multirow{5}{*}{Depression Pipeline} & Depression Main\\ 
+& & Depression Data Processing\\
+& & Depression Feature Extraction\\
+& & Depression Output\\ 
+& & Depression Evaluation\\\cline{2-3}
 & \multirow{4}{*}{Anorexia Pipeline} & Anorexia Main\\ 
 & & Anorexia Parser\\
 & & Anorexia Training\\
 & & Anorexia Predictor\\ \cline{2-3}
-& \multirow{5}{*}{Eating Disorder Pipeline} & ED Pipeline Manager\\
-& & ED Tokenizer\\
+& \multirow{7}{*}{Eating Disorder Pipeline} & ED Pipeline Manager\\
+& & ED Trainer\\
+& & ED Data Storage\\
 & & ED Representation Model\\
+& & ED Relabeler\\
 & & ED Prediction Model\\
-& & ED Transformation 1...n (represents multiple modules)\\
+& & ED Aggregator\\
+& & ED Evaluation\\
 \bottomrule
 
 \end{tabular}
 \caption{Module Hierarchy}
 \label{TblMH}
+\end{table} \newpage
+
+\begin{table}[H]
+\centering
+\begin{tabular}{p{0.5\textwidth} p{0.5\textwidth}}
+\toprule
+\textbf{Level 3} & \textbf{Level 4}\\
+
+\midrule
+\multirow{2}{*}{ED Input} & ED Parsing\\
+& ED Cleaning\\ \midrule
+ED Output &\\
+\midrule
+
+Depression Main &\\ 
+Depression Data Processing &\\
+Depression Feature Extraction &\\
+Depression Output &\\ 
+Depression Evaluation &\\ \midrule
+Anorexia Main &\\ 
+Anorexia Parser &\\
+Anorexia Training &\\
+Anorexia Predictor &\\ \midrule
+ED Pipeline Manager &\\
+ED Trainer &\\
+ED Data Storage &\\
+ED Representation Model &\\
+ED Relabeler &\\
+ED Prediction Model &\\
+ED Aggregator &\\ \midrule
+\multirow{3}{*}{ED Evaluation} & ED Metrics\\
+& ED Evaluator\\
+& ED Visualization\\
+
+\bottomrule
+
+\end{tabular}
+\caption{Module Hierarchy cont}
+\label{TblMH2}
 \end{table}
 
 \newpage
@@ -283,8 +346,7 @@ module. The \emph{Services} field specifies \emph{what} the module will do
 without documenting \emph{how} to do it. For each module, a suggestion for the
 implementing software is given under the \emph{Implemented By} title. If the
 entry is \emph{OS}, this means that the module is provided by the operating
-system or by standard programming language libraries.  \emph{\progname{}} means the
-module will be implemented by the \progname{} software.
+system or by standard programming language libraries.
 
 Only the leaf modules in the hierarchy have to be implemented. If a dash
 (\emph{--}) is shown, this means that the module is not a leaf and will not have
@@ -313,18 +375,33 @@ to be implemented.
 \item[Implemented By:] Depression IO, Anorexia IO, Eating Disorder IO
 \end{description}
 
-\subsubsection{Eating Disorder IO (\edmref{edmI}, \edmref{edmO})}
+\subsubsection{Eating Disorder IO (-)}
 \begin{description}
 \item[Secrets:]How input and output is handled for the eating disorder diagnosis tool.
 \item[Services:]Includes programs that provide reading from an input file and outputting to an output file for the eating disorder diagnosis tool.
-\item[Implemented By:] ed\_input.py, ed\_output.py
+\item[Implemented By:] ED Input, ED Output
 \end{description}
 
-\paragraph{ED Input (\edmref{edmI})}
+\paragraph{ED Input (-)}
 \begin{description}
-\item[Secrets:]What format the input file is provided in.
+\item[Secrets:] What format the input file is provided in.
 \item[Services:] Provides functionality for reading user posts from a file and formatting them into a data structure usable by the rest of the system.
-\item[Implemented By:] ed\_input.py
+\item[Implemented By:] ED Parsing, ED Cleaning
+\end{description}
+
+\paragraph{ED Parsing (\edmref{edmPars})}
+\begin{description}
+\item[Secrets:] What format the input file is provided in.
+\item[Services:] Provides functionality for reading user posts from a file.
+\item[Implemented By:] parsing code developed for this project
+\item[Type of Module:] Library
+\end{description}
+
+\paragraph{ED Cleaning (\edmref{edmClean})}
+\begin{description}
+\item[Secrets:] What the initial fields and structure of the data is.
+\item[Services:] Cleans the data into a form ready to be used by the rest of the pipeline..
+\item[Implemented By:] cleaning code developed for this project
 \item[Type of Module:] Library
 \end{description}
 
@@ -332,16 +409,44 @@ to be implemented.
 \begin{description}
 \item[Secrets:]What format the output file is written in.
 \item[Services:] Provides functionality for writing predictions to a file.
-\item[Implemented By:] ed\_output.py
+\item[Implemented By:] ED output code
 \item[Type of Module:] Library
 \end{description}
 
 \subsection{Software Decision Module}
-\subsubsection{Search for Symptoms of Depression Module (\mref{m2})}
+\subsubsection{Depression Main Module (\mref{DNOM1})}
 \begin{description}
-\item[Secrets:]The format and structures of detecting symptoms of depression data objects.
-\item[Services:] Sorts and ranks 1000 sentences of users to a BDI Questionnaire with 21 questions in correspondence. Each question of the questionnaire will correspond to 1000 related sentences.
-\item[Implemented By:] Natural Language Processing for Mental Health Risk Prevention
+\item[Secrets:]The Natural Language processor which will combine the depression related functions such as process data, extract features, generating output, and evaluation to compute symptoms of depression in new documents.
+\item[Services:] Depression training data do not provide direct interaction with the user. 
+\item[Implemented By:] task1\_main
+\end{description}
+
+\subsubsection{Depression Data Processing Module (\mref{DNOM2})}
+\begin{description}
+\item[Secrets:]The parser for taking user posts and converting them into a format readable by the nlp model.
+\item[Services:] Depresson training data do not provide direct interaction with the user. 
+\item[Implemented By:] task1\_DataProcessing
+\end{description}
+
+\subsubsection{Depression Feature Extraction Module (\mref{DNOM3})}
+\begin{description}
+\item[Secrets:]The Natural Language processor which will analyze, compute with NLP techniques and extract the necessary features on parsed data.
+\item[Services:] Depression training data do not provide direct interaction with the user. 
+\item[Implemented By:] task1\_FeatureExtraction
+\end{description}
+
+\subsubsection{Depression Output Module (\mref{DNOM4})}
+\begin{description}
+\item[Secrets:]The Natural Language processor which will take the extracted features and generate sentences that shows symptoms of depression.
+\item[Services:] Depression training data do not provide direct interaction with the user. 
+\item[Implemented By:] task1\_Output
+\end{description}
+
+\subsubsection{Depression Evaluation Module (\mref{DNOM5})}
+\begin{description}
+\item[Secrets:]The Natural Language processor which will evaluate the output generated by measuring it against various metrics.
+\item[Services:] Depression training data do not provide direct interaction with the user. 
+\item[Implemented By:] task1\_Evaluation
 \end{description}
 
 \subsubsection{Anorexia Main Module (\mref{ANOM1})}
@@ -379,50 +484,97 @@ to be implemented.
 \subsubsection{Eating Disorder Pipeline (-)}
 \begin{description}
 \item[Secrets:] The structure and design of the eating disorder NLP pipeline.
-\item[Services:] Includes programs that manage the overall pipeline and others that define the specific transformations used to produce a prediction.
-\item[Implemented By:] ED Pipeline Manager, ED Tokenizer, ED Representation Model, ED Prediction Model, ED Transformation 1...n
+\item[Services:] Includes programs that manage the overall pipeline and others that define the specific transformations used to produce a prediction. More details on the structure of the pipeline and how modules fit together can be found in section \ref{SecUse}.
+\item[Implemented By:] ED Pipeline Manager, ED Representation Model, ED Relabeler, ED Aggregator ED Prediction Model, ED Trainer, ED Evaluator
 \end{description}
 
 \paragraph{ED Pipeline Manager (\edmref{edmPipeline})}
 \begin{description}
 \item[Secrets:] What components the NLP pipeline for the eating disorder task is comprised of.
-\item[Services:] Orchestrates and runs all the components of the eating disorder NLP pipeline.
-\item[Implemented By:] ed\_pipeline.py
+\item[Services:] Orchestrates and runs all the components of the eating disorder NLP pipeline when used for predicting a score.
+\item[Implemented By:] pipeline manager code developed for the project
 \item[Type of Module:] Library
 \end{description}
 
-\paragraph{ED Tokenizer (\edmref{edmToken})}
+\paragraph{ED Trainer (\edmref{edmTr})}
 \begin{description}
-\item[Secrets:] How the raw text data is cleaned in preparation of the model.
-\item[Services:] Provides a routine for the cleaning and stripping of less useful information from raw text.
-\item[Implemented By:] ed\_tokenizer.py
+\item[Secrets:] How the pipeline is optimized and tuned.
+\item[Services:] Orchestrates the tuning of models and model parameters for the pipeline.
+\item[Implemented By:] trainer code developed for the project
 \item[Type of Module:] Library
+\end{description}
+
+\paragraph{ED Data Storage (\edmref{edmData})}
+\begin{description}
+\item[Secrets:] What format the data is stored in during runtime.
+\item[Services:] Abstracts away the underlying data format and provides an interface for accessing features of the data.
+\item[Implemented By:] data storage code developed for the project
+\item[Type of Module:] ADT
 \end{description}
 
 \paragraph{ED Representation Model (\edmref{edmRM})}
 \begin{description}
 \item[Secrets:] How text data is converted into a numerical format.
 \item[Services:] Provides a routine for converting text data into a numerical format.
-\item[Implemented By:] ed\_rep\_model.py
+\item[Implemented By:] representation model code developed for the project
 \item[Type of Module:] Library
+\end{description}
+
+\paragraph{ED Relabeler (\edmref{edmRel})}
+\begin{description}
+\item[Secrets:] How scores for each user in the ED data are converted into scores for each post.
+\item[Services:] Provides a tool for creating scores for each post in the ED data based on the scores for each user. For more details on how this relabeling is used see section \ref{SecUse}
+\item[Implemented By:] relabeling code developed for the project
+\item[Type of Module:] ADT
 \end{description}
 
 \paragraph{ED Prediction Model (\edmref{edmPM})}
 \begin{description}
-\item[Secrets:] The overall structure of the transformations used to produce a prediction from the numerical representation of the text.
+\item[Secrets:] How the numerical representation of text from the Representation Model is converted to predictions.
 \item[Services:] Orchestrates and runs all the transformations that make up the prediction model.
-\item[Implemented By:] ed\_pred\_model.py
+\item[Implemented By:] prediction model code developed for the project
+\item[Type of Module:] ADT
+\end{description}
+
+\paragraph{ED Aggregator (\edmref{edmAgg})}
+\begin{description}
+\item[Secrets:] How scores for each post in a user's post history are converted to a single score for the user.
+\item[Services:] Provides a tool for creating a single score for a user from scores for each of their posts.
+\item[Implemented By:] aggregation code developed for the project
+\item[Type of Module:] ADT
+\end{description}
+
+\paragraph{ED Evaluation (-)}
+\begin{description}
+\item[Secrets:] How the accuracy of model will be evaluated.
+\item[Services:] Provides functions and routines for evaluating on specific metrics against certain baselines, and visualizing the data.
+\item[Implemented By:] ED Metrics, ED Evaluator, ED Visualization
+\end{description}
+
+\paragraph{ED Metrics (\edmref{edmMets})}
+\begin{description}
+\item[Secrets:] What accuracy measures the model will be evaluated on.
+\item[Services:] Provides functions for evaluating predictions on different metrics.
+\item[Implemented By:] metrics code written for this project
 \item[Type of Module:] Library
 \end{description}
 
-\paragraph{ED Transformation 1...n (\edmref{edmTrans})}
+\paragraph{ED Evaluator (\edmref{edmEval})}
 \begin{description}
-\item[Note:] Currently represents multiple modules, when a clearer picture of what structure the eating disorder pipeline will take on is reached this will be updated and expanded into multiple specific transformations
-\item[Secrets:] What transformations are used to produce a prediction from the numerical representation of the text.
-\item[Services:] Provides a routine for transforming numerical data from one form to another.
-\item[Implemented By:] ed\_transformation1...n.py
+\item[Secrets:] What baselines a model will be evaluated against.
+\item[Services:] Provides functions for seeing the performance of baselines as compared to a model.
+\item[Implemented By:] evaluator code written for this project
+\item[Type of Module:] ADT
+\end{description}
+
+\paragraph{ED Visualization (\edmref{edmViz})}
+\begin{description}
+\item[Secrets:] What methods there are to visualize the data.
+\item[Services:] Provides functions for visualizing different aspects of the data through graphs and plots.
+\item[Implemented By:] visualization code written for this project
 \item[Type of Module:] Library
 \end{description}
+
 
 \section{Traceability Matrix} \label{SecTM}
 
@@ -437,20 +589,23 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-T1FR-1 & \mref{m2}\\
-T1FR-2 & \mref{m2}\\
-T1FR-3 & \mref{m2}\\
+T1FR-1 & \mref{DNOM1}, \mref{DNOM2}\\
+T1FR-2 & \mref{DNOM1}, \mref{DNOM3}\\
+T1FR-3 & \mref{DNOM1}, \mref{DNOM4}, \mref{DNOM5}\\
 T2FR-1 & \mref{ANOM1}, \mref{ANOM2}\\
 T2FR-2 & \mref{ANOM1}, \mref{ANOM4}\\
 T2FR-3 & \mref{ANOM1}, \mref{ANOM3}, \mref{ANOM4}\\
 T2FR-4 & \mref{ANOM1}, \mref{ANOM4}\\
-T3FR-1 & \edmref{edmI}\\
+T3FR-1 & \edmref{edmPars}, \edmref{edmClean}\\
 T3FR-2 & \edmref{edmO}\\
 T3FR-3 & \edmref{edmO}\\
-GR1 & \mref{m2}, \mref{ANOM1}, \edmref{edmI}, \edmref{edmO}\\
-GR2 & \mref{m2}, \mref{ANOM4}, \edmref{edmO}\\
-SR1 & \mref{m2}, \mref{ANOM1}, \edmref{edmO}\\
-SR2 & \mref{m2}, \mref{ANOM4}, \edmref{edmO}\\
+T3FR-4 & \edmref{edmPipeline}, \edmref{edmTr}, \edmref{edmRM}, \edmref{edmRel}, \edmref{edmPM}, \edmref{edmAgg}, \edmref{edmMets}, \edmref{edmEval}, \edmref{edmViz}\\
+T3FR-5 & \edmref{edmPipeline}, \edmref{edmTr}, \edmref{edmRM}, \edmref{edmRel}, \edmref{edmPM}, \edmref{edmAgg}, \edmref{edmMets}, \edmref{edmEval}, \edmref{edmViz}\\
+T3FR-6 & \edmref{edmPipeline}, \edmref{edmTr}, \edmref{edmRM}, \edmref{edmRel}, \edmref{edmPM}, \edmref{edmAgg}, \edmref{edmMets}, \edmref{edmEval}, \edmref{edmViz}\\
+GR1 & \mref{DNOM1}, \mref{ANOM1}, \edmref{edmPars}, \edmref{edmO}\\
+GR2 & \mref{DNOM4}, \mref{ANOM4}, \edmref{edmO}\\
+SR1 & \mref{DNOM1}, \mref{ANOM1}, \edmref{edmO}\\
+SR2 & \mref{DNOM4}, \mref{ANOM4}, \edmref{edmO}\\
 
 \bottomrule
 \end{tabular}
@@ -464,14 +619,17 @@ SR2 & \mref{m2}, \mref{ANOM4}, \edmref{edmO}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acInput} & \mref{m2}, \mref{ANOM2}, \edmref{edmI}\\
-\acref{acOutput} & \mref{m2}, \mref{ANOM4}, \edmref{edmO}\\
-\acref{acPipelineStages} & \mref{m2}, \mref{ANOM1}, \edmref{edmPipeline}\\
-\acref{acTokenization} & \mref{m2}, \mref{ANOM2}, \edmref{edmToken}\\
-\acref{acRepModel} & \mref{m2}, \mref{ANOM3}, \edmref{edmRM}\\
-\acref{acPredModel} & \mref{m2}, \mref{ANOM3}, \edmref{edmPM}\\
-\acref{acTrans} & \mref{m2}, \mref{ANOM4}, \edmref{edmTrans}\\
-\acref{acOps} & \mref{m2}, \mref{ANOM1}\\
+\acref{acInput} & \mref{DNOM2}, \mref{ANOM2}, \edmref{edmPars}\\
+\acref{acOutput} & \mref{DNOM4}, \mref{ANOM4}, \edmref{edmO}\\
+\acref{acData} & \edmref{edmData}\\
+\acref{acPipelineStages} & \mref{DNOM1}, \mref{ANOM1}, \edmref{edmPipeline}\\
+\acref{acTokenization} & \mref{DNOM2}, \mref{ANOM2}, \edmref{edmClean}, \edmref{edmRM}\\
+\acref{acRepModel} & \mref{DNOM3}, \mref{ANOM3}, \edmref{edmRM}\\
+\acref{acPredModel} & \mref{DNOM3}, \mref{ANOM3}, \edmref{edmRel}, \edmref{edmPM}, \edmref{edmAgg}\\
+\acref{acTrans} & \mref{DNOM3}, \mref{ANOM4}, \edmref{edmRel}, \edmref{edmPM}, \edmref{edmAgg}\\
+\acref{acParams} & \mref{DNOM1}, \mref{ANOM3}, \edmref{edmTr}\\
+\acref{acMets} & \mref{DNOM5}, \mref{ANOM4}, \edmref{edmMets}, \edmref{edmEval}, \edmref{edmViz}\\
+\acref{acOps} & \mref{DNOM1}, \mref{ANOM1}, \edmref{edmPipeline}\\
 
 \bottomrule
 \end{tabular}
@@ -479,39 +637,108 @@ SR2 & \mref{m2}, \mref{ANOM4}, \edmref{edmO}\\
 \label{TblACT}
 \end{table}
 
-\section{Use Hierarchy Between Modules} \label{SecUse}
+\section{Pipeline Structure and Use Hierarchy Between Modules} \label{SecUse}
 
-In this section, the uses hierarchy between modules is
-provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if
-correct execution of B may be necessary for A to complete the task described in
-its specification. That is, A {\em uses} B if there exist situations in which
-the correct functioning of A depends upon the availability of a correct
-implementation of B.  Figure \ref{FigUH} illustrates the use relation between
-the modules. It can be seen that the graph is a directed acyclic graph
-(DAG). Each level of the hierarchy offers a testable and usable subset of the
-system, and modules in the higher level of the hierarchy are essentially simpler
-because they use modules from the lower levels.
+%In this section, the uses hierarchy between modules is
+%provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if
+%correct execution of B may be necessary for A to complete the task described in
+%its specification. That is, A {\em uses} B if there exist situations in which
+%the correct functioning of A depends upon the availability of a correct
+%implementation of B.  Figure \ref{FigUH} illustrates the use relation between
+%the modules. It can be seen that the graph is a directed acyclic graph
+%(DAG). Each level of the hierarchy offers a testable and usable subset of the
+%system, and modules in the higher level of the hierarchy are essentially simpler
+%because they use modules from the lower levels.
+
+\subsection{Depression}
+
+The pipeline for the depression module has \mref{DNOM1} Depression Main orchestrating the different stages. \mref{DNOM2} Data Processing processes the input data and converts to a usable form. \mref{DNOM3} Feature Extraction then pulls the most important features out of this data and feeds it to \mref{DNOM4} which writes to an output. \mref{DNOM5} provides evaluation metrics so the developer can see the accuracy of the model.
 
 \begin{figure}[H]
 \centering
-%\includegraphics[width=0.7\textwidth]{UsesHierarchy.png}
-\caption{Use hierarchy among modules}
-\label{FigUH}
+\resizebox{0.7\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\normalsize]
+\draw  (3,12.5) rectangle  node {\normalsize Processing} (7,11.5);
+\draw  (8.75,15.75) rectangle  node {\normalsize Main} (12,14.75);
+\draw  (8.5,12.5) rectangle  node {\normalsize Feature Extraction} (12.5,11.5);
+\draw  (13.75,11.25) rectangle  node {\normalsize Output} (17.75,10.25);
+\draw  (13.75,13.75) rectangle  node {\normalsize Evaluation} (17.75,12.75);
+\node [font=\normalsize] at (5,10) {Data};
+\node [font=\normalsize] at (15.5,14.75) {Metrics};
+\node [font=\normalsize] at (15.75,9.25) {Scores};
+\draw [->, >=Stealth] (5,10.25) -- (5,11.5);
+\draw [->, >=Stealth] (7,12) -- (8.5,12);
+\draw [->, >=Stealth] (12.5,12) -- (13.75,10.75);
+\draw [->, >=Stealth] (12.5,12) -- (13.75,13.25);
+\draw [->, >=Stealth] (15.5,13.75) -- (15.5,14.5);
+\draw [->, >=Stealth] (15.75,10.25) -- (15.75,9.5);
+\draw [->, >=Stealth] (10.25,14.75) -- (5,12.5);
+\draw [->, >=Stealth] (10.25,14.75) -- (10.5,12.5);
+\draw [->, >=Stealth] (10.25,14.75) -- (16,11.25);
+\draw [->, >=Stealth] (10.5,14.75) -- (15.25,13.75);
+\end{circuitikz}
+}%
+\caption{Pipeline for Depression Component}
+\label{task1-diag}
+\end{figure}
+
+\subsection{Anorexia}
+
+The anorexia pipeline uses the trainer to train the predictor on data with predictions gotten by the parser. It then makes predictions on data after it is trained
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{task2-train-diagram.png}
+\caption{Anorexia Training}
+\label{FigT2Tr}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{task2-test.png}
+\caption{Anorexia Predicting}
+\label{FigT2Tes}
+\end{figure}
+
+\subsection{Eating Disorders}
+
+The eating disorders pipeline involves the usage of a relabeling technique. This technique takes the ED data, which original only has scores for each user, and produces scores for each post. The prediction model is then trained to predict these post level scores. Then these predictions are aggregated to user level predictions which are evaluated against what the user scores should be. The rational behind this relabeling method will be explored more in the VnV report.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{ED-uses-diagram.png}
+\caption{ED Uses Diagram}
+\label{FigT3Uses}
 \end{figure}
 
 \section{Timeline}
 
 \begin{itemize}
-    \item Module: \edmref{edmI} Finish Date: Jan 20 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmPars} and \edmref{edmClean} Finish Date: Jan 20 2024 Assignee(s): Jessica
     \item Module: \edmref{edmO} Finish Date: Jan 22 2024 Assignee(s): Jessica
-    \item Module: \edmref{edmPipeline} Finish Date: Jan 24 2024 Assignee(s): Jessica
-    \item Module: \edmref{edmToken} Finish Date: Jan 26 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmData} Finish Date: Jan 26 2024 Assignee(s): Jessica
     \item Module: \edmref{edmRM} Finish Date: Jan 28 2024 Assignee(s): Jessica
-    \item Module: \edmref{edmPM} Finish Date: Jan 28 2024 Assignee(s): Jessica
-    \item Module: \edmref{edmTrans} Finish Date: Feb 1 2024 Assignee(s): Jessica
-    \item Module: \mref{m2} Finish Date: Feb 1 2024 Assignee(s): Franklin, Matthew
+    \item Module: \edmref{edmRel} Finish Date: Feb 4 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmPM} Finish Date: Feb 8 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmAgg} Finish Date: Feb 10 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmMets} and \edmref{edmEval} Finish Date: Feb 11 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmTr} Finish Date: Feb 13 2024 Assignee(s): Jessica
+    \item Module: \edmref{edmPipeline} Finish Date: Feb 15 2024 Assignee(s): Jessica
+    \item Module: \mref{DNOM1} Finish Date: Feb 1 2024 Assignee(s): Franklin, Matthew
+    \item Module: \mref{DNOM2} Finish Date: Feb 1 2024 Assignee(s): Franklin, Matthew
+    \item Module: \mref{DNOM3} Finish Date: Feb 1 2024 Assignee(s): Franklin, Matthew
+    \item Module: \mref{DNOM4} Finish Date: Feb 1 2024 Assignee(s): Franklin, Matthew
+    \item Module: \mref{DNOM5} Finish Date: Feb 1 2024 Assignee(s): Franklin, Matthew
     \item Module: \mref{ANOM1} Finish Date: Feb 1 2024 Assignee(s): Michael, Ben
+    \item Module: \mref{ANOM2} Finish Date: Feb 1 2024 Assignee(s): Michael, Ben
+    \item Module: \mref{ANOM3} Finish Date: Feb 1 2024 Assignee(s): Michael, Ben
+    \item Module: \mref{ANOM4} Finish Date: Feb 1 2024 Assignee(s): Michael, Ben
     \item Module: \mref{mHH} Finish Date: Feb 1 2024 Assignee(s): All
+    \item Testing (PyTest): \mref{DNOM1}, \mref{DNOM2}, \mref{DNOM3} Finish Date: Feb 2 2024 Assignee(s): Franklin, Matthew
+    \item Testing (PyTest): \mref{ANOM1}, \mref{ANOM2}, \mref{ANOM3} Finish Date: Feb 2 2024 Assignee(s): Michael, Ben
+    \item Testing (PyTest): \mref{DNOM4}, \mref{DNOM5} Finish Date: Feb 3 2024 Assignee(s): Franklin, Matthew
+    \item Testing (PyTest): \mref{ANOM4} Finish Date: Feb 4 2024 Assignee(s): Michael, Ben
     \item Testing: All Modules Finish Date: Feb 4 2024 Assignee(s): All
 \end{itemize}
 
