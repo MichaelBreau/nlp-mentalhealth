@@ -33,19 +33,33 @@ from the supervisor shaped your project.  In particular, you should highlight th
 supervisor's response to your Rev 0 demonstration to them.}
 
 \subsection{SRS and Hazard Analysis}
-
-Our SRS has undergone many changes since the revision 0 submission. Some were from feedback from the TA such as reformatting document structure to be more clear, creating more readable functional requirements with labelling, adding a reflection section which we missed for rev 0, etc... We also made many changes directly because of our expanding of scope and knowledge of natural language processing pipelines increasing so we had a better idea of the functional requirements needed as well as our division into the three different NLP tasks.
+   \item SRS:
+   Our SRS has undergone many changes since the revision 0 submission. Some were from feedback from the TA such as reformatting document structure to be more clear, creating more readable functional requirements with labelling, adding a reflection section which we missed for rev 0, etc... We also made many changes directly because of our expanding of scope and knowledge of natural language processing pipelines increasing so we had a better idea of the functional requirements needed as well as our division into the three different NLP tasks.
+   \item Hazard Analysis:
+       For this report we utilized a lot of high quality feedback from our professor and TA. The first major concern we
+       addressed from there feedback was making it explicit what was in scope for this project. There was also the point
+       made that they thought we could come up with more hazards to identify and once we read this, we actually came up
+       with a couple of different new hazards to add that we previously did not think of. Lastly there was the correction
+       we added from the feedback about ensuring we have all terms we used defined and also following their advice to make
+       our recommended action more detailed and less vague. We also implemented one main change based on group 8s feedback,
+       specifically about SR1. We used there feedback to realize that we needed to add clarity to SR1 to include and explicitly
+       mention the idea of not sharing data online or exposing it to third-party sites.
 
 \subsection{Design and Design Documentation}
 
 \subsection{VnV Plan and Report}
-
+   \item VnV Plan:
+   \item VnV Report:
+       A good piece of feedback we got from group 8 for our VnV Report was to add something into our automated testing section to
+       mention how we used a linter and Github actions in our implementation because this would fall under this category.
+       
 \section{Design Iteration (LO11)}
 
 \plt{Explain how you arrived at your final design and implementation.  How did
 the design evolve from the first version to the final version?} 
 
 \subsection{Task 1}
+How we arrived at our final design and implementation was through a lot of research and talking with the team in Montreal, specifically Diego. Our first version was very bare bones and we had yet to determine any testing metrics or even create a system to test our product. Also we were originally between using a vectorization approach and bert topic modeling approach. After research however, attempts at implementing both approaches, talks with the Montreal team along with analyzing our testing data, we came to the conclusion that it would not be viable to use the bert topic approach. We realized the data results we were given to test on were not comprehensive enough and were not adequately labeled to be used to train data. This brought up to fully committing to our vectorization word embeddings approach! We also considered multiple different word vector databases to use which would act as our basis for which words the system could understand. We originally just the twitter glove database but in the end we decided to go with a crawl vector database. How we came to this was we tested our code with multiple different databases and compared how many words in our feature set were found in the databases and how accurate our results were. At the end of this, crawl ended up being the most encompassing database for our needs and also produced the best results.
 
 \subsection{Task 2}
 
@@ -53,18 +67,22 @@ For our second natural language processing task related to the binary classifica
 
 \subsection{Task 3}
 
+
+
 \section{Design Decisions (LO12)}
 
 \plt{Reflect and justify your design decisions.  How did limitations,
  assumptions, and constraints influence your decisions?}
 
 \subsection{Task 1}
+Our first large design decision was whether to use the BERT approach or a vectorization word embedding approach. When considering this choice, we had to assess both methods and decide which we deemed more suitable for our project. We had to consider feasibility, time constraints, and the limited resources we had available. We ended up deeming that the BERT topic model may be the best option but we had limited data to use to test and with that, not adequately labeled data either for training purposes. As a result we deemed this strategy as not feasible. We considered trying to label the data to allow training ourselves but we could not ensure accurate labeling and with our time constraint of the capstone this was not feasible either. This left us to go with the vectorization option which fit our needs and abilities perfectly. We were also faced with the design decision of which word vector database to use for our word embeddings. This was an important decision because some words we wanted to use are not in every database. To come to our design decision, the main factor was how encompassing the database was for the words we were looking for (as few words missing in the database as possible) along with the biggest factor which was what were our accuracy test results with each database. This led us to choose crawl for our database. 
 
 \subsection{Task 2}
 The primary limitations and constraints influencing the design of this task stemmed from the rules and guidelines of the competition. It was important for the team to try to find the best balance between achieving the highest accuracy possible, but also keeping a good handle on length of operation, resource allocation, and of course repeatability in order to optimize our performance scores. Although the team experimented with various models which boasted all sorts of situational expertise's, the team felt that the BERTopic model was able to strike the best balance between our allocated priorities. A major component of this task is that the model is meant to take information in sequential chunks in order to imitate real time posting behaviours, what made BERTopic stand out was its ability to update decisions on its users on the fly, without having to retrain its database every time, cutting down on operation time as well as resource usage.
 
 \subsection{Task 3}
 
+I picked up some interesting design techniques for this area. I discovered that using classes and the state information they provide can be used to cache data to speed up reruns of model parts for stuff like parameter tuning. I think I would have liked to plan more of the design process before getting into coding as there was a fair amount of spaghetti going on in my code as a result, I think part of that can be attributed to coding in an area that I don't have the most knowledge of and I hope in the future I can improve on that. I think the model I built was interesting, it built upon prior work done by teams at the competition and did something new. I think one of the biggest limitations I ran into was not having a foundation of knowledge in this area, it was an interesting challenge trying to develop an approach and system while still learning how everything NLP fit together, it resulted in going down a number of deadends and some floundering. I think in the future I would like to learn 
 
 \section{Economic Considerations (LO23)}
 
