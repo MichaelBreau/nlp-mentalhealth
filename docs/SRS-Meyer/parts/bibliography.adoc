@@ -8,6 +8,10 @@ on the Internet (Extended Overview)_. Springer. 2022.
 
 == Reflections
 
+General::
+
+The Knowledge and skills that the team will collectively need to acquire are as follows: Vectors, Inter-team Project Management, varying strengths and weaknesses of existing Natural Language Processors, current eRisk strategy effectiveness, binary classification strategies.
+
 Matthew Curtis::
 
 A knowledge area that I thought was imperative to acquire for success was a deeper understanding of vectors, how to manipulate them, and how they can be used in the NLP process. Task 1’s main approach we were looking at involved treating each symptom as a vector and each sentence as a vector and comparing them but for that I thought we needed a deeper knowledge of vectors and their formation. For this the main two methods I used were watching youtube videos and reading articles on vectors and nlp vectorization. To understand the basics I read the article “Understanding NLP Word Embeddings - Text Vectorization” on towardsdatascience.com which was very helpful in gaining a basic technical knowledge about vectors and vectors in the NLP space. Then I wanted a different method of learning so I wanted some youtube videos first about vectors themselves, then about vectorization and how it is used in NLP. I also watched “Word Embedding - Natural Language Processing| Deep Learning” by Krish Naik on youtube which gave me a lot of insight into how the whole process comes together and how vectors are used for word embeddings. Lastly, I looked at the article “Vectorization Techniques in NLP [Guide]” by neptune.ai to see specific examples of how vectors can be used and manipulated for NLP purposes. This was very important for me to actually see the possible use cases.
@@ -20,6 +24,9 @@ Michael Breau::
 
 
 Benjamin Chinnery::
+
+A skill that I found necessary in regards to project management, is trying to learn more about the process required for two distinct teams operating in unison. For the final project to be efficient, it is imperative that both the NLP team and the OPS team have good synergy and understanding of each other's goals. Difficulties arise in the sense that although each group member has a level of control over their own group, it’s important to also have some sort of central management that can guide the progress of the other team, without delving too far from your personal responsibilities. It is important to not extend oneself too far both because the other team would not want to take orders from someone who isn’t as intimately familiar with their task, and because it is important to not overencomber oneself and lose sight of keeping their own project on track. To improve my inter-team project management skills, I could refer to past year guides for the competition and attempt to translate their process into something that's more applicable. Alternatively, while the prior approach holds some merit, I believe a more effective strategy would be to opt for more open communication with the teams through a liaison and use the existing capstone management guidelines as a basis.
+
 
 
 Yaruo Tian::
