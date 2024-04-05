@@ -122,7 +122,7 @@ The following table is taken directly from the Module Guide document for this pr
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{p{0.2\textwidth} p{0.3\textwidth} p{0.5\textwidth}}
+\begin{tabular}{p{0.2\textwidth} p{0.3\textwidth} p{0.4\textwidth}}
 \toprule
 \textbf{Level 1} & \textbf{Level 2} & \textbf{Level 3}\\
 \midrule
@@ -135,8 +135,12 @@ The following table is taken directly from the Module Guide document for this pr
 & & ED Output\\
 \midrule
 
-\multirow{3}{*}{Software Decision} 
-& Depression Module\\ \cline{2-3}
+\multirow{4}{*}{Software Decision} 
+& \multirow{5}{*}{Depression Pipeline} & Depression Main\\ 
+& & Depression Data Processing\\
+& & Depression Feature Extraction\\
+& & Depression Output\\ 
+& & Depression Evaluation\\\cline{2-3}
 & \multirow{4}{*}{Anorexia Pipeline} & Anorexia Main\\ 
 & & Anorexia Parser\\
 & & Anorexia Training\\
@@ -158,14 +162,16 @@ The following table is taken directly from the Module Guide document for this pr
 
 \section{MIS for Search for Symptoms of Depression Module} \label{Module} 
 
-\subsection{Module}
+\subsection{depression\_main}
 
-Task 1 - Search for Symptoms of Depression for User Sentences 
+Task 1 - Search for Symptoms of Depression for User Sentences - Main Module
 
 
 \subsection{Uses}
 
-Used to rank each input sentence by its correlation to a given depression symptom and returns the 1000 sentences with the highest correlation to said depression symptom. Each sentence will receive a level of correlation for each of the 21 given depression symptoms (totaling an output of 21,000 sentences). These results for user sentences will be tested against the results each user gave when filling out the BDI Questionnaire regarding there depression symptoms.
+Used for combining the various module functionalities in a pipeline format.\\ 
+Uses depression\_process\_data, depression\_feature\_extraction, depression\_output, \\ 
+depression\_accuracy\_evaluation
 
 \subsection{Syntax}
 
@@ -177,17 +183,64 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{5cm} p{4.5cm} p{3cm} p{2cm}}
+
+\begin{tabular}{p{3cm}p{2cm}p{2cm}p{4cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-path\_address & String & String & - \\
-parse\_data & String & Dictionary & - \\
-filter\_sentences & Dictionary & Dictionary & - \\
-write\_top\_sentences & List, String & - & - \\ 
-detect\_depression\_symptom & String, String & Integer & - \\ 
-normalize\_symptom\_scores & Dictionary & List & - \\ 
+N/A & N/A & N/A & - \\
+\end{tabular}
+\end{center}
 
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+
+\subsubsection{Access Routine Semantics}
+
+None
+
+
+\subsubsection{Local Functions}
+
+None
+
+\subsection{depression\_process\_data}
+
+Task 1 - Search for Symptoms of Depression for User Sentences - Data Processing Module
+
+\subsection{Uses}
+
+Used for parsing user posts and golden truth files
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3.5cm} p{4.5cm} p{3cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+pathaddress & String & String & - \\
+parsedata & String & Dictionary & - \\
+processdata & String & Dictionary  & - \\
+goldentruthsentences & String & Dictionary & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -205,54 +258,280 @@ None
 \subsubsection{Assumptions}
 
 \begin{itemize}
-\item Data for each users sentences are in there own .trec file and the jsonl file acts as a master list of sentences containing all sentences across all users in one jsonl file.
-\item The users answered the BDI questionnaire honestly so we can take that data as being accurate when we use it. 
+\item Data from user posts are in multiple trec file and the ground truth file is in a csv file and are present in the current task directory.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent path\_address():
+\noindent pathaddress():
 \begin{itemize}
 \item transition: None
-\item output: A string representing the address's of all trec files
-\item exception:  
-\end{itemize}
-
-\noindent parse\_data():
-\begin{itemize}
-\item transition: None
-\item output: A dictionary containing every sentence where the key is the sentence id and the value is the sentence itself.
+\item output: The path address for the data files
 \item exception: None
 \end{itemize}
 
-\noindent filter\_sentences():
+\noindent parsedata():
 \begin{itemize}
 \item transition: None
-\item output: A dictionary containing all sentences that were not filtered out by the filter function due to being deemed as low quality or irrelevant sentences for testing. The key for each dictionary entry is the sentence id and the value is the sentence itself.
-\item exception: None 
+\item output: Dictionary with usernames as keys connected to a list of strings containing user posts
+\item exception: None
 \end{itemize}
 
-\noindent write\_top\_sentences():
+\noindent parsedata():
+\begin{itemize}
+\item transition: None
+\item output: Dictionary with usernames as keys connected to a list of strings containing user posts, with gibberish information removed
+\item exception: None
+\end{itemize}
+
+\noindent goldentruthsentences():
+\begin{itemize}
+\item transition: None
+\item output: Dictionary with usernames as keys connected to an integer representing their depression symptom 
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\subsection{depression\_feature\_extraction}
+
+Task 1 - Search for Symptoms of Depression for User Sentences - Feature Extraction Module
+
+\subsection{Uses}
+
+Used for predicting the top depression sentences that matches each symptom of depression
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3.5cm} p{4.5cm} p{3cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+getFeatureWords & List & Dictionary & - \\
+feature\_2\_vec & Dictionary, Dictionary & Dictionary & - \\
+getEmbeddings & Dictionary, Dictionary,  & Dictionary & - \\
+ & Dictionary &  &  \\
+tf\_idf & Dictionary, Dictionary & Dictionary & - \\
+ & Integer &  &  \\
+vectorizePosts & Dictionary, Dictionary & Dictionary & - \\
+ & Dictionary &  &  \\
+cosine\_sim & Dictionary, List & Dictionary & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent getFeatureWords():
+\begin{itemize}
+\item transition: None
+\item output: A dictionary where each key represents a depression symptom, and the corresponding value is a list of strings representing feature words extracted from files.
+\item exception: None
+\end{itemize}
+
+\noindent feature\_2\_vec():
+\begin{itemize}
+\item transition: None
+\item output: Produces a dictionary where each key corresponds to a question number, and the associated value is a numpy array representing the vectorized features for that question. 
+\item exception: None
+\end{itemize}
+
+\noindent getEmbeddings():
+\begin{itemize}
+\item transition: None
+\item output: Outputs a dictionary containing word embeddings, filtered based on words present in the data, feature sets, and a given set of word embeddings
+\item exception: None
+\end{itemize}
+
+\noindent tf\_idf():
+\begin{itemize}
+\item transition: None
+\item output: Generates a dictionary where each key represents a document ID, and the associated value is a list of strings representing the top-k words based on TF-IDF scores.
+\item exception: None
+\end{itemize}
+
+\noindent vectorizePosts():
+\begin{itemize}
+\item transition: None
+\item output: A dictionary where each key represents a sentence, and the corresponding value is a numpy array representing the vectorized representation of the sentence.
+\item exception: None
+\end{itemize}
+
+\noindent cosine\_sim():
+\begin{itemize}
+\item transition: None
+\item output: A dictionary where each key represents a sentence, and the associated value is a float representing the cosine similarity between the sentence vector and a target vector.
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\subsection{depression\_output}
+
+Task 1 - Search for Symptoms of Depression for User Sentences - Ouput Module
+
+\subsection{Uses}
+
+Used for generating output into a specific format
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{3.5cm} p{4.5cm} p{3cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+write\_to\_text\_file & Any, String & - & - \\
+write\_dict\_to\_file & Dictionary, String & - & - \\
+get\_questions & String & List & - \\
+get\_top\_matchs & String, Dictionary & Dictionary & - \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent write\_to\_text\_file():
 \begin{itemize}
 \item transition: None
 \item output: None
 \item exception: None
 \end{itemize}
-
-\noindent detect\_depression\_symptom():
+\noindent write\_dict\_to\_file():
 \begin{itemize}
 \item transition: None
-\item output: A integer that represents the correlation of the inputted sentence to the inputted symptom.
-\item exception: 
+\item output: None
+\item exception: None
 \end{itemize}
-
-\noindent normalize\_symptom\_scores():
+\noindent get\_questions():
 \begin{itemize}
 \item transition: None
-\item output: A list of lists where each inner array represents a sentence. The first element in the inner list is the sentence id and the second is the score for the given depression symptom from 1-10. The outputted list of lists will be sorted by there depression symptom score from highest to lowest.
-\item exception: 
+\item output: A list of strings representing symptom names extracted from a JSON questionnaire file.
+\item exception: None
+\end{itemize}
+\noindent get\_top\_matchs():
+\begin{itemize}
+\item transition: None
+\item output: A dictionary where each key represents a question index, and the associated value is a list of top matches based on user responses.
+\item exception: None
 \end{itemize}
 
+\subsubsection{Local Functions}
+
+None
+
+\subsection{depression\_accuracy\_evaluation}
+
+Task 1 - Search for Symptoms of Depression for User Sentences - Accuracy Evaluation Module
+
+
+\subsection{Uses}
+
+Used for determining the accuracy of generated results using various metrics
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None 
+
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{5.5cm} p{3cm} p{2.5cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+golden\_truth\_sentence\_data & String & Dictionary & - \\
+get\_average\_precisions & Dictionary,  & List & - \\
+ & Dictionary  &  &  \\
+print\_accuracy & List, List, String & - & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+
+\subsubsection{Access Routine Semantics}
+
+\noindent golden\_truth\_sentence\_data():
+\begin{itemize}
+\item transition: None
+\item output: A dictionary where each key represents a question index, and the associated value is a list of sentence IDs and their relevances based on a provided CSV file.
+\item exception: None
+\end{itemize}
+\noindent get\_average\_precisions():
+\begin{itemize}
+\item transition: None
+\item output: A list containing precision values and NDCG values calculated based on the provided sentence scores and golden truth values.
+\item exception: None
+\end{itemize}
+\noindent print\_accuracy():
+\begin{itemize}
+\item transition: None
+\item output: None
+\item exception: None
+\end{itemize}
 
 \subsubsection{Local Functions}
 
@@ -579,12 +858,14 @@ None
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{3cm}}
+\begin{tabular}{p{2cm} p{6cm} p{2cm} p{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-write\_file & $Str,\ Dict$ & None & None \\
+write\_file & $Str,\ $ & None & None \\
+& $\ Dict<Str:List[Int]>$ &  &  \\
 \hline
+
 \end{tabular}
 \end{center}
 
@@ -708,7 +989,7 @@ None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent write\_file($text: Str,\ options: List\ of\ Bool$):
+\noindent write\_file($text: Str,\ options: [Bool]$):
 \begin{itemize}
 \item transition: None
 \item output: A list of words representing $text$ split by whitespace after $text$ is processed in a number of ways specified by $options$.
@@ -760,7 +1041,7 @@ The first input to represent will be the output of ed\_tokenizer: a processed li
 
 \subsubsection{Access Routine Semantics}
 
-\noindent represent($text: List\ of\ Str,\ options: List\ of\ Bool$):
+\noindent represent($text: [Str],\ options: [Bool]$):
 \begin{itemize}
 \item transition: None
 \item output: A list of floats representing $text$ encoded by some method into a numerical format, the details of the conversion are specified by $options$.
@@ -864,7 +1145,7 @@ None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent represent($user\_data: <username: text, representation: [Float]>,\ options: List\ of\ Bool$):
+\noindent represent($user\_data: <username: text, representation: [Float]>,\ options: [Bool]$):
 \begin{itemize}
 \item transition: None
 \item output: A dictionary of $<username: String,\ representation: [Float]>$ where each of the output's $representation$s is a transformation of the input $representation$s.

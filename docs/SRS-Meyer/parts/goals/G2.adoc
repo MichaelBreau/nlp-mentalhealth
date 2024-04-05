@@ -16,4 +16,3 @@ eRisk has been running since 2017 and has grown from having just one proposed ta
 - **Task 3: Measuring the Severity of the Signs of Eating Disorders** This task explores directly predicting the severity of different mental health symptoms from an individual's posting activity.
 
 All three of these tasks have been run in two prior years of eRisk already. The first years for each task no labelled training data was provided; the second years the test data from the first year, now with labels, was provided as training data; and the third year, this year, the test data from the first and second years was labelled and provided as training data.
-
